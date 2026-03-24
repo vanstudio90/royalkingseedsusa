@@ -4,9 +4,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      allow: '/',
-      disallow: ['/api/', '/checkout/', '/account/'],
+      disallow: ['/'],
     },
-    sitemap: 'https://royalkingseedsusa.vercel.app/sitemap.xml',
   };
 }
