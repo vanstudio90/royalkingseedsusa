@@ -60,6 +60,7 @@ export default function AdminCouponsPage() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState(emptyCoupon);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [saving, setSaving] = useState(false);
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
   const [deleting, setDeleting] = useState(false);
@@ -77,30 +78,57 @@ export default function AdminCouponsPage() {
     fetchCoupons();
   }, []);
 
-  const handleCreate = async (e: React.FormEvent) => {
+  const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
-    await fetch('/api/admin/coupons', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        code: form.code,
-        type: form.type,
-        value: form.type === 'free_shipping' ? 0 : Number(form.value),
-        min_order: form.min_order ? Number(form.min_order) : null,
-        max_uses: form.max_uses ? Number(form.max_uses) : null,
-        applies_to: form.applies_to,
-        applies_to_ids: form.applies_to !== 'all' && form.applies_to_ids
-          ? form.applies_to_ids.split(',').map((s: string) => s.trim()).filter(Boolean)
-          : [],
-        expires_at: form.expires_at || null,
-        active: form.active,
-      }),
-    });
+    const payload = {
+      code: form.code.toUpperCase(),
+      type: form.type,
+      value: form.type === 'free_shipping' ? 0 : Number(form.value),
+      min_order: form.min_order ? Number(form.min_order) : null,
+      max_uses: form.max_uses ? Number(form.max_uses) : null,
+      applies_to: form.applies_to,
+      applies_to_ids: form.applies_to !== 'all' && form.applies_to_ids
+        ? form.applies_to_ids.split(',').map((s: string) => s.trim()).filter(Boolean)
+        : [],
+      expires_at: form.expires_at || null,
+      active: form.active,
+    };
+
+    if (editingId) {
+      await fetch(`/api/admin/coupons/${editingId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    } else {
+      await fetch('/api/admin/coupons', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+    }
     setForm(emptyCoupon);
+    setEditingId(null);
     setShowForm(false);
     setSaving(false);
     fetchCoupons();
+  };
+
+  const startEdit = (coupon: Coupon) => {
+    setForm({
+      code: coupon.code,
+      type: coupon.type,
+      value: coupon.value as any,
+      min_order: coupon.min_order ? String(coupon.min_order) : '',
+      max_uses: coupon.max_uses ? String(coupon.max_uses) : '',
+      applies_to: coupon.applies_to as AppliesTo,
+      applies_to_ids: (coupon.applies_to_ids || []).join(', '),
+      expires_at: coupon.expires_at ? coupon.expires_at.split('T')[0] : '',
+      active: coupon.active,
+    });
+    setEditingId(coupon.id);
+    setShowForm(true);
   };
 
   const toggleActive = async (id: number, active: boolean) => {
@@ -192,6 +220,12 @@ export default function AdminCouponsPage() {
           >
             {showForm ? 'Cancel' : '+ Add Coupon'}
           </button>
+          {showForm && editingId && (
+            <button type="button" onClick={() => { setForm(emptyCoupon); setEditingId(null); setShowForm(false); }}
+              className="px-4 py-2.5 text-[#192026]/40 text-sm hover:text-red-500 cursor-pointer">
+              Discard
+            </button>
+          )}
         </div>
       </div>
 
@@ -225,7 +259,8 @@ export default function AdminCouponsPage() {
       {showForm && (
         <div className="bg-white rounded-2xl border border-[#192026]/5 p-6 mb-4">
           <h2 className="text-lg font-bold text-[#192026] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>New Coupon</h2>
-          <form onSubmit={handleCreate} className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <h3 className="text-sm font-bold text-[#275C53] mb-4">{editingId ? 'Edit Coupon' : 'Create New Coupon'}</h3>
+          <form onSubmit={handleSave} className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold block mb-1.5">Code</label>
               <input
@@ -354,7 +389,7 @@ export default function AdminCouponsPage() {
                 disabled={saving}
                 className="px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-sm font-semibold hover:bg-[#1e4a42] transition-colors disabled:opacity-50 cursor-pointer"
               >
-                {saving ? 'Creating...' : 'Create Coupon'}
+                {saving ? 'Saving...' : editingId ? 'Update Coupon' : 'Create Coupon'}
               </button>
             </div>
           </form>
@@ -494,6 +529,16 @@ export default function AdminCouponsPage() {
                       ) : (
                         'Never'
                       )}
+                    </td>
+
+                    {/* Edit */}
+                    <td className="px-4 py-3 text-right">
+                      <button
+                        onClick={() => startEdit(c)}
+                        className="px-3 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/50 hover:text-[#275C53] transition-colors cursor-pointer"
+                      >
+                        Edit
+                      </button>
                     </td>
                   </tr>
                 );
