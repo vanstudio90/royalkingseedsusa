@@ -527,12 +527,15 @@ export default async function HomePage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { title: 'How to Germinate Cannabis Seeds (Step-by-Step)', desc: 'The paper towel method explained with photos, timing, troubleshooting, and transplanting instructions. Used by thousands of our customers with a 92%+ success rate.', href: '/blog', tag: 'Beginner' },
-            { title: 'Indoor Cannabis Growing Setup for US Apartments', desc: 'Complete guide to tent sizing, LED selection, ventilation, odor control, and nutrient schedules for growing cannabis in small indoor spaces across the United States.', href: '/blog', tag: 'Indoor' },
-            { title: 'Autoflower vs. Feminized: Which Seeds Should You Buy?', desc: 'A detailed comparison covering yield potential, difficulty, flowering time, and which type matches your experience level, growing space, and goals as an American grower.', href: '/blog', tag: 'Seed Guide' },
-            { title: 'Outdoor Cannabis Growing by US Climate Zone', desc: 'State-by-state guidance on strain selection, planting dates, harvest timing, and weather management for outdoor cultivators in every US region.', href: '/blog', tag: 'Outdoor' },
-            { title: 'Maximizing Yield: Nutrient Schedules and Training', desc: 'LST, topping, SCROG, and feeding schedules that our most successful customers use to double their harvest weight compared to untrained plants.', href: '/blog', tag: 'Advanced' },
-            { title: 'Choosing the Best Cannabis Seeds for Your First Grow', desc: 'Our recommendations for first-time growers based on customer feedback, support conversations, and germination data from over 50,000 orders shipped across the USA.', href: '/blog', tag: 'Beginner' },
+            { title: '5 Ways to Take CBD for Medical Use', desc: 'A practical guide covering sublingual tinctures, edibles, topicals, vaporization, and capsules — with dosing tips and bioavailability comparisons for therapeutic users.', href: '/blog/5-different-ways-to-take-cbd-for-medical-use', tag: 'CBD Guide' },
+            { title: 'Cannabis Pruning and Topping Techniques', desc: 'Learn when and how to top, prune, and train your cannabis plants. Covers FIM, LST, SCROG, and defoliation for maximum canopy management and yield.', href: '/blog/cannabis-plant-pruning-and-topping', tag: 'Advanced' },
+            { title: 'CBN and Its Effects on Sleep and Wellness', desc: 'How cannabinol (CBN) supports sleep quality, what strains produce it, and how harvest timing influences CBN levels in your finished flower.', href: '/blog/cbn-and-its-effects-on-sleep-and-wellness', tag: 'Wellness' },
+            { title: 'Origins and History of Cannabis', desc: 'Trace the journey of cannabis from ancient Central Asian landrace genetics through prohibition to the modern American seed market.', href: '/blog/origins-and-history-of-cannabis', tag: 'Education' },
+            { title: 'VPD and Humidity Control in Cannabis Cultivation', desc: 'Understanding vapor pressure deficit and how temperature-humidity interaction governs transpiration, nutrient uptake, and mold risk across every growth stage.', href: '/blog/vpd-and-humidity-control-in-cannabis-cultivation', tag: 'Indoor' },
+            { title: 'What Is CBD and the Benefits It Carries', desc: 'A complete breakdown of cannabidiol — how it works, what conditions it helps, which strains produce the most CBD, and how to choose CBD seeds.', href: '/blog/what-is-cbd-and-the-benefits-it-carries', tag: 'CBD Guide' },
+            { title: 'Low-Watt Grows: 7 Seeds That Still Deliver', desc: 'Running 150-300W? These strains are bred for efficiency — compact structure, fast finish, and solid yields even under modest LED setups.', href: '/blog/low-watt-grows-150-300-w-7-seeds-that-still-deliver', tag: 'Indoor' },
+            { title: 'Cannabis Terpenes vs. Other Aromatic Plants', desc: 'How cannabis terpenes compare to those found in lavender, citrus, pine, and pepper — and why the entourage effect matters for medicinal users.', href: '/blog/cannabis-vs-other-aromatic-plant-terpenes', tag: 'Science' },
+            { title: 'Tropical Balcony Grow: 8 Mold-Resistant Autos', desc: 'Compact, humidity-tolerant autoflowers perfect for balcony and patio growing in warm, humid US climates like Florida, Texas, and the Gulf Coast.', href: '/blog/tropical-balcony-grow-8-compact-mold-resistant-autos', tag: 'Outdoor' },
           ].map((guide) => (
             <Link key={guide.title} href={guide.href} className="bg-white rounded-2xl p-6 border border-[#275C53]/5 hover:shadow-md hover:-translate-y-1 transition-all group">
               <span className="text-[10px] uppercase tracking-[1.5px] text-[#D7B65D] font-semibold">{guide.tag}</span>
@@ -659,6 +662,14 @@ export default async function HomePage() {
           <div className="flex flex-wrap gap-2">
             {[
               { name: 'Growing Guides & Blog', href: '/blog' },
+              { name: 'Apple Fritter Strain Review', href: '/blog/apple-fritter-cannabis-strain' },
+              { name: 'CBD for Muscle Spasms', href: '/blog/cbd-for-muscle-spasms-dosing-and-frequency' },
+              { name: 'Marijuana & Nicotine Effects', href: '/blog/marijuana-and-nicotine-use-and-effects' },
+              { name: 'Oral Drug Tests & Detox', href: '/blog/mouth-and-oral-drug-tests-and-detox-methods' },
+              { name: 'CBD for Opioid Withdrawal', href: '/blog/guide-to-cannabidiol-cbd-for-opioid-withdrawal' },
+              { name: 'Purple Dead Nettle Guide', href: '/blog/purple-dead-nettle-and-weeds-in-lawns' },
+              { name: 'Volcanic vs Regular Soil', href: '/blog/volcanic-compared-regular-soil-for-cannabis' },
+              { name: 'Terpene-Light Seed Options', href: '/blog/terpene-light-options-7-seeds-with-minimal-aroma-in-flower' },
               { name: 'Shipping & Delivery Info', href: '/shipping' },
               { name: 'Frequently Asked Questions', href: '/faq' },
               { name: 'Contact Our Team', href: '/contact' },
