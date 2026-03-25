@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { getProductCount } from '@/lib/products/data';
 
 export async function GET() {
   const now = new Date();
@@ -70,13 +71,10 @@ export async function GET() {
   // --- Failed payments ---
   const failedPayments = orders.filter(o => o.payment_status === 'unpaid' && o.status !== 'cancelled').length;
 
-  // --- Products (use SQL counts to avoid Supabase row limit) ---
-  const [publishedCount, draftCount] = await Promise.all([
-    supabaseAdmin.from('products').select('id', { count: 'exact', head: true }).eq('status', 'published'),
-    supabaseAdmin.from('products').select('id', { count: 'exact', head: true }).eq('status', 'draft'),
-  ]);
-  const publishedProducts = publishedCount.count || 0;
-  const draftProducts = draftCount.count || 0;
+  // --- Products (from local product engine — source of truth for catalog) ---
+  const productCounts = getProductCount();
+  const publishedProducts = productCounts.published;
+  const draftProducts = productCounts.draft;
   const outOfStock = productList.filter(p => !p.in_stock || (p.stock_quantity !== null && p.stock_quantity <= 0)).length;
 
   // --- Low stock products ---
@@ -151,7 +149,7 @@ export async function GET() {
     products: {
       published: publishedProducts,
       draft: draftProducts,
-      total: products.count || 0,
+      total: productCounts.total,
       out_of_stock: outOfStock,
     },
     low_stock_products: lowStockProducts,
