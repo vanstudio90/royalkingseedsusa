@@ -36,7 +36,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           1. HERO — keyword-rich, natural copy, internal links
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="hero-gradient text-white">
+      <section className="hero-gradient text-white -mt-[132px] pt-[132px] lg:-mt-[88px] lg:pt-[88px]">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl max-w-4xl mx-auto leading-tight" style={{ fontFamily: 'var(--font-patua)' }}>
             Buy Cannabis Seeds in the USA — Feminized, Autoflower &amp; High-THC Strains
