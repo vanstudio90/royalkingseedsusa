@@ -19,6 +19,15 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
+  async redirects() {
+    return [
+      // Old WordPress -cannabis-seeds slugs → correct -feminized slugs
+      { source: '/:slug*-cannabis-seeds', destination: '/:slug*-feminized', permanent: true },
+      { source: '/:slug*-cannabis-seed', destination: '/:slug*-feminized', permanent: true },
+      // Old blog URL
+      { source: '/royal-king-blog', destination: '/blog', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
