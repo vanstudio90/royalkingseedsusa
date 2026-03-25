@@ -145,69 +145,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ─── BEGINNER-FRIENDLY SEEDS ─── */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
-              Beginner-Friendly Cannabis Seeds
-            </h2>
-            <div className="w-12 h-0.5 bg-[#D7B65D] mx-auto mt-4 mb-4" />
-            <p className="text-[#192026]/65 max-w-2xl mx-auto">
-              If you&apos;re new to growing cannabis, start with <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] font-medium hover:underline">autoflowering seeds</Link> — they&apos;re the most forgiving, require no light schedule changes, and finish in 8-10 weeks. Best cannabis seeds for beginners include Northern Lights Auto, Blueberry Auto, and White Widow Auto. Our <Link href="/blog" className="text-[#275C53] font-medium hover:underline">beginner growing guide</Link> walks first-time growers through every step.
-            </p>
-          </div>
-          <FeaturedProducts products={beginnerSeeds} />
-          <div className="text-center mt-10">
-            <Link href="/product-category/autoflowering-seeds" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
-              Shop All Beginner Seeds
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── HIGH THC SEEDS ─── */}
-      <section className="py-12 sm:py-16 bg-white">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
-              High THC Cannabis Seeds
-            </h2>
-            <div className="w-12 h-0.5 bg-[#D7B65D] mx-auto mt-4 mb-4" />
-            <p className="text-[#192026]/65 max-w-2xl mx-auto">
-              Our most potent strains testing 20-30% THC. Dense, trichome-covered buds favored by experienced American growers seeking maximum potency. These <Link href="/product-category/high-tch-seeds" className="text-[#275C53] font-medium hover:underline">high-THC genetics</Link> produce heavy resin production and powerful effects — ideal for growers who want top-shelf flower from every harvest.
-            </p>
-          </div>
-          <FeaturedProducts products={highThcSeeds} />
-          <div className="text-center mt-10">
-            <Link href="/product-category/high-tch-seeds" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
-              Shop All High THC Seeds
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── FAST FLOWERING SEEDS ─── */}
-      <section className="py-12 sm:py-16">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
-              Fast Flowering Cannabis Seeds for the USA
-            </h2>
-            <div className="w-12 h-0.5 bg-[#D7B65D] mx-auto mt-4 mb-4" />
-            <p className="text-[#192026]/65 max-w-2xl mx-auto">
-              Designed for American growers who need a quick turnaround. These fast flowering cannabis seeds complete their cycle in 8-10 weeks, allowing outdoor growers in northern states like <Link href="/seeds/usa/michigan" className="text-[#275C53] font-medium hover:underline">Michigan</Link>, <Link href="/seeds/usa/colorado" className="text-[#275C53] font-medium hover:underline">Colorado</Link>, and <Link href="/seeds/usa/new-york" className="text-[#275C53] font-medium hover:underline">New York</Link> to harvest before first frost. Autoflower seeds finish 2-4 weeks faster than photoperiod strains — the preferred choice for outdoor cannabis seeds in states with fewer than 150 frost-free days.
-            </p>
-          </div>
-          <FeaturedProducts products={fastFlowering} />
-          <div className="text-center mt-10">
-            <Link href="/product-category/autoflowering-seeds" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
-              Shop Fast Flowering Seeds
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* ═══════════════════════════════════════════════════════════════
           5. MASSIVE AUTHORITY SECTION — 2000+ word guide with 20+ internal links
       ═══════════════════════════════════════════════════════════════ */}
@@ -282,6 +219,27 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ─── BEGINNER-FRIENDLY SEEDS ─── */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
+              Beginner-Friendly Cannabis Seeds
+            </h2>
+            <div className="w-12 h-0.5 bg-[#D7B65D] mx-auto mt-4 mb-4" />
+            <p className="text-[#192026]/65 max-w-2xl mx-auto">
+              If you&apos;re new to growing cannabis, start with <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] font-medium hover:underline">autoflowering seeds</Link> — they&apos;re the most forgiving, require no light schedule changes, and finish in 8-10 weeks. Best cannabis seeds for beginners include Northern Lights Auto, Blueberry Auto, and White Widow Auto. Our <Link href="/blog" className="text-[#275C53] font-medium hover:underline">beginner growing guide</Link> walks first-time growers through every step.
+            </p>
+          </div>
+          <FeaturedProducts products={beginnerSeeds} />
+          <div className="text-center mt-10">
+            <Link href="/product-category/autoflowering-seeds" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
+              Shop All Beginner Seeds
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ═══════════════════════════════════════════════════════════════
           5B. HOW TO CHOOSE — comparison/decision section
       ═══════════════════════════════════════════════════════════════ */}
@@ -339,6 +297,27 @@ export default async function HomePage() {
           <Link href="/seeds/usa" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
             Browse All 50 States →
           </Link>
+        </div>
+      </section>
+
+      {/* ─── HIGH THC SEEDS ─── */}
+      <section className="py-12 sm:py-16 bg-white">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
+              High THC Cannabis Seeds
+            </h2>
+            <div className="w-12 h-0.5 bg-[#D7B65D] mx-auto mt-4 mb-4" />
+            <p className="text-[#192026]/65 max-w-2xl mx-auto">
+              Our most potent strains testing 20-30% THC. Dense, trichome-covered buds favored by experienced American growers seeking maximum potency. These <Link href="/product-category/high-tch-seeds" className="text-[#275C53] font-medium hover:underline">high-THC genetics</Link> produce heavy resin production and powerful effects — ideal for growers who want top-shelf flower from every harvest.
+            </p>
+          </div>
+          <FeaturedProducts products={highThcSeeds} />
+          <div className="text-center mt-10">
+            <Link href="/product-category/high-tch-seeds" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
+              Shop All High THC Seeds
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -441,6 +420,27 @@ export default async function HomePage() {
               <p className="text-[13px] text-[#192026]/70 leading-relaxed">{item.desc}</p>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ─── FAST FLOWERING SEEDS ─── */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
+              Fast Flowering Cannabis Seeds for the USA
+            </h2>
+            <div className="w-12 h-0.5 bg-[#D7B65D] mx-auto mt-4 mb-4" />
+            <p className="text-[#192026]/65 max-w-2xl mx-auto">
+              Designed for American growers who need a quick turnaround. These fast flowering cannabis seeds complete their cycle in 8-10 weeks, allowing outdoor growers in northern states like <Link href="/seeds/usa/michigan" className="text-[#275C53] font-medium hover:underline">Michigan</Link>, <Link href="/seeds/usa/colorado" className="text-[#275C53] font-medium hover:underline">Colorado</Link>, and <Link href="/seeds/usa/new-york" className="text-[#275C53] font-medium hover:underline">New York</Link> to harvest before first frost. Autoflower seeds finish 2-4 weeks faster than photoperiod strains — the preferred choice for outdoor cannabis seeds in states with fewer than 150 frost-free days.
+            </p>
+          </div>
+          <FeaturedProducts products={fastFlowering} />
+          <div className="text-center mt-10">
+            <Link href="/product-category/autoflowering-seeds" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
+              Shop Fast Flowering Seeds
+            </Link>
+          </div>
         </div>
       </section>
 
