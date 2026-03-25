@@ -251,18 +251,23 @@ export default async function HomePage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {[
-            { region: 'California Cannabis Seeds', desc: 'Year-round outdoor growing in SoCal. Long seasons support full-size sativas and photoperiod indicas. Customers in the Emerald Triangle, Central Valley, and LA consistently report our highest outdoor yields — 16-24 oz per plant with strains like Blue Dream, OG Kush, and GSC.', link: '/product-category/best-strains-for-outdoor-growing' },
-            { region: 'Colorado Cannabis Seeds', desc: 'Short mountain seasons (May-September) with intense UV at altitude. Indica-dominant and fast-flowering genetics perform best. Colorado customers favor Granddaddy Purple, Northern Lights, and autoflower hybrids that finish before October frost. Indoor grows thrive year-round in the dry climate.', link: '/product-category/indica-seeds' },
-            { region: 'New York & Northeast Seeds', desc: 'Humid summers, short outdoor seasons. Autoflowering seeds are essential for outdoor growers in NY, New Jersey, Connecticut, and Massachusetts. Mold-resistant hybrids recommended. Our NYC apartment growers dominate our indoor autoflower sales — compact strains that fit small spaces.', link: '/product-category/autoflowering-seeds' },
-            { region: 'Texas & Southern Heat Seeds', desc: 'Extreme heat and humidity challenge outdoor grows. Heat-tolerant sativa-dominant hybrids and drought-resistant genetics outperform here. Texas customers growing indoors report excellent results with our feminized indica and hybrid collections using supplemental A/C and dehumidification.', link: '/product-category/hybrid' },
-            { region: 'Michigan & Midwest Seeds', desc: 'Variable seasons with cold snaps. Michigan is one of our top 3 markets — home cultivation is legal and growers here favor feminized indicas for indoor grows and autoflowers for short outdoor seasons. Fast-flowering seeds that finish by late September are most popular.', link: '/product-category/fast-flowering-seeds' },
-            { region: 'Pacific Northwest Seeds', desc: 'Oregon and Washington offer mild, wet growing conditions ideal for mold-resistant strains. PNW outdoor growers report excellent results with our hybrid and sativa collections. The Willamette Valley produces some of our highest-yielding customer harvests. Indoor grows benefit from the naturally cool, stable climate.', link: '/product-category/sativa-seeds' },
+            { region: 'California Cannabis Seeds', desc: 'Year-round outdoor growing in SoCal. Long seasons support full-size sativas and photoperiod indicas. Customers in the Emerald Triangle, Central Valley, and LA consistently report our highest outdoor yields — 16-24 oz per plant with strains like Blue Dream, OG Kush, and GSC.', link: '/seeds/usa/california' },
+            { region: 'Colorado Cannabis Seeds', desc: 'Short mountain seasons (May-September) with intense UV at altitude. Indica-dominant and fast-flowering genetics perform best. Colorado customers favor Granddaddy Purple, Northern Lights, and autoflower hybrids that finish before October frost. Indoor grows thrive year-round in the dry climate.', link: '/seeds/usa/colorado' },
+            { region: 'New York & Northeast Seeds', desc: 'Humid summers, short outdoor seasons. Autoflowering seeds are essential for outdoor growers in NY, New Jersey, Connecticut, and Massachusetts. Mold-resistant hybrids recommended. Our NYC apartment growers dominate our indoor autoflower sales — compact strains that fit small spaces.', link: '/seeds/usa/new-york' },
+            { region: 'Texas & Southern Heat Seeds', desc: 'Extreme heat and humidity challenge outdoor grows. Heat-tolerant sativa-dominant hybrids and drought-resistant genetics outperform here. Texas customers growing indoors report excellent results with our feminized indica and hybrid collections using supplemental A/C and dehumidification.', link: '/seeds/usa/texas' },
+            { region: 'Michigan & Midwest Seeds', desc: 'Variable seasons with cold snaps. Michigan is one of our top 3 markets — home cultivation is legal and growers here favor feminized indicas for indoor grows and autoflowers for short outdoor seasons. Fast-flowering seeds that finish by late September are most popular.', link: '/seeds/usa/michigan' },
+            { region: 'Pacific Northwest Seeds', desc: 'Oregon and Washington offer mild, wet growing conditions ideal for mold-resistant strains. PNW outdoor growers report excellent results with our hybrid and sativa collections. The Willamette Valley produces some of our highest-yielding customer harvests. Indoor grows benefit from the naturally cool, stable climate.', link: '/seeds/usa/oregon' },
           ].map((item) => (
             <Link key={item.region} href={item.link} className="bg-white rounded-2xl p-6 border border-[#275C53]/5 hover:shadow-md hover:-translate-y-1 transition-all group">
               <h3 className="text-base font-semibold text-[#275C53] mb-2 group-hover:text-[#D7B65D] transition-colors">{item.region}</h3>
               <p className="text-[13px] text-[#192026]/70 leading-relaxed">{item.desc}</p>
             </Link>
           ))}
+        </div>
+        <div className="text-center mt-8">
+          <Link href="/seeds/usa" className="inline-block px-8 py-3 bg-[#275C53] text-white text-sm font-semibold rounded-xl hover:bg-[#1e4a42] transition-colors">
+            Browse All 50 States →
+          </Link>
         </div>
       </section>
 

@@ -80,13 +80,30 @@ const navItems: MenuItem[] = [
     ],
   },
   {
-    label: 'Buying Seeds',
-    href: '/product-category/shop-all-cannabis-seeds',
+    label: 'Buy By State',
+    href: '/seeds/usa',
     children: [
-      { label: 'How to Order', href: '/faq' },
-      { label: 'Payment Methods', href: '/faq' },
-      { label: 'Shipping & Delivery', href: '/shipping' },
-      { label: 'Track Your Order', href: '/shipping' },
+      {
+        label: 'Popular States',
+        children: [
+          { label: 'California', href: '/seeds/usa/california' },
+          { label: 'Colorado', href: '/seeds/usa/colorado' },
+          { label: 'Florida', href: '/seeds/usa/florida' },
+          { label: 'New York', href: '/seeds/usa/new-york' },
+          { label: 'Texas', href: '/seeds/usa/texas' },
+          { label: 'Michigan', href: '/seeds/usa/michigan' },
+          { label: 'Oregon', href: '/seeds/usa/oregon' },
+          { label: 'Washington', href: '/seeds/usa/washington' },
+        ],
+      },
+      {
+        label: 'More',
+        children: [
+          { label: 'All 50 States', href: '/seeds/usa' },
+          { label: 'How to Order', href: '/faq' },
+          { label: 'Shipping & Delivery', href: '/shipping' },
+        ],
+      },
     ],
   },
   {

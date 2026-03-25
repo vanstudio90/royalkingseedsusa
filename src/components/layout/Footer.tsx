@@ -146,15 +146,18 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Buy Seeds In */}
+            {/* Buy Seeds By State */}
             <div>
-              <h3 className={headingClass}>Buy Seeds In</h3>
+              <h3 className={headingClass}>Buy Seeds By State</h3>
               <ul className="space-y-2.5">
-                <li><Link href="/product-category/shop-all-cannabis-seeds" className={linkClass}>Buy Cannabis Seeds USA</Link></li>
-                <li><Link href="/product-category/usa-premium-cannabis-seeds" className={linkClass}>USA Premium Seeds</Link></li>
-                <li><Link href="/product-category/best-strains-for-outdoor-growing" className={linkClass}>Outdoor Growing USA</Link></li>
-                <li><Link href="/product-category/best-strains-for-anxiety" className={linkClass}>Anxiety Relief Seeds</Link></li>
-                <li><Link href="/product-category/best-seller" className={linkClass}>Best Sellers</Link></li>
+                <li><Link href="/seeds/usa" className={linkClass}>All 50 States</Link></li>
+                <li><Link href="/seeds/usa/california" className={linkClass}>California</Link></li>
+                <li><Link href="/seeds/usa/colorado" className={linkClass}>Colorado</Link></li>
+                <li><Link href="/seeds/usa/florida" className={linkClass}>Florida</Link></li>
+                <li><Link href="/seeds/usa/new-york" className={linkClass}>New York</Link></li>
+                <li><Link href="/seeds/usa/texas" className={linkClass}>Texas</Link></li>
+                <li><Link href="/seeds/usa/michigan" className={linkClass}>Michigan</Link></li>
+                <li><Link href="/seeds/usa/oregon" className={linkClass}>Oregon</Link></li>
               </ul>
             </div>
           </div>
