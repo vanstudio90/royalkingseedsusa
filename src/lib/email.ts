@@ -235,6 +235,41 @@ function cancelledHtml(order: OrderData) {
   `);
 }
 
+function manualPaymentHtml(order: OrderData) {
+  return layout(
+    'Payment Received',
+    'Your order is confirmed and preparing to ship',
+    `
+    ${greeting(order.customer_name)}
+    ${message("We are writing to confirm that your payment has been successfully received and verified. Thank you for choosing Royal King Seeds.")}
+    ${statusBadge('Payment Confirmed', GREEN)}
+    ${orderNumberBlock(order.order_number)}
+    ${message("Your order is now being carefully prepared for shipment. Our team inspects every seed pack to ensure you receive only the highest quality genetics.")}
+    ${itemsTable(order.items)}
+    ${totalsBlock(order)}
+    <table width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td width="48%" valign="top">
+        ${infoCard('Shipping To', addressContent(order.shipping_address))}
+      </td>
+      <td width="4%"></td>
+      <td width="48%" valign="top">
+        ${infoCard('Payment', order.payment_method || 'Manual Payment')}
+      </td>
+    </tr></table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};border-radius:6px;margin:20px 0 24px;">
+      <tr><td style="padding:18px 20px;">
+        <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${GREEN};margin-bottom:8px;">What Happens Next</div>
+        <div style="font-size:14px;color:#4a4540;line-height:1.8;">
+          1. Our team will carefully package your order<br>
+          2. You will receive a shipping confirmation email with tracking details<br>
+          3. Estimated delivery: 3-7 business days after shipment
+        </div>
+      </td></tr>
+    </table>
+    ${message("If you have any questions about your order, simply reply to this email and our team will be happy to assist you.")}
+  `);
+}
+
 function refundedHtml(order: OrderData) {
   return layout(
     'Refund Processed',
@@ -260,6 +295,7 @@ function refundedHtml(order: OrderData) {
 
 const SUBJECTS: Record<string, (order: OrderData) => string> = {
   processing: (o) => `Order Confirmed \u2014 ${o.order_number}`,
+  manual_payment: (o) => `Payment Received \u2014 ${o.order_number}`,
   shipped: (o) => `Your Order Has Shipped! \u2014 ${o.order_number}`,
   completed: (o) => `Order Complete \u2014 ${o.order_number}`,
   cancelled: (o) => `Order Cancelled \u2014 ${o.order_number}`,
@@ -268,6 +304,7 @@ const SUBJECTS: Record<string, (order: OrderData) => string> = {
 
 const TEMPLATES: Record<string, (order: OrderData) => string> = {
   processing: orderConfirmationHtml,
+  manual_payment: manualPaymentHtml,
   shipped: shippedHtml,
   completed: completedHtml,
   cancelled: cancelledHtml,

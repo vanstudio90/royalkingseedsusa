@@ -20,6 +20,7 @@ interface Order {
 const statusColors: Record<string, string> = {
   pending: 'bg-yellow-50 text-yellow-600',
   processing: 'bg-blue-50 text-blue-600',
+  manual_payment: 'bg-teal-50 text-teal-600',
   shipped: 'bg-purple-50 text-purple-600',
   completed: 'bg-emerald-50 text-emerald-600',
   cancelled: 'bg-red-50 text-red-500',
@@ -114,7 +115,7 @@ export default function AdminOrdersPage() {
     URL.revokeObjectURL(url);
   };
 
-  const statuses = ['all', 'pending', 'processing', 'shipped', 'completed', 'cancelled', 'trashed'];
+  const statuses = ['all', 'pending', 'processing', 'manual_payment', 'shipped', 'completed', 'cancelled', 'trashed'];
   const isTrashView = statusFilter === 'trashed';
 
   return (
@@ -264,6 +265,7 @@ export default function AdminOrdersPage() {
                       >
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>
+                        <option value="manual_payment">Manual Payment Received</option>
                         <option value="shipped">Shipped</option>
                         <option value="completed">Completed</option>
                         <option value="cancelled">Cancelled</option>
