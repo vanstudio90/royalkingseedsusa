@@ -29,21 +29,25 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  // Fetch counts for the current type filter
-  const countsBase = supabaseAdmin.from('pages').select('status, page_type');
-  const { data: allRows } = type !== 'all'
-    ? await countsBase.eq('page_type', type)
-    : await countsBase;
+  // Fetch counts using exact count queries (no row limit)
+  const buildCountQuery = (statusVal?: string) => {
+    let q = supabaseAdmin.from('pages').select('*', { count: 'exact', head: true });
+    if (type !== 'all') q = q.eq('page_type', type);
+    if (statusVal) q = q.eq('status', statusVal);
+    return q;
+  };
 
-  const counts = { all: 0, published: 0, draft: 0 };
-  if (allRows) {
-    counts.all = allRows.length;
-    for (const row of allRows) {
-      const s = (row as { status: string }).status;
-      if (s === 'published') counts.published++;
-      else if (s === 'draft') counts.draft++;
-    }
-  }
+  const [allQ, pubQ, draftQ] = await Promise.all([
+    buildCountQuery(),
+    buildCountQuery('published'),
+    buildCountQuery('draft'),
+  ]);
+
+  const counts = {
+    all: allQ.count || 0,
+    published: pubQ.count || 0,
+    draft: draftQ.count || 0,
+  };
 
   return NextResponse.json({ pages: data, total: count, counts });
 }
