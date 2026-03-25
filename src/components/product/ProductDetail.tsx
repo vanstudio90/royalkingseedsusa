@@ -1084,14 +1084,25 @@ function EffectsGrid({ effects, strainType }: { effects: string[]; strainType: s
   );
 }
 
+function mdToHtml(text: string): string {
+  return text
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[#275C53] hover:underline">$1</a>')
+    .replace(/^- (.+)/gm, '<li>$1</li>')
+    .replace(/(<li>[\s\S]*?<\/li>\n?)+/g, (m) => `<ul class="list-disc pl-5 space-y-1 my-2">${m}</ul>`)
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^/, '<p>')
+    .replace(/$/, '</p>')
+    .replace(/<p><\/p>/g, '');
+}
+
 function DescriptionRenderer({ description, productName }: { description: string; productName: string }) {
-  // Strip all ## headings from the raw text, then split into sections
   const sections = description
     .split(/^##\s+.*/m)
     .map(s => s.trim())
     .filter(Boolean);
 
-  // Extract heading titles
   const headingMatches = [...description.matchAll(/^##\s+(.+)/gm)];
   const headings = headingMatches.map(m => m[1].trim());
 
@@ -1099,7 +1110,7 @@ function DescriptionRenderer({ description, productName }: { description: string
     return (
       <div>
         <h2 className="text-xl font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>About {productName}</h2>
-        <div className="text-[#192026]/60 leading-relaxed text-[15px] whitespace-pre-line">{description.replace(/^##\s+.*/gm, '').trim()}</div>
+        <div className="text-[#192026]/60 leading-relaxed text-[15px] space-y-3" dangerouslySetInnerHTML={{ __html: mdToHtml(description.replace(/^##\s+.*/gm, '').trim()) }} />
       </div>
     );
   }
@@ -1111,7 +1122,7 @@ function DescriptionRenderer({ description, productName }: { description: string
         return (
           <div key={i}>
             {heading && <h2 className="text-xl font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>{heading}</h2>}
-            <div className="text-[#192026]/60 leading-relaxed text-[15px] whitespace-pre-line">{body}</div>
+            <div className="text-[#192026]/60 leading-relaxed text-[15px] space-y-3" dangerouslySetInnerHTML={{ __html: mdToHtml(body) }} />
           </div>
         );
       })}
