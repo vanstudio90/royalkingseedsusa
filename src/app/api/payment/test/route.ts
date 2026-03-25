@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const API_URL = process.env.ACCEPT_BLUE_API_URL || 'NOT SET';
-  const API_KEY = process.env.ACCEPT_BLUE_API_KEY || '';
-  const PIN = process.env.ACCEPT_BLUE_PIN || '';
+  const API_URL = (process.env.ACCEPT_BLUE_API_URL || 'NOT SET').trim();
+  const API_KEY = (process.env.ACCEPT_BLUE_API_KEY || '').trim();
+  const PIN = (process.env.ACCEPT_BLUE_PIN || '').trim();
 
   // Test the API connection with a minimal charge (will be declined with test card)
   const auth = Buffer.from(`${API_KEY}:${PIN}`).toString('base64');
