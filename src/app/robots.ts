@@ -4,7 +4,9 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
-      disallow: ['/'],
+      allow: '/',
+      disallow: ['/futu/', '/api/admin/'],
     },
+    sitemap: 'https://royalkingseeds.us/sitemap.xml',
   };
 }

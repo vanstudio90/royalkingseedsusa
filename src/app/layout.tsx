@@ -71,11 +71,11 @@ export const metadata: Metadata = {
     canonical: "https://royalkingseedsusa.vercel.app",
   },
   robots: {
-    index: false,
-    follow: false,
+    index: true,
+    follow: true,
     googleBot: {
-      index: false,
-      follow: false,
+      index: true,
+      follow: true,
     },
   },
 };
