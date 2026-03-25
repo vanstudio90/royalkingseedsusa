@@ -58,7 +58,7 @@ export default function AdminOrdersPage() {
   }, [fetchOrders, search]);
 
   const updateStatus = async (id: number, status: string) => {
-    await fetch(`/api/futu/orders/${id}`, {
+    await fetch(`/api/admin/orders/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),
@@ -272,7 +272,8 @@ export default function AdminOrdersPage() {
                     )}
                   </td>
                   <td className="px-4 py-3 text-[12px] text-[#192026]/30">
-                    {new Date(o.created_at).toLocaleDateString('en-US')}
+                    <div>{new Date(o.created_at).toLocaleDateString('en-US')}</div>
+                    <div className="text-[10px] text-[#192026]/20">{new Date(o.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</div>
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center gap-2 justify-end">
