@@ -49,7 +49,7 @@ const navItems: MenuItem[] = [
       {
         label: 'Latest Guides',
         children: [
-          { label: 'Germination Guide', href: '/blog/germination-guide-cannabis-seeds' },
+          { label: 'Germination Guide', href: '/blog/autoflowering-seed-germination-guide' },
           { label: 'All Grow Guides', href: '/blog' },
         ],
       },
