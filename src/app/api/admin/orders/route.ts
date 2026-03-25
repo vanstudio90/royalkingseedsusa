@@ -18,8 +18,13 @@ export async function GET(req: NextRequest) {
     .select('*', { count: 'exact' })
     .order('created_at', { ascending: false });
 
-  if (status && status !== 'all') {
+  if (status === 'trashed') {
+    query = query.eq('status', 'trashed');
+  } else if (status && status !== 'all') {
     query = query.eq('status', status);
+  } else {
+    // "all" excludes trashed orders
+    query = query.neq('status', 'trashed');
   }
 
   if (search) {
