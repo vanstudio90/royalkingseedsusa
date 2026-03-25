@@ -82,7 +82,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full px-4 py-3 bg-[#192026] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#D7B65D]/50"
-              placeholder="contact@royalkingseeds.com"
+              placeholder="Username"
               required
             />
           </div>
@@ -94,7 +94,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 bg-[#192026] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#D7B65D]/50"
-              placeholder="Enter password"
+              placeholder="Password"
               required
             />
           </div>
