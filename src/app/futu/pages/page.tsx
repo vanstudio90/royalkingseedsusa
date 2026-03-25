@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -19,18 +19,31 @@ interface PageItem {
 export default function AdminPagesPage() {
   const router = useRouter();
   const [pages, setPages] = useState<PageItem[]>([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
   const [typeFilter, setTypeFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
+  const [counts, setCounts] = useState<{ all: number; published: number; draft: number }>({ all: 0, published: 0, draft: 0 });
+  const [page, setPage] = useState(1);
+  const limit = 50;
 
-  const fetchPages = async () => {
+  const fetchPages = useCallback(async () => {
     setLoading(true);
-    const res = await fetch(`/api/admin/pages?type=${typeFilter}`);
+    const params = new URLSearchParams({
+      type: typeFilter,
+      status: statusFilter,
+      page: String(page),
+      limit: String(limit),
+    });
+    const res = await fetch(`/api/admin/pages?${params}`);
     const data = await res.json();
     setPages(data.pages || []);
+    setTotal(data.total || 0);
+    setCounts(data.counts || { all: 0, published: 0, draft: 0 });
     setLoading(false);
-  };
+  }, [typeFilter, statusFilter, page]);
 
-  useEffect(() => { fetchPages(); }, [typeFilter]);
+  useEffect(() => { fetchPages(); }, [fetchPages]);
 
   const toggleStatus = async (id: number, current: string) => {
     const newStatus = current === 'published' ? 'draft' : 'published';
@@ -48,12 +61,14 @@ export default function AdminPagesPage() {
     fetchPages();
   };
 
+  const totalPages = Math.ceil(total / limit);
+
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-[#192026]" style={{ fontFamily: 'var(--font-patua)' }}>Pages & Blog</h1>
-          <p className="text-[#192026]/40 text-sm mt-1">Manage static pages and blog posts</p>
+          <p className="text-[#192026]/40 text-sm mt-1">{total} items</p>
         </div>
         <Link
           href="/futu/pages/new"
@@ -65,10 +80,10 @@ export default function AdminPagesPage() {
 
       {/* Type Filter */}
       <div className="bg-white rounded-2xl border border-[#192026]/5 p-4 mb-4 flex items-center gap-2">
-        {['all', 'page', 'blog'].map((t) => (
+        {(['all', 'page', 'blog'] as const).map((t) => (
           <button
             key={t}
-            onClick={() => setTypeFilter(t)}
+            onClick={() => { setTypeFilter(t); setStatusFilter('all'); setPage(1); }}
             className={`px-3 py-2 rounded-lg text-[11px] uppercase tracking-[1px] font-semibold transition-colors cursor-pointer ${
               typeFilter === t
                 ? 'bg-[#275C53] text-white'
@@ -80,13 +95,35 @@ export default function AdminPagesPage() {
         ))}
       </div>
 
+      {/* Status Filter */}
+      <div className="bg-white rounded-2xl border border-[#192026]/5 p-4 mb-4 flex items-center gap-2">
+        {(['all', 'published', 'draft'] as const).map((s) => (
+          <button
+            key={s}
+            onClick={() => { setStatusFilter(s); setPage(1); }}
+            className={`px-3 py-2 rounded-lg text-[11px] uppercase tracking-[1px] font-semibold transition-colors cursor-pointer flex items-center gap-1.5 ${
+              statusFilter === s
+                ? 'bg-[#275C53] text-white'
+                : 'bg-[#f5f0ea] text-[#192026]/40 hover:text-[#192026]/70'
+            }`}
+          >
+            {s}
+            <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+              statusFilter === s ? 'bg-white/20 text-white' : 'bg-[#192026]/5 text-[#192026]/30'
+            }`}>
+              {counts[s]}
+            </span>
+          </button>
+        ))}
+      </div>
+
       {/* Table */}
       <div className="bg-white rounded-2xl border border-[#192026]/5 overflow-hidden">
         {loading ? (
           <div className="p-12 text-center text-[#192026]/30 text-sm">Loading...</div>
         ) : pages.length === 0 ? (
           <div className="p-12 text-center">
-            <p className="text-[#192026]/30 text-sm mb-2">No pages yet</p>
+            <p className="text-[#192026]/30 text-sm mb-2">No pages found</p>
             <Link href="/futu/pages/new" className="text-[#275C53] text-sm underline">Create your first page</Link>
           </div>
         ) : (
@@ -144,6 +181,31 @@ export default function AdminPagesPage() {
               ))}
             </tbody>
           </table>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-between px-4 py-3 border-t border-[#192026]/5">
+            <span className="text-[12px] text-[#192026]/30">
+              Page {page} of {totalPages}
+            </span>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setPage(Math.max(1, page - 1))}
+                disabled={page === 1}
+                className="px-3 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold disabled:opacity-30 cursor-pointer"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => setPage(Math.min(totalPages, page + 1))}
+                disabled={page === totalPages}
+                className="px-3 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold disabled:opacity-30 cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>
