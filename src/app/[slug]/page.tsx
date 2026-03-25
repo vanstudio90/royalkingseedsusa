@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { fetchProductBySlug, fetchWcProducts } from '@/lib/woocommerce';
+import { getProductBySlug, getProducts } from '@/lib/products/data';
 import { ProductDetail } from '@/components/product/ProductDetail';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = await fetchProductBySlug(slug);
+  const product = getProductBySlug(slug);
   if (!product) return { title: 'Not Found' };
 
   return {
@@ -29,14 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = await fetchProductBySlug(slug);
+  const product = getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
-  // Fetch related products (same strain type)
-  const { products: allProducts } = await fetchWcProducts(1, 100);
+  // Related products (same strain type)
+  const allProducts = getProducts();
   const related = allProducts
     .filter((p) => p.id !== product.id && (p.strainType === product.strainType || p.categories.some((c) => product.categories.includes(c))))
     .slice(0, 4);

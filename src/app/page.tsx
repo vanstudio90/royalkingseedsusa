@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { fetchWcProducts } from '@/lib/woocommerce';
+import { getProducts, getFeaturedProducts } from '@/lib/products/data';
 
 export const metadata: Metadata = {
   title: 'Buy Cannabis Seeds in the USA — #1 Trusted American Seed Bank | Royal King Seeds',
@@ -21,15 +21,8 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const { products } = await fetchWcProducts(1, 20);
-
-  const featuredByType = {
-    indica: products.filter(p => p.strainType === 'indica').slice(0, 2),
-    sativa: products.filter(p => p.strainType === 'sativa').slice(0, 2),
-    hybrid: products.filter(p => p.strainType === 'hybrid').slice(0, 2),
-    cbd: products.filter(p => p.strainType === 'cbd').slice(0, 2),
-  };
-  const featured = [...featuredByType.indica, ...featuredByType.sativa, ...featuredByType.hybrid, ...featuredByType.cbd].slice(0, 8);
+  const products = getProducts().slice(0, 20);
+  const featured = getFeaturedProducts();
 
   return (
     <>

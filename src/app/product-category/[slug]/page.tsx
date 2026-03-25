@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { fetchAllProducts } from '@/lib/woocommerce';
+import { getProducts } from '@/lib/products/data';
 import { getCategoryBySlug, categories } from '@/lib/categories';
 import { getCategoryContent } from '@/lib/category-content';
 import { ProductGrid } from '@/components/product/ProductGrid';
@@ -80,7 +80,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     notFound();
   }
 
-  const allProducts = await fetchAllProducts();
+  const allProducts = getProducts();
   const filtered = filterProductsByCategory(allProducts, slug);
   const content = getCategoryContent(slug);
 
