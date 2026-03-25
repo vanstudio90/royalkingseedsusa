@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { getProductBySlug, getProducts } from '@/lib/products/data';
+import { getProductBySlug, getProducts, getProductBySlugFromDb } from '@/lib/products/data';
 import { ProductDetail } from '@/components/product/ProductDetail';
 import { ProductDetailSidebar } from '@/components/product/ProductDetailSidebar';
 import { getCategoryBySlug } from '@/lib/categories';
@@ -10,9 +10,11 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getProductBySlug(slug) || await getProductBySlugFromDb(slug);
   if (!product) return { title: 'Product Not Found' };
 
   const type = product.autoflower ? 'Autoflower' : product.feminized ? 'Feminized' : '';
@@ -53,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getProductBySlug(slug) || await getProductBySlugFromDb(slug);
   if (!product) notFound();
 
   const allProducts = getProducts();

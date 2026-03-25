@@ -15,3 +15,5 @@ export {
   searchProducts,
   getProductCount,
 } from './product-engine';
+
+export { getProductBySlugFromDb } from './db-fallback';
