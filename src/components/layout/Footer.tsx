@@ -118,7 +118,9 @@ export function Footer() {
                 <li><Link href="/product-category/high-tch-seeds" className={linkClass}>High THC Seeds</Link></li>
                 <li><Link href="/product-category/indica-seeds" className={linkClass}>Indica Strains</Link></li>
                 <li><Link href="/product-category/sativa-seeds" className={linkClass}>Sativa Strains</Link></li>
-                <li><Link href="/product-category/mix-packs" className={linkClass}>Mix Packs</Link></li>
+                <li><Link href="/product-category/fast-flowering-seeds" className={linkClass}>Fast Flowering</Link></li>
+                <li><Link href="/product-category/photoperiod" className={linkClass}>Photoperiod Seeds</Link></li>
+                <li><Link href="/product-category/usa-premium-cannabis-seeds" className={linkClass}>USA Premium</Link></li>
               </ul>
             </div>
 
@@ -131,6 +133,8 @@ export function Footer() {
                 <li><Link href="/shipping" className={linkClass}>Shipping &amp; Returns</Link></li>
                 <li><Link href="/privacy" className={linkClass}>Privacy Policy</Link></li>
                 <li><Link href="/terms" className={linkClass}>Terms &amp; Conditions</Link></li>
+                <li><Link href="/refund-returns" className={linkClass}>Refund &amp; Returns</Link></li>
+                <li><Link href="/affiliate" className={linkClass}>Affiliate Program</Link></li>
               </ul>
             </div>
 
