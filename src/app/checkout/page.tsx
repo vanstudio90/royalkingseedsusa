@@ -125,13 +125,13 @@ export default function CheckoutPage() {
 
       // Find matching coupon
       const coupons = data.coupons || data || [];
+      const code = promoCode.trim().toUpperCase();
       const match = (Array.isArray(coupons) ? coupons : []).find(
-        (c: any) => c.code?.toUpperCase() === promoCode.trim().toUpperCase() && c.status === 'active'
+        (c: any) => c.code?.toUpperCase() === code && (c.active === true || c.status === 'active')
       );
 
       if (!match) {
-        // Fallback: check hardcoded GROWNOW15
-        if (promoCode.trim().toUpperCase() === 'GROWNOW15') {
+        if (code === 'GROWNOW15') {
           setDiscount(subtotal * 0.15);
           setPromoApplied(true);
           setPromoLoading(false);
@@ -143,7 +143,8 @@ export default function CheckoutPage() {
       }
 
       // Check usage limit
-      if (match.max_uses && match.usage_count >= match.max_uses) {
+      const usedCount = match.used_count || match.usage_count || 0;
+      if (match.max_uses && usedCount >= match.max_uses) {
         setPromoError('This coupon has reached its usage limit');
         setPromoLoading(false);
         return;
@@ -157,8 +158,9 @@ export default function CheckoutPage() {
       }
 
       // Check minimum order
-      if (match.min_order_amount && subtotal < match.min_order_amount) {
-        setPromoError(`Minimum order of $${match.min_order_amount} required`);
+      const minOrder = match.min_order_amount || match.min_order || 0;
+      if (minOrder > 1 && subtotal < minOrder) {
+        setPromoError(`Minimum order of $${minOrder} required`);
         setPromoLoading(false);
         return;
       }
