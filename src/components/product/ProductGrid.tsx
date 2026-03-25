@@ -44,10 +44,12 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
       );
     }
 
+    // Strain type filter
     if (filters.strainType?.length) {
       result = result.filter((p) => filters.strainType.includes(p.strainType));
     }
 
+    // Flowering type filter
     if (filters.floweringType?.length) {
       result = result.filter((p) => {
         if (filters.floweringType.includes('autoflower') && p.autoflower) return true;
@@ -57,6 +59,7 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
       });
     }
 
+    // THC filter
     if (filters.thc?.length) {
       result = result.filter((p) => {
         const thc = parseFloat(p.thcContent) || 0;
@@ -70,6 +73,7 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
       });
     }
 
+    // Effects filter
     if (filters.effects?.length) {
       result = result.filter((p) =>
         filters.effects.some((e) =>
@@ -78,6 +82,18 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
       );
     }
 
+    // Suitable for filter
+    if (filters.suitableFor?.length) {
+      result = result.filter((p) =>
+        filters.suitableFor.some((s) =>
+          p.bestUse.some((bu) => bu.toLowerCase().includes(s)) ||
+          p.effects.some((e) => e.toLowerCase().includes(s)) ||
+          p.description.toLowerCase().includes(s)
+        )
+      );
+    }
+
+    // Flavor filter
     if (filters.flavor?.length) {
       result = result.filter((p) =>
         filters.flavor.some((f) =>
@@ -85,6 +101,33 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
           p.name.toLowerCase().includes(f)
         )
       );
+    }
+
+    // Difficulty filter
+    if (filters.difficulty?.length) {
+      result = result.filter((p) => {
+        const diff = (p.difficulty || 'intermediate').toLowerCase();
+        return filters.difficulty.some((d) => {
+          if (d === 'easy') return diff.includes('beginner') || diff.includes('easy');
+          if (d === 'moderate') return diff.includes('intermediate') || diff.includes('moderate');
+          if (d === 'advanced') return diff.includes('advanced') || diff.includes('expert');
+          return false;
+        });
+      });
+    }
+
+    // Flowering time filter
+    if (filters.floweringTime?.length) {
+      result = result.filter((p) => {
+        const ft = p.floweringTime || '';
+        const weeks = parseInt(ft.replace(/[^\d]/g, '')) || (p.autoflower ? 9 : 10);
+        return filters.floweringTime.some((range) => {
+          if (range === '6-8') return weeks <= 9;
+          if (range === '8-10') return weeks >= 9 && weeks <= 10;
+          if (range === '10-12') return weeks > 10;
+          return false;
+        });
+      });
     }
 
     switch (sortBy) {
@@ -103,12 +146,18 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
 
   const totalPages = Math.ceil(filtered.length / perPage);
   const paginated = filtered.slice((page - 1) * perPage, page * perPage);
+
   const activeFilterCount = Object.values(filters).reduce((sum, arr) => sum + arr.length, 0);
 
   return (
     <div className="flex gap-8 items-start">
-      <ProductSidebar activeFilters={filters} onFilterChange={handleFilterChange} />
+      {/* Sidebar — desktop */}
+      <ProductSidebar
+        activeFilters={filters}
+        onFilterChange={handleFilterChange}
+      />
 
+      {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <>
           <div className="fixed inset-0 bg-black/40 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
@@ -121,13 +170,20 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
                 </svg>
               </button>
             </div>
-            <ProductSidebar activeFilters={filters} onFilterChange={handleFilterChange} mobile />
+            <ProductSidebar
+              activeFilters={filters}
+              onFilterChange={handleFilterChange}
+              mobile
+            />
           </div>
         </>
       )}
 
+      {/* Main content */}
       <div className="flex-1 min-w-0">
+        {/* Top bar */}
         <div className="flex flex-wrap items-center gap-3 mb-8">
+          {/* Search */}
           <div className="relative flex-1 min-w-[200px] max-w-md">
             <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#192026]/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -141,6 +197,7 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
             />
           </div>
 
+          {/* Mobile filter button */}
           <button
             onClick={() => setSidebarOpen(true)}
             className="lg:hidden flex items-center gap-2 px-4 py-2.5 bg-white border border-[#275C53]/15 rounded-full text-[13px] text-[#275C53] font-medium cursor-pointer"
@@ -150,10 +207,13 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
             </svg>
             Filters
             {activeFilterCount > 0 && (
-              <span className="w-5 h-5 rounded-full bg-[#275C53] text-white text-[10px] flex items-center justify-center">{activeFilterCount}</span>
+              <span className="w-5 h-5 rounded-full bg-[#275C53] text-white text-[10px] flex items-center justify-center">
+                {activeFilterCount}
+              </span>
             )}
           </button>
 
+          {/* Sort */}
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
@@ -164,15 +224,21 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
             <option value="price-desc">Price: High to Low</option>
           </select>
 
-          <span className="text-sm text-[#192026]/40 ml-auto">{filtered.length} {filtered.length === 1 ? 'strain' : 'strains'}</span>
+          <span className="text-sm text-[#192026]/40 ml-auto">
+            {filtered.length} {filtered.length === 1 ? 'strain' : 'strains'}
+          </span>
         </div>
 
+        {/* Active filters chips */}
         {activeFilterCount > 0 && (
           <div className="flex flex-wrap gap-2 mb-6">
             {Object.entries(filters).map(([type, values]) =>
               values.map((v) => (
-                <button key={`${type}-${v}`} onClick={() => handleFilterChange(type, v)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-[#275C53]/10 rounded-full text-[11px] text-[#275C53] font-medium cursor-pointer hover:bg-[#275C53]/20 transition-colors">
+                <button
+                  key={`${type}-${v}`}
+                  onClick={() => handleFilterChange(type, v)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-[#275C53]/10 rounded-full text-[11px] text-[#275C53] font-medium cursor-pointer hover:bg-[#275C53]/20 transition-colors"
+                >
                   {v}
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                     <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
@@ -180,10 +246,16 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
                 </button>
               ))
             )}
-            <button onClick={() => setFilters({})} className="px-3 py-1.5 text-[11px] text-[#192026]/40 hover:text-[#275C53] cursor-pointer">Clear all</button>
+            <button
+              onClick={() => setFilters({})}
+              className="px-3 py-1.5 text-[11px] text-[#192026]/40 hover:text-[#275C53] cursor-pointer"
+            >
+              Clear all
+            </button>
           </div>
         )}
 
+        {/* Grid */}
         {paginated.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
             {paginated.map((product) => (
@@ -193,15 +265,35 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
         ) : (
           <div className="text-center py-20">
             <p className="text-[#192026]/50">No strains match your filters</p>
-            <button onClick={() => { setSearch(''); setFilters({}); }} className="mt-4 text-sm text-[#275C53] hover:text-[#D7B65D] cursor-pointer font-medium">Clear all filters</button>
+            <button
+              onClick={() => { setSearch(''); setFilters({}); }}
+              className="mt-4 text-sm text-[#275C53] hover:text-[#D7B65D] cursor-pointer font-medium"
+            >
+              Clear all filters
+            </button>
           </div>
         )}
 
+        {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-center gap-3 mt-12">
-            <button onClick={() => setPage(Math.max(1, page - 1))} disabled={page === 1} className="btn-second !min-w-0 !px-6 !py-2.5 disabled:opacity-30 disabled:cursor-not-allowed">Previous</button>
-            <span className="text-sm text-[#192026]/50 px-4">Page {page} of {totalPages}</span>
-            <button onClick={() => setPage(Math.min(totalPages, page + 1))} disabled={page === totalPages} className="btn-second !min-w-0 !px-6 !py-2.5 disabled:opacity-30 disabled:cursor-not-allowed">Next</button>
+            <button
+              onClick={() => setPage(Math.max(1, page - 1))}
+              disabled={page === 1}
+              className="btn-second !min-w-0 !px-6 !py-2.5 disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            <span className="text-sm text-[#192026]/50 px-4">
+              Page {page} of {totalPages}
+            </span>
+            <button
+              onClick={() => setPage(Math.min(totalPages, page + 1))}
+              disabled={page === totalPages}
+              className="btn-second !min-w-0 !px-6 !py-2.5 disabled:opacity-30 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
           </div>
         )}
       </div>
