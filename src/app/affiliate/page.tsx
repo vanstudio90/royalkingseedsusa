@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Affiliate Program | Royal King Seeds USA',
   description: 'Join the Royal King Seeds affiliate program. Earn commissions promoting premium cannabis seeds to American growers.',
-  alternates: { canonical: 'https://royalkingseedsusa.vercel.app/affiliate' },
+  alternates: { canonical: 'https://royalkingseeds.us/affiliate' },
 };
 
 export default function AffiliatePage() {

@@ -5,7 +5,7 @@ import { getRecentPosts, getAllBlogPosts } from '@/lib/blog-content';
 export const metadata: Metadata = {
   title: 'Cannabis Growing Guides, Strain Reviews & Cultivation Tips | Royal King Seeds Blog',
   description: 'Expert cannabis growing guides, in-depth strain reviews, and practical cultivation tips from Sierra Langston and the Royal King Seeds team. Written from hands-on experience for American growers.',
-  alternates: { canonical: 'https://royalkingseedsusa.vercel.app/blog' },
+  alternates: { canonical: 'https://royalkingseeds.us/blog' },
 };
 
 export default function BlogPage() {

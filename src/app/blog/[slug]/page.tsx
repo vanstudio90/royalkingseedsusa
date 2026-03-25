@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${post.title} | Royal King Seeds USA`,
     description: post.metaDescription,
     alternates: {
-      canonical: `https://royalkingseedsusa.vercel.app/blog/${slug}`,
+      canonical: `https://royalkingseeds.us/blog/${slug}`,
     },
     openGraph: {
       title: post.title,
@@ -179,8 +179,8 @@ export default async function BlogPostPage({ params }: Props) {
             datePublished: post.publishDate,
             dateModified: post.publishDate,
             author: { "@type": "Person", name: post.author, jobTitle: "Cannabis Cultivator & Seed Specialist" },
-            publisher: { "@type": "Organization", name: "Royal King Seeds", url: "https://royalkingseedsusa.vercel.app" },
-            mainEntityOfPage: `https://royalkingseedsusa.vercel.app/blog/${slug}`,
+            publisher: { "@type": "Organization", name: "Royal King Seeds", url: "https://royalkingseeds.us" },
+            mainEntityOfPage: `https://royalkingseeds.us/blog/${slug}`,
           }),
         }}
       />

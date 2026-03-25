@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Legal Disclaimer | Royal King Seeds USA',
   description: 'Legal disclaimer for Royal King Seeds. Cannabis seeds are sold as adult novelty souvenirs and for genetic preservation purposes.',
-  alternates: { canonical: 'https://royalkingseedsusa.vercel.app/legal' },
+  alternates: { canonical: 'https://royalkingseeds.us/legal' },
 };
 
 export default function LegalPage() {

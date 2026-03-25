@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: content?.h1 || `${category.name} — Buy Online USA | Royal King Seeds`,
     description: content?.intro?.slice(0, 160) || `Shop ${category.name} online with discreet US shipping. Premium cannabis seed genetics from Royal King Seeds.`,
     alternates: {
-      canonical: `https://royalkingseedsusa.vercel.app/product-category/${slug}`,
+      canonical: `https://royalkingseeds.us/product-category/${slug}`,
     },
   };
 }
@@ -165,14 +165,14 @@ export default async function CategoryPage({ params, searchParams }: Props) {
             "@type": "CollectionPage",
             name: content?.h1 || category.name,
             description: content?.intro || `Browse ${category.name} at Royal King Seeds USA`,
-            url: `https://royalkingseedsusa.vercel.app/product-category/${slug}`,
+            url: `https://royalkingseeds.us/product-category/${slug}`,
             mainEntity: {
               "@type": "ItemList",
               numberOfItems: filtered.length,
               itemListElement: filtered.slice(0, 10).map((p, i) => ({
                 "@type": "ListItem",
                 position: i + 1,
-                url: `https://royalkingseedsusa.vercel.app/${p.slug}`,
+                url: `https://royalkingseeds.us/${p.slug}`,
                 name: p.name,
               })),
             },

@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Terms & Conditions | Royal King Seeds USA',
   description: 'Terms and conditions for purchasing cannabis seeds from Royal King Seeds. Read before ordering.',
-  alternates: { canonical: 'https://royalkingseedsusa.vercel.app/terms' },
+  alternates: { canonical: 'https://royalkingseeds.us/terms' },
 };
 
 export default function TermsPage() {

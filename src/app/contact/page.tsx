@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Contact Us — Royal King Seeds USA Customer Support',
   description: 'Get in touch with the Royal King Seeds team. We help American growers with seed selection, order inquiries, growing advice, and account support. Email us or use our contact form.',
-  alternates: { canonical: 'https://royalkingseedsusa.vercel.app/contact' },
+  alternates: { canonical: 'https://royalkingseeds.us/contact' },
 };
 
 export default function ContactPage() {

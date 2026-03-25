@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://royalkingseedsusa.vercel.app/og-image.png",
+        url: "https://royalkingseeds.us/og-image.png",
         width: 1200,
         height: 630,
         alt: "Royal King Seeds — America's Premier Cannabis Seed Bank",
@@ -65,10 +65,10 @@ export const metadata: Metadata = {
     title: "Royal King Seeds — America's Best Cannabis Seeds",
     description:
       "Shop premium cannabis seeds. Trusted by American growers for feminized, autoflower, and CBD genetics.",
-    images: ["https://royalkingseedsusa.vercel.app/og-image.png"],
+    images: ["https://royalkingseeds.us/og-image.png"],
   },
   alternates: {
-    canonical: "https://royalkingseedsusa.vercel.app",
+    canonical: "https://royalkingseeds.us",
   },
   robots: {
     index: true,
@@ -106,13 +106,13 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "Royal King Seeds USA",
-              url: "https://royalkingseedsusa.vercel.app",
+              url: "https://royalkingseeds.us",
               description: "America's premier source for premium cannabis seeds.",
               potentialAction: {
                 "@type": "SearchAction",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://royalkingseedsusa.vercel.app/product-category/shop-all-cannabis-seeds?q={search_term_string}",
+                  urlTemplate: "https://royalkingseeds.us/product-category/shop-all-cannabis-seeds?q={search_term_string}",
                 },
                 "query-input": "required name=search_term_string",
               },
@@ -126,8 +126,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Royal King Seeds",
-              url: "https://royalkingseedsusa.vercel.app",
-              logo: "https://royalkingseedsusa.vercel.app/icons/icon-512x512.png",
+              url: "https://royalkingseeds.us",
+              logo: "https://royalkingseeds.us/icons/icon-512x512.png",
               description: "America's premier cannabis seed bank with discreet nationwide shipping.",
               areaServed: { "@type": "Country", name: "United States" },
               contactPoint: { "@type": "ContactPoint", contactType: "customer service", email: "support@royalkingseeds.us", availableLanguage: ["English"] },
@@ -141,14 +141,14 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "ItemList",
               itemListElement: [
-                { "@type": "SiteNavigationElement", position: 1, name: "Autoflower Cannabis Seeds", description: "Fast-growing autoflowering cannabis seeds that flower automatically in 8-10 weeks. Beginner-friendly for American growers.", url: "https://royalkingseedsusa.vercel.app/product-category/autoflowering-seeds" },
-                { "@type": "SiteNavigationElement", position: 2, name: "Feminized Cannabis Seeds", description: "Premium feminized cannabis seeds guaranteed 99.9% female plants for maximum yield and potency in US grows.", url: "https://royalkingseedsusa.vercel.app/product-category/feminized-seeds" },
-                { "@type": "SiteNavigationElement", position: 3, name: "CBD Cannabis Seeds", description: "High-CBD cannabis seeds for therapeutic use. Low-THC varieties ideal for pain, anxiety, and relaxation.", url: "https://royalkingseedsusa.vercel.app/product-category/cbd-strains" },
-                { "@type": "SiteNavigationElement", position: 4, name: "Indica Seeds", description: "Indica cannabis seeds for deep relaxation, sleep support, and pain relief. Premium genetics for nighttime use.", url: "https://royalkingseedsusa.vercel.app/product-category/indica-seeds" },
-                { "@type": "SiteNavigationElement", position: 5, name: "Sativa Seeds", description: "Sativa cannabis seeds for energy, creativity, and focus. Uplifting daytime strains for American growers.", url: "https://royalkingseedsusa.vercel.app/product-category/sativa-seeds" },
-                { "@type": "SiteNavigationElement", position: 6, name: "High THC Seeds", description: "The most potent cannabis seeds with 20%+ THC content. Maximum potency strains for experienced cultivators.", url: "https://royalkingseedsusa.vercel.app/product-category/high-tch-seeds" },
-                { "@type": "SiteNavigationElement", position: 7, name: "Cannabis Growing Guides", description: "Free guides for American growers covering germination, indoor growing, lighting, nutrients, and harvest techniques.", url: "https://royalkingseedsusa.vercel.app/blog" },
-                { "@type": "SiteNavigationElement", position: 8, name: "Shop All Cannabis Seeds", description: "Browse 1000+ premium cannabis seed strains. Feminized, autoflower, CBD, and mix packs with US-wide shipping.", url: "https://royalkingseedsusa.vercel.app/product-category/shop-all-cannabis-seeds" },
+                { "@type": "SiteNavigationElement", position: 1, name: "Autoflower Cannabis Seeds", description: "Fast-growing autoflowering cannabis seeds that flower automatically in 8-10 weeks. Beginner-friendly for American growers.", url: "https://royalkingseeds.us/product-category/autoflowering-seeds" },
+                { "@type": "SiteNavigationElement", position: 2, name: "Feminized Cannabis Seeds", description: "Premium feminized cannabis seeds guaranteed 99.9% female plants for maximum yield and potency in US grows.", url: "https://royalkingseeds.us/product-category/feminized-seeds" },
+                { "@type": "SiteNavigationElement", position: 3, name: "CBD Cannabis Seeds", description: "High-CBD cannabis seeds for therapeutic use. Low-THC varieties ideal for pain, anxiety, and relaxation.", url: "https://royalkingseeds.us/product-category/cbd-strains" },
+                { "@type": "SiteNavigationElement", position: 4, name: "Indica Seeds", description: "Indica cannabis seeds for deep relaxation, sleep support, and pain relief. Premium genetics for nighttime use.", url: "https://royalkingseeds.us/product-category/indica-seeds" },
+                { "@type": "SiteNavigationElement", position: 5, name: "Sativa Seeds", description: "Sativa cannabis seeds for energy, creativity, and focus. Uplifting daytime strains for American growers.", url: "https://royalkingseeds.us/product-category/sativa-seeds" },
+                { "@type": "SiteNavigationElement", position: 6, name: "High THC Seeds", description: "The most potent cannabis seeds with 20%+ THC content. Maximum potency strains for experienced cultivators.", url: "https://royalkingseeds.us/product-category/high-tch-seeds" },
+                { "@type": "SiteNavigationElement", position: 7, name: "Cannabis Growing Guides", description: "Free guides for American growers covering germination, indoor growing, lighting, nutrients, and harvest techniques.", url: "https://royalkingseeds.us/blog" },
+                { "@type": "SiteNavigationElement", position: 8, name: "Shop All Cannabis Seeds", description: "Browse 1000+ premium cannabis seed strains. Feminized, autoflower, CBD, and mix packs with US-wide shipping.", url: "https://royalkingseeds.us/product-category/shop-all-cannabis-seeds" },
               ],
             }),
           }}

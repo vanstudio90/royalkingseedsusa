@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'FAQ — Cannabis Seed Questions Answered | Royal King Seeds USA',
   description: 'Find answers to common questions about buying cannabis seeds online in the USA. Shipping, payment, germination guarantee, legality, and growing advice from Royal King Seeds.',
-  alternates: { canonical: 'https://royalkingseedsusa.vercel.app/faq' },
+  alternates: { canonical: 'https://royalkingseeds.us/faq' },
 };
 
 const faqs = [

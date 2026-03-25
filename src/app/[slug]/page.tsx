@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const type = product.autoflower ? 'Autoflower' : product.feminized ? 'Feminized' : '';
   const title = product.metaTitle || `Buy ${product.name} Seeds in the USA`;
   const description = product.metaDescription || product.shortDescription || product.description.replace(/##[^\n]*/g, '').slice(0, 155).trim() + '...';
-  const canonical = `https://royalkingseedsusa.vercel.app/${product.slug}`;
+  const canonical = `https://royalkingseeds.us/${product.slug}`;
 
   return {
     title,
@@ -78,12 +78,12 @@ export default async function ProductPage({ params }: Props) {
     name: `${product.name} Cannabis Seeds`,
     description: product.shortDescription || product.description.replace(/##[^\n]*/g, '').slice(0, 300).trim(),
     image: product.imageUrl || undefined,
-    url: `https://royalkingseedsusa.vercel.app/${product.slug}`,
+    url: `https://royalkingseeds.us/${product.slug}`,
     brand: { '@type': 'Brand', name: 'Royal King Seeds' },
     category: `${product.strainType.charAt(0).toUpperCase() + product.strainType.slice(1)} Cannabis Seeds`,
     offers: {
       '@type': 'Offer',
-      url: `https://royalkingseedsusa.vercel.app/${product.slug}`,
+      url: `https://royalkingseeds.us/${product.slug}`,
       priceCurrency: 'USD',
       price: product.price.toFixed(2),
       availability: product.inStock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
@@ -118,8 +118,8 @@ export default async function ProductPage({ params }: Props) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://royalkingseedsusa.vercel.app' },
-      { '@type': 'ListItem', position: 2, name: categoryName, item: `https://royalkingseedsusa.vercel.app/product-category/${primaryCategory}` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://royalkingseeds.us' },
+      { '@type': 'ListItem', position: 2, name: categoryName, item: `https://royalkingseeds.us/product-category/${primaryCategory}` },
       { '@type': 'ListItem', position: 3, name: product.name },
     ],
   };

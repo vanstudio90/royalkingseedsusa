@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { generateLocationPage, getAllStateSlugs } from '@/lib/us-locations';
 
-const BASE = 'https://royalkingseedsusa.vercel.app';
+const BASE = 'https://royalkingseeds.us';
 
 export const metadata: Metadata = {
   title: 'Buy Cannabis Seeds in the USA — All 50 States | Royal King Seeds',

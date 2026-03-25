@@ -8,7 +8,7 @@ import {
   getAllStateSlugs,
 } from '@/lib/us-locations';
 
-const BASE = 'https://royalkingseedsusa.vercel.app';
+const BASE = 'https://royalkingseeds.us';
 
 interface Props {
   params: Promise<{ state: string }>;
