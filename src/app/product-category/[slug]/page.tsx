@@ -111,7 +111,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         <p className="text-sm text-[#192026]/40 mt-3">{filtered.length} strains available</p>
       </div>
 
-      {/* Product Grid — strip heavy fields to reduce page size */}
+      {/* Product Grid */}
+      <h2 className="sr-only">{category.name} — Browse All Strains</h2>
       <ProductGrid products={filtered.map(p => ({
         id: p.id, slug: p.slug, name: p.name,
         strainType: p.strainType, thcContent: p.thcContent,
@@ -155,7 +156,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       {/* Related Categories */}
       {relatedCategories.length > 0 && (
         <div className="mt-12 pt-8 border-t border-[#275C53]/10">
-          <h3 className="text-sm font-semibold text-[#275C53] mb-4">Related Seed Categories</h3>
+          <h2 className="text-sm font-semibold text-[#275C53] mb-4">Related Seed Categories</h2>
           <div className="flex flex-wrap gap-2">
             {relatedCategories.map((cat) => (
               <Link key={cat.slug} href={`/product-category/${cat.slug}`}

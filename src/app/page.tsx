@@ -158,7 +158,13 @@ export default async function HomePage() {
 
           <div className="prose prose-sm max-w-none text-[#192026]/75 prose-headings:text-[#275C53] prose-headings:font-normal prose-a:text-[#275C53] prose-a:no-underline hover:prose-a:text-[#D7B65D] leading-relaxed">
             <p>
-              In our experience working with growers across California, Colorado, Michigan, and every other US state for the past six years, the single biggest factor separating a great harvest from a disappointing one is <strong>seed quality</strong>. Not nutrients. Not lights. Seeds. We know this because our support team talks to growers every day — over 200 strain-selection conversations per week — and the pattern is consistent: growers who start with fresh, tested genetics from a reputable source get results. Growers who buy cheap seeds from unverified marketplaces get heartbreak. That is why we built Royal King Seeds around one idea: <strong>give American home growers access to 1,200+ <Link href="/product-category/shop-all-cannabis-seeds">premium cannabis seed strains</Link> that are actually tested before they reach your door</strong>. We offer over 1,200 cannabis strains categorized by yield, THC level, growing difficulty, climate compatibility, and terpene profile — because we believe an informed grower is a successful grower.
+              In our experience working with growers across California, Colorado, Michigan, and every other US state for the past six years, the single biggest factor separating a great harvest from a disappointing one is <strong>seed quality</strong>. Not nutrients. Not lights. Seeds.
+            </p>
+            <p>
+              We know this because our support team talks to growers every day — over 200 strain-selection conversations per week — and the pattern is consistent: growers who start with fresh, tested genetics from a reputable source get results. Growers who buy cheap seeds from unverified marketplaces get heartbreak.
+            </p>
+            <p>
+              That is why we built Royal King Seeds around one idea: <strong>give American home growers access to 1,200+ <Link href="/product-category/shop-all-cannabis-seeds">premium cannabis seed strains</Link> that are actually tested before they reach your door</strong>. We offer over 1,200 cannabis strains categorized by yield, THC level, growing difficulty, climate compatibility, and terpene profile — because we believe an informed grower is a successful grower.
             </p>
 
             <h3 style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Seed Legality in the United States</h3>
@@ -168,7 +174,10 @@ export default async function HomePage() {
 
             <h3 style={{ fontFamily: 'var(--font-patua)' }}>How Discreet Shipping Actually Works</h3>
             <p>
-              We get asked about this constantly, so here is exactly what happens. Every order ships in <strong>plain, unmarked packaging</strong> — no logos, no branding, no indication of contents. The return address uses a generic business name. Seeds go inside crush-proof vials inside padded mailers. We ship via USPS and UPS with full tracking to all 50 states — domestically, no international routing, zero customs risk. Based on USPS tracking data from our last 12,000 shipments, 94% of orders arrive within 5 business days, with many of our East Coast customers receiving packages in just 3 days. Orders over $99 qualify for <Link href="/shipping">free discreet shipping</Link>. Honestly, the discretion piece is something we are a bit obsessive about — we have heard too many stories from customers who ordered from overseas seed banks and dealt with customs seizures, 3-week waits, and crushed packaging. That does not happen with us.
+              We get asked about this constantly, so here is exactly what happens. Every order ships in <strong>plain, unmarked packaging</strong> — no logos, no branding, no indication of contents. The return address uses a generic business name. Seeds go inside crush-proof vials inside padded mailers.
+            </p>
+            <p>
+              We ship via USPS and UPS with full tracking to all 50 states — domestically, no international routing, zero customs risk. Based on USPS tracking data from our last 12,000 shipments, 94% of orders arrive within 5 business days, with many of our East Coast customers receiving packages in just 3 days. Orders over $99 qualify for <Link href="/shipping">free discreet shipping</Link>.
             </p>
 
             <h3 style={{ fontFamily: 'var(--font-patua)' }}>Feminized vs. Autoflower Seeds: Which Should You Choose?</h3>

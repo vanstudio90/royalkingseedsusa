@@ -73,7 +73,15 @@ export default async function BlogPostPage({ params }: Props) {
           <div
             className="prose prose-sm max-w-none text-[#192026]/80 prose-headings:text-[#275C53] prose-headings:font-normal prose-a:text-[#275C53] prose-a:no-underline hover:prose-a:text-[#D7B65D] prose-p:leading-relaxed prose-li:leading-relaxed"
             style={{ fontFamily: 'var(--font-sans)' }}
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: post.content.replace(
+              /(<p>)([^<]{600,}?)(<\/p>)/g,
+              (_, open, text, close) => {
+                const sentences = text.split(/(?<=\.)\s+/);
+                if (sentences.length <= 2) return open + text + close;
+                const mid = Math.ceil(sentences.length / 2);
+                return open + sentences.slice(0, mid).join(' ') + close + open + sentences.slice(mid).join(' ') + close;
+              }
+            ) }}
           />
 
           {/* Related Posts */}
