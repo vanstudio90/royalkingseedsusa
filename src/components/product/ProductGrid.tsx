@@ -38,7 +38,7 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
       result = result.filter(
         (p) =>
           p.name.toLowerCase().includes(q) ||
-          p.description.toLowerCase().includes(q) ||
+          p.strainType.toLowerCase().includes(q) ||
           p.effects.some((e) => e.toLowerCase().includes(q)) ||
           p.categories.some((c) => c.toLowerCase().includes(q))
       );

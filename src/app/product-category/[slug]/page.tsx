@@ -111,8 +111,13 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         <p className="text-sm text-[#192026]/40 mt-3">{filtered.length} strains available</p>
       </div>
 
-      {/* Product Grid */}
-      <ProductGrid products={filtered} activeCategory={slug} initialQuery={q} />
+      {/* Product Grid — strip heavy fields to reduce page size */}
+      <ProductGrid products={filtered.map(p => ({
+        ...p,
+        description: '',
+        shortDescription: p.shortDescription?.slice(0, 120) || '',
+        bestUse: [],
+      }))} activeCategory={slug} initialQuery={q} />
 
       {/* Bottom SEO Content */}
       {content?.bottomSections && content.bottomSections.length > 0 && (
