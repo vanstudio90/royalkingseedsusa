@@ -1419,7 +1419,8 @@ export function generateBlogPost(slug: string): BlogPost | null {
   }
 
   const stripped = content.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim();
-  const meta = stripped.slice(0, 155).replace(/\s+\S*$/, '') + '...';
+  const metaBase = `${title}. ${stripped}`;
+  const meta = metaBase.slice(0, 155).replace(/\s+\S*$/, '') + '...';
   return { slug, title, content, category: cat, author: 'Sierra Langston', publishDate: pubDate(slug, idx), metaDescription: meta };
 }
 
