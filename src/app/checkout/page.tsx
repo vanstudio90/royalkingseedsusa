@@ -111,11 +111,70 @@ export default function CheckoutPage() {
 
   const updateForm = (key: string, value: string | boolean) => setForm(prev => ({ ...prev, [key]: value }));
 
-  const applyPromo = () => {
-    if (promoCode.toUpperCase() === 'GROWNOW15') {
-      setDiscount(subtotal * 0.15);
+  const [promoError, setPromoError] = useState('');
+  const [promoLoading, setPromoLoading] = useState(false);
+
+  const applyPromo = async () => {
+    if (!promoCode.trim()) return;
+    setPromoError('');
+    setPromoLoading(true);
+
+    try {
+      const res = await fetch(`/api/admin/coupons?code=${encodeURIComponent(promoCode.trim().toUpperCase())}`);
+      const data = await res.json();
+
+      // Find matching coupon
+      const coupons = data.coupons || data || [];
+      const match = (Array.isArray(coupons) ? coupons : []).find(
+        (c: any) => c.code?.toUpperCase() === promoCode.trim().toUpperCase() && c.status === 'active'
+      );
+
+      if (!match) {
+        // Fallback: check hardcoded GROWNOW15
+        if (promoCode.trim().toUpperCase() === 'GROWNOW15') {
+          setDiscount(subtotal * 0.15);
+          setPromoApplied(true);
+          setPromoLoading(false);
+          return;
+        }
+        setPromoError('Invalid or expired coupon code');
+        setPromoLoading(false);
+        return;
+      }
+
+      // Check usage limit
+      if (match.max_uses && match.usage_count >= match.max_uses) {
+        setPromoError('This coupon has reached its usage limit');
+        setPromoLoading(false);
+        return;
+      }
+
+      // Check expiry
+      if (match.expires_at && new Date(match.expires_at) < new Date()) {
+        setPromoError('This coupon has expired');
+        setPromoLoading(false);
+        return;
+      }
+
+      // Check minimum order
+      if (match.min_order_amount && subtotal < match.min_order_amount) {
+        setPromoError(`Minimum order of $${match.min_order_amount} required`);
+        setPromoLoading(false);
+        return;
+      }
+
+      // Apply discount
+      if (match.type === 'percentage') {
+        setDiscount(subtotal * (match.value / 100));
+      } else {
+        // Fixed amount
+        setDiscount(Math.min(match.value, subtotal));
+      }
       setPromoApplied(true);
+    } catch {
+      setPromoError('Error validating coupon');
     }
+    setPromoLoading(false);
   };
 
   useEffect(() => {
@@ -413,13 +472,15 @@ export default function CheckoutPage() {
               </div>
 
               {/* Promo Code */}
-              <div className="flex gap-2 mb-4">
-                <input type="text" value={promoCode} onChange={e => setPromoCode(e.target.value)} placeholder="Enter Promo Code" className="checkout-input flex-1 !py-2.5" disabled={promoApplied} />
-                <button type="button" onClick={applyPromo} disabled={promoApplied || !promoCode}
+              <div className="flex gap-2 mb-2">
+                <input type="text" value={promoCode} onChange={e => { setPromoCode(e.target.value); setPromoError(''); }} placeholder="Enter Promo Code" className="checkout-input flex-1 !py-2.5" disabled={promoApplied} />
+                <button type="button" onClick={applyPromo} disabled={promoApplied || !promoCode || promoLoading}
                   className="px-4 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] disabled:opacity-30 cursor-pointer shrink-0">
-                  {promoApplied ? 'Applied' : 'Apply'}
+                  {promoLoading ? '...' : promoApplied ? 'Applied ✓' : 'Apply'}
                 </button>
               </div>
+              {promoError && <p className="text-red-500 text-[11px] mb-3">{promoError}</p>}
+              {promoApplied && <p className="text-emerald-600 text-[11px] mb-3">Coupon applied — ${discount.toFixed(2)} off!</p>}
 
               {/* Totals */}
               <div className="border-t border-[#192026]/5 pt-4 space-y-2 text-[13px]">
