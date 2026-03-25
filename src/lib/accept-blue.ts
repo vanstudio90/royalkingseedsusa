@@ -4,9 +4,9 @@
  * Card data is sent server-to-server (same as the WooCommerce plugin).
  */
 
-const API_URL = process.env.ACCEPT_BLUE_API_URL || 'https://api.accept.blue/api/v2';
-const API_KEY = process.env.ACCEPT_BLUE_API_KEY || '';
-const PIN = process.env.ACCEPT_BLUE_PIN || '';
+const API_URL = (process.env.ACCEPT_BLUE_API_URL || 'https://api.accept.blue/api/v2').trim();
+const API_KEY = (process.env.ACCEPT_BLUE_API_KEY || '').trim();
+const PIN = (process.env.ACCEPT_BLUE_PIN || '').trim();
 
 function getAuthHeader(): string {
   const credentials = Buffer.from(`${API_KEY}:${PIN}`).toString('base64');
