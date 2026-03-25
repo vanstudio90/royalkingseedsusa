@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { processCharge } from '@/lib/accept-blue';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { sendOrderEmail } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -161,6 +162,22 @@ export async function POST(req: NextRequest) {
         total_orders: 1,
         total_spent: order.total,
       }, { onConflict: 'email' });
+
+    // 4. Send order confirmation email (non-blocking)
+    sendOrderEmail('processing', {
+      order_number: order.order_number,
+      customer_email: order.customer_email,
+      customer_name: order.customer_name,
+      items: order.items,
+      subtotal: order.subtotal,
+      shipping_cost: order.shipping_cost,
+      tax: order.tax,
+      total: order.total,
+      discount: order.discount,
+      coupon_code: order.coupon_code,
+      shipping_address: order.shipping_address,
+      payment_method: `${chargeResult.card_type} ending ${chargeResult.last_4}`,
+    });
 
     return NextResponse.json({
       success: true,

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { sendOrderEmail } from '@/lib/email';
 
 export async function GET(
   req: NextRequest,
@@ -27,9 +28,11 @@ export async function PUT(
   const { id } = await params;
   const body = await req.json();
 
+  // Track previous status for email notifications
+  let previousStatus: string | null = null;
+
   // If status is being changed, add to status_history
   if (body.status) {
-    // Get current order to check if status actually changed
     const { data: current } = await supabaseAdmin
       .from('orders')
       .select('status, status_history')
@@ -37,6 +40,7 @@ export async function PUT(
       .single();
 
     if (current && current.status !== body.status) {
+      previousStatus = current.status;
       const history = Array.isArray(current.status_history) ? current.status_history : [];
       history.push({
         from: current.status,
@@ -56,6 +60,25 @@ export async function PUT(
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  // Send status email if status actually changed
+  if (previousStatus !== null && data) {
+    sendOrderEmail(body.status, {
+      order_number: data.order_number,
+      customer_email: data.customer_email,
+      customer_name: data.customer_name,
+      items: data.items,
+      subtotal: data.subtotal,
+      shipping_cost: data.shipping_cost,
+      tax: data.tax,
+      total: data.total,
+      discount: data.discount,
+      coupon_code: data.coupon_code,
+      shipping_address: data.shipping_address,
+      payment_method: data.payment_method,
+      tracking_number: data.tracking_number,
+    });
   }
 
   return NextResponse.json(data);
