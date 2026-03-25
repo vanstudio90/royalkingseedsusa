@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 /* ── Metadata ── */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { state: stateSlug } = await params;
-  const slug = `buy-cannabis-seeds-in-${stateSlug}`;
+  const slug = stateSlug;
   const page = generateLocationPage(slug);
   if (!page) return { title: 'Not Found' };
 
@@ -61,7 +61,7 @@ const CATEGORIES = [
 
 export default async function StatePage({ params }: Props) {
   const { state: stateSlug } = await params;
-  const slug = `buy-cannabis-seeds-in-${stateSlug}`;
+  const slug = stateSlug;
   const page = generateLocationPage(slug);
 
   if (!page) {

@@ -29,7 +29,7 @@ export async function generateStaticParams() {
 /* ── Metadata ── */
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { state: stateSlug, city: citySlug } = await params;
-  const slug = `buy-cannabis-seeds-in-${citySlug}-${stateSlug}`;
+  const slug = `${stateSlug}/${citySlug}`;
   const page = generateLocationPage(slug);
   if (!page) return { title: 'Not Found' };
 
@@ -69,7 +69,7 @@ const CATEGORIES = [
 
 export default async function CityPage({ params }: Props) {
   const { state: stateSlug, city: citySlug } = await params;
-  const slug = `buy-cannabis-seeds-in-${citySlug}-${stateSlug}`;
+  const slug = `${stateSlug}/${citySlug}`;
   const page = generateLocationPage(slug);
 
   if (!page) {
