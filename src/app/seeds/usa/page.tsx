@@ -282,13 +282,13 @@ export default function USAHubPage() {
         }}
       />
 
-      {/* Structured Data — SeedShop / Organization local */}
+      {/* Structured Data — Online Store */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Store',
+            '@type': 'OnlineStore',
             name: 'Royal King Seeds USA',
             url: BASE,
             description: 'America\'s trusted online cannabis seed bank with discreet shipping to all 50 states.',

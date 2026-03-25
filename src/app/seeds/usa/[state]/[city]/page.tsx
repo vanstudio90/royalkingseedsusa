@@ -259,13 +259,13 @@ export default async function CityPage({ params }: Props) {
         }}
       />
 
-      {/* Structured Data — LocalBusiness */}
+      {/* Structured Data — Online Store serving this city */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'Store',
+            '@type': 'OnlineStore',
             name: `Royal King Seeds — ${cityName}, ${stateName}`,
             url: `${BASE}/seeds/usa/${stateSlug}/${citySlug}`,
             description: `Buy cannabis seeds online in ${cityName}, ${stateName}. Discreet shipping with germination guarantee.`,
