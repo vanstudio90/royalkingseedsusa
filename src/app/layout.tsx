@@ -154,6 +154,7 @@ export default function RootLayout({
           }}
         />
         <SiteShell>{children}</SiteShell>
+        <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=146311b4-6cd1-4f71-9ad2-dfca0c3e571e" async />
       </body>
     </html>
   );
