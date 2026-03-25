@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Affiliate Program | Royal King Seeds USA',
+  title: 'Affiliate Program — Earn Commissions',
   description: 'Join the Royal King Seeds affiliate program. Earn commissions promoting premium cannabis seeds to American growers.',
   alternates: { canonical: 'https://royalkingseeds.us/affiliate' },
 };

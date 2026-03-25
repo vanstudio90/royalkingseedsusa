@@ -18,7 +18,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return { title: 'Product Not Found' };
 
   const type = product.autoflower ? 'Autoflower' : product.feminized ? 'Feminized' : '';
-  const title = product.metaTitle || `Buy ${product.name} Seeds in the USA`;
+  // Strip any "| Royal King Seeds..." suffix from engine-generated metaTitle (template adds it)
+  const rawTitle = product.metaTitle || `${product.name} Seeds — Buy Online USA`;
+  const title = rawTitle.replace(/\s*\|\s*Royal King Seeds.*$/i, '').trim();
   const description = product.metaDescription || product.shortDescription || product.description.replace(/##[^\n]*/g, '').slice(0, 155).trim() + '...';
   const canonical = `https://royalkingseeds.us/${product.slug}`;
 

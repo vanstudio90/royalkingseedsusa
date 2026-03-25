@@ -5,7 +5,7 @@ import { generateLocationPage, getAllStateSlugs } from '@/lib/us-locations';
 const BASE = 'https://royalkingseeds.us';
 
 export const metadata: Metadata = {
-  title: 'Buy Cannabis Seeds in the USA — All 50 States | Royal King Seeds',
+  title: 'Buy Cannabis Seeds in the USA — All 50 States',
   description:
     'Buy cannabis seeds online with discreet shipping to all 50 US states. Feminized, autoflower, and high-THC seeds. 92% germination guarantee. Fast 3-5 day delivery.',
   alternates: { canonical: `${BASE}/seeds/usa` },

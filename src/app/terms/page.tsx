@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Terms & Conditions | Royal King Seeds USA',
+  title: 'Terms & Conditions',
   description: 'Terms and conditions for purchasing cannabis seeds from Royal King Seeds. Read before ordering.',
   alternates: { canonical: 'https://royalkingseeds.us/terms' },
 };

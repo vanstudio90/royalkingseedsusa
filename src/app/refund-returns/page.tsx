@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Refund & Returns Policy | Royal King Seeds USA',
+  title: 'Refund & Returns Policy',
   description: 'Royal King Seeds refund and returns policy. Learn about our germination guarantee and seed replacement program for US customers.',
   alternates: { canonical: 'https://royalkingseeds.us/refund-returns' },
 };

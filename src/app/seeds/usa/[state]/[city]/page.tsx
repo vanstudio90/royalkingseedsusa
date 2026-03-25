@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cityEntry = cities.find((c) => c.slug === citySlug);
   const cityName = cityEntry?.city || citySlug;
 
-  const title = `Buy Cannabis Seeds in ${cityName}, ${stateName} | Royal King Seeds`;
+  const title = `Cannabis Seeds in ${cityName}, ${stateName}`;
   const description = `Buy premium cannabis seeds in ${cityName}, ${stateName}. Discreet shipping, 92% germination guarantee. Feminized, autoflower, and CBD strains for ${cityName} growers.`;
 
   return {

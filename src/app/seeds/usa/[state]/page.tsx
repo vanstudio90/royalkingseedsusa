@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const stateEntry = getAllStateSlugs().find((s) => s.slug === stateSlug);
   const stateName = stateEntry?.state || stateSlug;
 
-  const title = `Buy Cannabis Seeds in ${stateName} — Discreet Shipping | Royal King Seeds`;
+  const title = `Buy Cannabis Seeds in ${stateName} — Discreet Shipping`;
   const description = `Buy premium cannabis seeds in ${stateName} with fast, discreet shipping. Feminized, autoflower, and CBD seeds. 92% germination guarantee. Best strains for ${stateName} climate.`;
 
   return {

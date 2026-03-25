@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Shipping & Delivery — Discreet US Cannabis Seed Shipping | Royal King Seeds',
+  title: 'Shipping & Delivery — Discreet US Seed Shipping',
   description: 'Free shipping on orders over $99. Discreet packaging to all 50 states. 3-7 business day delivery with tracking. Learn about Royal King Seeds shipping policies.',
   alternates: { canonical: 'https://royalkingseeds.us/shipping' },
 };

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { getRecentPosts, getAllBlogPosts } from '@/lib/blog-content';
 
 export const metadata: Metadata = {
-  title: 'Cannabis Growing Guides, Strain Reviews & Cultivation Tips | Royal King Seeds Blog',
+  title: 'Cannabis Growing Guides, Strain Reviews & Tips',
   description: 'Expert cannabis growing guides, in-depth strain reviews, and practical cultivation tips from Sierra Langston and the Royal King Seeds team. Written from hands-on experience for American growers.',
   alternates: { canonical: 'https://royalkingseeds.us/blog' },
 };

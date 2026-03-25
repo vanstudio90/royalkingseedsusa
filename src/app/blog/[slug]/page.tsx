@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return { title: 'Not Found' };
 
   return {
-    title: `${post.title} | Royal King Seeds USA`,
+    title: post.title,
     description: post.metaDescription,
     alternates: {
       canonical: `https://royalkingseeds.us/blog/${slug}`,

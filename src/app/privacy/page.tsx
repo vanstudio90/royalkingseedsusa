@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Royal King Seeds USA',
+  title: 'Privacy Policy',
   description: 'How Royal King Seeds collects, uses, and protects your personal information. Read our privacy policy for US customers.',
   alternates: { canonical: 'https://royalkingseeds.us/privacy' },
 };

@@ -111,9 +111,9 @@ function generateMetaTitle(raw: any): string {
   const name = raw.name;
   const type = raw.strain_type || 'hybrid';
   return pick(raw.slug, [
-    `Buy ${name} Seeds Online USA | Royal King Seeds`,
-    `${name} Cannabis Seeds — ${type.charAt(0).toUpperCase() + type.slice(1)} | Royal King Seeds USA`,
-    `${name} Seeds | ${raw.thc_content || '20%'} THC ${type.charAt(0).toUpperCase() + type.slice(1)} | US Shipping`,
+    `${name} Seeds — Buy Online USA`,
+    `${name} Cannabis Seeds — ${type.charAt(0).toUpperCase() + type.slice(1)}`,
+    `${name} Seeds — ${raw.thc_content || '20%'} THC ${type.charAt(0).toUpperCase() + type.slice(1)}`,
   ], 'meta');
 }
 

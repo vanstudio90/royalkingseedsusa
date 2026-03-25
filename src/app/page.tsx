@@ -4,7 +4,9 @@ import { getProducts, getFeaturedProducts, getBeginnerProducts, getHighThcProduc
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 
 export const metadata: Metadata = {
-  title: 'Buy Cannabis Seeds in the USA — #1 Trusted American Seed Bank | Royal King Seeds',
+  title: {
+    absolute: 'Royal King Seeds USA — Buy Cannabis Seeds Online',
+  },
   description: 'Buy cannabis seeds online in the USA from Royal King Seeds. 1,200+ feminized, autoflower, indica, sativa, and high-THC marijuana seeds with discreet shipping to all 50 states. 92% germination rate. Trusted by 50,000+ American growers since 2019.',
   alternates: { canonical: 'https://royalkingseeds.us' },
   keywords: [

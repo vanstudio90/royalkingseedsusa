@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Legal Disclaimer | Royal King Seeds USA',
+  title: 'Legal Disclaimer',
   description: 'Legal disclaimer for Royal King Seeds. Cannabis seeds are sold as adult novelty souvenirs and for genetic preservation purposes.',
   alternates: { canonical: 'https://royalkingseeds.us/legal' },
 };
