@@ -61,16 +61,11 @@ export default function BlogPage() {
         {recent.map((post) => (
           <Link key={post.slug} href={`/blog/${post.slug}`}
             className="bg-white rounded-2xl border border-[#275C53]/5 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all group">
-            <div className="h-40 bg-gradient-to-br from-[#275C53] to-[#1e4a42] flex items-center justify-center relative">
-              <span className="text-4xl opacity-20">
-                {post.category === 'strain' ? '🌿' : post.category === 'growing' ? '🌱' : post.category === 'effects' ? '🧬' : post.category === 'state-guide' ? '📍' : '📰'}
-              </span>
-              <span className="absolute top-3 left-3 text-[9px] uppercase tracking-[1px] text-[#D7B65D] font-semibold bg-black/20 px-2 py-0.5 rounded-full">
+            <div className="p-5">
+              <span className="text-[9px] uppercase tracking-[1px] text-[#D7B65D] font-semibold bg-[#275C53] px-2 py-0.5 rounded-full">
                 {categoryLabels[post.category] || 'Article'}
               </span>
-            </div>
-            <div className="p-5">
-              <span className="text-[10px] text-[#192026]/40 uppercase tracking-[1px]">
+              <span className="text-[10px] text-[#192026]/40 uppercase tracking-[1px] ml-2">
                 {new Date(post.publishDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </span>
               <h3 className="title-underline text-base text-[#275C53] mt-2 leading-snug">
