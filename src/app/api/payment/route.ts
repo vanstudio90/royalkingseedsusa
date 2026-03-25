@@ -85,6 +85,31 @@ export async function POST(req: NextRequest) {
     });
 
     if (chargeResult.status !== 'Approved') {
+      // Save declined order so it shows in admin panel
+      const declineInfo = `[DECLINED: ${chargeResult.error_message || chargeResult.status}, Card ending ${chargeResult.last_4 || card.number.slice(-4)}, Ref #${chargeResult.reference_number || 'N/A'}]`;
+      await supabaseAdmin
+        .from('orders')
+        .insert({
+          order_number: order.order_number,
+          customer_email: order.customer_email,
+          customer_name: order.customer_name,
+          shipping_address: order.shipping_address,
+          items: order.items,
+          subtotal: order.subtotal,
+          shipping_cost: order.shipping_cost,
+          tax: order.tax,
+          total: order.total,
+          discount: order.discount,
+          coupon_code: order.coupon_code,
+          province: order.province,
+          payment_method: `credit-card (*${chargeResult.last_4 || card.number.slice(-4)})`,
+          status: 'cancelled',
+          payment_status: 'unpaid',
+          notes: order.notes ? `${order.notes}\n\n${declineInfo}` : declineInfo,
+        });
+
+      console.log('[Payment] DECLINED order saved:', order.order_number);
+
       return NextResponse.json({
         error: 'Payment declined',
         message: chargeResult.error_message || `Card was ${chargeResult.status.toLowerCase()}. Please check your card details and try again.`,
@@ -148,6 +173,32 @@ export async function POST(req: NextRequest) {
   } catch (err: any) {
     console.error('[Payment] Error:', err?.message || err);
     const errMsg = err?.message || '';
+
+    // Save failed order so it shows in admin panel
+    const failInfo = `[FAILED: ${errMsg || 'Unknown error'}]`;
+    try {
+      await supabaseAdmin
+        .from('orders')
+        .insert({
+          order_number: order.order_number,
+          customer_email: order.customer_email,
+          customer_name: order.customer_name,
+          shipping_address: order.shipping_address,
+          items: order.items,
+          subtotal: order.subtotal,
+          shipping_cost: order.shipping_cost,
+          tax: order.tax,
+          total: order.total,
+          discount: order.discount,
+          coupon_code: order.coupon_code,
+          province: order.province,
+          payment_method: `credit-card (*${card.number.slice(-4)})`,
+          status: 'cancelled',
+          payment_status: 'unpaid',
+          notes: order.notes ? `${order.notes}\n\n${failInfo}` : failInfo,
+        });
+    } catch (_) {}
+
     return NextResponse.json({
       error: 'Payment processing failed',
       message: errMsg.includes('not configured')

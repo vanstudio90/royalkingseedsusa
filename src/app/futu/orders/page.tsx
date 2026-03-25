@@ -13,6 +13,7 @@ interface Order {
   payment_status: string;
   created_at: string;
   items: { name: string; qty: number; price: number }[];
+  notes?: string;
 }
 
 const statusColors: Record<string, string> = {
@@ -215,9 +216,14 @@ export default function AdminOrdersPage() {
                   <td className="px-4 py-3 text-sm font-semibold text-[#192026]">${o.total}</td>
                   <td className="px-4 py-3">
                     <span className={`text-[10px] uppercase tracking-[1px] font-semibold px-2 py-1 rounded-full ${
-                      o.payment_status === 'paid' ? 'bg-emerald-50 text-emerald-600' : 'bg-yellow-50 text-yellow-600'
+                      o.payment_status === 'paid' ? 'bg-emerald-50 text-emerald-600'
+                      : (o.notes || '').includes('[DECLINED:') ? 'bg-red-100 text-red-700'
+                      : (o.notes || '').includes('[FAILED:') ? 'bg-orange-100 text-orange-700'
+                      : 'bg-yellow-50 text-yellow-600'
                     }`}>
-                      {o.payment_status}
+                      {(o.notes || '').includes('[DECLINED:') ? 'DECLINED'
+                       : (o.notes || '').includes('[FAILED:') ? 'FAILED'
+                       : o.payment_status}
                     </span>
                   </td>
                   <td className="px-4 py-3">
