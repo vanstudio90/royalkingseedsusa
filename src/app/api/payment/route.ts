@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { processCharge } from '@/lib/accept-blue';
+import { supabaseAdmin } from '@/lib/supabase/server';
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -91,8 +92,50 @@ export async function POST(req: NextRequest) {
       }, { status: 402 });
     }
 
-    // Payment approved — log success (order storage to be added with Supabase later)
-    console.log('[Payment] Approved:', order.order_number, chargeResult.card_type, '*' + chargeResult.last_4, 'Ref:', chargeResult.reference_number);
+    // 2. Payment approved — save order to Supabase
+    const paymentInfo = `[Payment: ${chargeResult.card_type} ending ${chargeResult.last_4}, Ref #${chargeResult.reference_number}, Auth: ${chargeResult.auth_code}]`;
+    const combinedNotes = order.notes
+      ? `${order.notes}\n\n${paymentInfo}`
+      : paymentInfo;
+
+    const { error: orderError } = await supabaseAdmin
+      .from('orders')
+      .insert({
+        order_number: order.order_number,
+        customer_email: order.customer_email,
+        customer_name: order.customer_name,
+        shipping_address: order.shipping_address,
+        items: order.items,
+        subtotal: order.subtotal,
+        shipping_cost: order.shipping_cost,
+        tax: order.tax,
+        total: order.total,
+        discount: order.discount,
+        coupon_code: order.coupon_code,
+        province: order.province,
+        payment_method: `credit-card (${chargeResult.card_type} *${chargeResult.last_4})`,
+        status: 'processing',
+        payment_status: 'paid',
+        notes: combinedNotes,
+      })
+      .select()
+      .single();
+
+    if (orderError) {
+      console.error('Order save error (payment was successful):', orderError);
+    }
+
+    // 3. Create/update customer record
+    await supabaseAdmin
+      .from('customers')
+      .upsert({
+        email: order.customer_email,
+        name: order.customer_name,
+        phone: order.phone || '',
+        shipping_address: order.shipping_address,
+        total_orders: 1,
+        total_spent: order.total,
+      }, { onConflict: 'email' });
 
     return NextResponse.json({
       success: true,
