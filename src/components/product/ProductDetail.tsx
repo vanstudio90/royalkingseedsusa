@@ -1164,7 +1164,7 @@ function CompareTab({ product, relatedProducts }: {
       <p className="text-[13px] text-[#192026]/40 mb-6">See how {product.name} stacks up against other popular strains.</p>
 
       {/* Full column-based layout — scrollable on mobile */}
-      <div className="overflow-x-auto scrollbar-hide -mx-2 px-2">
+      <div className="overflow-x-auto overflow-y-visible scrollbar-hide -mx-2 px-2 pt-4">
       <div className="grid grid-cols-[70px_140px_140px_140px_140px] sm:grid-cols-[90px_1fr_1fr_1fr_1fr] gap-0 min-w-[630px] sm:min-w-0">
         {/* Header row: label + product cards */}
         <div />
@@ -1180,7 +1180,7 @@ function CompareTab({ product, relatedProducts }: {
             >
               <div className={`rounded-2xl p-3 text-center transition-all duration-300 ${
                 isHovered && !isActive
-                  ? 'bg-white shadow-xl ring-2 ring-[#D7B65D] -translate-y-2 scale-105 z-10 relative'
+                  ? 'bg-white shadow-xl ring-2 ring-[#D7B65D] scale-[1.03] z-10 relative'
                   : isActive
                     ? 'bg-[#275C53]/5 ring-2 ring-[#275C53]'
                     : 'bg-[#F5F0EA]'
