@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getProductBySlug, getProducts } from '@/lib/products/data';
 import { ProductDetail } from '@/components/product/ProductDetail';
+import { ProductDetailSidebar } from '@/components/product/ProductDetailSidebar';
 import { getCategoryBySlug } from '@/lib/categories';
 
 interface Props {
@@ -137,7 +138,12 @@ export default async function ProductPage({ params }: Props) {
         </ol>
       </nav>
 
-      <ProductDetail product={product} relatedProducts={related} galleryImages={[]} />
+      <div className="flex gap-8 items-start">
+        <ProductDetailSidebar productName={product.name} />
+        <div className="flex-1 min-w-0">
+          <ProductDetail product={product} relatedProducts={related} galleryImages={[]} />
+        </div>
+      </div>
     </div>
   );
 }

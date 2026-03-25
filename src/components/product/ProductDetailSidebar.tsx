@@ -9,16 +9,16 @@ interface TopStrain {
 
 export function ProductDetailSidebar({ productName, topStrains }: { productName: string; topStrains?: TopStrain[] }) {
   const defaultStrains: TopStrain[] = [
-    { name: 'OG Kush Feminized', slug: 'og-kush-feminized' },
+    { name: 'Girl Scout Cookies Feminized', slug: 'girl-scout-cookies-feminized' },
+    { name: 'Gorilla Glue Feminized', slug: 'gorilla-glue-feminized' },
+    { name: 'Blue Dream Feminized', slug: 'blue-dream-feminized' },
+    { name: 'Northern Lights Feminized', slug: 'northern-lights-feminized' },
+    { name: 'White Widow Feminized', slug: 'white-widow-feminized' },
     { name: 'Granddaddy Purple Feminized', slug: 'granddaddy-purple-feminized' },
-    { name: 'Hindu Kush Feminized', slug: 'hindu-kush-feminized' },
-    { name: 'Fruity Pebbles Feminized', slug: 'fruity-pebbles-feminized' },
-    { name: 'Forbidden Fruit Feminized', slug: 'forbidden-fruit-feminized' },
-    { name: 'G13 Feminized', slug: 'g13-feminized' },
-    { name: 'Acapulco Gold Auto', slug: 'acapulco-gold-auto' },
-    { name: 'A-10 Auto', slug: 'a-10-auto' },
-    { name: 'High Resin Pack', slug: 'high-resin-strains-mixpack' },
-    { name: 'G.O.A.T Pack', slug: 'goat-mixpack' },
+    { name: 'OG Kush Feminized', slug: 'og-kush-feminized' },
+    { name: 'Gelato Feminized', slug: 'gelato-feminized' },
+    { name: 'Wedding Cake Feminized', slug: 'wedding-cake-feminized' },
+    { name: 'Jack Herer Feminized', slug: 'jack-herer-feminized' },
   ];
 
   const strains = topStrains || defaultStrains;
@@ -66,7 +66,7 @@ export function ProductDetailSidebar({ productName, topStrains }: { productName:
         {/* Free Shipping */}
         <div className="bg-white rounded-2xl p-5 border border-[#275C53]/5 text-center">
           <h3 className="text-sm font-bold text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua), Patua One, serif' }}>Free Shipping</h3>
-          <p className="text-[12px] text-[#192026]/50">to all of Canada 🇨🇦</p>
+          <p className="text-[12px] text-[#192026]/50">on orders over $150 to all 50 states 🇺🇸</p>
           <div className="flex justify-center gap-4 mt-3 text-[10px] text-[#192026]/40 uppercase tracking-[0.5px]">
             <div className="text-center">
               <span className="text-lg block mb-0.5">📦</span>
