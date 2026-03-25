@@ -223,6 +223,20 @@ export function searchProducts(query: string, limit = 8): Product[] {
     .slice(0, limit);
 }
 
+export function getBeginnerProducts(): Product[] {
+  return getProducts().filter(p => p.autoflower).slice(0, 8);
+}
+
+export function getHighThcProducts(): Product[] {
+  return getProducts()
+    .filter(p => { const thc = parseInt(p.thcContent) || 0; return thc >= 20; })
+    .slice(0, 8);
+}
+
+export function getFastFloweringProducts(): Product[] {
+  return getProducts().filter(p => p.autoflower && p.feminized).slice(0, 8);
+}
+
 export function getProductCount(): { total: number; published: number; draft: number } {
   const all = getAllProductsRaw();
   const published = getProducts();
