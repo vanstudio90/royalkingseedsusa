@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getProducts, getFeaturedProducts } from '@/lib/products/data';
+import { ProductCard } from '@/components/product/ProductCard';
 
 export const metadata: Metadata = {
   title: 'Buy Cannabis Seeds in the USA — #1 Trusted American Seed Bank | Royal King Seeds',
@@ -128,35 +129,9 @@ export default async function HomePage() {
               View All 1,200+ Strains →
             </Link>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
             {featured.map((p) => (
-              <Link key={p.id} href={`/${p.slug}`} className="product-card group block">
-                <div className="product-image aspect-square bg-white flex items-center justify-center relative mb-4 overflow-hidden">
-                  {p.imageUrl ? (
-                    <img src={p.imageUrl} alt={`${p.name} cannabis seeds for sale USA`} loading="lazy" className="w-full h-full object-contain p-3" />
-                  ) : (
-                    <span className="text-5xl opacity-40">🌱</span>
-                  )}
-                  <div className="absolute top-3 left-3">
-                    <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${
-                      p.strainType === 'indica' ? 'bg-purple-100 text-purple-700' :
-                      p.strainType === 'sativa' ? 'bg-amber-100 text-amber-700' :
-                      p.strainType === 'cbd' ? 'bg-blue-100 text-blue-700' :
-                      'bg-emerald-100 text-emerald-700'
-                    }`}>{p.strainType.charAt(0).toUpperCase() + p.strainType.slice(1)}</span>
-                  </div>
-                  {p.thcContent && (
-                    <div className="absolute top-3 right-3 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-white/80 text-[#275C53]">THC {p.thcContent}%</div>
-                  )}
-                </div>
-                <h3 className="title-underline font-normal text-[#275C53] text-sm leading-snug">{p.name}</h3>
-                <div className="mt-3 pt-3 border-t border-[#F5F0EA]">
-                  <span className="text-lg font-semibold text-[#275C53]">
-                    <span className="text-[11px] text-[#192026]/70 font-normal">From </span>${p.price.toFixed(2)}
-                    <span className="text-[11px] text-[#192026]/70 ml-1 font-normal">USD</span>
-                  </span>
-                </div>
-              </Link>
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         </div>
