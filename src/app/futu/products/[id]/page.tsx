@@ -61,6 +61,7 @@ export default function ProductEditorPage() {
   const [flavorInput, setFlavorInput] = useState('');
   const [categoryInput, setCategoryInput] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [saved, setSaved] = useState(false);
   const [tab, setTab] = useState<'general' | 'details' | 'seo' | 'inventory'>('general');
 
   useEffect(() => {
@@ -99,7 +100,14 @@ export default function ProductEditorPage() {
     });
 
     if (res.ok) {
-      router.push('/futu/products');
+      if (isNew) {
+        const data = await res.json();
+        router.push(`/futu/products/${data.id}`);
+      } else {
+        setSaved(true);
+        setSaving(false);
+        setTimeout(() => setSaved(false), 3000);
+      }
     } else {
       const err = await res.json();
       alert(err.error || 'Save failed');
@@ -149,7 +157,8 @@ export default function ProductEditorPage() {
             {isNew ? 'New Product' : `Edit: ${form.name}`}
           </h1>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-3">
+          {saved && <span className="text-emerald-600 text-sm font-medium">Saved!</span>}
           <select value={form.status} onChange={e => updateForm('status', e.target.value)}
             className={`px-3 py-2 rounded-xl text-sm font-semibold border-0 cursor-pointer ${form.status === 'published' ? 'bg-emerald-50 text-emerald-600' : 'bg-orange-50 text-orange-500'}`}>
             <option value="draft">Draft</option>
