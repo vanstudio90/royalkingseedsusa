@@ -12,7 +12,7 @@ interface StatusChange {
 interface Order {
   id: number; order_number: string; customer_name: string; customer_email: string;
   shipping_address: { street?: string; city?: string; province?: string; postal?: string; country?: string };
-  items: { name: string; slug: string; qty: number; price: number }[];
+  items: { name: string; slug: string; qty: number; price: number; variant?: string }[];
   subtotal: number; shipping_cost: number; tax: number; total: number; discount: number;
   status: string; payment_status: string; payment_method: string;
   tracking_number: string; notes: string; coupon_code: string; province: string;
@@ -189,7 +189,7 @@ export default function OrderDetailPage() {
               <tbody>
                 {(order.items || []).map((item, i) => (
                   <tr key={i} className="border-b border-[#192026]/5">
-                    <td className="px-5 py-3 text-sm">{item.name}</td>
+                    <td className="px-5 py-3 text-sm">{item.name}{item.variant && <span className="text-[#192026]/40 ml-1.5">({item.variant})</span>}</td>
                     <td className="px-5 py-3 text-sm text-center">{item.qty}</td>
                     <td className="px-5 py-3 text-sm text-right">${item.price}</td>
                     <td className="px-5 py-3 text-sm text-right font-semibold">${(item.qty * item.price).toFixed(2)}</td>
@@ -336,7 +336,7 @@ export default function OrderDetailPage() {
 
         <table><thead><tr><th>Product</th><th>Qty</th><th style={{ textAlign: 'right' }}>Price</th><th style={{ textAlign: 'right' }}>Total</th></tr></thead>
         <tbody>{(order.items||[]).map((item,i)=>(
-          <tr key={i}><td>{item.name}</td><td>{item.qty}</td><td style={{ textAlign: 'right' }}>${item.price}</td><td style={{ textAlign: 'right' }}>${(item.qty*item.price).toFixed(2)}</td></tr>
+          <tr key={i}><td>{item.name}{item.variant ? ` (${item.variant})` : ''}</td><td>{item.qty}</td><td style={{ textAlign: 'right' }}>${item.price}</td><td style={{ textAlign: 'right' }}>${(item.qty*item.price).toFixed(2)}</td></tr>
         ))}</tbody></table>
 
         <div className="summary" style={{ textAlign: 'right', marginTop: 10 }}>
@@ -372,7 +372,7 @@ export default function OrderDetailPage() {
         <table style={{ marginTop: 20 }}>
           <thead><tr><th>Product</th><th style={{ textAlign: 'center' }}>Qty</th></tr></thead>
           <tbody>{(order.items||[]).map((item,i)=>(
-            <tr key={i}><td>{item.name}</td><td style={{ textAlign: 'center' }}>{item.qty}</td></tr>
+            <tr key={i}><td>{item.name}{item.variant ? ` (${item.variant})` : ''}</td><td style={{ textAlign: 'center' }}>{item.qty}</td></tr>
           ))}</tbody>
         </table>
 
