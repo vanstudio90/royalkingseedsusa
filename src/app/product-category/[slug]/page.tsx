@@ -113,10 +113,16 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
       {/* Product Grid — strip heavy fields to reduce page size */}
       <ProductGrid products={filtered.map(p => ({
-        ...p,
-        description: '',
-        shortDescription: p.shortDescription?.slice(0, 120) || '',
-        bestUse: [],
+        id: p.id, slug: p.slug, name: p.name,
+        strainType: p.strainType, thcContent: p.thcContent,
+        indicaPercent: p.indicaPercent, sativaPercent: p.sativaPercent,
+        effects: p.effects.slice(0, 3), categories: p.categories,
+        seedOptions: p.seedOptions,
+        price: p.price, feminized: p.feminized, autoflower: p.autoflower,
+        inStock: p.inStock, imageUrl: p.imageUrl, difficulty: p.difficulty,
+        description: '', shortDescription: '', bestUse: [],
+        metaTitle: '', metaDescription: '', floweringTime: '', plantHeight: '',
+        indoorYield: '', outdoorYield: '',
       }))} activeCategory={slug} initialQuery={q} />
 
       {/* Bottom SEO Content */}
