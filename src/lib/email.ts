@@ -334,14 +334,15 @@ export async function sendTrackingEmail(order: { order_number: string; customer_
   `);
 
   try {
-    await getResend().emails.send({
+    const result = await getResend().emails.send({
       from: FROM_EMAIL,
       to: order.customer_email,
       subject: `Tracking Update \u2014 ${order.order_number}`,
       html,
     });
-  } catch {
-    // Email send failed silently
+    console.log('[Tracking Email] Sent to', order.customer_email, 'result:', JSON.stringify(result));
+  } catch (err) {
+    console.error('[Tracking Email] Failed:', err);
   }
 }
 
