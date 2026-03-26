@@ -238,9 +238,9 @@ export default function AdminOrdersPage() {
             <tbody>
               {orders.map((o) => (
                 <tr key={o.id} className={`border-b border-[#192026]/5 hover:bg-[#f5f0ea]/50 transition-colors ${isTrashView ? 'opacity-60' : ''}`}>
-                  <td className="px-4 py-3 text-sm font-mono font-semibold text-[#275C53]">#{o.order_number}</td>
+                  <td className="px-4 py-3 text-sm font-mono font-semibold"><Link href={`/futu/orders/${o.id}`} className="text-[#275C53] hover:underline">#{o.order_number}</Link></td>
                   <td className="px-4 py-3">
-                    <div className="text-sm text-[#192026]">{o.customer_name}</div>
+                    <Link href={`/futu/orders/${o.id}`} className="text-sm text-[#192026] hover:text-[#275C53] hover:underline">{o.customer_name}</Link>
                     <div className="text-[11px] text-[#192026]/30">{o.customer_email}</div>
                   </td>
                   <td className="px-4 py-3 text-sm font-semibold text-[#192026]">${o.total}</td>
