@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS orders (
   discount DECIMAL(10,2) DEFAULT 0,
   coupon_code TEXT DEFAULT '',
   province TEXT DEFAULT '',
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'processing', 'shipped', 'completed', 'cancelled', 'refunded')),
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'processing', 'shipped', 'completed', 'cancelled', 'refunded', 'trashed', 'archived')),
   payment_status TEXT DEFAULT 'unpaid' CHECK (payment_status IN ('unpaid', 'paid', 'refunded')),
   payment_method TEXT DEFAULT '',
   tracking_number TEXT DEFAULT '',
@@ -260,6 +260,93 @@ CREATE POLICY "Public read product images" ON storage.objects FOR SELECT USING (
 CREATE POLICY "Auth upload product images" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'products');
 CREATE POLICY "Auth update product images" ON storage.objects FOR UPDATE USING (bucket_id = 'products');
 CREATE POLICY "Auth delete product images" ON storage.objects FOR DELETE USING (bucket_id = 'products');
+
+-- ============================================================
+-- Orders Archive — orders are NEVER permanently deleted
+-- ============================================================
+CREATE TABLE IF NOT EXISTS orders_archive (
+  id BIGSERIAL PRIMARY KEY,
+  original_id BIGINT NOT NULL,
+  order_number TEXT NOT NULL,
+  customer_email TEXT NOT NULL,
+  customer_name TEXT NOT NULL,
+  shipping_address JSONB DEFAULT '{}',
+  billing_address JSONB DEFAULT '{}',
+  items JSONB DEFAULT '[]',
+  subtotal DECIMAL(10,2) DEFAULT 0,
+  shipping_cost DECIMAL(10,2) DEFAULT 0,
+  tax DECIMAL(10,2) DEFAULT 0,
+  total DECIMAL(10,2) DEFAULT 0,
+  discount DECIMAL(10,2) DEFAULT 0,
+  coupon_code TEXT DEFAULT '',
+  province TEXT DEFAULT '',
+  status TEXT DEFAULT '',
+  payment_status TEXT DEFAULT '',
+  payment_method TEXT DEFAULT '',
+  tracking_number TEXT DEFAULT '',
+  notes TEXT DEFAULT '',
+  status_history JSONB DEFAULT '[]'::jsonb,
+  original_created_at TIMESTAMPTZ,
+  original_updated_at TIMESTAMPTZ,
+  archived_at TIMESTAMPTZ DEFAULT NOW(),
+  archived_reason TEXT DEFAULT 'empty_trash'
+);
+
+ALTER TABLE orders_archive ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Service full access orders_archive" ON orders_archive FOR ALL USING (true) WITH CHECK (true);
+
+-- Safety trigger: if anyone tries to DELETE from orders, copy to archive first
+CREATE OR REPLACE FUNCTION archive_order_before_delete()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO orders_archive (
+    original_id, order_number, customer_email, customer_name,
+    shipping_address, billing_address, items, subtotal, shipping_cost,
+    tax, total, discount, coupon_code, province, status, payment_status,
+    payment_method, tracking_number, notes, status_history,
+    original_created_at, original_updated_at, archived_reason
+  ) VALUES (
+    OLD.id, OLD.order_number, OLD.customer_email, OLD.customer_name,
+    OLD.shipping_address, OLD.billing_address, OLD.items, OLD.subtotal, OLD.shipping_cost,
+    OLD.tax, OLD.total, OLD.discount, OLD.coupon_code, OLD.province, OLD.status, OLD.payment_status,
+    OLD.payment_method, OLD.tracking_number, OLD.notes, OLD.status_history,
+    OLD.created_at, OLD.updated_at, 'db_delete_trigger'
+  );
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER orders_archive_before_delete
+  BEFORE DELETE ON orders
+  FOR EACH ROW EXECUTE FUNCTION archive_order_before_delete();
+
+-- Prevent customers table deletion from losing order data
+-- (orders already embed customer_email/name/address — no FK — so they survive)
+-- This trigger logs customer deletions for audit trail
+CREATE OR REPLACE FUNCTION log_customer_delete()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO activity_log (user_email, action, entity_type, entity_id, entity_name, details)
+  VALUES (
+    OLD.email,
+    'customer_deleted',
+    'customer',
+    OLD.id::text,
+    OLD.name,
+    jsonb_build_object(
+      'email', OLD.email,
+      'total_orders', OLD.total_orders,
+      'total_spent', OLD.total_spent,
+      'deleted_at', NOW()
+    )
+  );
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER customers_log_before_delete
+  BEFORE DELETE ON customers
+  FOR EACH ROW EXECUTE FUNCTION log_customer_delete();
 
 -- Default settings for US site
 INSERT INTO settings (key, value) VALUES

@@ -77,7 +77,7 @@ export default function AdminOrdersPage() {
   };
 
   const emptyTrash = async () => {
-    if (!confirm('Permanently delete all orders in trash older than 30 days? This cannot be undone.')) return;
+    if (!confirm('Archive all orders in trash older than 30 days? Orders are moved to the archive and will no longer appear here.')) return;
     await fetch('/api/admin/orders/empty-trash', { method: 'POST' });
     fetchOrders();
   };
@@ -205,7 +205,7 @@ export default function AdminOrdersPage() {
       {/* Trash notice */}
       {isTrashView && (
         <div className="bg-orange-50 border border-orange-200 rounded-xl p-3 mb-4 text-[12px] text-orange-700">
-          Orders in trash are automatically deleted after 30 days. Use &quot;Empty Trash&quot; to remove orders older than 30 days now, or restore individual orders.
+          Orders in trash are archived after 30 days. Archived orders are never deleted and can be retrieved from the database. Use &quot;Empty Trash&quot; to archive orders older than 30 days now, or restore individual orders.
         </div>
       )}
 
