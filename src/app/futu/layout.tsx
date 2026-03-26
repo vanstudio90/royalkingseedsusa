@@ -117,16 +117,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [authenticated, setAuthenticated] = useState(false);
   const [checking, setChecking] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [desktopCollapsed, setDesktopCollapsed] = useState(false);
 
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
-    if (token) {
-      setAuthenticated(true);
-    }
+    try {
+      const token = localStorage.getItem('admin_token');
+      if (token) setAuthenticated(true);
+      const collapsed = localStorage.getItem('admin_sidebar_collapsed');
+      if (collapsed === 'true') setDesktopCollapsed(true);
+    } catch {}
     setChecking(false);
   }, []);
 
-  // Close sidebar on route change (mobile)
+  const toggleDesktopSidebar = () => {
+    const next = !desktopCollapsed;
+    setDesktopCollapsed(next);
+    try { localStorage.setItem('admin_sidebar_collapsed', String(next)); } catch {}
+  };
+
+  // Close mobile sidebar on route change
   useEffect(() => {
     setSidebarOpen(false);
   }, [pathname]);
@@ -185,54 +194,72 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Sidebar */}
       <aside className={`
-        fixed lg:sticky top-0 left-0 z-50 w-[260px] bg-[#192026] h-screen flex flex-col shrink-0 transition-transform duration-200 ease-in-out
+        fixed lg:sticky top-0 left-0 z-50 bg-[#192026] h-screen flex flex-col shrink-0 transition-all duration-200 ease-in-out
+        ${desktopCollapsed ? 'lg:w-[68px]' : 'lg:w-[260px]'} w-[260px]
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0
       `}>
-        {/* Desktop header (hidden on mobile since we have the top bar) */}
-        <div className="hidden lg:block p-5 border-b border-white/5">
-          <Link href="/futu" className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-[#275C53] rounded-xl flex items-center justify-center">
+        {/* Desktop header */}
+        <div className="hidden lg:flex items-center p-4 border-b border-white/5">
+          <Link href="/futu" className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 bg-[#275C53] rounded-xl flex items-center justify-center shrink-0">
               <span className="text-[#D7B65D] font-bold text-xs">RK</span>
             </div>
-            <div>
-              <div className="text-white text-sm font-bold">Royal King Seeds</div>
-              <div className="text-white/25 text-[10px] uppercase tracking-[1px]">Admin Panel</div>
-            </div>
+            {!desktopCollapsed && (
+              <div className="min-w-0">
+                <div className="text-white text-sm font-bold truncate">Royal King Seeds</div>
+                <div className="text-white/25 text-[10px] uppercase tracking-[1px]">Admin Panel</div>
+              </div>
+            )}
           </Link>
+          <button
+            onClick={toggleDesktopSidebar}
+            className={`w-7 h-7 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer shrink-0 ${desktopCollapsed ? 'mx-auto mt-1' : 'ml-auto'}`}
+            title={desktopCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              {desktopCollapsed ? (
+                <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>
+              ) : (
+                <><polyline points="11 17 6 12 11 7" /><line x1="6" y1="12" x2="18" y2="12" /></>
+              )}
+            </svg>
+          </button>
         </div>
 
         {/* Mobile: spacer for top bar */}
         <div className="lg:hidden h-[52px] shrink-0" />
 
-        <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
+        <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const active = pathname === item.href || (item.href !== '/futu' && pathname.startsWith(item.href));
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                title={desktopCollapsed ? item.label : undefined}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-colors ${
                   active
                     ? 'bg-[#275C53] text-white'
                     : 'text-white/40 hover:text-white/70 hover:bg-white/5'
-                }`}
+                } ${desktopCollapsed ? 'lg:justify-center lg:px-0' : ''}`}
               >
-                <span className="text-base">{item.icon}</span>
-                {item.label}
+                <span className={`text-base ${desktopCollapsed ? 'lg:text-lg' : ''}`}>{item.icon}</span>
+                <span className={desktopCollapsed ? 'lg:hidden' : ''}>{item.label}</span>
               </Link>
             );
           })}
         </nav>
 
-        <div className="p-3 border-t border-white/5">
-          <Link href="/" className="flex items-center gap-3 px-3 py-2.5 text-white/30 hover:text-white/50 text-sm transition-colors">
-            <span>🌐</span> View Site
+        <div className="p-2 border-t border-white/5">
+          <Link href="/" title={desktopCollapsed ? 'View Site' : undefined} className={`flex items-center gap-3 px-3 py-2.5 text-white/30 hover:text-white/50 text-sm transition-colors ${desktopCollapsed ? 'lg:justify-center lg:px-0' : ''}`}>
+            <span>🌐</span> <span className={desktopCollapsed ? 'lg:hidden' : ''}>View Site</span>
           </Link>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2.5 text-white/30 hover:text-red-400 text-sm transition-colors text-left cursor-pointer"
+            title={desktopCollapsed ? 'Logout' : undefined}
+            className={`w-full flex items-center gap-3 px-3 py-2.5 text-white/30 hover:text-red-400 text-sm transition-colors text-left cursor-pointer ${desktopCollapsed ? 'lg:justify-center lg:px-0' : ''}`}
           >
-            <span>🚪</span> Logout
+            <span>🚪</span> <span className={desktopCollapsed ? 'lg:hidden' : ''}>Logout</span>
           </button>
         </div>
       </aside>
