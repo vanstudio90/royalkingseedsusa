@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 export default function AdminExportPage() {
   const [exporting, setExporting] = useState<string | null>(null);
@@ -11,7 +12,7 @@ export default function AdminExportPage() {
   const handleExport = async (type: string) => {
     setExporting(type);
     try {
-      const res = await fetch(`/api/admin/export?type=${type}`);
+      const res = await adminFetch(`/api/admin/export?type=${type}`);
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -39,7 +40,7 @@ export default function AdminExportPage() {
       formData.append('file', file);
       formData.append('type', 'products');
 
-      const res = await fetch('/api/admin/import', {
+      const res = await adminFetch('/api/admin/import', {
         method: 'POST',
         body: formData,
       });

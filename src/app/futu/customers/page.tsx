@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface CustomerOrder {
   id: number;
@@ -77,7 +78,7 @@ export default function AdminCustomersPage() {
     if (search) params.set('search', search);
     params.set('sortBy', sortBy === 'ltv' ? 'total_spent' : sortBy === 'order_count' ? 'total_orders' : sortBy);
     params.set('sortDir', sortDir);
-    const res = await fetch(`/api/admin/customers?${params}`);
+    const res = await adminFetch(`/api/admin/customers?${params}`);
     const data = await res.json();
     setCustomers(data.customers || []);
     setStats(data.stats || { totalCustomers: 0, avgLTV: 0, repeatRate: 0, repeatCustomers: 0 });
@@ -110,7 +111,7 @@ export default function AdminCustomersPage() {
   const saveNotes = async (customerId: number) => {
     setSavingNotes(customerId);
     const noteText = editingNotes[customerId] ?? '';
-    await fetch('/api/admin/customers', {
+    await adminFetch('/api/admin/customers', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: customerId, notes: noteText }),
@@ -130,7 +131,7 @@ export default function AdminCustomersPage() {
     // Optimistic update
     setCustomers(prev => prev.map(c => c.id === customerId ? { ...c, tags: newTags } : c));
 
-    await fetch('/api/admin/customers', {
+    await adminFetch('/api/admin/customers', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id: customerId, tags: newTags }),

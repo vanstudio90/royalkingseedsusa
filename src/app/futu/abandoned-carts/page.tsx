@@ -1,6 +1,7 @@
 'use client';
 
 import { Fragment, useEffect, useState, useCallback } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface CartItem {
   name?: string;
@@ -38,7 +39,7 @@ export default function AdminAbandonedCartsPage() {
     if (dateFrom) params.set('from', dateFrom);
     if (dateTo) params.set('to', dateTo);
     const qs = params.toString();
-    const res = await fetch(`/api/admin/abandoned-carts${qs ? `?${qs}` : ''}`);
+    const res = await adminFetch(`/api/admin/abandoned-carts${qs ? `?${qs}` : ''}`);
     const data = await res.json();
     setCarts(data.carts || []);
     setLoading(false);
@@ -50,7 +51,7 @@ export default function AdminAbandonedCartsPage() {
 
   const sendRecoveryEmail = async (id: number) => {
     setSendingEmail(id);
-    await fetch(`/api/admin/abandoned-carts`, {
+    await adminFetch(`/api/admin/abandoned-carts`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, recovery_email_sent: true }),

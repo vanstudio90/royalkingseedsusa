@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { adminFetch } from '@/lib/admin-fetch';
 
 /* ─── Types ────────────────────────────────────────────────────── */
 
@@ -105,8 +106,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     Promise.all([
-      fetch('/api/admin/stats').then(r => r.json()),
-      fetch('/api/admin/analytics/top-products').then(r => r.json()),
+      adminFetch('/api/admin/stats').then(r => r.json()),
+      adminFetch('/api/admin/analytics/top-products').then(r => r.json()),
     ])
       .then(([statsData, analyticsData]) => {
         setStats(statsData);

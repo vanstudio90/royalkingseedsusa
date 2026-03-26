@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Review {
   id: number;
@@ -29,7 +30,7 @@ export default function AdminReviewsPage() {
     setLoading(true);
     const params = new URLSearchParams();
     if (statusFilter !== 'all') params.set('status', statusFilter);
-    const res = await fetch(`/api/admin/reviews?${params}`);
+    const res = await adminFetch(`/api/admin/reviews?${params}`);
     const data = await res.json();
     setReviews(data.reviews || []);
     setLoading(false);
@@ -40,7 +41,7 @@ export default function AdminReviewsPage() {
   }, [statusFilter]);
 
   const updateStatus = async (id: number, status: string) => {
-    await fetch(`/api/admin/reviews/${id}`, {
+    await adminFetch(`/api/admin/reviews/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),

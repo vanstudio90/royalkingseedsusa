@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface StatusChange {
   from: string;
@@ -45,13 +46,13 @@ export default function OrderDetailPage() {
   const packingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch(`/api/admin/orders/${params.id}`)
+    adminFetch(`/api/admin/orders/${params.id}`)
       .then(r => r.json())
       .then(data => { setOrder(data); setTracking(data.tracking_number || ''); setNotes(data.notes || ''); });
   }, [params.id]);
 
   const updateOrder = async (updates: Partial<Order>) => {
-    const res = await fetch(`/api/admin/orders/${params.id}`, {
+    const res = await adminFetch(`/api/admin/orders/${params.id}`, {
       method: 'PUT', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updates),
     });

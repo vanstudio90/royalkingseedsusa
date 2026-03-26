@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface ProductForm {
   name: string;
@@ -66,7 +67,7 @@ export default function ProductEditorPage() {
 
   useEffect(() => {
     if (!isNew) {
-      fetch(`/api/admin/products/${params.id}`)
+      adminFetch(`/api/admin/products/${params.id}`)
         .then(r => r.json())
         .then(data => {
           if (data.error && !data.error.includes('gallery_images')) { router.push('/futu/products'); return; }
@@ -93,7 +94,7 @@ export default function ProductEditorPage() {
     const { gallery_images, ...saveData } = form as any;
     void gallery_images;
 
-    const res = await fetch(url, {
+    const res = await adminFetch(url, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(saveData),
@@ -124,7 +125,7 @@ export default function ProductEditorPage() {
     formData.append('file', file);
     formData.append('slug', form.slug || 'product');
 
-    const res = await fetch('/api/admin/upload', {
+    const res = await adminFetch('/api/admin/upload', {
       method: 'POST',
       body: formData,
     });

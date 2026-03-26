@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface WishlistItem {
   id: number;
@@ -22,7 +23,7 @@ export default function AdminWishlistsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/admin/wishlists')
+    adminFetch('/api/admin/wishlists')
       .then((r) => r.json())
       .then((data) => {
         setItems(data.items || []);

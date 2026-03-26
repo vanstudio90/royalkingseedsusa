@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 const STATES = [
   'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
@@ -34,7 +35,7 @@ export default function AdminShippingPage() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('/api/admin/settings?key=shipping')
+    adminFetch('/api/admin/settings?key=shipping')
       .then((r) => {
         if (!r.ok) throw new Error('not found');
         return r.json();
@@ -83,7 +84,7 @@ export default function AdminShippingPage() {
     setSaving(true);
     setMessage('');
     try {
-      const res = await fetch('/api/admin/settings', {
+      const res = await adminFetch('/api/admin/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ key: 'shipping', value: shipping }),

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Product {
   id: number;
@@ -33,7 +34,7 @@ export default function AdminProductsPage() {
       ...(search && { search }),
     });
 
-    const res = await fetch(`/api/admin/products?${params}`);
+    const res = await adminFetch(`/api/admin/products?${params}`);
     const data = await res.json();
     setProducts(data.products || []);
     setTotal(data.total || 0);
@@ -52,7 +53,7 @@ export default function AdminProductsPage() {
 
   const toggleStatus = async (id: number, current: string) => {
     const newStatus = current === 'published' ? 'draft' : 'published';
-    await fetch(`/api/admin/products/${id}`, {
+    await adminFetch(`/api/admin/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus }),
@@ -62,7 +63,7 @@ export default function AdminProductsPage() {
 
   const deleteProduct = async (id: number, name: string) => {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
-    await fetch(`/api/admin/products/${id}`, { method: 'DELETE' });
+    await adminFetch(`/api/admin/products/${id}`, { method: 'DELETE' });
     fetchProducts();
   };
 

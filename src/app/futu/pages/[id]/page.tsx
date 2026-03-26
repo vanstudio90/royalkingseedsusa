@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface PageData {
   id: number;
@@ -24,7 +25,7 @@ export default function EditPagePage() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/admin/pages?type=all`)
+    adminFetch(`/api/admin/pages?type=all`)
       .then(r => r.json())
       .then(data => {
         const found = (data.pages || []).find((p: PageData) => p.id === Number(params.id));
@@ -35,7 +36,7 @@ export default function EditPagePage() {
   const handleSave = async () => {
     if (!page) return;
     setSaving(true);
-    const res = await fetch(`/api/admin/pages/${page.id}`, {
+    const res = await adminFetch(`/api/admin/pages/${page.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

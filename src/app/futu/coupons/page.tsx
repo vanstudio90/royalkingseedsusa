@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Coupon {
   id: number;
@@ -68,7 +69,7 @@ export default function AdminCouponsPage() {
 
   const fetchCoupons = async () => {
     setLoading(true);
-    const res = await fetch('/api/admin/coupons');
+    const res = await adminFetch('/api/admin/coupons');
     const data = await res.json();
     setCoupons(data.coupons || []);
     setLoading(false);
@@ -96,13 +97,13 @@ export default function AdminCouponsPage() {
     };
 
     if (editingId) {
-      await fetch(`/api/admin/coupons/${editingId}`, {
+      await adminFetch(`/api/admin/coupons/${editingId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
     } else {
-      await fetch('/api/admin/coupons', {
+      await adminFetch('/api/admin/coupons', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -132,7 +133,7 @@ export default function AdminCouponsPage() {
   };
 
   const toggleActive = async (id: number, active: boolean) => {
-    await fetch(`/api/admin/coupons/${id}`, {
+    await adminFetch(`/api/admin/coupons/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ active: !active }),
@@ -144,7 +145,7 @@ export default function AdminCouponsPage() {
     if (selectedIds.size === 0) return;
     if (!confirm(`Delete ${selectedIds.size} coupon${selectedIds.size > 1 ? 's' : ''}?`)) return;
     setDeleting(true);
-    await fetch('/api/admin/coupons', {
+    await adminFetch('/api/admin/coupons', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ids: Array.from(selectedIds) }),

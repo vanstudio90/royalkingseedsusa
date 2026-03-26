@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Activity {
   id: number;
@@ -29,7 +30,7 @@ export default function AdminActivityPage() {
     setLoading(true);
     const params = new URLSearchParams();
     if (filter !== 'all') params.set('entity_type', filter);
-    const res = await fetch(`/api/admin/activity?${params}`);
+    const res = await adminFetch(`/api/admin/activity?${params}`);
     const data = await res.json();
     setActivities(data.activities || []);
     setLoading(false);

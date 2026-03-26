@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface PageItem {
   id: number;
@@ -35,7 +36,7 @@ export default function AdminPagesPage() {
       page: String(page),
       limit: String(limit),
     });
-    const res = await fetch(`/api/admin/pages?${params}`);
+    const res = await adminFetch(`/api/admin/pages?${params}`);
     const data = await res.json();
     setPages(data.pages || []);
     setTotal(data.total || 0);
@@ -47,7 +48,7 @@ export default function AdminPagesPage() {
 
   const toggleStatus = async (id: number, current: string) => {
     const newStatus = current === 'published' ? 'draft' : 'published';
-    await fetch(`/api/admin/pages/${id}`, {
+    await adminFetch(`/api/admin/pages/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus }),
@@ -57,7 +58,7 @@ export default function AdminPagesPage() {
 
   const deletePage = async (id: number, title: string) => {
     if (!confirm(`Delete "${title}"?`)) return;
-    await fetch(`/api/admin/pages/${id}`, { method: 'DELETE' });
+    await adminFetch(`/api/admin/pages/${id}`, { method: 'DELETE' });
     fetchPages();
   };
 

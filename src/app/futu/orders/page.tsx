@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Order {
   id: number;
@@ -45,7 +46,7 @@ export default function AdminOrdersPage() {
     if (search) params.set('search', search);
     if (dateFrom) params.set('dateFrom', dateFrom);
     if (dateTo) params.set('dateTo', dateTo);
-    const res = await fetch(`/api/admin/orders?${params}`);
+    const res = await adminFetch(`/api/admin/orders?${params}`);
     const data = await res.json();
     setOrders(data.orders || []);
     setTotal(data.total || 0);
@@ -59,7 +60,7 @@ export default function AdminOrdersPage() {
   }, [fetchOrders, search]);
 
   const updateStatus = async (id: number, status: string) => {
-    await fetch(`/api/admin/orders/${id}`, {
+    await adminFetch(`/api/admin/orders/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status }),
@@ -78,7 +79,7 @@ export default function AdminOrdersPage() {
 
   const emptyTrash = async () => {
     if (!confirm('Archive all orders in trash older than 30 days? Orders are moved to the archive and will no longer appear here.')) return;
-    await fetch('/api/admin/orders/empty-trash', { method: 'POST' });
+    await adminFetch('/api/admin/orders/empty-trash', { method: 'POST' });
     fetchOrders();
   };
 
@@ -87,7 +88,7 @@ export default function AdminOrdersPage() {
     if (search) params.set('search', search);
     if (dateFrom) params.set('dateFrom', dateFrom);
     if (dateTo) params.set('dateTo', dateTo);
-    const res = await fetch(`/api/admin/orders?${params}`);
+    const res = await adminFetch(`/api/admin/orders?${params}`);
     const data = await res.json();
     const rows = data.orders || [];
 

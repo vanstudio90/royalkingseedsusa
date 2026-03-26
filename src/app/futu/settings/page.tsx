@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface StoreInfo {
   name: string;
@@ -39,7 +40,7 @@ export default function AdminSettingsPage() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('/api/admin/settings')
+    adminFetch('/api/admin/settings')
       .then((r) => r.json())
       .then((data) => {
         const settings = data.settings || {};
@@ -60,22 +61,22 @@ export default function AdminSettingsPage() {
     setMessage('');
     try {
       await Promise.all([
-        fetch('/api/admin/settings', {
+        adminFetch('/api/admin/settings', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ key: 'store_info', value: storeInfo }),
         }),
-        fetch('/api/admin/settings', {
+        adminFetch('/api/admin/settings', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ key: 'announcement_bar', value: announcement }),
         }),
-        fetch('/api/admin/settings', {
+        adminFetch('/api/admin/settings', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ key: 'social_links', value: social }),
         }),
-        fetch('/api/admin/settings', {
+        adminFetch('/api/admin/settings', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ key: 'seo_defaults', value: seo }),

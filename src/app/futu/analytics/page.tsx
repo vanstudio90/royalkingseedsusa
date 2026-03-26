@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 type Period = '7d' | '30d' | '90d' | 'all';
 
@@ -89,7 +90,7 @@ export default function AdminAnalyticsPage() {
   const fetchData = useCallback(async (p: Period) => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/analytics/top-products?period=${p}`);
+      const res = await adminFetch(`/api/admin/analytics/top-products?period=${p}`);
       const json = await res.json();
       setData(json);
     } catch (err) {

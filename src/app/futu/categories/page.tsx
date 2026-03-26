@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { adminFetch } from '@/lib/admin-fetch';
 
 interface Category {
   id: number;
@@ -24,7 +25,7 @@ export default function AdminCategoriesPage() {
 
   const fetchCategories = async () => {
     setLoading(true);
-    const res = await fetch('/api/admin/categories');
+    const res = await adminFetch('/api/admin/categories');
     const data = await res.json();
     setCategories(data.categories || []);
     setLoading(false);
@@ -38,13 +39,13 @@ export default function AdminCategoriesPage() {
     const payload = { ...form, slug };
 
     if (editingId) {
-      await fetch('/api/admin/categories', {
+      await adminFetch('/api/admin/categories', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id: editingId, ...payload }),
       });
     } else {
-      await fetch('/api/admin/categories', {
+      await adminFetch('/api/admin/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -72,7 +73,7 @@ export default function AdminCategoriesPage() {
 
   const handleDelete = async (id: number, name: string) => {
     if (!confirm(`Delete category "${name}"?`)) return;
-    await fetch('/api/admin/categories', {
+    await adminFetch('/api/admin/categories', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id }),
