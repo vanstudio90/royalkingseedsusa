@@ -2,7 +2,19 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import Image from 'next/image';
 import { adminFetch } from '@/lib/admin-fetch';
+
+interface StrainSpecs {
+  thc: string; lineageShort: string; type: string; climate: string;
+  harvest: string; height: string; yieldRating: string; yieldIndoor: string;
+  yieldOutdoor: string; floweringTime: string;
+}
+
+interface ProductInfo {
+  imageUrl: string;
+  specs: StrainSpecs;
+}
 
 interface StatusChange {
   from: string;
@@ -42,13 +54,27 @@ export default function OrderDetailPage() {
   const [tracking, setTracking] = useState('');
   const [notes, setNotes] = useState('');
   const [toast, setToast] = useState('');
+  const [productData, setProductData] = useState<Record<string, ProductInfo | null>>({});
+  const [dataSheetSlug, setDataSheetSlug] = useState<string | null>(null);
   const printRef = useRef<HTMLDivElement>(null);
   const packingRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     adminFetch(`/api/admin/orders/${params.id}`)
       .then(r => r.json())
-      .then(data => { setOrder(data); setTracking(data.tracking_number || ''); setNotes(data.notes || ''); });
+      .then(data => {
+        setOrder(data);
+        setTracking(data.tracking_number || '');
+        setNotes(data.notes || '');
+        // Fetch product images and specs
+        const slugs = (data.items || []).map((i: { slug: string }) => i.slug).filter(Boolean);
+        if (slugs.length > 0) {
+          fetch(`/api/products/by-slugs?slugs=${slugs.join(',')}`)
+            .then(r => r.json())
+            .then(setProductData)
+            .catch(() => {});
+        }
+      });
   }, [params.id]);
 
   const updateOrder = async (updates: Partial<Order>) => {
@@ -129,6 +155,56 @@ export default function OrderDetailPage() {
 
   return (
     <div>
+      {/* Strain Data Sheet Modal */}
+      {dataSheetSlug && productData[dataSheetSlug]?.specs && (() => {
+        const item = order.items.find(i => i.slug === dataSheetSlug);
+        const pInfo = productData[dataSheetSlug]!;
+        const s = pInfo.specs;
+        const rows = [
+          { icon: '🧬', label: 'THC', value: s.thc },
+          { icon: '🌿', label: 'Lineage', value: s.lineageShort },
+          { icon: '🔬', label: 'Type', value: s.type },
+          { icon: '🌡️', label: 'Climate', value: s.climate },
+          { icon: '📅', label: 'Harvest', value: s.harvest },
+          { icon: '📏', label: 'Height', value: s.height },
+          { icon: '⚖️', label: 'Yield', value: s.yieldRating },
+          { icon: '🏠', label: 'Yield Indoor', value: s.yieldIndoor },
+          { icon: '🌳', label: 'Yield Outdoor', value: s.yieldOutdoor },
+          { icon: '⏱️', label: 'Flowering Time', value: s.floweringTime },
+        ];
+        return (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40" onClick={() => setDataSheetSlug(null)}>
+            <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg mx-4 overflow-hidden" onClick={e => e.stopPropagation()}>
+              {/* Header */}
+              <div className="flex items-center gap-4 px-6 py-4 border-b border-[#192026]/5">
+                {pInfo.imageUrl && (
+                  <Image src={pInfo.imageUrl} alt={item?.name || ''} width={56} height={56} className="w-14 h-14 rounded-xl object-cover" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <h2 className="text-lg font-bold text-[#192026] truncate" style={{ fontFamily: 'var(--font-patua)' }}>{item?.name || dataSheetSlug}</h2>
+                  <p className="text-[12px] text-[#192026]/40">Strain Data Sheet</p>
+                </div>
+                <button onClick={() => setDataSheetSlug(null)} className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-[#f5f0ea] text-[#192026]/40 hover:text-[#192026] transition-colors cursor-pointer">
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              {/* Specs */}
+              <div className="divide-y divide-[#192026]/5">
+                {rows.map((row) => (
+                  <div key={row.label} className="flex items-center px-6 py-3.5">
+                    <span className="text-lg mr-3">{row.icon}</span>
+                    <span className="text-sm font-semibold text-[#192026] w-36">{row.label}</span>
+                    <span className="text-sm text-[#192026]/60 flex-1">{row.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Toast */}
       {toast && (
         <div className="fixed top-6 right-6 z-50 bg-[#275C53] text-white px-5 py-3 rounded-xl shadow-lg text-sm font-semibold flex items-center gap-2 animate-in fade-in slide-in-from-top-2">
@@ -191,14 +267,34 @@ export default function OrderDetailPage() {
                 </tr>
               </thead>
               <tbody>
-                {(order.items || []).map((item, i) => (
-                  <tr key={i} className="border-b border-[#192026]/5">
-                    <td className="px-5 py-3 text-sm">{item.name}{item.variant && <span className="text-[#192026]/40 ml-1.5">({item.variant})</span>}</td>
-                    <td className="px-5 py-3 text-sm text-center">{item.qty}</td>
-                    <td className="px-5 py-3 text-sm text-right">${item.price}</td>
-                    <td className="px-5 py-3 text-sm text-right font-semibold">${(item.qty * item.price).toFixed(2)}</td>
-                  </tr>
-                ))}
+                {(order.items || []).map((item, i) => {
+                  const pInfo = productData[item.slug];
+                  return (
+                    <tr key={i} className="border-b border-[#192026]/5">
+                      <td className="px-5 py-3 text-sm">
+                        <div className="flex items-center gap-3">
+                          {pInfo?.imageUrl ? (
+                            <button onClick={() => setDataSheetSlug(item.slug)} className="shrink-0 cursor-pointer rounded-lg overflow-hidden border border-[#192026]/10 hover:border-[#275C53] hover:shadow-md transition-all" title="View Strain Data Sheet">
+                              <Image src={pInfo.imageUrl} alt={item.name} width={48} height={48} className="w-12 h-12 object-cover" />
+                            </button>
+                          ) : (
+                            <div className="w-12 h-12 bg-[#f5f0ea] rounded-lg shrink-0 flex items-center justify-center text-[#192026]/20 text-lg">🌱</div>
+                          )}
+                          <div>
+                            <span>{item.name}</span>
+                            {item.variant && <span className="text-[#192026]/40 ml-1.5">({item.variant})</span>}
+                            {pInfo?.specs && (
+                              <button onClick={() => setDataSheetSlug(item.slug)} className="block text-[10px] text-[#275C53] hover:underline cursor-pointer mt-0.5">View Data Sheet</button>
+                            )}
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-5 py-3 text-sm text-center">{item.qty}</td>
+                      <td className="px-5 py-3 text-sm text-right">${item.price}</td>
+                      <td className="px-5 py-3 text-sm text-right font-semibold">${(item.qty * item.price).toFixed(2)}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
             <div className="px-5 py-3 space-y-1 text-sm text-right">
