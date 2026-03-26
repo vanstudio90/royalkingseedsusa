@@ -101,13 +101,6 @@ export default async function ProductPage({ params }: Props) {
         },
       },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: (4.5 + (product.slug.charCodeAt(0) % 5) * 0.1).toFixed(1),
-      reviewCount: 10 + (product.slug.charCodeAt(0) % 40) + (product.slug.length % 20),
-      bestRating: '5',
-      worstRating: '1',
-    },
     additionalProperty: [
       { '@type': 'PropertyValue', name: 'Strain Type', value: product.strainType },
       { '@type': 'PropertyValue', name: 'THC Content', value: product.thcContent || 'Varies' },

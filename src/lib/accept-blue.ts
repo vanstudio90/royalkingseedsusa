@@ -84,8 +84,6 @@ export async function processCharge(data: ChargeRequest): Promise<ChargeResponse
   const url = `${API_URL}/transactions/charge`;
   const body = JSON.stringify({ ...data, capture: true });
 
-  console.log('[Accept.Blue] Charging:', { url, amount: data.amount, card_last4: data.card.slice(-4), hasApiKey: !!API_KEY, hasPin: !!PIN });
-
   const res = await fetch(url, {
     method: 'POST',
     headers: {
@@ -96,7 +94,6 @@ export async function processCharge(data: ChargeRequest): Promise<ChargeResponse
   });
 
   const responseText = await res.text();
-  console.log('[Accept.Blue] Response:', res.status, responseText.slice(0, 500));
 
   if (!res.ok) {
     throw new Error(`Accept.Blue API error (${res.status}): ${responseText}`);

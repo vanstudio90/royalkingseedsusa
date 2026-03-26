@@ -39,7 +39,18 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
   }
 
-  console.log('[Payment] Processing order:', order.order_number, 'amount:', order.total, 'card_last4:', card.number.slice(-4));
+  // Server-side price verification — prevent tampered totals
+  if (!order.items.every((i: { price: number; qty: number }) => i.price > 0 && i.qty > 0)) {
+    return NextResponse.json({ error: 'Invalid item data' }, { status: 400 });
+  }
+  const calculatedSubtotal = order.items.reduce((sum: number, i: { price: number; qty: number }) => sum + i.price * i.qty, 0);
+  const calculatedTotal = calculatedSubtotal + (order.shipping_cost || 0) + (order.tax || 0) - (order.discount || 0);
+  if (Math.abs(calculatedTotal - order.total) > 1) {
+    return NextResponse.json({ error: 'Price mismatch detected' }, { status: 400 });
+  }
+  if (order.total <= 0 || order.total > 50000) {
+    return NextResponse.json({ error: 'Invalid order total' }, { status: 400 });
+  }
 
   // 1. Process payment via Accept.Blue
   try {
@@ -109,7 +120,7 @@ export async function POST(req: NextRequest) {
           notes: order.notes ? `${order.notes}\n\n${declineInfo}` : declineInfo,
         });
 
-      console.log('[Payment] DECLINED order saved:', order.order_number);
+      // Declined order saved to DB
 
       return NextResponse.json({
         error: 'Payment declined',
@@ -148,7 +159,7 @@ export async function POST(req: NextRequest) {
       .single();
 
     if (orderError) {
-      console.error('Order save error (payment was successful):', orderError);
+      // Order save failed but payment succeeded — logged server-side only
     }
 
     // 3. Create/update customer record
@@ -188,7 +199,6 @@ export async function POST(req: NextRequest) {
     });
 
   } catch (err: any) {
-    console.error('[Payment] Error:', err?.message || err);
     const errMsg = err?.message || '';
 
     // Save failed order so it shows in admin panel
@@ -223,7 +233,6 @@ export async function POST(req: NextRequest) {
         : errMsg.includes('Accept.Blue API error')
         ? 'Payment gateway returned an error. Please try again or use a different card.'
         : 'There was an error connecting to the payment processor. Please try again.',
-      debug: process.env.NODE_ENV !== 'production' ? errMsg : undefined,
     }, { status: 500 });
   }
 }

@@ -8,7 +8,8 @@ export async function GET(req: NextRequest) {
 
   const { searchParams } = new URL(req.url);
   const search = searchParams.get('search');
-  const sortBy = searchParams.get('sortBy') || 'total_spent';
+  const ALLOWED_SORTS = ['total_spent', 'name', 'email', 'created_at', 'total_orders'];
+  const sortBy = ALLOWED_SORTS.includes(searchParams.get('sortBy') || '') ? searchParams.get('sortBy')! : 'total_spent';
   const sortDir = searchParams.get('sortDir') || 'desc';
 
   // Fetch customers
@@ -19,7 +20,10 @@ export async function GET(req: NextRequest) {
     .limit(200);
 
   if (search) {
-    query = query.or(`name.ilike.%${search}%,email.ilike.%${search}%`);
+    const safeSearch = search.replace(/[%_\\'"()]/g, '').slice(0, 100);
+    if (safeSearch) {
+      query = query.or(`name.ilike.%${safeSearch}%,email.ilike.%${safeSearch}%`);
+    }
   }
 
   const { data: customers, error, count } = await query;

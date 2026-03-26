@@ -31,17 +31,17 @@ export default function ContactPage() {
           <h2 className="text-lg text-[#275C53] font-semibold mb-4">Send Us a Message</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Name</label>
-              <input type="text" className="checkout-input" placeholder="Your name" />
+              <label htmlFor="name" className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Name</label>
+              <input type="text" id="name" name="name" className="checkout-input" placeholder="Your name" />
             </div>
             <div>
-              <label className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Email</label>
-              <input type="email" className="checkout-input" placeholder="your@email.com" />
+              <label htmlFor="email" className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Email</label>
+              <input type="email" id="email" name="email" className="checkout-input" placeholder="your@email.com" />
             </div>
           </div>
           <div>
-            <label className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Subject</label>
-            <select className="checkout-input">
+            <label htmlFor="subject" className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Subject</label>
+            <select id="subject" name="subject" className="checkout-input">
               <option>Order Inquiry</option>
               <option>Strain Selection Help</option>
               <option>Shipping Question</option>
@@ -51,8 +51,8 @@ export default function ContactPage() {
             </select>
           </div>
           <div>
-            <label className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Message</label>
-            <textarea className="checkout-input" rows={5} placeholder="How can we help?" />
+            <label htmlFor="message" className="text-[12px] uppercase tracking-[1px] text-[#192026]/50 font-medium mb-1.5 block">Message</label>
+            <textarea id="message" name="message" className="checkout-input" rows={5} placeholder="How can we help?" />
           </div>
           <button type="submit" className="btn-main w-full">Send Message</button>
         </form>

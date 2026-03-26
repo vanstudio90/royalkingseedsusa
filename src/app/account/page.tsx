@@ -132,22 +132,22 @@ export default function AccountPage() {
         <form onSubmit={handleAuth} className="bg-white rounded-2xl p-6 border border-[#275C53]/5 space-y-4">
           {authMode === 'register' && (
             <div>
-              <label className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Full Name</label>
-              <input type="text" value={authForm.name} onChange={e => setAuthForm(p => ({ ...p, name: e.target.value }))} placeholder="Your name" className="checkout-input" required />
+              <label htmlFor="auth_name" className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Full Name</label>
+              <input type="text" id="auth_name" name="name" value={authForm.name} onChange={e => setAuthForm(p => ({ ...p, name: e.target.value }))} placeholder="Your name" className="checkout-input" required />
             </div>
           )}
           <div>
-            <label className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Email</label>
-            <input type="email" value={authForm.email} onChange={e => setAuthForm(p => ({ ...p, email: e.target.value }))} placeholder="you@email.com" className="checkout-input" required />
+            <label htmlFor="auth_email" className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Email</label>
+            <input type="email" id="auth_email" name="email" value={authForm.email} onChange={e => setAuthForm(p => ({ ...p, email: e.target.value }))} placeholder="you@email.com" className="checkout-input" required />
           </div>
           <div>
-            <label className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Password</label>
-            <input type="password" value={authForm.password} onChange={e => setAuthForm(p => ({ ...p, password: e.target.value }))} placeholder="Password" className="checkout-input" required minLength={6} />
+            <label htmlFor="auth_password" className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Password</label>
+            <input type="password" id="auth_password" name="password" value={authForm.password} onChange={e => setAuthForm(p => ({ ...p, password: e.target.value }))} placeholder="Password" className="checkout-input" required minLength={6} />
           </div>
           {authMode === 'register' && (
             <div>
-              <label className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Phone (optional)</label>
-              <input type="tel" value={authForm.phone} onChange={e => setAuthForm(p => ({ ...p, phone: e.target.value }))} placeholder="Phone number" className="checkout-input" />
+              <label htmlFor="auth_phone" className="text-[12px] font-semibold text-[#192026]/50 uppercase tracking-[0.5px] block mb-1">Phone (optional)</label>
+              <input type="tel" id="auth_phone" name="phone" value={authForm.phone} onChange={e => setAuthForm(p => ({ ...p, phone: e.target.value }))} placeholder="Phone number" className="checkout-input" />
             </div>
           )}
           <button type="submit" className="w-full py-3.5 bg-[#275C53] text-white rounded-xl text-[13px] font-bold uppercase tracking-[1px] hover:bg-[#1e4a42] transition-colors cursor-pointer">
@@ -334,26 +334,26 @@ export default function AccountPage() {
               <div className="bg-white rounded-2xl border border-[#275C53]/5 p-6 space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Full Name</label>
-                    <input type="text" value={profileForm.name} onChange={e => setProfileForm(p => ({ ...p, name: e.target.value }))} className="checkout-input" />
+                    <label htmlFor="profile_name" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Full Name</label>
+                    <input type="text" id="profile_name" name="name" value={profileForm.name} onChange={e => setProfileForm(p => ({ ...p, name: e.target.value }))} className="checkout-input" />
                   </div>
                   <div>
-                    <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Phone</label>
-                    <input type="tel" value={profileForm.phone} onChange={e => setProfileForm(p => ({ ...p, phone: e.target.value }))} className="checkout-input" />
+                    <label htmlFor="profile_phone" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Phone</label>
+                    <input type="tel" id="profile_phone" name="phone" value={profileForm.phone} onChange={e => setProfileForm(p => ({ ...p, phone: e.target.value }))} className="checkout-input" />
                   </div>
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Email</label>
-                  <input type="email" value={user?.email || ''} disabled className="checkout-input !bg-[#F5F0EA] !text-[#192026]/40" />
+                  <label htmlFor="profile_email" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Email</label>
+                  <input type="email" id="profile_email" name="email" value={user?.email || ''} disabled className="checkout-input !bg-[#F5F0EA] !text-[#192026]/40" />
                 </div>
                 <div>
-                  <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Street Address</label>
-                  <input type="text" value={profileForm.street} onChange={e => setProfileForm(p => ({ ...p, street: e.target.value }))} className="checkout-input" placeholder="123 Main St" />
+                  <label htmlFor="profile_street" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Street Address</label>
+                  <input type="text" id="profile_street" name="street" value={profileForm.street} onChange={e => setProfileForm(p => ({ ...p, street: e.target.value }))} className="checkout-input" placeholder="123 Main St" />
                 </div>
                 <div className="grid grid-cols-3 gap-4">
                   <div>
-                    <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">City</label>
-                    <input type="text" value={profileForm.city} onChange={e => setProfileForm(p => ({ ...p, city: e.target.value }))} className="checkout-input" />
+                    <label htmlFor="profile_city" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">City</label>
+                    <input type="text" id="profile_city" name="city" value={profileForm.city} onChange={e => setProfileForm(p => ({ ...p, city: e.target.value }))} className="checkout-input" />
                   </div>
                   <div>
                     <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">State</label>

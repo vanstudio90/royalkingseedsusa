@@ -25,7 +25,10 @@ export async function GET(req: NextRequest) {
   }
 
   if (search) {
-    query = query.ilike('name', `%${search}%`);
+    const safeSearch = search.replace(/[%_\\'"()]/g, '').slice(0, 100);
+    if (safeSearch) {
+      query = query.ilike('name', `%${safeSearch}%`);
+    }
   }
 
   const { data, error, count } = await query;

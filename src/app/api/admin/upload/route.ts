@@ -14,8 +14,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'No file provided' }, { status: 400 });
   }
 
-  const ext = file.name.split('.').pop();
-  const fileName = `${slug}-${Date.now()}.${ext}`;
+  // Validate file type and size
+  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/avif', 'image/gif'];
+  const MAX_SIZE = 10 * 1024 * 1024; // 10MB
+  if (!ALLOWED_TYPES.includes(file.type)) {
+    return NextResponse.json({ error: 'Invalid file type. Allowed: JPEG, PNG, WebP, AVIF, GIF' }, { status: 400 });
+  }
+  if (file.size > MAX_SIZE) {
+    return NextResponse.json({ error: 'File too large. Maximum 10MB' }, { status: 400 });
+  }
+  // Sanitize slug to prevent path traversal
+  const safeSlug = (slug || 'product').replace(/[^a-z0-9-]/gi, '').slice(0, 100);
+
+  const ext = file.name.split('.').pop()?.replace(/[^a-z0-9]/gi, '') || 'jpg';
+  const fileName = `${safeSlug}-${Date.now()}.${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
 
   const { error } = await supabaseAdmin.storage

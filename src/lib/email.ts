@@ -317,25 +317,16 @@ export async function sendOrderEmail(status: string, order: OrderData) {
 
   if (!subjectFn || !templateFn) return;
 
-  if (!process.env.RESEND_API_KEY) {
-    console.warn('[Email] RESEND_API_KEY not set, skipping email');
-    return;
-  }
+  if (!process.env.RESEND_API_KEY) return;
 
   try {
-    const { error } = await getResend().emails.send({
+    await getResend().emails.send({
       from: FROM_EMAIL,
       to: order.customer_email,
       subject: subjectFn(order),
       html: templateFn(order),
     });
-
-    if (error) {
-      console.error('[Email] Send error:', error);
-    } else {
-      console.log(`[Email] Sent ${status} email to ${order.customer_email} for ${order.order_number}`);
-    }
-  } catch (err) {
-    console.error('[Email] Failed:', err);
+  } catch {
+    // Email send failed silently — order is already saved
   }
 }

@@ -32,14 +32,18 @@ export async function GET(req: NextRequest) {
   }
 
   if (search) {
-    query = query.or(`order_number.ilike.%${search}%,customer_name.ilike.%${search}%`);
+    // Sanitize search input — strip special chars that could affect Supabase query syntax
+    const safeSearch = search.replace(/[%_\\'"()]/g, '').slice(0, 100);
+    if (safeSearch) {
+      query = query.or(`order_number.ilike.%${safeSearch}%,customer_name.ilike.%${safeSearch}%`);
+    }
   }
 
-  if (dateFrom) {
+  if (dateFrom && /^\d{4}-\d{2}-\d{2}$/.test(dateFrom)) {
     query = query.gte('created_at', `${dateFrom}T00:00:00`);
   }
 
-  if (dateTo) {
+  if (dateTo && /^\d{4}-\d{2}-\d{2}$/.test(dateTo)) {
     query = query.lte('created_at', `${dateTo}T23:59:59`);
   }
 
