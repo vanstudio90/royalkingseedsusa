@@ -199,26 +199,30 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0
       `}>
         {/* Desktop header */}
-        <div className="hidden lg:flex items-center p-4 border-b border-white/5">
-          <Link href="/futu" className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 bg-[#275C53] rounded-xl flex items-center justify-center shrink-0">
-              <span className="text-[#D7B65D] font-bold text-xs">RK</span>
-            </div>
-            {!desktopCollapsed && (
+        <div className={`hidden lg:flex items-center border-b border-white/5 ${desktopCollapsed ? 'flex-col gap-2 py-3 px-2' : 'p-4'}`}>
+          {!desktopCollapsed && (
+            <Link href="/futu" className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="w-9 h-9 bg-[#275C53] rounded-xl flex items-center justify-center shrink-0">
+                <span className="text-[#D7B65D] font-bold text-xs">RK</span>
+              </div>
               <div className="min-w-0">
                 <div className="text-white text-sm font-bold truncate">Royal King Seeds</div>
                 <div className="text-white/25 text-[10px] uppercase tracking-[1px]">Admin Panel</div>
               </div>
-            )}
-          </Link>
+            </Link>
+          )}
           <button
             onClick={toggleDesktopSidebar}
-            className={`w-7 h-7 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer shrink-0 ${desktopCollapsed ? 'mx-auto mt-1' : 'ml-auto'}`}
+            className={`flex items-center justify-center rounded-lg transition-colors cursor-pointer shrink-0 ${
+              desktopCollapsed
+                ? 'w-10 h-10 bg-[#275C53] text-white/70 hover:text-white hover:bg-[#275C53]/80'
+                : 'w-7 h-7 text-white/30 hover:text-white hover:bg-white/10 ml-auto'
+            }`}
             title={desktopCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg width={desktopCollapsed ? 20 : 16} height={desktopCollapsed ? 20 : 16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               {desktopCollapsed ? (
-                <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>
+                <><polyline points="13 7 18 12 13 17" /><line x1="18" y1="12" x2="6" y2="12" /></>
               ) : (
                 <><polyline points="11 17 6 12 11 7" /><line x1="6" y1="12" x2="18" y2="12" /></>
               )}
