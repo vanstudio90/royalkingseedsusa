@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { adminFetch } from '@/lib/admin-fetch';
 
 interface Order {
@@ -280,9 +281,9 @@ export default function AdminOrdersPage() {
                   </td>
                   <td className="px-4 py-3 text-right">
                     <div className="flex items-center gap-2 justify-end">
-                      <button onClick={() => router.push(`/futu/orders/${o.id}`)} className="px-3 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/50 hover:text-[#275C53] transition-colors cursor-pointer">
+                      <Link href={`/futu/orders/${o.id}`} className="px-3 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/50 hover:text-[#275C53] transition-colors cursor-pointer">
                         View
-                      </button>
+                      </Link>
                       {isTrashView ? (
                         <button
                           onClick={() => restoreOrder(o.id)}
