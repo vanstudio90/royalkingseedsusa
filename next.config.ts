@@ -19,6 +19,13 @@ const nextConfig: NextConfig = {
     formats: ['image/webp', 'image/avif'],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
+  async rewrites() {
+    return [
+      // .well-known discovery for AI engines
+      { source: '/.well-known/llms.txt', destination: '/llms.txt' },
+      { source: '/.well-known/llms-full.txt', destination: '/llms-full.txt' },
+    ];
+  },
   async redirects() {
     return [
       // Old WordPress -cannabis-seeds slugs → correct -feminized slugs
@@ -33,14 +40,16 @@ const nextConfig: NextConfig = {
       {
         source: "/(.*)",
         headers: [
-          {
-            key: "X-Content-Language",
-            value: "en-US",
-          },
-          {
-            key: "X-Robots-Tag",
-            value: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
-          },
+          // Language & indexing
+          { key: "X-Content-Language", value: "en-US" },
+          { key: "X-Robots-Tag", value: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+          // Security headers (crawler-safe — no restrictive CSP that blocks bots)
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "X-XSS-Protection", value: "1; mode=block" },
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
         ],
       },
       {
@@ -48,6 +57,7 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "Cache-Control", value: "public, max-age=86400" },
           { key: "Content-Type", value: "text/plain; charset=utf-8" },
+          { key: "X-Robots-Tag", value: "noindex" },
         ],
       },
       {
@@ -55,6 +65,7 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "Cache-Control", value: "public, max-age=86400" },
           { key: "Content-Type", value: "text/plain; charset=utf-8" },
+          { key: "X-Robots-Tag", value: "noindex" },
         ],
       },
     ];
