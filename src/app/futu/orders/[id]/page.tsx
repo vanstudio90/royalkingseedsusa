@@ -12,7 +12,7 @@ interface StatusChange {
 
 interface Order {
   id: number; order_number: string; customer_name: string; customer_email: string;
-  shipping_address: { street?: string; city?: string; province?: string; postal?: string; country?: string };
+  shipping_address: { street?: string; city?: string; province?: string; state?: string; postal?: string; zip?: string; country?: string };
   items: { name: string; slug: string; qty: number; price: number; variant?: string }[];
   subtotal: number; shipping_cost: number; tax: number; total: number; discount: number;
   status: string; payment_status: string; payment_method: string;
@@ -283,9 +283,8 @@ export default function OrderDetailPage() {
             {addr ? (
               <div className="text-[13px] text-[#192026]/60 space-y-0.5">
                 <p>{addr.street}</p>
-                <p>{addr.city}, {addr.province}</p>
-                <p>{addr.postal}</p>
-                <p>{addr.country || 'Canada'}</p>
+                <p>{addr.city}, {addr.state || addr.province} {addr.zip || addr.postal}</p>
+                <p>{addr.country || 'US'}</p>
               </div>
             ) : <p className="text-[13px] text-[#192026]/30">No address</p>}
           </div>
@@ -309,8 +308,8 @@ export default function OrderDetailPage() {
             <img src="/icons/icon-192x192.png" alt="Royal King Seeds" style={{ width: 48, height: 48, borderRadius: 8 }} />
             <div>
               <p className="store-name" style={{ fontSize: 20, fontWeight: 'bold', color: '#275C53', margin: 0 }}>Royal King Seeds</p>
-              <p className="store-address" style={{ fontSize: 12, color: '#999', margin: '2px 0 0' }}>royalkingseeds.ca</p>
-              <p className="store-address" style={{ fontSize: 12, color: '#999', margin: '2px 0 0' }}>Canada</p>
+              <p className="store-address" style={{ fontSize: 12, color: '#999', margin: '2px 0 0' }}>royalkingseeds.us</p>
+              <p className="store-address" style={{ fontSize: 12, color: '#999', margin: '2px 0 0' }}>United States</p>
             </div>
           </div>
           <div className="invoice-title" style={{ textAlign: 'right' }}>
@@ -331,8 +330,8 @@ export default function OrderDetailPage() {
             {addr && (
               <>
                 <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.street}</p>
-                <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.city}, {addr.province} {addr.postal}</p>
-                <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.country || 'Canada'}</p>
+                <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.city}, {addr.state || addr.province} {addr.zip || addr.postal}</p>
+                <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.country || 'US'}</p>
               </>
             )}
           </div>
@@ -352,7 +351,7 @@ export default function OrderDetailPage() {
         </div>
 
         <div className="footer" style={{ marginTop: 40, paddingTop: 20, borderTop: '1px solid #eee', textAlign: 'center', color: '#999', fontSize: 12 }}>
-          <p>Thank you for your order! | royalkingseeds.ca</p>
+          <p>Thank you for your order! | royalkingseeds.us</p>
         </div>
       </div>
 
@@ -368,8 +367,8 @@ export default function OrderDetailPage() {
           <>
             <p style={{ margin: '2px 0', fontSize: 13, fontWeight: 600 }}>{order.customer_name}</p>
             <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.street}</p>
-            <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.city}, {addr.province} {addr.postal}</p>
-            <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.country || 'Canada'}</p>
+            <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.city}, {addr.state || addr.province} {addr.zip || addr.postal}</p>
+            <p style={{ margin: '2px 0', fontSize: 13 }}>{addr.country || 'US'}</p>
           </>
         ) : <p style={{ fontSize: 13, color: '#999' }}>No address on file</p>}
 
@@ -381,7 +380,7 @@ export default function OrderDetailPage() {
         </table>
 
         <div style={{ marginTop: 30, paddingTop: 20, borderTop: '1px solid #eee', fontSize: 12, color: '#999' }}>
-          <p>Royal King Seeds | royalkingseeds.ca</p>
+          <p>Royal King Seeds | royalkingseeds.us</p>
         </div>
       </div>
     </div>
