@@ -408,80 +408,98 @@ export function StrainFinderQuiz({ products }: { products: QuizProduct[] }) {
           </div>
         ) : (
           <>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
               {results.map((r, i) => {
                 const matchPct = Math.round((r.score / maxScore) * 100);
-                const displayPct = Math.max(matchPct, 60); // floor at 60% for display
+                const displayPct = Math.max(matchPct, 60);
+                const typeLabel = {
+                  indica: { text: 'Indica', color: 'bg-purple-100 text-purple-700' },
+                  sativa: { text: 'Sativa', color: 'bg-amber-100 text-amber-700' },
+                  hybrid: { text: 'Hybrid', color: 'bg-emerald-100 text-emerald-700' },
+                  cbd: { text: 'CBD', color: 'bg-blue-100 text-blue-700' },
+                }[r.product.strainType];
                 return (
-                  <Link
-                    key={r.product.id}
-                    href={`/${r.product.slug}`}
-                    className="bg-white rounded-2xl border border-[#275C53]/5 overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all group"
-                  >
-                    {/* Match badge */}
-                    <div className="relative">
-                      <div className="aspect-square bg-[#F5F0EA] flex items-center justify-center overflow-hidden">
+                  <div key={r.product.id} className="product-card group flex flex-col h-full">
+                    <Link href={`/${r.product.slug}`}>
+                      {/* Image — matches ProductCard exactly */}
+                      <div className="product-image aspect-square bg-white flex items-center justify-center relative mb-3 sm:mb-5 overflow-hidden">
                         {r.product.imageUrl && !r.product.imageUrl.startsWith('/images/seeds/') ? (
                           <Image
                             src={r.product.imageUrl}
                             alt={r.product.name}
                             width={300}
                             height={300}
-                            loading={i < 6 ? 'eager' : 'lazy'}
-                            className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
+                            loading={i < 8 ? 'eager' : 'lazy'}
+                            className="w-full h-full object-contain p-1 sm:p-3 group-hover:scale-105 transition-transform duration-300"
                           />
                         ) : (
-                          <span className="text-6xl opacity-40">🌱</span>
+                          <span className="text-6xl opacity-40 group-hover:opacity-60 transition-opacity duration-300">🌱</span>
                         )}
-                      </div>
-                      <div className="absolute top-3 right-3 bg-[#275C53] text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                        {displayPct}% Match
-                      </div>
-                      {i === 0 && (
-                        <div className="absolute top-3 left-3 bg-[#D7B65D] text-[#1a3d36] text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-wide">
-                          Top Pick
+                        {/* Badges — same as ProductCard */}
+                        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                          <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${typeLabel.color}`}>
+                            {typeLabel.text}
+                          </span>
+                          {r.product.autoflower && (
+                            <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-100 text-cyan-700">Auto</span>
+                          )}
+                          {i === 0 && (
+                            <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#D7B65D] text-[#1a3d36] uppercase tracking-wide">Top Pick</span>
+                          )}
                         </div>
-                      )}
-                      <div className="absolute bottom-3 left-3 flex gap-1.5">
-                        <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${
-                          { indica: 'bg-purple-100 text-purple-700', sativa: 'bg-amber-100 text-amber-700', hybrid: 'bg-emerald-100 text-emerald-700', cbd: 'bg-blue-100 text-blue-700' }[r.product.strainType]
-                        }`}>
-                          {r.product.strainType.charAt(0).toUpperCase() + r.product.strainType.slice(1)}
-                        </span>
-                        {r.product.autoflower && (
-                          <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-100 text-cyan-700">Auto</span>
-                        )}
+                        {/* Match badge — replaces THC badge position */}
+                        <div className="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#275C53] text-white">
+                          {displayPct}% Match
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="p-5">
-                      <h3 className="text-[#275C53] font-semibold text-sm mb-1 group-hover:text-[#D7B65D] transition-colors">
+                      {/* Title with gold underline hover — matches ProductCard */}
+                      <h3 className="title-underline font-normal text-[#275C53] text-sm sm:text-base leading-snug">
                         {r.product.name}
                       </h3>
-                      <div className="flex items-center gap-3 text-[12px] text-[#192026]/60 mb-3">
-                        <span>{r.product.thcContent.replace('%%', '%')} THC</span>
-                        <span className="text-[#275C53]/20">|</span>
-                        <span>{r.product.indicaPercent}% Indica / {r.product.sativaPercent}% Sativa</span>
-                      </div>
+                    </Link>
 
-                      {/* Why it matches */}
-                      <div className="space-y-1 mb-4">
-                        {r.reasons.map((reason) => (
-                          <div key={reason} className="flex items-start gap-1.5">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="2" className="shrink-0 mt-0.5 opacity-60"><polyline points="20 6 9 17 4 12"/></svg>
-                            <span className="text-[12px] text-[#192026]/70">{reason}</span>
+                    {/* Middle content */}
+                    <div className="flex-grow">
+                      {/* Why it matches — replaces short description */}
+                      <div className="hidden sm:block mt-2">
+                        {r.reasons.slice(0, 2).map((reason) => (
+                          <div key={reason} className="flex items-start gap-1.5 mb-0.5">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="2.5" className="shrink-0 mt-0.5 opacity-60"><polyline points="20 6 9 17 4 12"/></svg>
+                            <span className="text-[12px] text-[#192026]/70 leading-relaxed">{reason}</span>
                           </div>
                         ))}
                       </div>
 
-                      <div className="flex items-center justify-between">
-                        <span className="text-[#275C53] font-semibold text-sm">From ${r.product.price.toFixed(2)}</span>
-                        <span className="text-[11px] text-[#D7B65D] font-medium group-hover:translate-x-0.5 transition-transform">
-                          View Strain →
+                      {/* Effects */}
+                      {r.product.effects.length > 0 && (
+                        <div className="flex flex-wrap justify-center gap-1 mt-2 sm:mt-3">
+                          {r.product.effects.slice(0, 3).map((effect) => (
+                            <span key={effect} className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-[#275C53]/15 text-[#275C53] font-medium">
+                              {effect}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Price — matches ProductCard */}
+                    <div className="mt-auto pt-3 sm:pt-4 border-t border-[#F5F0EA]">
+                      <div className="text-center mb-2">
+                        <span className="text-lg sm:text-xl font-semibold text-[#275C53]">
+                          <span className="text-[10px] sm:text-[11px] text-[#192026]/70 font-normal">From </span>
+                          ${r.product.price.toFixed(2)}
+                          <span className="text-[10px] sm:text-[11px] text-[#192026]/70 ml-1 font-normal">USD</span>
                         </span>
                       </div>
+                      <Link
+                        href={`/${r.product.slug}`}
+                        className="block w-full py-2 sm:py-2.5 bg-[#275C53] hover:bg-[#1e4a42] text-white text-[10px] sm:text-[11px] uppercase tracking-[1px] font-medium rounded-lg transition-colors duration-300 text-center"
+                      >
+                        View Strain
+                      </Link>
                     </div>
-                  </Link>
+                  </div>
                 );
               })}
             </div>
