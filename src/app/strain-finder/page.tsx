@@ -4,13 +4,13 @@ import { getProducts } from '@/lib/products/data';
 import { StrainFinderQuiz } from './StrainFinderQuiz';
 
 export const metadata: Metadata = {
-  title: 'Cannabis Strain Finder — Find the Best Weed Strain for You | Royal King Seeds',
-  description: 'Use our cannabis strain finder quiz to discover the best marijuana strains for your desired effects, growing experience, climate, and flavor preferences. Find your perfect strain in under 60 seconds.',
-  keywords: ['cannabis strain finder', 'find the best cannabis strain', 'weed strain selector', 'cannabis strain quiz', 'what strain should I grow', 'best marijuana strains for beginners', 'strain recommendation tool'],
+  title: 'Cannabis Strain Finder Tool — Find the Best Weed Strain for Your Needs | Royal King Seeds',
+  description: 'Use our free cannabis strain finder tool to discover the best weed strains for your needs. This marijuana strain selector quiz matches you with the right cannabis seeds based on effects, THC level, grow difficulty, and flavor in under 60 seconds.',
+  keywords: ['cannabis strain finder', 'cannabis strain finder tool', 'weed strain finder', 'find the best cannabis strain', 'marijuana strain selector', 'weed strain selector', 'cannabis strain quiz', 'what strain should I grow', 'best marijuana strains for beginners', 'strain recommendation tool'],
   alternates: { canonical: 'https://royalkingseeds.us/strain-finder' },
   openGraph: {
-    title: 'Cannabis Strain Finder — Find the Best Weed Strain for You',
-    description: 'Use our cannabis strain finder quiz to discover the best marijuana strains based on effects, experience level, climate, and flavor. Personalized recommendations in 60 seconds.',
+    title: 'Cannabis Strain Finder Tool — Find the Best Weed Strain for Your Needs',
+    description: 'Free cannabis strain finder tool — discover the best weed strains based on effects, experience level, climate, and flavor. Personalized marijuana strain recommendations in 60 seconds.',
     url: 'https://royalkingseeds.us/strain-finder',
     siteName: 'Royal King Seeds',
     type: 'website',
@@ -20,35 +20,39 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: 'What is the best cannabis strain for beginners?',
-    a: 'The best beginner strains are forgiving, mold-resistant, and easy to grow. Autoflowering varieties like Northern Lights Auto, Blue Dream Auto, and White Widow Auto are excellent choices because they flower automatically, finish quickly (8–10 weeks), and don\'t require light schedule changes. Our strain finder quiz factors in your experience level to recommend beginner-friendly genetics.',
+    a: 'The best cannabis strains for beginners are easy-to-grow weed strains like Northern Lights, Blue Dream, and White Widow. These beginner-friendly cannabis seeds are resilient, require minimal maintenance, and produce reliable yields even for first-time growers. Autoflowering varieties are especially good for beginners because they flower automatically without light schedule changes. Use our cannabis strain finder tool and select "Beginner" to see the top beginner cannabis seeds ranked for you.',
   },
   {
     q: 'How do I choose the right weed strain?',
-    a: 'Start with what you want to feel — relaxed, energetic, creative, or sleepy. Then consider your growing environment (indoor vs outdoor), your experience level, and flavor preferences. Our cannabis strain finder automates this process by scoring over 1,200 strains against your answers and showing you the top matches with explanations for why each strain fits.',
+    a: 'To choose the right weed strain, start with how you want to feel — relaxed, energetic, creative, or sleepy. Then consider your growing environment (indoor vs outdoor), your skill level, and flavor preferences. Our cannabis strain finder tool automates this entire process by scoring over 1,200 cannabis strains against your answers and showing the top matches with clear explanations of why each marijuana strain fits your needs.',
   },
   {
     q: 'What cannabis strain gives the strongest high?',
-    a: 'High-THC strains like Gorilla Glue (30%+ THC), Bruce Banner, Girl Scout Cookies, and Godfather OG are among the most potent cannabis strains available. These are best suited for experienced users. If you\'re looking for strong effects, select "Strong" in the potency step of our strain finder quiz.',
+    a: 'The strongest cannabis strains are high-THC weed strains like Gorilla Glue (30%+ THC), Bruce Banner, Girl Scout Cookies, and Godfather OG. These potent marijuana strains are best suited for experienced users looking for intense effects. Use our weed strain finder and select "Strong" in the potency step to see the most powerful cannabis seeds ranked by match score.',
   },
   {
-    q: 'What\'s better: indica or sativa?',
-    a: 'Neither is objectively better — it depends on what you want. Indica strains tend to produce relaxing, body-heavy effects ideal for evening use and sleep. Sativa strains lean toward energizing, cerebral effects great for daytime creativity and focus. Hybrids offer a blend of both. Our quiz helps you find the right type based on your desired experience.',
+    q: 'What\'s better for growing: indica or sativa?',
+    a: 'Indica cannabis strains tend to be shorter, bushier plants ideal for indoor growing with relaxing body effects. Sativa weed strains grow taller and produce energizing cerebral effects suited for daytime use. Hybrid cannabis seeds offer the best of both worlds. Neither is objectively better — it depends on your goals. Our marijuana strain selector quiz helps you find the right type based on your desired experience and growing setup.',
   },
   {
-    q: 'What cannabis strain grows fastest?',
-    a: 'Autoflowering strains are the fastest, finishing in 8–10 weeks from seed to harvest regardless of light schedule. Fast-flowering photoperiod strains like Quick One, Speedy Chile, and Early Skunk can finish in 6–7 weeks of flowering. Use our strain finder and select "Cold / Short Season" under climate to see fast-finishing recommendations.',
+    q: 'What cannabis strain grows the fastest?',
+    a: 'The fastest-growing cannabis strains are autoflowering weed seeds, which finish in 8–10 weeks from seed to harvest regardless of light schedule. Fast-flowering photoperiod cannabis seeds can finish flowering in 6–7 weeks. Popular fast cannabis strains include White Widow Auto and Northern Lights Auto. Use our cannabis strain finder and select "Cold / Short Season" to see the fastest-finishing marijuana strains for your setup.',
   },
   {
-    q: 'Can I grow cannabis seeds indoors and outdoors?',
-    a: 'Yes — most cannabis strains can be grown both indoors and outdoors, though some perform better in specific environments. Autoflowers and compact indicas thrive indoors, while tall sativas and mold-resistant strains excel outdoors. Our strain finder quiz matches strains to your grow environment for optimal results.',
+    q: 'Can I grow cannabis seeds both indoors and outdoors?',
+    a: 'Yes — most cannabis strains can be grown both indoors and outdoors, though some weed strains perform better in specific environments. Autoflower cannabis seeds and compact indica strains thrive indoors, while tall sativas and mold-resistant marijuana strains excel outdoors. Our weed strain finder quiz matches cannabis seeds to your grow environment so you get strains that will thrive where you grow.',
   },
   {
-    q: 'What are the best cannabis strains for anxiety?',
-    a: 'Strains high in CBD or with balanced THC/CBD ratios are often recommended for anxiety, along with calming indica-dominant hybrids. Popular choices include Granddaddy Purple, ACDC, Harlequin, and Northern Lights. In our quiz, select "Relax / Chill" and "Mild" potency to see anxiety-friendly strain recommendations.',
+    q: 'What are the best cannabis strains for anxiety and relaxation?',
+    a: 'The best cannabis strains for anxiety are calming indica-dominant weed strains and CBD-rich cannabis seeds. Popular choices include Granddaddy Purple, Northern Lights, ACDC, and Harlequin. These marijuana strains produce relaxing effects without overwhelming potency. In our cannabis strain finder quiz, select "Relax / Chill" and "Mild" potency to see the best anxiety-friendly cannabis seeds ranked for you.',
   },
   {
-    q: 'How does the cannabis strain finder quiz work?',
-    a: 'Our strain finder uses a weighted scoring algorithm that evaluates over 1,200 cannabis strains across six dimensions: desired effects, potency level, growing environment, experience level, flavor preferences, and climate compatibility. Each strain receives a match score, and your top results are ranked by how closely they align with your specific answers — so you always see the most relevant recommendations first.',
+    q: 'How does the cannabis strain finder tool work?',
+    a: 'Our cannabis strain finder tool uses a weighted scoring algorithm that evaluates over 1,200 weed strains across six dimensions: desired effects, potency level, growing environment, experience level, flavor preferences, and climate compatibility. Each cannabis strain receives a match score based on your specific answers. Unlike simple filters, our marijuana strain selector never returns zero results — your top cannabis seed recommendations are always ranked from best match to good match.',
+  },
+  {
+    q: 'What cannabis strain produces the highest yield?',
+    a: 'The highest-yielding cannabis strains include Big Bud, Critical Mass, and Blue Dream — all known for heavy harvests of 500–600g/m\u00B2 indoors and 700–1,000g+ per plant outdoors. For maximum yield, choose feminized cannabis seeds and consider training techniques like LST or SCROG. Use our weed strain finder to find high-yield marijuana strains matched to your skill level and growing environment.',
   },
 ];
 
@@ -91,8 +95,8 @@ export default async function StrainFinderPage() {
   const toolSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'Cannabis Strain Finder Quiz',
-    description: 'Interactive cannabis strain recommendation tool that matches users with ideal marijuana strains based on desired effects, growing experience, climate, and flavor preferences.',
+    name: 'Cannabis Strain Finder Tool',
+    description: 'Free cannabis strain finder tool and weed strain selector quiz that matches users with the best marijuana strains based on desired effects, THC level, growing experience, climate, and flavor preferences.',
     url: 'https://royalkingseeds.us/strain-finder',
     applicationCategory: 'UtilityApplication',
     operatingSystem: 'All',
@@ -122,15 +126,18 @@ export default async function StrainFinderPage() {
       {/* ── HERO ── */}
       <div className="bg-[#275C53] text-white">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-16 text-center">
-          <p className="text-[#D7B65D] text-xs uppercase tracking-[2px] font-semibold mb-3">Cannabis Strain Finder</p>
+          <p className="text-[#D7B65D] text-xs uppercase tracking-[2px] font-semibold mb-3">Cannabis Strain Finder Tool</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4" style={hStyle}>
-            Cannabis Strain Finder — Find the Best Weed Strain for You
+            Cannabis Strain Finder Tool — Find the Best Weed Strain for Your Needs
           </h1>
-          <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-4">
-            Use our cannabis strain finder to quickly discover the best weed seeds based on your desired effects, THC level, growing environment, and flavor preferences. Whether you&apos;re looking for relaxing indica strains, energizing sativas, or beginner-friendly cannabis seeds, this marijuana strain selector matches you with the right genetics in seconds.
+          <p className="text-white/90 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-3">
+            Looking for the right cannabis strain? Our weed strain finder helps you choose the best cannabis seeds based on effects, potency, and growing conditions — in under 60 seconds.
           </p>
-          <p className="text-white/60 max-w-2xl mx-auto text-sm leading-relaxed">
-            Not sure what strain you should grow? Our weed strain finder quiz takes under 60 seconds — just answer 6 simple questions and get personalized recommendations from over 1,200 strains, ranked by how closely they match what you&apos;re looking for.
+          <p className="text-white/75 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-4">
+            Use our cannabis strain finder tool to quickly discover the best weed strains for your needs. This marijuana strain selector helps you find the right cannabis seeds based on desired effects, THC level, growing environment, and flavor preferences. Whether you&apos;re looking for relaxing indica strains, energizing sativas, or beginner-friendly <Link href="/product-category/autoflowering-seeds" className="text-[#D7B65D] hover:text-white underline underline-offset-2">autoflower seeds</Link>, our weed strain quiz matches you with the right genetics from over 1,200 strains.
+          </p>
+          <p className="text-white/55 max-w-2xl mx-auto text-sm leading-relaxed">
+            Not sure what strain you should grow? Answer 6 simple questions and get personalized cannabis strain recommendations ranked by how closely they match what you&apos;re looking for. Browse our full <Link href="/product-category/shop-all-cannabis-seeds" className="text-[#D7B65D] hover:text-white underline underline-offset-2">cannabis seed collection</Link> or let the quiz do the work.
           </p>
         </div>
       </div>
@@ -149,7 +156,7 @@ export default async function StrainFinderPage() {
               Choosing the right cannabis strain can feel overwhelming when you&apos;re staring at a catalog of over a thousand varieties. Whether you&apos;re browsing <Link href="/product-category/feminized-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">feminized seeds</Link>, <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">autoflower seeds</Link>, or <Link href="/product-category/high-tch-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">high-THC strains</Link> — strain names alone don&apos;t tell you much. Most growers, especially first-timers, don&apos;t think in terms of genetics or terpene profiles. They think in terms of how they want to feel, what they can realistically grow, and what flavors appeal to them.
             </p>
             <p className={pClass}>
-              That&apos;s exactly why we built this cannabis strain finder tool. Our weed strain finder takes the guesswork out of choosing seeds — whether you use the quiz above or prefer to browse manually, understanding a few key factors will help you find the best cannabis strain for your specific situation.
+              That&apos;s exactly why we built this cannabis strain finder tool. Our weed strain finder takes the guesswork out of choosing weed strains — whether you use the marijuana strain selector quiz above or prefer to browse our <Link href="/product-category/shop-all-cannabis-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">full cannabis seed collection</Link> manually, understanding a few key factors will help you find the best cannabis strain for your specific situation.
             </p>
 
             <h3 className={h3Class} style={hStyle}>Indica vs. Sativa vs. Hybrid</h3>
@@ -313,8 +320,13 @@ export default async function StrainFinderPage() {
               Short on time or growing in a cold climate with a limited season? <Link href="/product-category/fast-flowering-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Fast-flowering strains</Link> and autoflowers finish weeks earlier than standard photoperiod genetics. Most autoflowers go from seed to harvest in just 8–10 weeks total. <Link href="/white-widow-auto-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">White Widow Auto</Link> is a popular fast-finisher with potent effects and excellent resin production. Our marijuana strain selector quiz includes a climate step — select &ldquo;Cold / Short Season&rdquo; to see fast-finishing strains matched to your setup.
             </p>
 
+            <h3 className={h3Class} style={hStyle}>Best Cannabis Strains for Yield</h3>
+            <p className={pClass}>
+              High-yield cannabis strains are the top priority for growers who want to maximize their harvest. <Link href="/big-bud-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Big Bud</Link> is the undisputed champion — expect 500–600g/m&sup2; indoors with minimal effort. <Link href="/critical-mass-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Critical Mass</Link> produces similarly heavy harvests and responds well to SOG and SCROG training techniques. <Link href="/blue-dream-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Blue Dream cannabis seeds</Link> consistently deliver impressive weight with a balanced hybrid experience. For outdoor growers, some high-yield weed strains can produce over 1,000g per plant in optimal conditions. Browse our <Link href="/product-category/shop-all-cannabis-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">full cannabis seed collection</Link> or use the marijuana strain selector above to find high-yield strains matched to your setup.
+            </p>
+
             {/* ── H2: Why Use Our Cannabis Strain Finder? ── */}
-            <h2 className={h2Class} style={hStyle}>Why Use Our Cannabis Strain Finder?</h2>
+            <h2 className={h2Class} style={hStyle}>Why Use Our Cannabis Strain Finder Tool?</h2>
             <p className={pClass}>
               With over 1,200 cannabis seed varieties in our catalog, browsing manually can take hours — and most customers end up overwhelmed, second-guessing their choice, or buying something that doesn&apos;t match what they actually want. Our cannabis strain finder tool solves this by doing the hard work for you.
             </p>
@@ -335,6 +347,22 @@ export default async function StrainFinderPage() {
             <p className={pClass}>
               Whether you&apos;re a first-time grower trying to find the best cannabis strain for your situation or an experienced cultivator exploring new genetics, our strain quiz gives you a shortcut to confident buying decisions. <a href="#top" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Try the cannabis strain finder now</a> — it&apos;s free and takes less than a minute.
             </p>
+
+            {/* ── H2: People Also Ask ── */}
+            <h2 className={h2Class} style={hStyle}>Common Questions About Choosing Cannabis Strains</h2>
+            <div className="grid sm:grid-cols-2 gap-4 mb-10">
+              {[
+                { q: 'What strain should I grow first?', a: 'Start with a beginner-friendly autoflower like Northern Lights Auto or White Widow Auto. These cannabis seeds are forgiving, fast-finishing, and produce reliable yields even on your first grow.' },
+                { q: 'What cannabis strain grows the fastest?', a: 'Autoflowering cannabis strains are the fastest — most finish seed-to-harvest in 8–10 weeks. For photoperiod weed strains, look for fast-flowering varieties that complete bloom in 6–7 weeks.' },
+                { q: 'What strain produces the highest yield?', a: 'High-yield cannabis strains like Big Bud, Critical Mass, and Blue Dream produce 500–600g/m\u00B2 indoors. Outdoor high-yield weed strains can exceed 1,000g per plant in optimal conditions.' },
+                { q: 'What strain is best for indoor growing?', a: 'Compact indica strains and autoflowering cannabis seeds are ideal for indoor growing. They stay short, finish fast, and produce dense buds under artificial lighting with manageable plant heights.' },
+              ].map((item) => (
+                <div key={item.q} className="bg-[#F5F0EA] rounded-2xl p-5 border border-[#275C53]/5">
+                  <h3 className="text-[#275C53] font-semibold text-sm mb-2">{item.q}</h3>
+                  <p className="text-[#192026]/70 text-[13px] leading-relaxed">{item.a}</p>
+                </div>
+              ))}
+            </div>
 
             {/* ── H2: FAQ ── */}
             <h2 className={h2Class} style={hStyle}>Cannabis Strain Finder FAQs</h2>
@@ -374,6 +402,13 @@ export default async function StrainFinderPage() {
 
           </div>
         </div>
+      </div>
+
+      {/* Sticky CTA — mobile */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 sm:hidden bg-[#275C53] border-t border-[#D7B65D]/30 px-4 py-3 safe-bottom">
+        <a href="#top" className="block w-full py-3 bg-[#D7B65D] text-[#1a3d36] text-sm font-semibold rounded-full text-center hover:bg-[#c9a84e] transition-colors">
+          Take the Strain Quiz
+        </a>
       </div>
     </div>
   );
