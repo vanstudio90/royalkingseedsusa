@@ -7,13 +7,15 @@ export async function GET(req: NextRequest) {
   const slugs = req.nextUrl.searchParams.get('slugs')?.split(',').slice(0, 50) || [];
   if (slugs.length === 0) return NextResponse.json({});
 
-  const result: Record<string, { imageUrl: string; specs: ReturnType<typeof generateStrainSpecs> } | null> = {};
+  const result: Record<string, { imageUrl: string; sku: string; seedOptions: any[]; specs: ReturnType<typeof generateStrainSpecs> } | null> = {};
 
   for (const slug of slugs) {
     const product = getProductBySlug(slug.trim());
     if (product) {
       result[slug.trim()] = {
         imageUrl: product.imageUrl || '',
+        sku: product.sku || '',
+        seedOptions: product.seedOptions || [],
         specs: generateStrainSpecs(product),
       };
     } else {

@@ -120,7 +120,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         effects: p.effects.slice(0, 3), categories: [],
         seedOptions: p.seedOptions.map((o: any) => ({ label: o.label, price: o.price })),
         price: p.price, feminized: p.feminized, autoflower: p.autoflower,
-        inStock: p.inStock, imageUrl: p.imageUrl, difficulty: '',
+        inStock: p.inStock, sku: p.sku || '', imageUrl: p.imageUrl, difficulty: '',
         description: '', shortDescription: '', bestUse: [],
       }))} activeCategory={slug} initialQuery={q} />
 
