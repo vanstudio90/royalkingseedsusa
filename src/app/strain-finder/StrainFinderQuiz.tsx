@@ -2,30 +2,14 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import type { Product } from '@/lib/products/types';
+import { ProductCard } from '@/components/product/ProductCard';
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
 
-interface QuizProduct {
-  id: string;
-  slug: string;
-  name: string;
-  strainType: 'indica' | 'sativa' | 'hybrid' | 'cbd';
-  thcContent: string;
-  indicaPercent: number;
-  sativaPercent: number;
-  effects: string[];
-  bestUse: string[];
-  difficulty: string;
-  feminized: boolean;
-  autoflower: boolean;
-  price: number;
-  imageUrl: string;
-  categories: string[];
-  seedOptions: any[];
-}
+type QuizProduct = Product;
 
 interface Answers {
   experience: string[];
@@ -412,93 +396,18 @@ export function StrainFinderQuiz({ products }: { products: QuizProduct[] }) {
               {results.map((r, i) => {
                 const matchPct = Math.round((r.score / maxScore) * 100);
                 const displayPct = Math.max(matchPct, 60);
-                const typeLabel = {
-                  indica: { text: 'Indica', color: 'bg-purple-100 text-purple-700' },
-                  sativa: { text: 'Sativa', color: 'bg-amber-100 text-amber-700' },
-                  hybrid: { text: 'Hybrid', color: 'bg-emerald-100 text-emerald-700' },
-                  cbd: { text: 'CBD', color: 'bg-blue-100 text-blue-700' },
-                }[r.product.strainType];
                 return (
-                  <div key={r.product.id} className="product-card group flex flex-col h-full">
-                    <Link href={`/${r.product.slug}`}>
-                      {/* Image — matches ProductCard exactly */}
-                      <div className="product-image aspect-square bg-white flex items-center justify-center relative mb-3 sm:mb-5 overflow-hidden">
-                        {r.product.imageUrl && !r.product.imageUrl.startsWith('/images/seeds/') ? (
-                          <Image
-                            src={r.product.imageUrl}
-                            alt={r.product.name}
-                            width={300}
-                            height={300}
-                            loading={i < 8 ? 'eager' : 'lazy'}
-                            className="w-full h-full object-contain p-1 sm:p-3 group-hover:scale-105 transition-transform duration-300"
-                          />
-                        ) : (
-                          <span className="text-6xl opacity-40 group-hover:opacity-60 transition-opacity duration-300">🌱</span>
-                        )}
-                        {/* Badges — same as ProductCard */}
-                        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                          <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${typeLabel.color}`}>
-                            {typeLabel.text}
-                          </span>
-                          {r.product.autoflower && (
-                            <span className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cyan-100 text-cyan-700">Auto</span>
-                          )}
-                          {i === 0 && (
-                            <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#D7B65D] text-[#1a3d36] uppercase tracking-wide">Top Pick</span>
-                          )}
-                        </div>
-                        {/* Match badge — replaces THC badge position */}
-                        <div className="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#275C53] text-white">
-                          {displayPct}% Match
-                        </div>
-                      </div>
-
-                      {/* Title with gold underline hover — matches ProductCard */}
-                      <h3 className="title-underline font-normal text-[#275C53] text-sm sm:text-base leading-snug">
-                        {r.product.name}
-                      </h3>
-                    </Link>
-
-                    {/* Middle content */}
-                    <div className="flex-grow">
-                      {/* Why it matches — replaces short description */}
-                      <div className="hidden sm:block mt-2">
-                        {r.reasons.slice(0, 2).map((reason) => (
-                          <div key={reason} className="flex items-start gap-1.5 mb-0.5">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="2.5" className="shrink-0 mt-0.5 opacity-60"><polyline points="20 6 9 17 4 12"/></svg>
-                            <span className="text-[12px] text-[#192026]/70 leading-relaxed">{reason}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Effects */}
-                      {r.product.effects.length > 0 && (
-                        <div className="flex flex-wrap justify-center gap-1 mt-2 sm:mt-3">
-                          {r.product.effects.slice(0, 3).map((effect) => (
-                            <span key={effect} className="text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 rounded-full bg-[#275C53]/15 text-[#275C53] font-medium">
-                              {effect}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                  <div key={r.product.id} className="relative">
+                    {/* Match badge overlay */}
+                    <div className="absolute top-3 right-3 z-10 text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#275C53] text-white shadow-sm">
+                      {displayPct}% Match
                     </div>
-
-                    {/* Price — matches ProductCard */}
-                    <div className="mt-auto pt-3 sm:pt-4 border-t border-[#F5F0EA]">
-                      <div className="text-center mb-2">
-                        <span className="text-lg sm:text-xl font-semibold text-[#275C53]">
-                          <span className="text-[10px] sm:text-[11px] text-[#192026]/70 font-normal">From </span>
-                          ${r.product.price.toFixed(2)}
-                          <span className="text-[10px] sm:text-[11px] text-[#192026]/70 ml-1 font-normal">USD</span>
-                        </span>
+                    {i === 0 && (
+                      <div className="absolute top-12 right-3 z-10 text-[9px] font-bold px-2.5 py-1 rounded-full bg-[#D7B65D] text-[#1a3d36] uppercase tracking-wide shadow-sm">
+                        Top Pick
                       </div>
-                      <Link
-                        href={`/${r.product.slug}`}
-                        className="block w-full py-2 sm:py-2.5 bg-[#275C53] hover:bg-[#1e4a42] text-white text-[10px] sm:text-[11px] uppercase tracking-[1px] font-medium rounded-lg transition-colors duration-300 text-center"
-                      >
-                        View Strain
-                      </Link>
-                    </div>
+                    )}
+                    <ProductCard product={r.product} />
                   </div>
                 );
               })}

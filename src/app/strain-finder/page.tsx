@@ -59,26 +59,7 @@ const faqs = [
 export default async function StrainFinderPage() {
   const allProducts = await getProducts();
 
-  const products = allProducts
-    .filter((p) => p.inStock)
-    .map((p) => ({
-      id: p.id,
-      slug: p.slug,
-      name: p.name,
-      strainType: p.strainType,
-      thcContent: p.thcContent,
-      indicaPercent: p.indicaPercent,
-      sativaPercent: p.sativaPercent,
-      effects: p.effects,
-      bestUse: p.bestUse,
-      difficulty: p.difficulty || 'intermediate',
-      feminized: p.feminized,
-      autoflower: p.autoflower,
-      price: p.price,
-      imageUrl: p.imageUrl,
-      categories: p.categories,
-      seedOptions: p.seedOptions,
-    }));
+  const products = allProducts.filter((p) => p.inStock);
 
   // FAQ Schema
   const faqSchema = {
