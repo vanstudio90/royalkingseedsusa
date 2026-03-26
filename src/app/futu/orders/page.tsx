@@ -223,28 +223,28 @@ export default function AdminOrdersPage() {
             </p>
           </div>
         ) : (
-          <table className="w-full">
+          <table className="w-full table-fixed">
             <thead>
               <tr className="border-b border-[#192026]/5">
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Order</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Customer</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Total</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Payment</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Status</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Date</th>
-                <th className="text-right px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Actions</th>
+                <th className="text-left px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[13%]">Order</th>
+                <th className="text-left px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[22%]">Customer</th>
+                <th className="text-left px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[9%]">Total</th>
+                <th className="text-left px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[10%]">Payment</th>
+                <th className="text-left px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[22%]">Status</th>
+                <th className="text-left px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[12%]">Date</th>
+                <th className="text-right px-3 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold w-[12%]">Actions</th>
               </tr>
             </thead>
             <tbody>
               {orders.map((o) => (
                 <tr key={o.id} className={`border-b border-[#192026]/5 hover:bg-[#f5f0ea]/50 transition-colors ${isTrashView ? 'opacity-60' : ''}`}>
-                  <td className="px-4 py-3 text-sm font-mono font-semibold"><Link href={`/futu/orders/${o.id}`} className="text-[#275C53] hover:underline">#{o.order_number}</Link></td>
-                  <td className="px-4 py-3">
-                    <Link href={`/futu/orders/${o.id}`} className="text-sm text-[#192026] hover:text-[#275C53] hover:underline">{o.customer_name}</Link>
-                    <div className="text-[11px] text-[#192026]/30">{o.customer_email}</div>
+                  <td className="px-3 py-3 text-sm font-mono font-semibold"><Link href={`/futu/orders/${o.id}`} className="text-[#275C53] hover:underline text-[12px]">#{o.order_number}</Link></td>
+                  <td className="px-3 py-3">
+                    <Link href={`/futu/orders/${o.id}`} className="text-sm text-[#192026] hover:text-[#275C53] hover:underline block truncate">{o.customer_name}</Link>
+                    <div className="text-[11px] text-[#192026]/30 truncate">{o.customer_email}</div>
                   </td>
-                  <td className="px-4 py-3 text-sm font-semibold text-[#192026]">${o.total}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-3 py-3 text-sm font-semibold text-[#192026]">${o.total}</td>
+                  <td className="px-3 py-3">
                     <span className={`text-[10px] uppercase tracking-[1px] font-semibold px-2 py-1 rounded-full ${
                       o.payment_status === 'paid' ? 'bg-emerald-50 text-emerald-600'
                       : (o.notes || '').includes('[DECLINED:') ? 'bg-red-100 text-red-700'
@@ -256,18 +256,18 @@ export default function AdminOrdersPage() {
                        : o.payment_status}
                     </span>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-3 py-3">
                     {isTrashView ? (
-                      <span className="text-[11px] uppercase tracking-[1px] font-semibold px-2.5 py-1.5 rounded-lg bg-gray-100 text-gray-400">Trashed</span>
+                      <span className="text-[10px] uppercase tracking-[0.5px] font-semibold px-2 py-1 rounded-lg bg-gray-100 text-gray-400">Trashed</span>
                     ) : (
                       <select
                         value={o.status}
                         onChange={(e) => updateStatus(o.id, e.target.value)}
-                        className={`text-[11px] uppercase tracking-[1px] font-semibold px-2.5 py-1.5 rounded-lg border-0 cursor-pointer ${statusColors[o.status] || 'bg-gray-50'}`}
+                        className={`text-[10px] uppercase tracking-[0.5px] font-semibold px-2 py-1.5 rounded-lg border-0 cursor-pointer w-full max-w-[180px] ${statusColors[o.status] || 'bg-gray-50'}`}
                       >
                         <option value="pending">Pending</option>
                         <option value="processing">Processing</option>
-                        <option value="manual_payment">Manual Payment Received</option>
+                        <option value="manual_payment">Manual Payment</option>
                         <option value="shipped">Shipped</option>
                         <option value="completed">Completed</option>
                         <option value="cancelled">Cancelled</option>
@@ -275,13 +275,13 @@ export default function AdminOrdersPage() {
                       </select>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-[12px] text-[#192026]/30">
+                  <td className="px-3 py-3 text-[12px] text-[#192026]/30">
                     <div>{new Date(o.created_at).toLocaleDateString('en-US')}</div>
                     <div className="text-[10px] text-[#192026]/20">{new Date(o.created_at).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true })}</div>
                   </td>
-                  <td className="px-4 py-3 text-right">
-                    <div className="flex items-center gap-2 justify-end">
-                      <Link href={`/futu/orders/${o.id}`} className="px-3 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/50 hover:text-[#275C53] transition-colors cursor-pointer">
+                  <td className="px-3 py-3 text-right">
+                    <div className="flex items-center gap-1.5 justify-end">
+                      <Link href={`/futu/orders/${o.id}`} className="px-2.5 py-1.5 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/50 hover:text-[#275C53] transition-colors cursor-pointer">
                         View
                       </Link>
                       {isTrashView ? (
