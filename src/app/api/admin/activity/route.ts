@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(req: NextRequest) {
+  const auth = await requireAdmin(req);
+  if (auth.error) return auth.error;
+
   const { searchParams } = new URL(req.url);
   const entityType = searchParams.get('entity_type');
 
@@ -22,6 +26,9 @@ export async function GET(req: NextRequest) {
 
 // Helper to log an activity (called from other routes)
 export async function POST(req: NextRequest) {
+  const auth = await requireAdmin(req);
+  if (auth.error) return auth.error;
+
   const body = await req.json();
 
   const { error } = await supabaseAdmin

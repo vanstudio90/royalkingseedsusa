@@ -1,7 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(req: NextRequest) {
+  const auth = await requireAdmin(req);
+  if (auth.error) return auth.error;
+
   const { searchParams } = new URL(req.url);
   const search = searchParams.get('search');
   const sortBy = searchParams.get('sortBy') || 'total_spent';
@@ -128,6 +132,9 @@ export async function GET(req: NextRequest) {
 
 // PATCH - update customer notes or tags
 export async function PATCH(req: NextRequest) {
+  const auth = await requireAdmin(req);
+  if (auth.error) return auth.error;
+
   const body = await req.json();
   const { id, notes, tags } = body;
 

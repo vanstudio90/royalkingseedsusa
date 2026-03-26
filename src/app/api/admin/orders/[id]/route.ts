@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
 import { sendOrderEmail } from '@/lib/email';
+import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const auth = await requireAdmin(req);
+  if (auth.error) return auth.error;
+
   const { id } = await params;
 
   const { data, error } = await supabaseAdmin
@@ -25,6 +29,9 @@ export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const auth = await requireAdmin(req);
+  if (auth.error) return auth.error;
+
   const { id } = await params;
   const body = await req.json();
 
