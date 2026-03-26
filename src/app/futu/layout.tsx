@@ -116,6 +116,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const pathname = usePathname();
   const [authenticated, setAuthenticated] = useState(false);
   const [checking, setChecking] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('admin_token');
@@ -124,6 +125,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
     setChecking(false);
   }, []);
+
+  // Close sidebar on route change (mobile)
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   if (checking) {
     return (
@@ -145,9 +151,45 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   return (
     <div className="min-h-screen bg-[#f0ece6] flex">
+      {/* Mobile top bar */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-[#192026] flex items-center gap-3 px-4 py-3 border-b border-white/10">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="w-9 h-9 flex items-center justify-center text-white/70 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+        >
+          {sidebarOpen ? (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          )}
+        </button>
+        <Link href="/futu" className="flex items-center gap-2">
+          <div className="w-7 h-7 bg-[#275C53] rounded-lg flex items-center justify-center">
+            <span className="text-[#D7B65D] font-bold text-[10px]">RK</span>
+          </div>
+          <span className="text-white text-sm font-bold">Royal King Seeds</span>
+        </Link>
+      </div>
+
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 z-40 bg-black/50"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-[240px] bg-[#192026] min-h-screen flex flex-col shrink-0">
-        <div className="p-5 border-b border-white/5">
+      <aside className={`
+        fixed lg:sticky top-0 left-0 z-50 w-[260px] bg-[#192026] h-screen flex flex-col shrink-0 transition-transform duration-200 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0
+      `}>
+        {/* Desktop header (hidden on mobile since we have the top bar) */}
+        <div className="hidden lg:block p-5 border-b border-white/5">
           <Link href="/futu" className="flex items-center gap-3">
             <div className="w-9 h-9 bg-[#275C53] rounded-xl flex items-center justify-center">
               <span className="text-[#D7B65D] font-bold text-xs">RK</span>
@@ -159,7 +201,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         </div>
 
-        <nav className="flex-1 py-4 px-3 space-y-1">
+        {/* Mobile: spacer for top bar */}
+        <div className="lg:hidden h-[52px] shrink-0" />
+
+        <nav className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
             const active = pathname === item.href || (item.href !== '/futu' && pathname.startsWith(item.href));
             return (
@@ -194,7 +239,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main Content */}
       <main className="flex-1 min-w-0">
-        <div className="p-6 sm:p-8">
+        <div className="pt-[60px] lg:pt-0 p-4 sm:p-6 lg:p-8">
           {children}
         </div>
       </main>
