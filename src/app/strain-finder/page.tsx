@@ -124,10 +124,13 @@ export default async function StrainFinderPage() {
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-16 text-center">
           <p className="text-[#D7B65D] text-xs uppercase tracking-[2px] font-semibold mb-3">Cannabis Strain Finder</p>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl mb-4" style={hStyle}>
-            Find Your Perfect Cannabis Strain
+            Cannabis Strain Finder — Find the Best Weed Strain for You
           </h1>
-          <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
-            Use our cannabis strain finder to discover the best weed strains based on your desired effects, growing experience, climate, and flavor preferences. Answer 6 quick questions and get personalized recommendations from over 1,200 strains — in under 60 seconds.
+          <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed mb-4">
+            Use our cannabis strain finder to quickly discover the best weed seeds based on your desired effects, THC level, growing environment, and flavor preferences. Whether you&apos;re looking for relaxing indica strains, energizing sativas, or beginner-friendly cannabis seeds, this marijuana strain selector matches you with the right genetics in seconds.
+          </p>
+          <p className="text-white/60 max-w-2xl mx-auto text-sm leading-relaxed">
+            Not sure what strain you should grow? Our weed strain finder quiz takes under 60 seconds — just answer 6 simple questions and get personalized recommendations from over 1,200 strains, ranked by how closely they match what you&apos;re looking for.
           </p>
         </div>
       </div>
@@ -143,10 +146,10 @@ export default async function StrainFinderPage() {
             {/* ── H2: How to Choose the Right Cannabis Strain ── */}
             <h2 className={h2Class} style={hStyle}>How to Choose the Right Cannabis Strain</h2>
             <p className={pClass}>
-              Choosing the right cannabis strain can feel overwhelming when you&apos;re staring at a catalog of over a thousand varieties. Strain names alone don&apos;t tell you much — and most growers, especially first-timers, don&apos;t think in terms of genetics or terpene profiles. They think in terms of how they want to feel, what they can realistically grow, and what flavors appeal to them.
+              Choosing the right cannabis strain can feel overwhelming when you&apos;re staring at a catalog of over a thousand varieties. Whether you&apos;re browsing <Link href="/product-category/feminized-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">feminized seeds</Link>, <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">autoflower seeds</Link>, or <Link href="/product-category/high-tch-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">high-THC strains</Link> — strain names alone don&apos;t tell you much. Most growers, especially first-timers, don&apos;t think in terms of genetics or terpene profiles. They think in terms of how they want to feel, what they can realistically grow, and what flavors appeal to them.
             </p>
             <p className={pClass}>
-              That&apos;s exactly why we built this cannabis strain finder. But whether you use the quiz above or prefer to browse manually, understanding a few key factors will help you make a confident decision.
+              That&apos;s exactly why we built this cannabis strain finder tool. Our weed strain finder takes the guesswork out of choosing seeds — whether you use the quiz above or prefer to browse manually, understanding a few key factors will help you find the best cannabis strain for your specific situation.
             </p>
 
             <h3 className={h3Class} style={hStyle}>Indica vs. Sativa vs. Hybrid</h3>
@@ -277,6 +280,60 @@ export default async function StrainFinderPage() {
 
             <p className={pClass}>
               Want something more specific? Our <Link href="/product-category/exotic-cannabis-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">exotic strains collection</Link> features rare genetics, while the <Link href="/product-category/purple-genetics-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">purple genetics collection</Link> showcases visually stunning cultivars. For quick harvests, check our <Link href="/product-category/fast-flowering-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">fast-flowering seeds</Link>. Or simply <a href="#top" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">take the cannabis strain finder quiz</a> above and let the algorithm do the work.
+            </p>
+
+            {/* ── H2: Best Cannabis Strains for Specific Needs ── */}
+            <h2 className={h2Class} style={hStyle}>Best Cannabis Strains for Specific Needs</h2>
+            <p className={pClass}>
+              Wondering what strain you should grow? Here are our top picks broken down by the most common goals growers have. Each recommendation links directly to seeds you can order today with discreet US shipping.
+            </p>
+
+            <h3 className={h3Class} style={hStyle}>Best Cannabis Strains for Beginners</h3>
+            <p className={pClass}>
+              The best marijuana strains for beginners are resilient, require minimal maintenance, and produce reliable yields even on a first grow. <Link href="/northern-lights-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Northern Lights</Link> is a classic — forgiving, compact, and mold-resistant with deeply relaxing indica effects. <Link href="/blue-dream-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Blue Dream</Link> is another go-to for new growers thanks to its balanced hybrid profile and generous yields. For the easiest possible experience, choose <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">autoflower seeds</Link> — they flower on their own schedule without needing light cycle changes.
+            </p>
+
+            <h3 className={h3Class} style={hStyle}>Best Strains for Sleep and Relaxation</h3>
+            <p className={pClass}>
+              Heavy indica strains with sedating effects are the top choice for sleep. <Link href="/granddaddy-purple-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Granddaddy Purple</Link> delivers grape-flavored relaxation that melts into deep sleep. <Link href="/northern-lights-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Northern Lights</Link> is equally effective for nighttime use. For a balanced option with CBD, explore our <Link href="/product-category/cbd-strains" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">CBD seed collection</Link> — ideal for relaxation without overwhelming potency. Use our weed strain finder above and select &ldquo;Sleep / Heavy Body&rdquo; to see all our best sleep strains ranked for you.
+            </p>
+
+            <h3 className={h3Class} style={hStyle}>Best Strains for Energy and Creativity</h3>
+            <p className={pClass}>
+              Sativa-dominant strains are the go-to for daytime energy, focus, and creative sessions. <Link href="/jack-herer-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Jack Herer</Link> is a legendary sativa with sharp cerebral effects and a spicy, earthy flavor. <Link href="/green-crack-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Green Crack</Link> delivers intense focus and motivation without heavy sedation. Browse our full <Link href="/product-category/energizing-cannabis-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">energizing cannabis seeds</Link> collection or take the cannabis strain quiz and select &ldquo;Energy / Daytime&rdquo; for personalized picks.
+            </p>
+
+            <h3 className={h3Class} style={hStyle}>Best High-Yield Cannabis Strains</h3>
+            <p className={pClass}>
+              If maximizing your harvest is the priority, look for strains known for heavy production. <Link href="/big-bud-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Big Bud</Link> lives up to its name with massive cola development — expect 500–600g/m&sup2; indoors. <Link href="/critical-mass-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Critical Mass</Link> is another heavy producer that responds well to training techniques. For outdoor growers chasing maximum weight, explore our <Link href="/product-category/best-strains-for-outdoor-growing" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">best outdoor strains</Link> — some varieties produce over 1,000g per plant under optimal conditions.
+            </p>
+
+            <h3 className={h3Class} style={hStyle}>Best Fast-Growing Cannabis Strains</h3>
+            <p className={pClass}>
+              Short on time or growing in a cold climate with a limited season? <Link href="/product-category/fast-flowering-seeds" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Fast-flowering strains</Link> and autoflowers finish weeks earlier than standard photoperiod genetics. Most autoflowers go from seed to harvest in just 8–10 weeks total. <Link href="/white-widow-auto-feminized" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">White Widow Auto</Link> is a popular fast-finisher with potent effects and excellent resin production. Our marijuana strain selector quiz includes a climate step — select &ldquo;Cold / Short Season&rdquo; to see fast-finishing strains matched to your setup.
+            </p>
+
+            {/* ── H2: Why Use Our Cannabis Strain Finder? ── */}
+            <h2 className={h2Class} style={hStyle}>Why Use Our Cannabis Strain Finder?</h2>
+            <p className={pClass}>
+              With over 1,200 cannabis seed varieties in our catalog, browsing manually can take hours — and most customers end up overwhelmed, second-guessing their choice, or buying something that doesn&apos;t match what they actually want. Our cannabis strain finder tool solves this by doing the hard work for you.
+            </p>
+            <ul className="space-y-3 mb-8">
+              {[
+                { bold: 'Personalized strain recommendations', text: ' — every result is scored against your specific answers, not a generic "best of" list. Your results are unique to you.' },
+                { bold: 'Beginner-friendly guidance', text: ' — you don\'t need to know THC percentages, terpene profiles, or strain genetics. Just tell us how you want to feel and we\'ll translate that into the right seeds.' },
+                { bold: 'Matches effects, flavor, and climate', text: ' — our weed strain finder evaluates six dimensions simultaneously: desired effects, potency, grow location, skill level, flavor preferences, and climate compatibility.' },
+                { bold: 'Saves hours of browsing', text: ' — instead of reading through hundreds of product descriptions, get your top matches in under 60 seconds with clear explanations of why each strain fits.' },
+                { bold: 'No "zero results" problem', text: ' — unlike rigid filters, our weighted scoring ensures you always see relevant recommendations, ranked from best match to good match.' },
+              ].map((item) => (
+                <li key={item.bold} className="flex items-start gap-3">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="2" className="shrink-0 mt-0.5 opacity-70"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span className="text-[#192026]/75 text-[15px] leading-[1.85]"><strong className="text-[#275C53]">{item.bold}</strong>{item.text}</span>
+                </li>
+              ))}
+            </ul>
+            <p className={pClass}>
+              Whether you&apos;re a first-time grower trying to find the best cannabis strain for your situation or an experienced cultivator exploring new genetics, our strain quiz gives you a shortcut to confident buying decisions. <a href="#top" className="text-[#275C53] font-medium hover:text-[#D7B65D] underline underline-offset-2">Try the cannabis strain finder now</a> — it&apos;s free and takes less than a minute.
             </p>
 
             {/* ── H2: FAQ ── */}

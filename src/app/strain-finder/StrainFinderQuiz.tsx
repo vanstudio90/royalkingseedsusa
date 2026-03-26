@@ -391,10 +391,10 @@ export function StrainFinderQuiz({ products }: { products: QuizProduct[] }) {
         <div className="text-center mb-10">
           <p className="text-[#D7B65D] text-xs uppercase tracking-[2px] font-semibold mb-2">Your Results</p>
           <h2 className="text-2xl sm:text-3xl text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
-            Your Recommended Strains
+            Best Cannabis Strains for You
           </h2>
-          <p className="text-[#192026]/70 text-sm mt-2 max-w-lg mx-auto">
-            Based on your answers, here are the strains we think you&apos;ll love — ranked by how closely they match your preferences.
+          <p className="text-[#192026]/70 text-sm mt-2 max-w-2xl mx-auto">
+            Our cannabis strain finder analyzed over 1,200 marijuana strains against your preferences and ranked the best matches below. Each strain is scored on effects, potency, grow difficulty, flavor, and climate compatibility — so you can buy with confidence knowing these are the right seeds for your goals.
           </p>
         </div>
 
