@@ -72,9 +72,9 @@ export async function PUT(
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  // Send tracking email whenever tracking number is saved
+  // Send emails BEFORE returning response (must await on Vercel serverless)
   if (hasTrackingUpdate && data && data.tracking_number) {
-    sendTrackingEmail({
+    await sendTrackingEmail({
       order_number: data.order_number,
       customer_email: data.customer_email,
       customer_name: data.customer_name,
@@ -82,9 +82,8 @@ export async function PUT(
     });
   }
 
-  // Send status email if status actually changed
   if (previousStatus !== null && data) {
-    sendOrderEmail(body.status, {
+    await sendOrderEmail(body.status, {
       order_number: data.order_number,
       customer_email: data.customer_email,
       customer_name: data.customer_name,
