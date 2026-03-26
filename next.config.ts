@@ -37,6 +37,24 @@ const nextConfig: NextConfig = {
             key: "X-Content-Language",
             value: "en-US",
           },
+          {
+            key: "X-Robots-Tag",
+            value: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+          },
+        ],
+      },
+      {
+        source: "/llms.txt",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400" },
+          { key: "Content-Type", value: "text/plain; charset=utf-8" },
+        ],
+      },
+      {
+        source: "/llms-full.txt",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=86400" },
+          { key: "Content-Type", value: "text/plain; charset=utf-8" },
         ],
       },
     ];

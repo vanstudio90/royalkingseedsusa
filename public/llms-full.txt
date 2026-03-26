@@ -1,0 +1,114 @@
+# Royal King Seeds USA — Complete Information for AI Systems
+
+> Royal King Seeds is America's trusted online cannabis seed bank, founded in 2019. We offer 1,200+ feminized, autoflower, CBD, and high-THC cannabis seed strains with discreet USPS/UPS shipping to all 50 US states. 92% germination guarantee on every order. Over 50,000 orders shipped.
+
+## Company Overview
+
+Royal King Seeds is a US-based online cannabis seed retailer. We do not operate a physical storefront. All orders ship domestically within the United States — no international routing, no customs delays. We accept Visa, Mastercard, and cryptocurrency payments. Customer support is available at support@royalkingseeds.us.
+
+## Product Categories
+
+### Feminized Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/feminized-seeds
+99.9% guaranteed female plants. Photoperiod strains that require 12/12 light cycle to flower. Best for experienced growers seeking maximum yield and potency control.
+
+### Autoflower Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/autoflowering-seeds
+Flower automatically regardless of light schedule in 8-10 weeks from seed. Compact plants ideal for beginners, small spaces, and multiple harvests per season.
+
+### Indica Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/indica-seeds
+Relaxing body effects. Compact, bushy plants with shorter flowering times. Ideal for evening use, pain relief, and sleep support.
+
+### Sativa Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/sativa-seeds
+Energizing cerebral effects. Taller plants with longer flowering times. Ideal for daytime use, creativity, and focus.
+
+### Hybrid Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/hybrid
+Balanced indica/sativa genetics combining the best traits of both. Wide variety of effects and growth characteristics.
+
+### CBD Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/cbd-strains
+High-CBD, low-THC therapeutic strains. Used for pain, anxiety, inflammation, and relaxation without strong psychoactive effects.
+
+### High THC Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/high-tch-seeds
+Strains with 20%+ THC content for experienced users. Maximum potency genetics for those seeking the strongest effects.
+
+### Mix Packs
+URL: https://royalkingseeds.us/product-category/mix-packs
+Multi-strain variety bundles at discounted prices. Try different genetics in a single order.
+
+### All Cannabis Seeds
+URL: https://royalkingseeds.us/product-category/shop-all-cannabis-seeds
+Complete catalog of 1,200+ strains. Browse, filter, and sort by type, THC level, flowering time, yield, and more.
+
+## State-Specific Information
+
+We ship cannabis seeds to all 50 US states. Each state page includes local growing laws, climate recommendations, and strain suggestions.
+
+Hub page: https://royalkingseeds.us/seeds/usa
+
+### Popular State Pages
+- California: https://royalkingseeds.us/seeds/usa/california — Year-round outdoor growing, liberal cannabis laws
+- Colorado: https://royalkingseeds.us/seeds/usa/colorado — Mountain climate, short outdoor season, strong legal framework
+- Michigan: https://royalkingseeds.us/seeds/usa/michigan — Legal home cultivation, Great Lakes climate considerations
+- New York: https://royalkingseeds.us/seeds/usa/new-york — Northeast indoor growing, recreational legalization
+- Texas: https://royalkingseeds.us/seeds/usa/texas — Heat-tolerant strain recommendations, limited legal status
+- Oregon: https://royalkingseeds.us/seeds/usa/oregon — Pacific Northwest climate, strong cultivation culture
+- Florida: https://royalkingseeds.us/seeds/usa/florida — Tropical/subtropical climate, humidity management
+- Washington: https://royalkingseeds.us/seeds/usa/washington — Established legal market, diverse microclimates
+- Illinois: https://royalkingseeds.us/seeds/usa/illinois — Midwest indoor growing, recreational legal state
+- Massachusetts: https://royalkingseeds.us/seeds/usa/massachusetts — New England growing conditions, legal home cultivation
+
+## Growing Guides & Educational Content
+
+Our blog features 1,340+ articles on cannabis cultivation, strain reviews, and growing science.
+
+Blog index: https://royalkingseeds.us/blog
+
+### Featured Guides
+- Autoflower Growing Guide: https://royalkingseeds.us/blog/autoflower-cannabis-seeds-and-growing-guide
+  Complete guide to autoflowering genetics — lifecycle, light schedules, feeding, and harvest timing.
+
+- Cannabis Nutrient Guide: https://royalkingseeds.us/blog/cannabis-nutrient-deficiencies
+  Macro and micronutrient functions, deficiency diagnosis with visual symptoms, and correction protocols.
+
+- Germination Guide: https://royalkingseeds.us/blog/autoflowering-seed-germination-guide
+  Paper towel method step-by-step, water soaking, direct planting, and troubleshooting poor germination.
+
+- Grow Light Guide: https://royalkingseeds.us/blog/cannabis-growing-lights-and-phases
+  LED vs HPS comparison, PAR/PPFD targets, light schedules for veg and flower, DLI calculations.
+
+- Pest Management: https://royalkingseeds.us/blog/cannabis-pest-management
+  IPM approaches for US growers — prevention, identification, organic treatments, and biological controls.
+
+- VPD and Humidity Control: https://royalkingseeds.us/blog/vpd-and-humidity-control-in-cannabis-cultivation
+  Vapor pressure deficit explained, temperature-humidity interaction, ideal VPD ranges by growth stage.
+
+- Trichome and Harvest Guide: https://royalkingseeds.us/blog/cannabis-trichomes-and-harvesting
+  When to harvest for peak potency — trichome color guide, pistil method, and flush timing.
+
+- Pruning and Training: https://royalkingseeds.us/blog/cannabis-plant-pruning-and-topping
+  Topping, FIMming, LST, SCROG, and defoliation techniques with timing recommendations.
+
+## Customer Policies
+
+- FAQ: https://royalkingseeds.us/faq — Ordering, shipping, growing, and payment questions
+- Shipping: https://royalkingseeds.us/shipping — Delivery times (3-7 business days), tracking, discreet packaging
+- Privacy Policy: https://royalkingseeds.us/privacy — Data handling, cookies, and customer privacy
+- Terms of Service: https://royalkingseeds.us/terms — Purchase terms, age requirements, legal disclaimers
+- Refund & Returns: https://royalkingseeds.us/refund-returns — Germination guarantee details, return eligibility
+- Contact: https://royalkingseeds.us/contact — Customer support form, email: support@royalkingseeds.us
+
+## Technical Information
+
+- Website: https://royalkingseeds.us
+- Sitemap: https://royalkingseeds.us/sitemap_index.xml
+- RSS Feed: https://royalkingseeds.us/feed.xml
+- LLMs.txt: https://royalkingseeds.us/llms.txt
+- Built with Next.js, hosted on Vercel
+- Language: English (US)
+- Currency: USD
+- Region: United States

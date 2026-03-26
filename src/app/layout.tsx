@@ -73,9 +73,15 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    "max-image-preview": "large" as any,
+    "max-snippet": -1 as any,
+    "max-video-preview": -1 as any,
     googleBot: {
       index: true,
       follow: true,
+      "max-image-preview": "large" as any,
+      "max-snippet": -1 as any,
+      "max-video-preview": -1 as any,
     },
   },
 };
@@ -97,6 +103,8 @@ export default function RootLayout({
         <meta name="geo.region" content="US" />
         <meta name="geo.position" content="40.7128;-74.0060" />
         <meta name="ICBM" content="40.7128, -74.0060" />
+        <meta name="msvalidate.01" content="" />
+        <link rel="alternate" type="application/rss+xml" title="Royal King Seeds Blog" href="https://royalkingseeds.us/feed.xml" />
       </head>
       <body className="min-h-full flex flex-col bg-[#F5F0EA] text-[#192026]">
         <script
