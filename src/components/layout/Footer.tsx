@@ -59,8 +59,8 @@ export function Footer() {
               <p className="text-[#192026]/70 text-sm mt-1">Our team can help you pick the perfect seeds for your climate, experience level, and goals.</p>
             </div>
             <div className="flex gap-3 shrink-0">
-              <Link href="/contact" className="px-5 py-2.5 bg-[#275C53] text-white text-sm font-medium rounded-full hover:bg-[#1e4a42] transition-colors">Contact Support</Link>
-              <Link href="/product-category/autoflowering-seeds" className="px-5 py-2.5 border border-[#275C53]/20 text-[#275C53] text-sm font-medium rounded-full hover:bg-[#275C53]/5 transition-colors">Beginner Seeds</Link>
+              <Link href="/strain-finder" className="px-5 py-2.5 bg-[#D7B65D] text-[#1a3d36] text-sm font-semibold rounded-full hover:bg-[#c9a84e] transition-colors">Take the Strain Quiz</Link>
+              <Link href="/contact" className="px-5 py-2.5 border border-[#275C53]/20 text-[#275C53] text-sm font-medium rounded-full hover:bg-[#275C53]/5 transition-colors">Contact Support</Link>
             </div>
           </div>
         </div>
@@ -128,6 +128,7 @@ export function Footer() {
             <div>
               <h3 className={headingClass}>Help &amp; Policies</h3>
               <ul className="space-y-2.5">
+                <li><Link href="/strain-finder" className={linkClass}>Strain Finder Quiz</Link></li>
                 <li><Link href="/contact" className={linkClass}>Contact Us</Link></li>
                 <li><Link href="/faq" className={linkClass}>FAQ</Link></li>
                 <li><Link href="/shipping" className={linkClass}>Shipping &amp; Returns</Link></li>

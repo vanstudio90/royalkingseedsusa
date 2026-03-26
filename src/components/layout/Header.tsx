@@ -72,6 +72,7 @@ const navItems: MenuItem[] = [
       {
         label: 'Strain Finder',
         children: [
+          { label: 'Find Your Perfect Strain', href: '/strain-finder' },
           { label: 'Best Strains For Anxiety', href: '/product-category/best-strains-for-anxiety' },
           { label: 'Best Outdoor Strains', href: '/product-category/best-strains-for-outdoor-growing' },
           { label: 'Energizing Seeds', href: '/product-category/energizing-cannabis-seeds' },
