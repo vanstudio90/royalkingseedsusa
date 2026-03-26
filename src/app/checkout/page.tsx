@@ -288,7 +288,8 @@ export default function CheckoutPage() {
             {/* Information */}
             <section>
               <h2 className="text-lg font-bold text-[#192026] mb-4 uppercase tracking-[1px]" style={{ fontFamily: 'var(--font-patua)' }}>Information</h2>
-              <input type="email" value={form.email} onChange={e => updateForm('email', e.target.value)} placeholder="Email address" className="checkout-input" required />
+              <label htmlFor="checkout_email" className="sr-only">Email address</label>
+              <input type="email" id="checkout_email" name="email" value={form.email} onChange={e => updateForm('email', e.target.value)} placeholder="Email address" className="checkout-input" required />
             </section>
 
             {/* Shipping Address */}
@@ -296,30 +297,47 @@ export default function CheckoutPage() {
               <h2 className="text-lg font-bold text-[#192026] mb-4 uppercase tracking-[1px]" style={{ fontFamily: 'var(--font-patua)' }}>Shipping Address</h2>
               <div className="space-y-3">
                 <div className="grid grid-cols-2 gap-3">
-                  <input type="text" value={form.firstName} onChange={e => updateForm('firstName', e.target.value)} placeholder="First name" className="checkout-input" required />
-                  <input type="text" value={form.lastName} onChange={e => updateForm('lastName', e.target.value)} placeholder="Last name" className="checkout-input" required />
+                  <div>
+                    <label htmlFor="checkout_first_name" className="sr-only">First name</label>
+                    <input type="text" id="checkout_first_name" name="first_name" value={form.firstName} onChange={e => updateForm('firstName', e.target.value)} placeholder="First name" className="checkout-input" required />
+                  </div>
+                  <div>
+                    <label htmlFor="checkout_last_name" className="sr-only">Last name</label>
+                    <input type="text" id="checkout_last_name" name="last_name" value={form.lastName} onChange={e => updateForm('lastName', e.target.value)} placeholder="Last name" className="checkout-input" required />
+                  </div>
                 </div>
-                <input type="text" value={form.street} onChange={e => updateForm('street', e.target.value)} placeholder="Street address" className="checkout-input" required />
+                <label htmlFor="checkout_street" className="sr-only">Street address</label>
+                <input type="text" id="checkout_street" name="street" value={form.street} onChange={e => updateForm('street', e.target.value)} placeholder="Street address" className="checkout-input" required />
                 <div className="grid grid-cols-3 gap-3">
                   <div className="checkout-input !p-0 overflow-hidden">
-                    <select value={country} onChange={e => setCountry(e.target.value)} className="w-full h-full px-4 py-3 bg-transparent text-sm text-[#192026]/70">
+                    <label htmlFor="checkout_country" className="sr-only">Country</label>
+                    <select id="checkout_country" name="country" value={country} onChange={e => setCountry(e.target.value)} className="w-full h-full px-4 py-3 bg-transparent text-sm text-[#192026]/70">
                       {countries.map(c => <option key={c.code} value={c.code}>{c.name}</option>)}
                     </select>
                   </div>
-                  <input type="text" value={form.zip} onChange={e => updateForm('zip', e.target.value)} placeholder={country === 'US' ? 'ZIP code' : 'Postal code'} className="checkout-input" required />
+                  <div>
+                    <label htmlFor="checkout_zip" className="sr-only">ZIP / Postal code</label>
+                    <input type="text" id="checkout_zip" name="zip" value={form.zip} onChange={e => updateForm('zip', e.target.value)} placeholder={country === 'US' ? 'ZIP code' : 'Postal code'} className="checkout-input" required />
+                  </div>
                   {regions.length > 0 ? (
                     <div className="checkout-input !p-0 overflow-hidden">
-                      <select value={form.state} onChange={e => updateForm('state', e.target.value)} className="w-full h-full px-4 py-3 bg-transparent text-sm text-[#192026]/70" required>
+                      <label htmlFor="checkout_state" className="sr-only">State / Province</label>
+                      <select id="checkout_state" name="state" value={form.state} onChange={e => updateForm('state', e.target.value)} className="w-full h-full px-4 py-3 bg-transparent text-sm text-[#192026]/70" required>
                         <option value="">{country === 'US' ? 'State' : 'Province'}</option>
                         {regions.map(r => <option key={r.code} value={r.code}>{r.name}</option>)}
                       </select>
                     </div>
                   ) : (
-                    <input type="text" value={form.state} onChange={e => updateForm('state', e.target.value)} placeholder="State / Province / Region" className="checkout-input" />
+                    <div>
+                      <label htmlFor="checkout_state" className="sr-only">State / Province / Region</label>
+                      <input type="text" id="checkout_state" name="state" value={form.state} onChange={e => updateForm('state', e.target.value)} placeholder="State / Province / Region" className="checkout-input" />
+                    </div>
                   )}
                 </div>
-                <input type="text" value={form.city} onChange={e => updateForm('city', e.target.value)} placeholder="Town / City" className="checkout-input" required />
-                <input type="tel" value={form.phone} onChange={e => updateForm('phone', e.target.value)} placeholder="Phone" className="checkout-input" required />
+                <label htmlFor="checkout_city" className="sr-only">Town / City</label>
+                <input type="text" id="checkout_city" name="city" value={form.city} onChange={e => updateForm('city', e.target.value)} placeholder="Town / City" className="checkout-input" required />
+                <label htmlFor="checkout_phone" className="sr-only">Phone</label>
+                <input type="tel" id="checkout_phone" name="phone" value={form.phone} onChange={e => updateForm('phone', e.target.value)} placeholder="Phone" className="checkout-input" required />
               </div>
             </section>
 
@@ -353,11 +371,19 @@ export default function CheckoutPage() {
                         <p className="text-[12px] text-[#192026]/40">
                           There is a fee of 3% when you use your card to make your payment. Please make sure that your billing details match the information on your card&apos;s statement to avoid a decline.
                         </p>
-                        <input type="text" value={card.name} onChange={e => setCard(prev => ({ ...prev, name: e.target.value }))} placeholder="Name on Card" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-name" />
-                        <input type="text" inputMode="numeric" value={card.number} onChange={e => setCard(prev => ({ ...prev, number: formatCardNumber(e.target.value) }))} placeholder="Card Number" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-number" maxLength={19} />
+                        <label htmlFor="checkout_card_name" className="sr-only">Name on Card</label>
+                        <input type="text" id="checkout_card_name" name="card_name" value={card.name} onChange={e => setCard(prev => ({ ...prev, name: e.target.value }))} placeholder="Name on Card" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-name" />
+                        <label htmlFor="checkout_card_number" className="sr-only">Card Number</label>
+                        <input type="text" inputMode="numeric" id="checkout_card_number" name="card_number" value={card.number} onChange={e => setCard(prev => ({ ...prev, number: formatCardNumber(e.target.value) }))} placeholder="Card Number" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-number" maxLength={19} />
                         <div className="grid grid-cols-2 gap-3">
-                          <input type="text" inputMode="numeric" value={card.expiry} onChange={e => setCard(prev => ({ ...prev, expiry: formatExpiry(e.target.value) }))} placeholder="MM / YY" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-exp" maxLength={7} />
-                          <input type="text" inputMode="numeric" value={card.cvv} onChange={e => setCard(prev => ({ ...prev, cvv: e.target.value.replace(/\D/g, '').slice(0, 4) }))} placeholder="CVC" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-csc" maxLength={4} />
+                          <div>
+                            <label htmlFor="checkout_card_expiry" className="sr-only">Expiry date</label>
+                            <input type="text" inputMode="numeric" id="checkout_card_expiry" name="card_expiry" value={card.expiry} onChange={e => setCard(prev => ({ ...prev, expiry: formatExpiry(e.target.value) }))} placeholder="MM / YY" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-exp" maxLength={7} />
+                          </div>
+                          <div>
+                            <label htmlFor="checkout_card_cvv" className="sr-only">CVC</label>
+                            <input type="text" inputMode="numeric" id="checkout_card_cvv" name="card_cvv" value={card.cvv} onChange={e => setCard(prev => ({ ...prev, cvv: e.target.value.replace(/\D/g, '').slice(0, 4) }))} placeholder="CVC" className="checkout-input !bg-[#F5F0EA]" autoComplete="cc-csc" maxLength={4} />
+                          </div>
                         </div>
                         <div className="flex items-center gap-2 text-[11px] text-[#192026]/30">
                           <svg className="w-3.5 h-3.5 text-[#275C53]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>

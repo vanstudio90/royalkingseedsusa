@@ -356,12 +356,12 @@ export default function AccountPage() {
                     <input type="text" id="profile_city" name="city" value={profileForm.city} onChange={e => setProfileForm(p => ({ ...p, city: e.target.value }))} className="checkout-input" />
                   </div>
                   <div>
-                    <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">State</label>
-                    <input type="text" value={profileForm.state} onChange={e => setProfileForm(p => ({ ...p, state: e.target.value }))} className="checkout-input" />
+                    <label htmlFor="profile_state" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">State</label>
+                    <input type="text" id="profile_state" name="state" value={profileForm.state} onChange={e => setProfileForm(p => ({ ...p, state: e.target.value }))} className="checkout-input" />
                   </div>
                   <div>
-                    <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">ZIP Code</label>
-                    <input type="text" value={profileForm.zip} onChange={e => setProfileForm(p => ({ ...p, zip: e.target.value }))} className="checkout-input" />
+                    <label htmlFor="profile_zip" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">ZIP Code</label>
+                    <input type="text" id="profile_zip" name="zip" value={profileForm.zip} onChange={e => setProfileForm(p => ({ ...p, zip: e.target.value }))} className="checkout-input" />
                   </div>
                 </div>
                 <button onClick={handleProfileSave} className="px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] transition-colors cursor-pointer">
