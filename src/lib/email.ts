@@ -177,14 +177,20 @@ function orderConfirmationHtml(order: OrderData) {
   `);
 }
 
-function shippedHtml(order: OrderData) {
-  const trackingHtml = order.tracking_number ? `
+function trackingBlock(trackingNumber: string) {
+  const uspsUrl = `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+  return `
     <table width="100%" cellpadding="0" cellspacing="0" style="background:${BG};border-radius:6px;margin-bottom:24px;">
       <tr><td style="padding:20px;text-align:center;">
         <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${GREEN};margin-bottom:8px;">Tracking Number</div>
-        <div style="font-size:18px;font-weight:800;color:${DARK};letter-spacing:2px;">${order.tracking_number}</div>
+        <div style="font-size:18px;font-weight:800;color:${DARK};letter-spacing:2px;margin-bottom:12px;">${trackingNumber}</div>
+        <a href="${uspsUrl}" target="_blank" style="display:inline-block;background:${GREEN};color:#ffffff;font-size:14px;font-weight:700;padding:12px 28px;border-radius:6px;text-decoration:none;letter-spacing:0.5px;">Track on USPS</a>
       </td></tr>
-    </table>` : '';
+    </table>`;
+}
+
+function shippedHtml(order: OrderData) {
+  const trackingHtml = order.tracking_number ? trackingBlock(order.tracking_number) : '';
 
   return layout(
     'Your Seeds Are On The Way!',
@@ -310,6 +316,34 @@ const TEMPLATES: Record<string, (order: OrderData) => string> = {
   cancelled: cancelledHtml,
   refunded: refundedHtml,
 };
+
+export async function sendTrackingEmail(order: { order_number: string; customer_email: string; customer_name: string; tracking_number: string }) {
+  if (!process.env.RESEND_API_KEY || !order.tracking_number) return;
+
+  const uspsUrl = `https://tools.usps.com/go/TrackConfirmAction?tLabels=${order.tracking_number}`;
+  const html = layout(
+    'Your Tracking Number Is Here!',
+    'Your seeds are on the way',
+    `
+    ${greeting(order.customer_name)}
+    ${message("Your order <strong style='color:" + DARK + ";'>#" + order.order_number + "</strong> has been shipped! Here's your tracking number:")}
+    ${trackingBlock(order.tracking_number)}
+    ${message("Click the button above or visit <a href='" + uspsUrl + "' style='color:" + GREEN + ";font-weight:600;'>USPS Tracking</a> to follow your package.")}
+    ${message("Estimated delivery: <strong style='color:" + DARK + ";'>3-7 business days</strong>. Your seeds are shipped in discreet, secure packaging.")}
+    ${message("Questions? Just reply to this email and we'll help you out.")}
+  `);
+
+  try {
+    await getResend().emails.send({
+      from: FROM_EMAIL,
+      to: order.customer_email,
+      subject: `Tracking Update \u2014 ${order.order_number}`,
+      html,
+    });
+  } catch {
+    // Email send failed silently
+  }
+}
 
 export async function sendOrderEmail(status: string, order: OrderData) {
   const subjectFn = SUBJECTS[status];

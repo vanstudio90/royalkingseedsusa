@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase/server';
-import { sendOrderEmail } from '@/lib/email';
+import { sendOrderEmail, sendTrackingEmail } from '@/lib/email';
 import { requireAdmin } from '@/lib/admin-auth';
 
 export async function GET(
@@ -35,6 +35,19 @@ export async function PUT(
   const { id } = await params;
   const body = await req.json();
 
+  // Check if tracking number is being added/changed
+  let trackingChanged = false;
+  if (body.tracking_number) {
+    const { data: current } = await supabaseAdmin
+      .from('orders')
+      .select('tracking_number')
+      .eq('id', id)
+      .single();
+    if (current && current.tracking_number !== body.tracking_number) {
+      trackingChanged = true;
+    }
+  }
+
   // Track previous status for email notifications
   let previousStatus: string | null = null;
 
@@ -67,6 +80,16 @@ export async function PUT(
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  // Send tracking email if tracking number was added/changed
+  if (trackingChanged && data) {
+    sendTrackingEmail({
+      order_number: data.order_number,
+      customer_email: data.customer_email,
+      customer_name: data.customer_name,
+      tracking_number: data.tracking_number,
+    });
   }
 
   // Send status email if status actually changed
