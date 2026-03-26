@@ -120,57 +120,35 @@ export default function CheckoutPage() {
     setPromoLoading(true);
 
     try {
-      const res = await fetch(`/api/admin/coupons?code=${encodeURIComponent(promoCode.trim().toUpperCase())}`);
+      const code = promoCode.trim().toUpperCase();
+      const res = await fetch(`/api/coupons/validate?code=${encodeURIComponent(code)}`);
       const data = await res.json();
 
-      // Find matching coupon
-      const coupons = data.coupons || data || [];
-      const code = promoCode.trim().toUpperCase();
-      const match = (Array.isArray(coupons) ? coupons : []).find(
-        (c: any) => c.code?.toUpperCase() === code && (c.active === true || c.status === 'active')
-      );
-
-      if (!match) {
+      if (!data.valid) {
+        // Fallback for hardcoded promo
         if (code === 'GROWNOW15') {
           setDiscount(subtotal * 0.15);
           setPromoApplied(true);
           setPromoLoading(false);
           return;
         }
-        setPromoError('Invalid or expired coupon code');
-        setPromoLoading(false);
-        return;
-      }
-
-      // Check usage limit
-      const usedCount = match.used_count || match.usage_count || 0;
-      if (match.max_uses && usedCount >= match.max_uses) {
-        setPromoError('This coupon has reached its usage limit');
-        setPromoLoading(false);
-        return;
-      }
-
-      // Check expiry
-      if (match.expires_at && new Date(match.expires_at) < new Date()) {
-        setPromoError('This coupon has expired');
+        setPromoError(data.error || 'Invalid or expired coupon code');
         setPromoLoading(false);
         return;
       }
 
       // Check minimum order
-      const minOrder = match.min_order_amount || match.min_order || 0;
-      if (minOrder > 1 && subtotal < minOrder) {
-        setPromoError(`Minimum order of $${minOrder} required`);
+      if (data.min_order > 1 && subtotal < data.min_order) {
+        setPromoError(`Minimum order of $${data.min_order} required`);
         setPromoLoading(false);
         return;
       }
 
       // Apply discount
-      if (match.type === 'percentage') {
-        setDiscount(subtotal * (match.value / 100));
+      if (data.type === 'percentage') {
+        setDiscount(subtotal * (data.value / 100));
       } else {
-        // Fixed amount
-        setDiscount(Math.min(match.value, subtotal));
+        setDiscount(Math.min(data.value, subtotal));
       }
       setPromoApplied(true);
     } catch {
