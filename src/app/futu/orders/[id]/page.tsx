@@ -13,6 +13,7 @@ interface StrainSpecs {
 
 interface ProductInfo {
   imageUrl: string;
+  sku: string;
   seedOptions: Array<{ label: string; price: number }>;
   specs: StrainSpecs;
 }
@@ -284,6 +285,7 @@ export default function OrderDetailPage() {
                           <div>
                             <span>{item.name}</span>
                             {item.variant && <span className="text-[#192026]/40 ml-1.5">({item.variant})</span>}
+                            {pInfo?.sku && <div className="text-[10px] font-mono text-[#192026]/30 mt-0.5">SKU: {pInfo.sku}</div>}
                             {pInfo?.specs && (
                               <button onClick={() => setDataSheetSlug(item.slug)} className="block text-[10px] text-[#275C53] hover:underline cursor-pointer mt-0.5">View Data Sheet</button>
                             )}
