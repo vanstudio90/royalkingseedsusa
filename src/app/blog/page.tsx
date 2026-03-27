@@ -80,33 +80,7 @@ export default function BlogPage() {
 
   const formatDate = (d: string) => new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-  // Archive
-  const archiveLabels: Record<string, string> = {
-    strain: 'Strain Reviews', 'pillar-nutrient': 'Nutrient Guides', 'support-nutrient': 'Nutrient Guides',
-    'pillar-germ': 'Germination & Seedlings', 'support-seedling': 'Germination & Seedlings',
-    'pillar-harvest': 'Harvest & Curing', 'support-harvest': 'Harvest & Curing', 'pillar-store': 'Harvest & Curing',
-    'pillar-light': 'Lighting & Indoor', 'support-light': 'Lighting & Indoor',
-    'pillar-pest': 'Pest & Disease', 'support-pest': 'Pest & Disease',
-    'pillar-vpd': 'Climate & Environment', 'support-vpd': 'Climate & Environment', environment: 'Climate & Environment',
-    'pillar-train': 'Training & Pruning', 'support-train': 'Training & Pruning',
-    'pillar-auto': 'Autoflower Growing', 'support-auto': 'Autoflower Growing',
-    'pillar-flower': 'Flowering & Bloom', 'support-flower': 'Flowering & Bloom',
-    'support-medium': 'Growing Media', 'support-watering': 'Watering & pH',
-    'support-clone': 'Cloning & Genetics', 'support-sex': 'Cloning & Genetics',
-    'support-yield': 'Yield Optimization', 'support-grow': 'General Growing',
-    terpene: 'Terpenes & Flavor', cannabinoid: 'Cannabinoid Science', effects: 'Effects & Science',
-    'cbd-focus': 'CBD & Wellness', sleep: 'Cannabis & Sleep', pain: 'Cannabis & Pain',
-    'anxiety-article': 'Anxiety & Wellness', health: 'Health & Wellness', therapeutic: 'Health & Wellness',
-    edible: 'Edibles & Recipes', accessory: 'Accessories & Gear',
-    legal: 'Legal & News', news: 'Industry News', dispensary: 'Dispensary Info',
-    'state-guide': 'State Growing Guides', promo: 'Seasonal Picks', general: 'Cannabis Knowledge',
-  };
-  const archiveGrouped: Record<string, typeof allPosts> = {};
-  for (const post of allPosts) {
-    const label = archiveLabels[post.category] || 'Cannabis Knowledge';
-    if (!archiveGrouped[label]) archiveGrouped[label] = [];
-    archiveGrouped[label].push(post);
-  }
+  const totalPosts = allPosts.length;
 
   return (
     <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
@@ -307,22 +281,13 @@ export default function BlogPage() {
             </div>
           </section>
 
-          {/* ─── FULL ARCHIVE ─── */}
-          <section className="mb-10 pt-8 border-t border-[#275C53]/10">
-            <h2 className="text-lg text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>Complete Article Archive</h2>
-            <p className="text-sm text-[#192026]/40 mb-6">All {allPosts.length} articles organized by topic.</p>
-            {Object.keys(archiveGrouped).sort().map(label => (
-              <div key={label} className="mb-6">
-                <h3 className="text-sm font-semibold text-[#275C53] mb-2">{label} ({archiveGrouped[label].length})</h3>
-                <ul className="columns-1 sm:columns-2 lg:columns-3 gap-x-6">
-                  {archiveGrouped[label].map(post => (
-                    <li key={post.slug} className="break-inside-avoid">
-                      <Link href={`/blog/${post.slug}`} className="text-[12px] text-[#192026]/50 hover:text-[#275C53] leading-relaxed block py-0.5">{post.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+          {/* ─── ARCHIVE CTA ─── */}
+          <section className="mb-10 pt-8 border-t border-[#275C53]/10 text-center">
+            <h2 className="text-lg text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>Looking for something specific?</h2>
+            <p className="text-sm text-[#192026]/40 mb-4">Browse all {totalPosts} cannabis growing articles organized by topic.</p>
+            <Link href="/blog/all-guides" className="inline-block px-8 py-3 bg-[#275C53] text-white rounded-xl text-[13px] font-bold hover:bg-[#1e4a42] transition-colors">
+              Browse All Grow Guides →
+            </Link>
           </section>
         </div>
 
