@@ -288,7 +288,7 @@ export default function BlogPage() {
         </div>
 
         {/* ═══ SIDEBAR ═══ */}
-        <aside className="w-full lg:w-[300px] shrink-0 space-y-5 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pb-8 scrollbar-hide">
+        <aside className="w-full lg:w-[300px] shrink-0 space-y-5 lg:self-start lg:sticky lg:top-4 lg:pb-8">
 
           {/* Quick Fix (troubleshooting shortcuts) */}
           <div className="bg-red-50/40 rounded-2xl border border-red-100/40 p-5">
