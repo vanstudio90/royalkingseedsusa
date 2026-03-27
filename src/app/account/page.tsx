@@ -32,7 +32,18 @@ const statusColors: Record<string, string> = {
   refunded: 'bg-gray-50 text-gray-500',
 };
 
-type Tab = 'dashboard' | 'orders' | 'profile' | 'password' | 'benefits' | 'growroom' | 'saved';
+type Tab = 'dashboard' | 'orders' | 'profile' | 'password' | 'reviews' | 'benefits' | 'growroom' | 'saved';
+
+interface Review {
+  id: number;
+  product_slug: string;
+  product_name: string;
+  rating: number;
+  title: string;
+  content: string;
+  status: string;
+  created_at: string;
+}
 
 function getTrackingUrl(tracking: string): string | null {
   if (!tracking) return null;
@@ -74,6 +85,12 @@ export default function AccountPage() {
   const [passwordSuccess, setPasswordSuccess] = useState('');
   const [passwordLoading, setPasswordLoading] = useState(false);
 
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [loadingReviews, setLoadingReviews] = useState(false);
+  const [editingReview, setEditingReview] = useState<number | null>(null);
+  const [editForm, setEditForm] = useState({ rating: 5, title: '', content: '' });
+  const [reviewSaving, setReviewSaving] = useState(false);
+
   const [profileForm, setProfileForm] = useState({
     name: '', phone: '', street: '', city: '', state: '', zip: '',
   });
@@ -87,6 +104,13 @@ export default function AccountPage() {
         .then(r => r.json())
         .then(data => { setOrders(Array.isArray(data) ? data : []); setLoadingOrders(false); })
         .catch(() => setLoadingOrders(false));
+
+      // Load reviews
+      setLoadingReviews(true);
+      fetch(`/api/account/reviews?email=${encodeURIComponent(user.email)}`)
+        .then(r => r.json())
+        .then(data => { setReviews(Array.isArray(data.reviews) ? data.reviews : []); setLoadingReviews(false); })
+        .catch(() => setLoadingReviews(false));
 
       // Load profile from database
       fetch(`/api/account/profile?email=${encodeURIComponent(user.email)}`)
@@ -286,7 +310,8 @@ export default function AccountPage() {
     { id: 'orders', label: 'Purchase History', icon: '📦' },
     { id: 'profile', label: 'Profile', icon: '👤' },
     { id: 'password', label: 'Change Password', icon: '🔒' },
-    { id: 'benefits', label: 'Member Benefits', icon: '⭐' },
+    { id: 'reviews', label: 'My Reviews', icon: '⭐' },
+    { id: 'benefits', label: 'Member Benefits', icon: '🎁' },
     { id: 'growroom', label: 'Grow Room', icon: '🌱' },
     { id: 'saved', label: 'Saved Items', icon: '❤️' },
   ];
@@ -559,6 +584,138 @@ export default function AccountPage() {
                   {passwordLoading ? 'Saving...' : 'Save'}
                 </button>
               </div>
+            </div>
+          )}
+
+          {/* My Reviews */}
+          {activeTab === 'reviews' && (
+            <div>
+              <h2 className="text-xl font-bold text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>My Reviews</h2>
+              <p className="text-[13px] text-[#192026]/40 mb-6">Reviews you&apos;ve posted on our products.</p>
+
+              {loadingReviews ? (
+                <div className="text-center py-12 text-[#192026]/30">Loading reviews...</div>
+              ) : reviews.length === 0 ? (
+                <div className="bg-white rounded-2xl border border-[#275C53]/5 p-8 text-center">
+                  <span className="text-4xl block mb-3">⭐</span>
+                  <p className="text-[#192026]/40 text-sm mb-4">You haven&apos;t posted any reviews yet.</p>
+                  <Link href="/product-category/shop-all-cannabis-seeds" className="inline-block px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold">Browse Seeds to Review</Link>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {reviews.map(review => (
+                    <div key={review.id} className="bg-white rounded-2xl border border-[#275C53]/5 overflow-hidden">
+                      <div className="px-5 py-3 bg-[#F5F0EA] flex items-center justify-between flex-wrap gap-2">
+                        <div className="flex items-center gap-3">
+                          <Link href={`/${review.product_slug}`} className="text-[14px] font-semibold text-[#275C53] hover:underline">{review.product_name || 'Product'}</Link>
+                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-[0.5px] ${
+                            review.status === 'approved' ? 'bg-emerald-50 text-emerald-600' :
+                            review.status === 'pending' ? 'bg-yellow-50 text-yellow-600' :
+                            'bg-red-50 text-red-500'
+                          }`}>{review.status}</span>
+                        </div>
+                        <span className="text-[11px] text-[#192026]/30">{new Date(review.created_at).toLocaleDateString('en-US')}</span>
+                      </div>
+
+                      {editingReview === review.id ? (
+                        <div className="px-5 py-4 space-y-3">
+                          <div>
+                            <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Rating</label>
+                            <div className="flex gap-1">
+                              {[1, 2, 3, 4, 5].map(star => (
+                                <button key={star} onClick={() => setEditForm(p => ({ ...p, rating: star }))} className="text-xl cursor-pointer">
+                                  {star <= editForm.rating ? '★' : '☆'}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <div>
+                            <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Title</label>
+                            <input type="text" value={editForm.title} onChange={e => setEditForm(p => ({ ...p, title: e.target.value }))} className="checkout-input" />
+                          </div>
+                          <div>
+                            <label className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Review</label>
+                            <textarea value={editForm.content} onChange={e => setEditForm(p => ({ ...p, content: e.target.value }))} rows={3} className="checkout-input" />
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              disabled={reviewSaving}
+                              onClick={async () => {
+                                setReviewSaving(true);
+                                try {
+                                  const res = await fetch('/api/account/reviews', {
+                                    method: 'PUT',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({
+                                      email: user?.email,
+                                      reviewId: review.id,
+                                      rating: editForm.rating,
+                                      title: editForm.title,
+                                      content: editForm.content,
+                                    }),
+                                  });
+                                  if (res.ok) {
+                                    setReviews(prev => prev.map(r => r.id === review.id ? { ...r, rating: editForm.rating, title: editForm.title, content: editForm.content, status: 'pending' } : r));
+                                    setEditingReview(null);
+                                  }
+                                } catch { /* ignore */ }
+                                setReviewSaving(false);
+                              }}
+                              className="px-4 py-2 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] transition-colors cursor-pointer disabled:opacity-50"
+                            >
+                              {reviewSaving ? 'Saving...' : 'Save Changes'}
+                            </button>
+                            <button onClick={() => setEditingReview(null)} className="px-4 py-2 text-[#192026]/40 text-[12px] font-semibold hover:text-[#192026]/60 cursor-pointer">
+                              Cancel
+                            </button>
+                          </div>
+                          <p className="text-[10px] text-[#192026]/30">Edited reviews will be re-submitted for approval.</p>
+                        </div>
+                      ) : (
+                        <div className="px-5 py-4">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[#D7B65D] text-sm">{'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}</span>
+                          </div>
+                          {review.title && <p className="text-[14px] font-semibold text-[#192026] mb-1">{review.title}</p>}
+                          {review.content && <p className="text-[13px] text-[#192026]/60 leading-relaxed">{review.content}</p>}
+
+                          <div className="flex gap-3 mt-3 pt-3 border-t border-[#192026]/5">
+                            <button
+                              onClick={() => {
+                                setEditingReview(review.id);
+                                setEditForm({ rating: review.rating, title: review.title, content: review.content });
+                              }}
+                              className="text-[11px] text-[#275C53] font-semibold hover:underline cursor-pointer flex items-center gap-1"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>
+                              Edit
+                            </button>
+                            <button
+                              onClick={async () => {
+                                if (!confirm('Are you sure you want to delete this review?')) return;
+                                try {
+                                  const res = await fetch('/api/account/reviews', {
+                                    method: 'DELETE',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ email: user?.email, reviewId: review.id }),
+                                  });
+                                  if (res.ok) {
+                                    setReviews(prev => prev.filter(r => r.id !== review.id));
+                                  }
+                                } catch { /* ignore */ }
+                              }}
+                              className="text-[11px] text-red-400 font-semibold hover:underline cursor-pointer flex items-center gap-1"
+                            >
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /></svg>
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
