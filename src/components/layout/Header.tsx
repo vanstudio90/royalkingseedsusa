@@ -23,23 +23,68 @@ function isMenuGroup(item: MenuGroup | MenuItem): item is MenuGroup {
 }
 
 const navItems: MenuItem[] = [
-  { label: 'Home', href: '/', highlight: 'text-[#D7B65D]' },
   {
     label: 'Seeds',
     href: '/product-category/shop-all-cannabis-seeds',
     children: [
-      { label: 'Feminized Seeds', href: '/product-category/feminized-seeds', highlight: 'bg-[#275C53] text-white' },
-      { label: 'Autoflower', href: '/product-category/autoflowering-seeds', highlight: 'bg-[#5B6B4F] text-white' },
-      { label: 'CBD Seeds', href: '/product-category/cbd-strains' },
-      { label: 'Indica Strains', href: '/product-category/indica-seeds' },
-      { label: 'Sativa Strains', href: '/product-category/sativa-seeds' },
-      { label: 'Hybrid Strains', href: '/product-category/hybrid' },
-      { label: 'High THC Seeds', href: '/product-category/high-tch-seeds' },
-      { label: 'Mix Packs', href: '/product-category/mix-packs' },
-      { label: 'Classic Seeds', href: '/product-category/classic-cannabis-seeds' },
-      { label: 'Exotic Seeds', href: '/product-category/exotic-cannabis-seeds' },
-      { label: 'Photoperiod Seeds', href: '/product-category/photoperiod' },
-      { label: 'Shop All Seeds', href: '/product-category/shop-all-cannabis-seeds' },
+      {
+        label: 'Shop by Type',
+        children: [
+          { label: 'Autoflower Seeds', href: '/product-category/autoflowering-seeds' },
+          { label: 'Feminized Seeds', href: '/product-category/feminized-seeds' },
+          { label: 'High THC Seeds', href: '/product-category/high-tch-seeds' },
+          { label: 'CBD Seeds', href: '/product-category/cbd-strains' },
+          { label: 'Photoperiod Seeds', href: '/product-category/photoperiod' },
+        ],
+      },
+      {
+        label: 'Shop by Goal',
+        children: [
+          { label: 'Beginner-Friendly', href: '/product-category/autoflowering-seeds' },
+          { label: 'High Yield Seeds', href: '/product-category/best-strains-for-high-yield' },
+          { label: 'Fast Growing Seeds', href: '/product-category/fast-flowering-cannabis-seeds' },
+          { label: 'Easy to Grow', href: '/product-category/autoflowering-seeds' },
+        ],
+      },
+      {
+        label: 'Shop by Setup',
+        children: [
+          { label: 'Indoor Seeds', href: '/product-category/best-strains-for-indoor-growing' },
+          { label: 'Outdoor Seeds', href: '/product-category/best-strains-for-outdoor-growing' },
+          { label: 'Mix Packs', href: '/product-category/mix-packs' },
+        ],
+      },
+      {
+        label: 'Shop by Effects',
+        children: [
+          { label: 'Relaxing', href: '/product-category/indica-seeds' },
+          { label: 'Uplifting', href: '/product-category/sativa-seeds' },
+          { label: 'Best Sellers', href: '/product-category/best-seller' },
+          { label: 'Shop All Seeds', href: '/product-category/shop-all-cannabis-seeds' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Autoflower',
+    href: '/product-category/autoflowering-seeds',
+    children: [
+      { label: 'All Autoflower Seeds', href: '/product-category/autoflowering-seeds' },
+      { label: 'High Yield Autoflowers', href: '/product-category/best-strains-for-high-yield' },
+      { label: 'Fast Autoflowers', href: '/product-category/fast-flowering-cannabis-seeds' },
+      { label: 'Beginner Autoflowers', href: '/product-category/autoflowering-seeds' },
+      { label: 'Autoflower Grow Guide', href: '/blog/autoflower-cannabis-seeds-and-growing-guide' },
+    ],
+  },
+  {
+    label: 'Feminized',
+    href: '/product-category/feminized-seeds',
+    children: [
+      { label: 'All Feminized Seeds', href: '/product-category/feminized-seeds' },
+      { label: 'High THC Feminized', href: '/product-category/high-tch-seeds' },
+      { label: 'Indoor Feminized', href: '/product-category/best-strains-for-indoor-growing' },
+      { label: 'Outdoor Feminized', href: '/product-category/best-strains-for-outdoor-growing' },
+      { label: 'High Yield Feminized', href: '/product-category/best-strains-for-high-yield' },
     ],
   },
   {
@@ -53,17 +98,14 @@ const navItems: MenuItem[] = [
           { label: 'Germination Guide', href: '/blog/autoflowering-seed-germination-guide' },
           { label: 'Indoor Growing', href: '/blog/cannabis-growing-lights-and-phases' },
           { label: 'Outdoor Growing', href: '/blog/rainy-season-outdoors-fast-finishing-seeds-that-beat-the-storms' },
-          { label: 'Autoflower Guide', href: '/blog/autoflower-cannabis-seeds-and-growing-guide' },
         ],
       },
       {
-        label: 'Learn the Process',
+        label: 'Grow Stages',
         children: [
-          { label: 'Seedling Care', href: '/blog/cannabis-seedlings-and-transplanting' },
+          { label: 'Seedling Stage', href: '/blog/cannabis-seedlings-and-transplanting' },
           { label: 'Vegetative Stage', href: '/blog/keep-cannabis-in-vegetative-stage' },
           { label: 'Flowering Stage', href: '/blog/cannabis-flowering-and-budding' },
-          { label: 'Training & Topping', href: '/blog/cannabis-plant-pruning-and-topping' },
-          { label: 'Nutrients & Feeding', href: '/blog/cannabis-nutrient-deficiencies' },
         ],
       },
       {
@@ -71,17 +113,16 @@ const navItems: MenuItem[] = [
         children: [
           { label: 'Yellow Leaves', href: '/blog/yellowing-of-cannabis-leaves-in-the-first-week-of-flowering' },
           { label: 'Nutrient Burn', href: '/blog/cannabis-nutrient-burn-and-light-stress' },
+          { label: 'Pests & Mold', href: '/blog/cannabis-pest-management' },
           { label: 'Overwatering', href: '/blog/overwatering-vs-underwatering-cannabis-plants' },
-          { label: 'Pests & Bugs', href: '/blog/cannabis-pest-management' },
-          { label: 'Mold & Mildew', href: '/blog/mold-in-cannabis' },
         ],
       },
       {
-        label: 'Harvest & Cure',
+        label: 'Harvest',
         children: [
           { label: 'When to Harvest', href: '/blog/cannabis-trichomes-and-harvesting' },
-          { label: 'Drying Guide', href: '/blog/drying-and-curing-your-cannabis-plants' },
-          { label: 'Curing Guide', href: '/blog/cannabis-harvesting-and-curing' },
+          { label: 'Drying Cannabis', href: '/blog/drying-and-curing-your-cannabis-plants' },
+          { label: 'Curing Cannabis', href: '/blog/cannabis-harvesting-and-curing' },
           { label: 'All Grow Guides', href: '/blog' },
         ],
       },
@@ -92,22 +133,69 @@ const navItems: MenuItem[] = [
     href: '/product-category/shop-all-cannabis-seeds',
     children: [
       {
-        label: 'Flavor & Genetics',
+        label: 'By Type',
         children: [
-          { label: 'Exotic Strains', href: '/product-category/exotic-cannabis-seeds' },
-          { label: 'Fruity Cannabis Seeds', href: '/product-category/fruity-cannabis-seeds' },
-          { label: 'Kush Seeds', href: '/product-category/kush-seeds' },
-          { label: 'Euphoric Seeds', href: '/product-category/euphoric-seeds' },
-          { label: 'Purple Genetics', href: '/product-category/purple-genetics-seeds' },
+          { label: 'Indica', href: '/product-category/indica-seeds' },
+          { label: 'Sativa', href: '/product-category/sativa-seeds' },
+          { label: 'Hybrid', href: '/product-category/hybrid' },
         ],
       },
       {
-        label: 'Strain Finder',
+        label: 'By Effects',
         children: [
-          { label: 'Find Your Perfect Strain', href: '/strain-finder' },
-          { label: 'Best Strains For Anxiety', href: '/product-category/best-strains-for-anxiety' },
-          { label: 'Best Outdoor Strains', href: '/product-category/best-strains-for-outdoor-growing' },
-          { label: 'Energizing Seeds', href: '/product-category/energizing-cannabis-seeds' },
+          { label: 'Relaxing', href: '/product-category/indica-seeds' },
+          { label: 'Energizing', href: '/product-category/energizing-cannabis-seeds' },
+          { label: 'For Anxiety', href: '/product-category/best-strains-for-anxiety' },
+          { label: 'For Sleep', href: '/product-category/indica-seeds' },
+        ],
+      },
+      {
+        label: 'By Grow Traits',
+        children: [
+          { label: 'High THC', href: '/product-category/high-tch-seeds' },
+          { label: 'High Yield', href: '/product-category/best-strains-for-high-yield' },
+          { label: 'Fast Flowering', href: '/product-category/fast-flowering-cannabis-seeds' },
+          { label: 'Beginner Friendly', href: '/product-category/autoflowering-seeds' },
+        ],
+      },
+      {
+        label: 'Featured',
+        children: [
+          { label: 'Best Sellers', href: '/product-category/best-seller' },
+          { label: 'Exotic Strains', href: '/product-category/exotic-cannabis-seeds' },
+          { label: 'Strain Finder Quiz', href: '/strain-finder' },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'Beginner',
+    href: '/blog/top-7-recommended-strains-for-beginners',
+    highlight: 'text-[#D7B65D]',
+    children: [
+      {
+        label: 'Start Growing',
+        children: [
+          { label: 'Beginner Grow Guide', href: '/blog/top-7-recommended-strains-for-beginners' },
+          { label: 'How to Germinate Seeds', href: '/blog/autoflowering-seed-germination-guide' },
+          { label: 'Indoor Setup', href: '/blog/cannabis-growing-lights-and-phases' },
+          { label: 'Outdoor Setup', href: '/blog/rainy-season-outdoors-fast-finishing-seeds-that-beat-the-storms' },
+        ],
+      },
+      {
+        label: 'Easy Picks',
+        children: [
+          { label: 'Best Beginner Seeds', href: '/product-category/autoflowering-seeds' },
+          { label: 'Autoflowers for Beginners', href: '/product-category/autoflowering-seeds' },
+          { label: 'Easy Strains', href: '/product-category/autoflowering-seeds' },
+        ],
+      },
+      {
+        label: 'Avoid Mistakes',
+        children: [
+          { label: 'Overwatering', href: '/blog/overwatering-vs-underwatering-cannabis-plants' },
+          { label: 'Nutrient Burn', href: '/blog/cannabis-nutrient-burn-and-light-stress' },
+          { label: 'Common Grow Mistakes', href: '/blog/cannabis-seedlings-and-transplanting' },
         ],
       },
     ],
@@ -116,43 +204,26 @@ const navItems: MenuItem[] = [
     label: 'Buy By State',
     href: '/seeds/usa',
     children: [
-      {
-        label: 'Popular States',
-        children: [
-          { label: 'California', href: '/seeds/usa/california' },
-          { label: 'Colorado', href: '/seeds/usa/colorado' },
-          { label: 'Florida', href: '/seeds/usa/florida' },
-          { label: 'New York', href: '/seeds/usa/new-york' },
-          { label: 'Texas', href: '/seeds/usa/texas' },
-          { label: 'Michigan', href: '/seeds/usa/michigan' },
-          { label: 'Oregon', href: '/seeds/usa/oregon' },
-          { label: 'Washington', href: '/seeds/usa/washington' },
-        ],
-      },
-      {
-        label: 'More',
-        children: [
-          { label: 'All 50 States', href: '/seeds/usa' },
-          { label: 'How to Order', href: '/faq' },
-          { label: 'Shipping & Delivery', href: '/shipping' },
-        ],
-      },
+      { label: 'California', href: '/seeds/usa/california' },
+      { label: 'Texas', href: '/seeds/usa/texas' },
+      { label: 'Florida', href: '/seeds/usa/florida' },
+      { label: 'New York', href: '/seeds/usa/new-york' },
+      { label: 'Illinois', href: '/seeds/usa/illinois' },
+      { label: 'Michigan', href: '/seeds/usa/michigan' },
+      { label: 'All 50 States', href: '/seeds/usa' },
     ],
   },
   {
     label: 'Support',
     href: '/contact',
     children: [
-      { label: 'FAQs', href: '/faq' },
-      { label: 'Shipping & Delivery', href: '/shipping' },
-      { label: 'Privacy Policy', href: '/privacy' },
-      { label: 'Terms & Conditions', href: '/terms' },
-      { label: 'Contact Support', href: '/contact' },
-      { label: 'Legal Disclaimer', href: '/legal' },
-      { label: 'Affiliate Program', href: '/affiliate' },
+      { label: 'Contact Us', href: '/contact' },
+      { label: 'FAQ', href: '/faq' },
+      { label: 'Shipping Info', href: '/shipping' },
+      { label: 'Germination Guarantee', href: '/faq' },
+      { label: 'Refund & Returns', href: '/refund-returns' },
     ],
   },
-  { label: 'Blog', href: '/blog' },
 ];
 
 export function Header() {
@@ -347,7 +418,9 @@ export function Header() {
                     onMouseLeave={handleMenuLeave}
                   >
                     {item.children.some((c) => 'children' in c && !('href' in c)) ? (
-                      <div className={`bg-white rounded-2xl shadow-xl border border-[#275C53]/10 p-6 grid gap-x-8 gap-y-5 ${item.children.filter(c => isMenuGroup(c)).length >= 4 ? 'min-w-[700px] grid-cols-4' : 'min-w-[500px] grid-cols-2'}`}>
+                      <div className={`bg-white rounded-2xl shadow-xl border border-[#275C53]/10 p-6 grid gap-x-8 gap-y-5 ${
+                        (() => { const cols = item.children.filter(c => isMenuGroup(c)).length; return cols >= 4 ? 'min-w-[750px] grid-cols-4' : cols === 3 ? 'min-w-[600px] grid-cols-3' : 'min-w-[500px] grid-cols-2'; })()
+                      }`}>
                         {item.children.map((child) =>
                           isMenuGroup(child) ? (
                             <div key={child.label}>
