@@ -5,6 +5,7 @@ import { getProductBySlug, getProducts, getProductBySlugFromDb } from '@/lib/pro
 import { ProductDetail } from '@/components/product/ProductDetail';
 import { ProductDetailSidebar } from '@/components/product/ProductDetailSidebar';
 import { getCategoryBySlug } from '@/lib/categories';
+import { supabaseAdmin } from '@/lib/supabase/server';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -12,10 +13,31 @@ interface Props {
 
 export const dynamic = 'force-dynamic';
 
+async function getStaticPage(slug: string) {
+  const { data } = await supabaseAdmin
+    .from('pages')
+    .select('*')
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .eq('page_type', 'page')
+    .single();
+  return data;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = getProductBySlug(slug) || await getProductBySlugFromDb(slug);
-  if (!product) return { title: 'Product Not Found' };
+  if (!product) {
+    const page = await getStaticPage(slug);
+    if (page) {
+      return {
+        title: page.meta_title || page.title,
+        description: page.meta_description || page.title,
+        alternates: { canonical: `https://royalkingseeds.us/${slug}` },
+      };
+    }
+    return { title: 'Not Found' };
+  }
 
   const type = product.autoflower ? 'Autoflower' : product.feminized ? 'Feminized' : '';
   // Strip any "| Royal King Seeds..." suffix from engine-generated metaTitle (template adds it)
@@ -58,7 +80,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug) || await getProductBySlugFromDb(slug);
-  if (!product) notFound();
+
+  if (!product) {
+    const page = await getStaticPage(slug);
+    if (!page) notFound();
+
+    return (
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <nav aria-label="Breadcrumb" className="mb-6 text-[12px] text-[#192026]/40">
+          <ol className="flex items-center gap-1.5 flex-wrap">
+            <li><Link href="/" className="hover:text-[#275C53] transition-colors">Home</Link></li>
+            <li>/</li>
+            <li className="text-[#275C53] font-medium">{page.title}</li>
+          </ol>
+        </nav>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl text-[#275C53] mb-8" style={{ fontFamily: 'var(--font-patua)' }}>
+          {page.title}
+        </h1>
+        <div
+          className="prose prose-sm max-w-none text-[#192026]/80 prose-headings:text-[#275C53] prose-headings:font-normal prose-a:text-[#275C53] prose-a:no-underline hover:prose-a:text-[#D7B65D] prose-p:leading-relaxed prose-li:leading-relaxed"
+          dangerouslySetInnerHTML={{ __html: page.content || '' }}
+        />
+      </div>
+    );
+  }
 
   const allProducts = getProducts();
   const related = allProducts
