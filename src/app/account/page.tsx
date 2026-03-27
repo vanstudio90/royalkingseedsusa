@@ -32,7 +32,7 @@ const statusColors: Record<string, string> = {
   refunded: 'bg-gray-50 text-gray-500',
 };
 
-type Tab = 'dashboard' | 'orders' | 'profile' | 'benefits' | 'growroom' | 'saved';
+type Tab = 'dashboard' | 'orders' | 'profile' | 'password' | 'benefits' | 'growroom' | 'saved';
 
 function getTrackingUrl(tracking: string): string | null {
   if (!tracking) return null;
@@ -66,6 +66,13 @@ export default function AccountPage() {
   const [authForm, setAuthForm] = useState({
     email: '', name: '', phone: '', password: '',
   });
+  const [authError, setAuthError] = useState('');
+  const [authLoading, setAuthLoading] = useState(false);
+
+  const [passwordForm, setPasswordForm] = useState({ current: '', newPw: '', confirm: '' });
+  const [passwordError, setPasswordError] = useState('');
+  const [passwordSuccess, setPasswordSuccess] = useState('');
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const [profileForm, setProfileForm] = useState({
     name: '', phone: '', street: '', city: '', state: '', zip: '',
@@ -149,14 +156,45 @@ export default function AccountPage() {
   );
   const uniqueStrains = [...new Map(boughtStrains.map(s => [s.slug, s])).values()];
 
-  const handleAuth = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    login({
-      email: authForm.email,
-      name: authForm.name || authForm.email.split('@')[0],
-      phone: authForm.phone || '',
-      street: '', city: '', state: '', zip: '',
-    });
+    setAuthError('');
+    setAuthLoading(true);
+
+    try {
+      const res = await fetch('/api/account/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: authMode,
+          email: authForm.email,
+          password: authForm.password,
+          name: authForm.name,
+          phone: authForm.phone,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setAuthError(data.error || 'Authentication failed');
+        setAuthLoading(false);
+        return;
+      }
+
+      login({
+        email: data.user.email,
+        name: data.user.name || authForm.name || authForm.email.split('@')[0],
+        phone: data.user.phone || authForm.phone || '',
+        street: data.user.street || '',
+        city: data.user.city || '',
+        state: data.user.state || '',
+        zip: data.user.zip || '',
+      });
+    } catch {
+      setAuthError('Something went wrong. Please try again.');
+    }
+    setAuthLoading(false);
   };
 
   const handleProfileSave = async () => {
@@ -225,8 +263,11 @@ export default function AccountPage() {
               <input type="tel" id="auth_phone" name="phone" value={authForm.phone} onChange={e => setAuthForm(p => ({ ...p, phone: e.target.value }))} placeholder="Phone number" className="checkout-input" />
             </div>
           )}
-          <button type="submit" className="w-full py-3.5 bg-[#275C53] text-white rounded-xl text-[13px] font-bold uppercase tracking-[1px] hover:bg-[#1e4a42] transition-colors cursor-pointer">
-            {authMode === 'login' ? 'Sign In' : 'Create Account'}
+          {authError && (
+            <p className="text-red-500 text-[12px] text-center bg-red-50 rounded-lg p-2">{authError}</p>
+          )}
+          <button type="submit" disabled={authLoading} className="w-full py-3.5 bg-[#275C53] text-white rounded-xl text-[13px] font-bold uppercase tracking-[1px] hover:bg-[#1e4a42] transition-colors cursor-pointer disabled:opacity-50">
+            {authLoading ? 'Please wait...' : authMode === 'login' ? 'Sign In' : 'Create Account'}
           </button>
           <p className="text-center text-[12px] text-[#192026]/40">
             {authMode === 'login' ? "Don't have an account? " : 'Already have an account? '}
@@ -244,6 +285,7 @@ export default function AccountPage() {
     { id: 'dashboard', label: 'Dashboard', icon: '📊' },
     { id: 'orders', label: 'Purchase History', icon: '📦' },
     { id: 'profile', label: 'Profile', icon: '👤' },
+    { id: 'password', label: 'Change Password', icon: '🔒' },
     { id: 'benefits', label: 'Member Benefits', icon: '⭐' },
     { id: 'growroom', label: 'Grow Room', icon: '🌱' },
     { id: 'saved', label: 'Saved Items', icon: '❤️' },
@@ -441,6 +483,80 @@ export default function AccountPage() {
                 </div>
                 <button onClick={handleProfileSave} disabled={profileSaving} className="px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] transition-colors cursor-pointer disabled:opacity-50">
                   {profileSaving ? 'Saving...' : profileSaved ? 'Saved!' : 'Save Profile'}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Change Password */}
+          {activeTab === 'password' && (
+            <div>
+              <h2 className="text-xl font-bold text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>Change Password</h2>
+              <p className="text-[13px] text-[#192026]/40 mb-4">Update your password</p>
+              <div className="bg-white rounded-2xl border border-[#275C53]/5 p-6 space-y-4 max-w-md">
+                <div>
+                  <label htmlFor="pw_current" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Current Password *</label>
+                  <input type="password" id="pw_current" value={passwordForm.current} onChange={e => setPasswordForm(p => ({ ...p, current: e.target.value }))} className="checkout-input" placeholder="Enter current password" required />
+                </div>
+                <div>
+                  <label htmlFor="pw_new" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">New Password *</label>
+                  <input type="password" id="pw_new" value={passwordForm.newPw} onChange={e => setPasswordForm(p => ({ ...p, newPw: e.target.value }))} className="checkout-input" placeholder="Enter new password (min 6 characters)" required minLength={6} />
+                </div>
+                <div>
+                  <label htmlFor="pw_confirm" className="text-[11px] font-semibold text-[#192026]/40 uppercase tracking-[0.5px] block mb-1">Confirm New Password *</label>
+                  <input type="password" id="pw_confirm" value={passwordForm.confirm} onChange={e => setPasswordForm(p => ({ ...p, confirm: e.target.value }))} className="checkout-input" placeholder="Confirm new password" required />
+                </div>
+                {passwordError && (
+                  <p className="text-red-500 text-[12px] bg-red-50 rounded-lg p-2">{passwordError}</p>
+                )}
+                {passwordSuccess && (
+                  <p className="text-emerald-600 text-[12px] bg-emerald-50 rounded-lg p-2">{passwordSuccess}</p>
+                )}
+                <button
+                  disabled={passwordLoading}
+                  onClick={async () => {
+                    setPasswordError('');
+                    setPasswordSuccess('');
+
+                    if (!passwordForm.current || !passwordForm.newPw || !passwordForm.confirm) {
+                      setPasswordError('All fields are required');
+                      return;
+                    }
+                    if (passwordForm.newPw.length < 6) {
+                      setPasswordError('New password must be at least 6 characters');
+                      return;
+                    }
+                    if (passwordForm.newPw !== passwordForm.confirm) {
+                      setPasswordError('New passwords do not match');
+                      return;
+                    }
+
+                    setPasswordLoading(true);
+                    try {
+                      const res = await fetch('/api/account/change-password', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                          email: user?.email,
+                          currentPassword: passwordForm.current,
+                          newPassword: passwordForm.newPw,
+                        }),
+                      });
+                      const data = await res.json();
+                      if (!res.ok) {
+                        setPasswordError(data.error || 'Failed to change password');
+                      } else {
+                        setPasswordSuccess('Password changed successfully!');
+                        setPasswordForm({ current: '', newPw: '', confirm: '' });
+                      }
+                    } catch {
+                      setPasswordError('Something went wrong. Please try again.');
+                    }
+                    setPasswordLoading(false);
+                  }}
+                  className="px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] transition-colors cursor-pointer disabled:opacity-50"
+                >
+                  {passwordLoading ? 'Saving...' : 'Save'}
                 </button>
               </div>
             </div>
