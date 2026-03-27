@@ -166,6 +166,42 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         </div>
       )}
 
+      {/* Full A-Z Product Directory (server-rendered for crawlers) */}
+      {slug === 'shop-all-cannabis-seeds' && filtered.length > 0 && (() => {
+        const grouped: Record<string, typeof filtered> = {};
+        for (const p of filtered) {
+          const letter = (p.name[0] || '#').toUpperCase().replace(/[^A-Z]/, '#');
+          if (!grouped[letter]) grouped[letter] = [];
+          grouped[letter].push(p);
+        }
+        const letters = Object.keys(grouped).sort();
+        return (
+          <div className="mt-16 pt-8 border-t border-[#275C53]/10">
+            <h2 className="text-lg text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>All Strains A–Z</h2>
+            <p className="text-sm text-[#192026]/50 mb-6">Browse our complete catalog of {filtered.length} cannabis seed strains.</p>
+            <div className="flex flex-wrap gap-1.5 mb-6">
+              {letters.map((l) => (
+                <a key={l} href={`#letter-${l}`} className="w-8 h-8 flex items-center justify-center rounded bg-[#275C53]/5 text-[12px] font-semibold text-[#275C53] hover:bg-[#275C53] hover:text-white transition-colors">{l}</a>
+              ))}
+            </div>
+            {letters.map((letter) => (
+              <div key={letter} id={`letter-${letter}`} className="mb-5">
+                <h3 className="text-sm font-semibold text-[#275C53] mb-1.5">{letter}</h3>
+                <ul className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-x-6">
+                  {grouped[letter].sort((a, b) => a.name.localeCompare(b.name)).map((p) => (
+                    <li key={p.slug} className="break-inside-avoid">
+                      <Link href={`/${p.slug}`} className="text-[12px] text-[#192026]/60 hover:text-[#275C53] leading-relaxed block py-0.5">
+                        {p.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        );
+      })()}
+
       {/* Structured Data */}
       <script
         type="application/ld+json"

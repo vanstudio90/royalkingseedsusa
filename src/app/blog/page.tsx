@@ -106,6 +106,37 @@ export default function BlogPage() {
           ))}
         </div>
       </div>
+
+      {/* Complete Article Archive — server-rendered links to every post */}
+      {(() => {
+        const grouped: Record<string, typeof allPosts> = {};
+        for (const post of allPosts) {
+          const cat = categoryLabels[post.category] || 'Cannabis Knowledge';
+          if (!grouped[cat]) grouped[cat] = [];
+          grouped[cat].push(post);
+        }
+        const sortedCategories = Object.keys(grouped).sort();
+        return (
+          <div className="mt-16 pt-8 border-t border-[#275C53]/10">
+            <h2 className="text-lg text-[#275C53] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>Complete Article Archive</h2>
+            <p className="text-sm text-[#192026]/50 mb-6">All {allPosts.length} articles organized by topic.</p>
+            {sortedCategories.map((cat) => (
+              <div key={cat} className="mb-6">
+                <h3 className="text-sm font-semibold text-[#275C53] mb-2">{cat} ({grouped[cat].length})</h3>
+                <ul className="columns-1 sm:columns-2 lg:columns-3 gap-x-6">
+                  {grouped[cat].map((post) => (
+                    <li key={post.slug} className="break-inside-avoid">
+                      <Link href={`/blog/${post.slug}`} className="text-[12px] text-[#192026]/60 hover:text-[#275C53] leading-relaxed block py-0.5">
+                        {post.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        );
+      })()}
     </div>
   );
 }
