@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAllBlogPosts } from '@/lib/blog-content';
+import { BlogSearch } from '@/components/blog/BlogSearch';
 
 export const metadata: Metadata = {
   title: 'Cannabis Seed Growing Blog — Guides, Strains & Tips',
@@ -95,12 +96,7 @@ export default function BlogPage() {
         </p>
 
         {/* Search Bar */}
-        <div className="max-w-xl mx-auto mb-6">
-          <div className="relative">
-            <svg className="absolute left-4 top-1/2 -translate-y-1/2 text-[#192026]/25" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Search grow guides, problems, strains..." className="w-full pl-11 pr-4 py-3.5 bg-white border border-[#275C53]/15 rounded-2xl text-[14px] text-[#192026] placeholder:text-[#192026]/30 focus:outline-none focus:border-[#275C53]/40 focus:shadow-sm transition-all" />
-          </div>
-        </div>
+        <BlogSearch posts={allPosts.map(p => ({ slug: p.slug, title: p.title }))} />
 
         {/* Topic Pills */}
         <div className="flex flex-wrap justify-center gap-2">
@@ -292,15 +288,7 @@ export default function BlogPage() {
         </div>
 
         {/* ═══ SIDEBAR ═══ */}
-        <aside className="w-full lg:w-[300px] shrink-0 space-y-5 lg:sticky lg:top-24">
-
-          {/* Sidebar Search */}
-          <div className="bg-white rounded-2xl border border-[#275C53]/5 p-4">
-            <div className="relative">
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-[#192026]/25" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input data-blog-search type="text" placeholder="Search articles..." className="w-full pl-9 pr-3 py-2.5 bg-[#F5F0EA] border-none rounded-xl text-[13px] text-[#192026] placeholder:text-[#192026]/30 focus:outline-none focus:ring-1 focus:ring-[#275C53]/30" />
-            </div>
-          </div>
+        <aside className="w-full lg:w-[300px] shrink-0 space-y-5 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pb-8 scrollbar-hide">
 
           {/* Quick Fix (troubleshooting shortcuts) */}
           <div className="bg-red-50/40 rounded-2xl border border-red-100/40 p-5">
