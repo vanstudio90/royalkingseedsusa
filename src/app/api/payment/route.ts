@@ -44,7 +44,10 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Invalid item data' }, { status: 400 });
   }
   const calculatedSubtotal = order.items.reduce((sum: number, i: { price: number; qty: number }) => sum + i.price * i.qty, 0);
-  const calculatedTotal = calculatedSubtotal + (order.shipping_cost || 0) + (order.tax || 0) - (order.discount || 0);
+  const calculatedBase = calculatedSubtotal + (order.shipping_cost || 0) + (order.tax || 0) - (order.discount || 0);
+  // Account for the 3% credit card surcharge the frontend adds
+  const calculatedSurcharge = parseFloat((calculatedBase * 0.03).toFixed(2));
+  const calculatedTotal = parseFloat((calculatedBase + calculatedSurcharge).toFixed(2));
   if (Math.abs(calculatedTotal - order.total) > 1) {
     return NextResponse.json({ error: 'Price mismatch detected' }, { status: 400 });
   }
