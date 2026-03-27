@@ -32,7 +32,7 @@ function filterProductsByCategory(products: any[], slug: string) {
   // Special filtering logic
   const filters: Record<string, (p: any) => boolean> = {
     'shop-all-cannabis-seeds': () => true,
-    'feminized-seeds': (p) => p.feminized || p.categories.some((c: string) => c.toLowerCase().includes('feminized')),
+    'feminized-seeds': (p) => !p.autoflower && (p.feminized || p.categories.some((c: string) => c.toLowerCase().includes('feminized'))),
     'autoflowering-seeds': (p) => p.autoflower || p.categories.some((c: string) => c.toLowerCase().includes('autoflower')),
     'indica-seeds': (p) => p.strainType === 'indica' || p.categories.some((c: string) => c.toLowerCase().includes('indica')),
     'sativa-seeds': (p) => p.strainType === 'sativa' || p.categories.some((c: string) => c.toLowerCase().includes('sativa')),
