@@ -37,7 +37,7 @@ export default async function HomePage() {
           1. HERO — keyword-rich, natural copy, internal links
       ═══════════════════════════════════════════════════════════════ */}
       <section className="hero-gradient text-white -mt-[132px] pt-[132px] lg:-mt-[88px] lg:pt-[88px]">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12 sm:py-24 text-center">
           <h1 className="text-3xl sm:text-5xl lg:text-6xl max-w-4xl mx-auto leading-tight" style={{ fontFamily: 'var(--font-patua)' }}>
             Buy Cannabis Seeds in the USA — Feminized, Autoflower &amp; High-THC Strains
           </h1>
@@ -69,7 +69,7 @@ export default async function HomePage() {
           2. TRUST + ENTITY SECTION — E-E-A-T signals
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-white border-b border-[#275C53]/5">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
               { stat: 'Since 2019', label: 'Serving American growers with tested genetics for 6+ years', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
@@ -97,7 +97,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           3. SEED TYPES — with explanatory context
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-14">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
         <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-4" style={{ fontFamily: 'var(--font-patua)' }}>
           Shop Cannabis Seeds by Type
         </h2>
@@ -127,7 +127,7 @@ export default async function HomePage() {
           4. FEATURED PRODUCTS — mid-page
       ═══════════════════════════════════════════════════════════════ */}
       {/* ─── BEST-SELLING SEEDS ─── */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
@@ -151,7 +151,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           5. MASSIVE AUTHORITY SECTION — 2000+ word guide with 20+ internal links
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl sm:text-3xl text-[#275C53] mb-8" style={{ fontFamily: 'var(--font-patua)' }}>
             Buying Cannabis Seeds in the USA: The Complete Guide
@@ -232,7 +232,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── BEGINNER-FRIENDLY SEEDS ─── */}
-      <section className="py-12 sm:py-16">
+      <section className="py-12">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
@@ -256,7 +256,7 @@ export default async function HomePage() {
           5B. HOW TO CHOOSE — comparison/decision section
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-white/50 border-y border-[#275C53]/5">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-14">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-4" style={{ fontFamily: 'var(--font-patua)' }}>
             How to Choose the Right Cannabis Seeds in the USA
           </h2>
@@ -283,7 +283,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           5C. GEO-BASED SEED SECTIONS — state/region authority
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-14">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
         <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-4" style={{ fontFamily: 'var(--font-patua)' }}>
           Explore Cannabis Seeds by US Growing Region
         </h2>
@@ -313,7 +313,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── HIGH THC SEEDS ─── */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-12 bg-white">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
@@ -337,7 +337,7 @@ export default async function HomePage() {
           5D. ABOUT ROYAL KING SEEDS — brand entity section
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-[#F5F0EA] border-y border-[#275C53]/5">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-14">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl sm:text-3xl text-[#275C53] mb-6" style={{ fontFamily: 'var(--font-patua)' }}>
               About Royal King Seeds USA
@@ -364,7 +364,7 @@ export default async function HomePage() {
           6. INTERNAL LINK HUBS — experience, effect, flavor
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-[#F5F0EA] border-y border-[#275C53]/5">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-14">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* By Experience */}
             <div>
@@ -411,7 +411,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           7. WHY CHOOSE US — proof-based, specific numbers
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
         <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-4" style={{ fontFamily: 'var(--font-patua)' }}>
           Why 200,000+ American Growers Choose Royal King Seeds
         </h2>
@@ -436,7 +436,7 @@ export default async function HomePage() {
       </section>
 
       {/* ─── FAST FLOWERING SEEDS ─── */}
-      <section className="py-12 sm:py-16">
+      <section className="py-12">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-normal text-[#275C53]" style={{ fontFamily: 'var(--font-patua)' }}>
@@ -460,7 +460,7 @@ export default async function HomePage() {
           8. FAQ — expanded to 12 questions, longer answers
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-white/50 border-t border-[#275C53]/5">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-10" style={{ fontFamily: 'var(--font-patua)' }}>
             Frequently Asked Questions About Buying Cannabis Seeds in the USA
           </h2>
@@ -519,7 +519,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           9. BLOG / EDUCATION PREVIEW — topical authority
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
         <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-4" style={{ fontFamily: 'var(--font-patua)' }}>
           Learn to Grow Cannabis Successfully
         </h2>
@@ -554,7 +554,7 @@ export default async function HomePage() {
           Popular Categories (dark section)
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-[#275C53] text-white">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <h2 className="text-2xl sm:text-3xl text-center mb-10" style={{ fontFamily: 'var(--font-patua)' }}>
             Popular Cannabis Seed Categories for US Growers
           </h2>
@@ -577,7 +577,7 @@ export default async function HomePage() {
       {/* ═══════════════════════════════════════════════════════════════
           10. FINAL CTA + TRUST CLOSE
       ═══════════════════════════════════════════════════════════════ */}
-      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-16">
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
         <div className="bg-[#275C53] rounded-3xl p-8 sm:p-14 text-center">
           <h2 className="text-2xl sm:text-3xl text-white mb-4" style={{ fontFamily: 'var(--font-patua)' }}>
             Your Next Harvest Starts Here
@@ -606,7 +606,7 @@ export default async function HomePage() {
           FULL INTERNAL LINK HUB — all categories, top strains, blog
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-[#F5F0EA] border-t border-[#275C53]/5">
-        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-14">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
           <h2 className="text-2xl text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>
             Browse Our Complete Cannabis Seed Catalog
           </h2>
