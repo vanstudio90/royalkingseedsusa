@@ -57,7 +57,7 @@ export default async function HomePage() {
           </div>
           <div className="mt-5 flex flex-wrap gap-x-6 gap-y-1 justify-center text-[11px] text-white/50 uppercase tracking-[1px]">
             <span>50,000+ US growers served</span>
-            <span>Free shipping over $99</span>
+            <span>Free shipping over $150</span>
             <span>All 50 states</span>
             <span>92% germination rate</span>
             <span>Discreet packaging</span>

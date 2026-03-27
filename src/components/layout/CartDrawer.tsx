@@ -74,7 +74,7 @@ export function CartDrawer() {
               <span className="text-[#192026]/60 text-sm">Subtotal</span>
               <span className="text-xl font-semibold text-[#275C53]">${totalPrice().toFixed(2)} USD</span>
             </div>
-            <p className="text-xs text-[#192026]/70">Free shipping on orders over $99 USD across the United States.</p>
+            <p className="text-xs text-[#192026]/70">Free shipping on orders over $150 USD across the United States.</p>
             <a href="/checkout" onClick={toggleCart} className="btn-main w-full py-3.5 text-center block">
               Proceed to Checkout
             </a>

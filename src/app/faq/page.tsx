@@ -17,7 +17,7 @@ const faqs = [
   { category: 'Shipping & Delivery', questions: [
     { q: 'Where do you ship?', a: 'We ship to all 50 US states. Orders are packaged discreetly in plain, unmarked packaging with no external indication of contents.' },
     { q: 'How long does shipping take?', a: 'Orders ship within 1-2 business days and typically arrive within 3-7 business days via USPS or UPS. Tracking information is provided for every order.' },
-    { q: 'Is shipping free?', a: 'Free shipping on all orders over $99 USD. Orders under $99 have a flat shipping rate of $9.99.' },
+    { q: 'Is shipping free?', a: 'Free shipping on all orders over $150 USD. Orders under $150 have a flat shipping rate of $9.99.' },
     { q: 'Is the packaging discreet?', a: 'Absolutely. All orders ship in plain, unmarked boxes or envelopes. There is no mention of cannabis, seeds, or Royal King Seeds on the exterior packaging.' },
   ]},
   { category: 'Seeds & Growing', questions: [

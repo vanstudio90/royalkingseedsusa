@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Shipping & Delivery — Discreet US Seed Shipping',
-  description: 'Free shipping on orders over $99. Discreet packaging to all 50 states. 3-7 business day delivery with tracking. Learn about Royal King Seeds shipping policies.',
+  description: 'Free shipping on orders over $150. Discreet packaging to all 50 states. 3-7 business day delivery with tracking. Learn about Royal King Seeds shipping policies.',
   alternates: { canonical: 'https://royalkingseeds.us/shipping' },
 };
 
@@ -18,8 +18,8 @@ export default function ShippingPage() {
           <div className="bg-white rounded-2xl p-6 border border-[#275C53]/5">
             <h2 className="text-lg text-[#275C53] font-semibold mb-3">Shipping Rates</h2>
             <div className="space-y-2 text-sm text-[#192026]/70">
-              <p><strong className="text-[#275C53]">Free Shipping:</strong> Orders over $99 USD</p>
-              <p><strong className="text-[#275C53]">Standard Shipping:</strong> $9.99 flat rate for orders under $99</p>
+              <p><strong className="text-[#275C53]">Free Shipping:</strong> Orders over $150 USD</p>
+              <p><strong className="text-[#275C53]">Standard Shipping:</strong> $9.99 flat rate for orders under $150</p>
               <p><strong className="text-[#275C53]">Processing Time:</strong> 1-2 business days</p>
               <p><strong className="text-[#275C53]">Delivery Time:</strong> 3-7 business days via USPS/UPS</p>
             </div>
