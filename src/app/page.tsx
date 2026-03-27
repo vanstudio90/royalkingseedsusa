@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: {
     absolute: 'Royal King Seeds USA — Buy Cannabis Seeds Online',
   },
-  description: 'Buy cannabis seeds online in the USA from Royal King Seeds. 1,200+ feminized, autoflower, indica, sativa, and high-THC marijuana seeds with discreet shipping to all 50 states. 92% germination rate. Trusted by 50,000+ American growers since 2019.',
+  description: 'Buy cannabis seeds online in the USA from Royal King Seeds. 1,600+ feminized, autoflower, indica, sativa, and high-THC marijuana seeds with discreet shipping to all 50 states. 92% germination rate. Trusted by 50,000+ American growers since 2019.',
   alternates: { canonical: 'https://royalkingseeds.us' },
   keywords: [
     'buy cannabis seeds USA',
@@ -70,13 +70,14 @@ export default async function HomePage() {
       ═══════════════════════════════════════════════════════════════ */}
       <section className="bg-white border-b border-[#275C53]/5">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
               { stat: 'Since 2019', label: 'Serving American growers with tested genetics for 6+ years', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
-              { stat: '1,200+', label: 'Strains curated from 40+ global breeders, tested before listing', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
+              { stat: '1,600+', label: 'Strains curated from 40+ global breeders, tested before listing', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> },
               { stat: '92%', label: 'Germination rate based on batch testing of 10,000+ seeds in controlled environments', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> },
               { stat: '50,000+', label: 'Trusted by over 50,000 growers across the United States since 2019', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg> },
               { stat: '3-5 Days', label: '94% of US orders delivered within 5 business days via USPS/UPS', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5a2 2 0 01-2 2h-1"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> },
+              { stat: 'Free Replacement', label: 'Free shipping on all germination guarantee replacements', icon: <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1.5"><path d="M21 8V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2v-2"/><path d="M16 12H3"/><path d="M16 12l-4-4"/><path d="M16 12l-4 4"/></svg> },
             ].map((item) => (
               <div key={item.label} className="text-center p-4">
                 <div className="w-11 h-11 rounded-full bg-[#275C53]/8 flex items-center justify-center mx-auto mb-2">{item.icon}</div>
@@ -164,7 +165,7 @@ export default async function HomePage() {
               We know this because our support team talks to growers every day — over 200 strain-selection conversations per week — and the pattern is consistent: growers who start with fresh, tested genetics from a reputable source get results. Growers who buy cheap seeds from unverified marketplaces get heartbreak.
             </p>
             <p>
-              That is why we built Royal King Seeds around one idea: <strong>give American home growers access to 1,200+ <Link href="/product-category/shop-all-cannabis-seeds">premium cannabis seed strains</Link> that are actually tested before they reach your door</strong>. We offer over 1,200 cannabis strains categorized by yield, THC level, growing difficulty, climate compatibility, and terpene profile — because we believe an informed grower is a successful grower.
+              That is why we built Royal King Seeds around one idea: <strong>give American home growers access to 1,600+ <Link href="/product-category/shop-all-cannabis-seeds">premium cannabis seed strains</Link> that are actually tested before they reach your door</strong>. We offer over 1,600 cannabis strains categorized by yield, THC level, growing difficulty, climate compatibility, and terpene profile — because we believe an informed grower is a successful grower.
             </p>
 
             <h3 style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Seed Legality in the United States</h3>
@@ -343,7 +344,7 @@ export default async function HomePage() {
             </h2>
             <div className="prose prose-sm max-w-none text-[#192026]/75 prose-headings:text-[#275C53] prose-a:text-[#275C53] leading-relaxed">
               <p>
-                Royal King Seeds was founded in 2019 with a clear mission: <strong>give American home growers access to premium, tested cannabis genetics without the markup, confusion, or unreliable service that plagues most online seed banks</strong>. We are not a marketplace that lists everything from every breeder. We are a curated seed bank — every strain in our 1,200+ catalog has been vetted for germination viability, genetic stability, and growing performance before it reaches our store.
+                Royal King Seeds was founded in 2019 with a clear mission: <strong>give American home growers access to premium, tested cannabis genetics without the markup, confusion, or unreliable service that plagues most online seed banks</strong>. We are not a marketplace that lists everything from every breeder. We are a curated seed bank — every strain in our 1,600+ catalog has been vetted for germination viability, genetic stability, and growing performance before it reaches our store.
               </p>
               <p>
                 Our genetics are sourced from over 40 established breeders across the Netherlands, Spain, the UK, and North America. We maintain relationships with these breeders based on consistent quality — if a breeder&apos;s germination rates drop below our 90% threshold, we pause orders until the issue is resolved. This is not common practice in the seed bank industry, but it is why our 92% germination rate — based on internal batch testing of 10,000+ seeds in controlled environments — exceeds the industry average.
@@ -419,7 +420,7 @@ export default async function HomePage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {[
-            { title: '1,200+ Curated Strains (Not Bloated Filler)', desc: 'Every strain in our catalog has been vetted for germination viability and includes real growing data. We add new genetics monthly and remove underperformers. From OG Kush to Gelato to exotic crosses — if it is in our store, it has been tested.', link: '/product-category/shop-all-cannabis-seeds' },
+            { title: '1,600+ Curated Strains (Not Bloated Filler)', desc: 'Every strain in our catalog has been vetted for germination viability and includes real growing data. We add new genetics monthly and remove underperformers. From OG Kush to Gelato to exotic crosses — if it is in our store, it has been tested.', link: '/product-category/shop-all-cannabis-seeds' },
             { title: 'Discreet Delivery Averaging 3-5 Business Days', desc: 'Over 94% of US orders arrive within 5 business days based on USPS/UPS tracking data. Plain packaging with no branding. Zero customs delays since we ship domestically from US-based fulfillment.', link: '/shipping' },
             { title: '92% Germination Rate (Industry-Leading)', desc: 'Based on internal batch testing and customer-reported data from 50,000+ orders. Seeds that fail to meet our 90% viability threshold are pulled from inventory. Our germination guarantee replaces seeds at no cost.', link: '/faq' },
             { title: 'Step-by-Step Grow Guides Used by 10,000+ Growers', desc: 'Our blog features detailed cultivation guides for germination, indoor setups, autoflower techniques, nutrient schedules, and harvesting — written by experienced cultivators, not generic content mills.', link: '/blog' },
@@ -582,11 +583,11 @@ export default async function HomePage() {
             Your Next Harvest Starts Here
           </h2>
           <p className="text-white/75 text-sm sm:text-base max-w-2xl mx-auto mb-6 leading-relaxed">
-            Browse over 1,200 premium cannabis strains trusted by 50,000+ American growers. Shop <Link href="/product-category/feminized-seeds" className="text-[#D7B65D] hover:underline">feminized</Link>, <Link href="/product-category/autoflowering-seeds" className="text-[#D7B65D] hover:underline">autoflower</Link>, and <Link href="/product-category/high-tch-seeds" className="text-[#D7B65D] hover:underline">high-yield seeds</Link> with fast, discreet US shipping and a 92% germination guarantee backed by real batch-testing data. Orders placed before 2 PM EST ship the same business day.
+            Browse over 1,600 premium cannabis strains trusted by 50,000+ American growers. Shop <Link href="/product-category/feminized-seeds" className="text-[#D7B65D] hover:underline">feminized</Link>, <Link href="/product-category/autoflowering-seeds" className="text-[#D7B65D] hover:underline">autoflower</Link>, and <Link href="/product-category/high-tch-seeds" className="text-[#D7B65D] hover:underline">high-yield seeds</Link> with fast, discreet US shipping and a 92% germination guarantee backed by real batch-testing data. Orders placed before 2 PM EST ship the same business day.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
             <Link href="/product-category/shop-all-cannabis-seeds" className="btn-main !bg-[#D7B65D] !text-[#1a3d36] hover:!bg-[#c9a84e]">
-              Browse All 1,200+ Strains
+              Browse All 1,600+ Strains
             </Link>
             <Link href="/contact" className="btn-second !border-white/30 !text-white hover:!bg-white/10">
               Talk to Our Team
@@ -610,7 +611,7 @@ export default async function HomePage() {
             Browse Our Complete Cannabis Seed Catalog
           </h2>
           <p className="text-sm text-[#192026]/65 mb-8 max-w-3xl leading-relaxed">
-            Our full catalog includes over 1,200 cannabis strains categorized by yield, THC level, growing difficulty, climate compatibility, terpene profile, and desired effects — filterable by strain type, flowering time, indoor vs. outdoor suitability, and price. Every category below links to a curated collection with detailed strain specs, growing data, and real customer-reported results. No other US-based seed bank offers this depth of organization and transparency.
+            Our full catalog includes over 1,600 cannabis strains categorized by yield, THC level, growing difficulty, climate compatibility, terpene profile, and desired effects — filterable by strain type, flowering time, indoor vs. outdoor suitability, and price. Every category below links to a curated collection with detailed strain specs, growing data, and real customer-reported results. No other US-based seed bank offers this depth of organization and transparency.
           </p>
 
           <h3 className="text-base text-[#275C53] mb-4 font-semibold">Seed Types &amp; Genetics</h3>
