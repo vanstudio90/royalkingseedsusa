@@ -392,7 +392,7 @@ export function Header() {
       <div className="bg-white border-b border-[#275C53]/10 hidden lg:block">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-center gap-2 h-12">
-            {navItems.map((item) => (
+            {navItems.map((item, navIdx) => (
               <div
                 key={item.label}
                 className="relative"
@@ -413,7 +413,7 @@ export function Header() {
 
                 {item.children && activeMenu === item.label && (
                   <div
-                    className="absolute left-1/2 -translate-x-1/2 top-full pt-1 z-50"
+                    className={`absolute top-full pt-1 z-50 ${navIdx <= 2 ? 'left-0' : navIdx >= navItems.length - 2 ? 'right-0' : 'left-1/2 -translate-x-1/2'}`}
                     onMouseEnter={() => handleMenuEnter(item.label)}
                     onMouseLeave={handleMenuLeave}
                   >
