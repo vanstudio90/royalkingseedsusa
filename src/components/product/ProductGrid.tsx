@@ -13,7 +13,7 @@ interface ProductGridProps {
 
 export function ProductGrid({ products, activeCategory, initialQuery }: ProductGridProps) {
   const [search, setSearch] = useState(initialQuery || '');
-  const [sortBy, setSortBy] = useState<'name' | 'price-asc' | 'price-desc'>('name');
+  const [sortBy, setSortBy] = useState<'featured' | 'name' | 'price-asc' | 'price-desc'>('featured');
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<Record<string, string[]>>({});
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -131,6 +131,9 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
     }
 
     switch (sortBy) {
+      case 'name':
+        result.sort((a, b) => a.name.localeCompare(b.name));
+        break;
       case 'price-asc':
         result.sort((a, b) => a.price - b.price);
         break;
@@ -138,7 +141,7 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
         result.sort((a, b) => b.price - a.price);
         break;
       default:
-        result.sort((a, b) => a.name.localeCompare(b.name));
+        break; // 'featured' — keep the shuffled order from getProducts()
     }
 
     return result;
@@ -219,6 +222,7 @@ export function ProductGrid({ products, activeCategory, initialQuery }: ProductG
             onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
             className="px-4 py-2.5 text-[13px] bg-white border border-[#275C53]/15 rounded-full text-[#192026]/60 cursor-pointer focus:outline-none"
           >
+            <option value="featured">Sort: Featured</option>
             <option value="name">Sort: A-Z</option>
             <option value="price-asc">Price: Low to High</option>
             <option value="price-desc">Price: High to Low</option>

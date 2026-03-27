@@ -14,6 +14,18 @@ function hash(s: string): number {
   return Math.abs(h);
 }
 
+// Seeded shuffle — deterministic per-day so product order feels mixed but stable within a session
+function seededShuffle<T>(arr: T[], seed = 42): T[] {
+  const shuffled = [...arr];
+  let s = seed;
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    s = (s * 1664525 + 1013904223) & 0x7fffffff;
+    const j = s % (i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 function pick<T>(slug: string, arr: T[], salt = ''): T {
   return arr[hash(slug + salt) % arr.length];
 }
@@ -181,10 +193,13 @@ function getAllProductsRaw(): Product[] {
 }
 
 export function getProducts(): Product[] {
-  return getAllProductsRaw().filter(p => {
+  const published = getAllProductsRaw().filter(p => {
     const raw = (rawProducts as any[]).find(r => r.slug === p.slug);
     return raw?.status === 'published';
   });
+  // Use day-of-year as seed so order rotates daily but stays stable within a session
+  const daySeed = Math.floor(Date.now() / 86400000);
+  return seededShuffle(published, daySeed);
 }
 
 export function getAllProducts(): Product[] {
