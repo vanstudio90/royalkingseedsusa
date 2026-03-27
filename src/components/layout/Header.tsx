@@ -47,9 +47,41 @@ const navItems: MenuItem[] = [
     href: '/blog',
     children: [
       {
-        label: 'Latest Guides',
+        label: 'Start Here',
         children: [
+          { label: 'Beginner Grow Guide', href: '/blog/top-7-recommended-strains-for-beginners' },
           { label: 'Germination Guide', href: '/blog/autoflowering-seed-germination-guide' },
+          { label: 'Indoor Growing', href: '/blog/cannabis-growing-lights-and-phases' },
+          { label: 'Outdoor Growing', href: '/blog/rainy-season-outdoors-fast-finishing-seeds-that-beat-the-storms' },
+          { label: 'Autoflower Guide', href: '/blog/autoflower-cannabis-seeds-and-growing-guide' },
+        ],
+      },
+      {
+        label: 'Learn the Process',
+        children: [
+          { label: 'Seedling Care', href: '/blog/cannabis-seedlings-and-transplanting' },
+          { label: 'Vegetative Stage', href: '/blog/keep-cannabis-in-vegetative-stage' },
+          { label: 'Flowering Stage', href: '/blog/cannabis-flowering-and-budding' },
+          { label: 'Training & Topping', href: '/blog/cannabis-plant-pruning-and-topping' },
+          { label: 'Nutrients & Feeding', href: '/blog/cannabis-nutrient-deficiencies' },
+        ],
+      },
+      {
+        label: 'Fix Problems',
+        children: [
+          { label: 'Yellow Leaves', href: '/blog/yellowing-of-cannabis-leaves-in-the-first-week-of-flowering' },
+          { label: 'Nutrient Burn', href: '/blog/cannabis-nutrient-burn-and-light-stress' },
+          { label: 'Overwatering', href: '/blog/overwatering-vs-underwatering-cannabis-plants' },
+          { label: 'Pests & Bugs', href: '/blog/cannabis-pest-management' },
+          { label: 'Mold & Mildew', href: '/blog/mold-in-cannabis' },
+        ],
+      },
+      {
+        label: 'Harvest & Cure',
+        children: [
+          { label: 'When to Harvest', href: '/blog/cannabis-trichomes-and-harvesting' },
+          { label: 'Drying Guide', href: '/blog/drying-and-curing-your-cannabis-plants' },
+          { label: 'Curing Guide', href: '/blog/cannabis-harvesting-and-curing' },
           { label: 'All Grow Guides', href: '/blog' },
         ],
       },
@@ -315,7 +347,7 @@ export function Header() {
                     onMouseLeave={handleMenuLeave}
                   >
                     {item.children.some((c) => 'children' in c && !('href' in c)) ? (
-                      <div className="bg-white rounded-2xl shadow-xl border border-[#275C53]/10 p-6 min-w-[500px] grid grid-cols-2 gap-x-8 gap-y-5">
+                      <div className={`bg-white rounded-2xl shadow-xl border border-[#275C53]/10 p-6 grid gap-x-8 gap-y-5 ${item.children.filter(c => isMenuGroup(c)).length >= 4 ? 'min-w-[700px] grid-cols-4' : 'min-w-[500px] grid-cols-2'}`}>
                         {item.children.map((child) =>
                           isMenuGroup(child) ? (
                             <div key={child.label}>
