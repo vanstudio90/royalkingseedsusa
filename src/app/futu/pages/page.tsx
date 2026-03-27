@@ -142,8 +142,15 @@ export default function AdminPagesPage() {
               {pages.map((p) => (
                 <tr key={p.id} className="border-b border-[#192026]/5 hover:bg-[#f5f0ea]/50 transition-colors">
                   <td className="px-4 py-3">
-                    <div className="text-sm font-medium text-[#192026]">{p.title}</div>
-                    <div className="text-[11px] text-[#192026]/30">/{p.slug}</div>
+                    <a
+                      href={p.page_type === 'blog' ? `/blog/${p.slug}` : `/${p.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block group"
+                    >
+                      <div className="text-sm font-medium text-[#192026] group-hover:text-[#275C53] transition-colors">{p.title}</div>
+                      <div className="text-[11px] text-[#192026]/30 group-hover:text-[#275C53]/50 transition-colors">/{p.slug}</div>
+                    </a>
                   </td>
                   <td className="px-4 py-3">
                     <span className={`text-[10px] uppercase tracking-[1px] font-semibold px-2 py-1 rounded-full ${
