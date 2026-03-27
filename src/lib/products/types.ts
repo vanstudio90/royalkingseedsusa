@@ -18,7 +18,6 @@ export interface Product {
   feminized: boolean;
   autoflower: boolean;
   inStock: boolean;
-  sku: string;
   imageUrl: string;
   metaTitle?: string;
   metaDescription?: string;
@@ -32,7 +31,7 @@ export interface Product {
 export interface CartItem {
   product: Product;
   quantity: number;
-  selectedVariant?: { label: string; price: number; sku?: string };
+  selectedVariant?: { label: string; price: number };
 }
 
 export interface ProductFilters {

@@ -23,7 +23,6 @@ function toProduct(row: any): Product {
     feminized: row.feminized ?? true,
     autoflower: row.autoflower ?? false,
     inStock: row.in_stock ?? true,
-    sku: row.sku || '',
     imageUrl: row.image_url || '',
     metaTitle: row.meta_title || '',
     metaDescription: row.meta_description || '',

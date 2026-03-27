@@ -169,7 +169,6 @@ function transformProduct(raw: any): Product {
     feminized: raw.feminized ?? true,
     autoflower: raw.autoflower ?? false,
     inStock: raw.in_stock ?? true,
-    sku: raw.sku || '',
     imageUrl: raw.image_url || '',
     metaTitle: generateMetaTitle(raw),
     metaDescription: generateMetaDescription(raw),

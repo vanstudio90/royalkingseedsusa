@@ -13,8 +13,7 @@ interface StrainSpecs {
 
 interface ProductInfo {
   imageUrl: string;
-  sku: string;
-  seedOptions: Array<{ label: string; price: number; sku?: string }>;
+  seedOptions: Array<{ label: string; price: number }>;
   specs: StrainSpecs;
 }
 
@@ -271,10 +270,6 @@ export default function OrderDetailPage() {
               <tbody>
                 {(order.items || []).map((item, i) => {
                   const pInfo = productData[item.slug];
-                  // Find matching variation SKU by seed count
-                  const seedNum = parseInt(item.variant || '') || 0;
-                  const varSku = pInfo?.seedOptions?.find(o => (parseInt(o.label) || 0) === seedNum)?.sku;
-                  const displaySku = varSku || pInfo?.sku || '';
                   return (
                     <tr key={i} className="border-b border-[#192026]/5">
                       <td className="px-5 py-3 text-sm">
@@ -289,7 +284,6 @@ export default function OrderDetailPage() {
                           <div>
                             <span>{item.name}</span>
                             {item.variant && <span className="text-[#192026]/40 ml-1.5">({item.variant})</span>}
-                            {displaySku && <div className="text-[10px] font-mono text-[#192026]/30 mt-0.5">SKU: {displaySku}</div>}
                             {pInfo?.specs && (
                               <button onClick={() => setDataSheetSlug(item.slug)} className="block text-[10px] text-[#275C53] hover:underline cursor-pointer mt-0.5">View Data Sheet</button>
                             )}
