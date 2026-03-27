@@ -9,6 +9,7 @@ const navItems = [
   { href: '/futu/products', label: 'Products', icon: '🌱' },
   { href: '/futu/orders', label: 'Orders', icon: '📦' },
   { href: '/futu/customers', label: 'Customers', icon: '👤' },
+  { href: '/futu/users', label: 'Users', icon: '👥' },
   { href: '/futu/coupons', label: 'Coupons', icon: '🏷️' },
   { href: '/futu/analytics', label: 'Analytics', icon: '📈' },
   { href: '/futu/pages', label: 'Pages & Blog', icon: '📄' },
