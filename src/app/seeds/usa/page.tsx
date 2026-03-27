@@ -7,7 +7,7 @@ const BASE = 'https://royalkingseeds.us';
 export const metadata: Metadata = {
   title: 'Buy Cannabis Seeds in the USA — All 50 States',
   description:
-    'Buy cannabis seeds online with discreet shipping to all 50 US states. Feminized, autoflower, and high-THC seeds. 92% germination guarantee. Fast 3-5 day delivery.',
+    'Buy cannabis seeds online with discreet shipping to all 50 US states. Feminized, autoflower, and high-THC seeds. 95% germination guarantee. Fast 3-5 day delivery.',
   alternates: { canonical: `${BASE}/seeds/usa` },
   openGraph: {
     title: 'Buy Cannabis Seeds in the USA — All 50 States',
@@ -106,7 +106,7 @@ export default function USAHubPage() {
         <p className="text-[#192026]/70 text-sm sm:text-base leading-relaxed max-w-4xl">
           Royal King Seeds ships premium cannabis seeds to every US state with discreet packaging and
           fast 3-5 day delivery. Choose from 1,200+ feminized, autoflower, CBD, and high-THC strains
-          backed by our 92% germination guarantee. Find your state below to see local growing guides,
+          backed by our 95% germination guarantee. Find your state below to see local growing guides,
           climate tips, and strain recommendations.
         </p>
       </header>
@@ -232,7 +232,7 @@ export default function USAHubPage() {
         </h2>
         <p className="text-white/70 text-sm mb-6 max-w-md mx-auto">
           Browse over 1,200 premium cannabis seeds with discreet shipping to all 50 states and our
-          92% germination guarantee.
+          95% germination guarantee.
         </p>
         <Link
           href="/product-category/shop-all-cannabis-seeds"

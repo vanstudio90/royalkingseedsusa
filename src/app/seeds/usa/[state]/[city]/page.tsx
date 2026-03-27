@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cityName = cityEntry?.city || citySlug;
 
   const title = `Cannabis Seeds in ${cityName}, ${stateName}`;
-  const description = `Buy premium cannabis seeds in ${cityName}, ${stateName}. Discreet shipping, 92% germination guarantee. Feminized, autoflower, and CBD strains for ${cityName} growers.`;
+  const description = `Buy premium cannabis seeds in ${cityName}, ${stateName}. Discreet shipping, 95% germination guarantee. Feminized, autoflower, and CBD strains for ${cityName} growers.`;
 
   return {
     title,
@@ -108,7 +108,7 @@ export default async function CityPage({ params }: Props) {
         </h1>
         <p className="text-[#192026]/70 text-sm sm:text-base leading-relaxed max-w-3xl">
           Royal King Seeds delivers premium cannabis seeds to {cityName}, {stateName} with discreet
-          packaging and fast 3-5 day shipping. Shop 1,200+ strains with our 92% germination guarantee.
+          packaging and fast 3-5 day shipping. Shop 1,200+ strains with our 95% germination guarantee.
         </p>
       </header>
 
@@ -201,7 +201,7 @@ export default async function CityPage({ params }: Props) {
         </h3>
         <p className="text-white/70 text-sm mb-6 max-w-md mx-auto">
           Over 1,200 premium strains shipped discreetly to {cityName}, {stateName} with our
-          92% germination guarantee.
+          95% germination guarantee.
         </p>
         <Link
           href="/product-category/shop-all-cannabis-seeds"

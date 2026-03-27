@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
               Ready to Start Growing?
             </h3>
             <p className="text-white/70 text-sm mb-6 max-w-md mx-auto">
-              Browse over 1,200 premium cannabis seeds with discreet shipping to all 50 states and our 92% germination guarantee.
+              Browse over 1,200 premium cannabis seeds with discreet shipping to all 50 states and our 95% germination guarantee.
             </p>
             <Link href="/product-category/shop-all-cannabis-seeds" className="btn-main !bg-[#D7B65D] !text-[#1a3d36]">
               Shop Cannabis Seeds

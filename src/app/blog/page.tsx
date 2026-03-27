@@ -33,7 +33,7 @@ export default function BlogPage() {
           Cannabis Growing Guides &amp; Strain Reviews
         </h1>
         <p className="text-[#192026]/70 max-w-2xl mx-auto">
-          In-depth cultivation guides, honest strain breakdowns, and practical growing advice written by Sierra Langston — a hands-on cultivator and seed specialist who has helped over 50,000 American growers succeed. Updated weekly.
+          In-depth cultivation guides, honest strain breakdowns, and practical growing advice written by Sierra Langston — a hands-on cultivator and seed specialist who has helped over 200,000 American growers succeed. Updated weekly.
         </p>
       </div>
 

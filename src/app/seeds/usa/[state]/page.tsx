@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const stateName = stateEntry?.state || stateSlug;
 
   const title = `Buy Cannabis Seeds in ${stateName} — Discreet Shipping`;
-  const description = `Buy premium cannabis seeds in ${stateName} with fast, discreet shipping. Feminized, autoflower, and CBD seeds. 92% germination guarantee. Best strains for ${stateName} climate.`;
+  const description = `Buy premium cannabis seeds in ${stateName} with fast, discreet shipping. Feminized, autoflower, and CBD seeds. 95% germination guarantee. Best strains for ${stateName} climate.`;
 
   return {
     title,
@@ -98,7 +98,7 @@ export default async function StatePage({ params }: Props) {
             <p className="text-[#192026]/70 text-sm sm:text-base leading-relaxed max-w-3xl">
               Royal King Seeds ships premium cannabis seeds to {stateName} with discreet packaging and
               fast 3-5 day delivery. Browse 1,200+ strains including feminized, autoflower, and CBD
-              genetics — all backed by our 92% germination guarantee.
+              genetics — all backed by our 95% germination guarantee.
             </p>
           </header>
 
@@ -191,7 +191,7 @@ export default async function StatePage({ params }: Props) {
               Start Growing in {stateName}
             </h3>
             <p className="text-white/70 text-sm mb-6 max-w-md mx-auto">
-              Browse 1,200+ premium strains with discreet shipping to {stateName} and our 92%
+              Browse 1,200+ premium strains with discreet shipping to {stateName} and our 95%
               germination guarantee.
             </p>
             <Link
