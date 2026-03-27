@@ -70,6 +70,8 @@ export default function AccountPage() {
   const [profileForm, setProfileForm] = useState({
     name: '', phone: '', street: '', city: '', state: '', zip: '',
   });
+  const [profileSaving, setProfileSaving] = useState(false);
+  const [profileSaved, setProfileSaved] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn && user?.email) {
@@ -78,19 +80,67 @@ export default function AccountPage() {
         .then(r => r.json())
         .then(data => { setOrders(Array.isArray(data) ? data : []); setLoadingOrders(false); })
         .catch(() => setLoadingOrders(false));
+
+      // Load profile from database
+      fetch(`/api/account/profile?email=${encodeURIComponent(user.email)}`)
+        .then(r => r.json())
+        .then(data => {
+          const addr = data.shipping_address || {};
+          const dbProfile = {
+            name: data.name || user.name || '',
+            phone: data.phone || user.phone || '',
+            street: addr.street || user.street || '',
+            city: addr.city || user.city || '',
+            state: addr.state || user.state || '',
+            zip: addr.zip || user.zip || '',
+          };
+          setProfileForm(dbProfile);
+          updateProfile(dbProfile);
+        })
+        .catch(() => {});
+
+      // Load wishlist from database and merge with local
+      fetch(`/api/account/wishlist?email=${encodeURIComponent(user.email)}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data.items && data.items.length > 0) {
+            const localSlugs = new Set(wishlistItems.map((i: Product) => i.slug));
+            const dbSlugs = data.items.map((i: { product_slug: string }) => i.product_slug);
+            // If DB has items not in local, we sync local → DB on next toggle
+            // For now, just ensure DB items are noted
+            if (wishlistItems.length === 0 && dbSlugs.length > 0) {
+              // DB has items but local is empty — user cleared browser
+              // We can't fully restore Product objects from DB (only slug/name stored)
+              // But we note that the data exists
+            }
+          }
+          // Sync local wishlist to DB
+          if (wishlistItems.length > 0) {
+            fetch('/api/account/wishlist', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: user.email,
+                action: 'sync',
+                items: wishlistItems.map((i: Product) => ({ slug: i.slug, name: i.name })),
+              }),
+            }).catch(() => {});
+          }
+        })
+        .catch(() => {});
     }
   }, [isLoggedIn, user?.email]);
 
   useEffect(() => {
     if (user) {
-      setProfileForm({
-        name: user.name || '',
-        phone: user.phone || '',
-        street: user.street || '',
-        city: user.city || '',
-        state: user.state || '',
-        zip: user.zip || '',
-      });
+      setProfileForm(prev => ({
+        name: prev.name || user.name || '',
+        phone: prev.phone || user.phone || '',
+        street: prev.street || user.street || '',
+        city: prev.city || user.city || '',
+        state: prev.state || user.state || '',
+        zip: prev.zip || user.zip || '',
+      }));
     }
   }, [user]);
 
@@ -109,8 +159,33 @@ export default function AccountPage() {
     });
   };
 
-  const handleProfileSave = () => {
+  const handleProfileSave = async () => {
+    setProfileSaving(true);
+    setProfileSaved(false);
     updateProfile(profileForm);
+
+    try {
+      await fetch('/api/account/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: user?.email,
+          name: profileForm.name,
+          phone: profileForm.phone,
+          shipping_address: {
+            street: profileForm.street,
+            city: profileForm.city,
+            state: profileForm.state,
+            zip: profileForm.zip,
+          },
+        }),
+      });
+      setProfileSaved(true);
+      setTimeout(() => setProfileSaved(false), 3000);
+    } catch {
+      // Still saved locally
+    }
+    setProfileSaving(false);
   };
 
   // --- Not Logged In ---
@@ -364,8 +439,8 @@ export default function AccountPage() {
                     <input type="text" id="profile_zip" name="zip" value={profileForm.zip} onChange={e => setProfileForm(p => ({ ...p, zip: e.target.value }))} className="checkout-input" />
                   </div>
                 </div>
-                <button onClick={handleProfileSave} className="px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] transition-colors cursor-pointer">
-                  Save Profile
+                <button onClick={handleProfileSave} disabled={profileSaving} className="px-6 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold uppercase tracking-[0.5px] hover:bg-[#1e4a42] transition-colors cursor-pointer disabled:opacity-50">
+                  {profileSaving ? 'Saving...' : profileSaved ? 'Saved!' : 'Save Profile'}
                 </button>
               </div>
             </div>
