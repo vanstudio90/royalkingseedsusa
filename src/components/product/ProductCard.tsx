@@ -11,7 +11,6 @@ export function ProductCard({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
   const toggleWishlist = useWishlistStore((s) => s.toggleItem);
   const isInWishlist = useWishlistStore((s) => s.isInWishlist(product.id));
-  const [imgError, setImgError] = useState(false);
 
   // Parse seed options
   const seedOpts: { label: string; price: number }[] = (product.seedOptions || []).map((opt: any) => {
@@ -45,16 +44,10 @@ export function ProductCard({ product }: { product: Product }) {
       <Link href={`/${product.slug}`}>
         {/* Image */}
         <div className="product-image aspect-square bg-white flex items-center justify-center relative mb-3 sm:mb-5 overflow-hidden">
-          {product.imageUrl && !product.imageUrl.startsWith('/images/seeds/') && !imgError && !product.imageUrl.match(/\.(jpg|jpeg)$/i) ? (
-            <Image src={product.imageUrl} alt={product.name} width={300} height={300} loading="lazy" onError={() => setImgError(true)} className="w-full h-full object-contain p-1 sm:p-3 group-hover:scale-105 transition-transform duration-300" />
+          {product.imageUrl && !product.imageUrl.startsWith('/images/seeds/') ? (
+            <Image src={product.imageUrl} alt={product.name} width={300} height={300} loading="lazy" className="w-full h-full object-contain p-1 sm:p-3 group-hover:scale-105 transition-transform duration-300" />
           ) : (
-            <div className="flex flex-col items-center justify-center gap-2">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#275C53" strokeWidth="1" className="opacity-25 group-hover:opacity-40 transition-opacity">
-                <path d="M12 22s-8-4-8-10V5l8-3 8 3v7c0 6-8 10-8 10z" />
-                <path d="M12 8v4M12 16h.01" />
-              </svg>
-              <span className="text-[10px] text-[#275C53]/20 font-medium">Image Coming Soon</span>
-            </div>
+            <span className="text-6xl opacity-40 group-hover:opacity-60 transition-opacity duration-300">🌱</span>
           )}
           {/* Badges */}
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
