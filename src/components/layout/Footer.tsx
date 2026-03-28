@@ -53,12 +53,12 @@ export function Footer() {
       {/* NEED HELP? */}
       <div className="bg-[#F5F0EA] border-b border-[#275C53]/10">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 py-8">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white rounded-2xl px-8 py-6 border border-[#275C53]/5">
+          <div className="flex flex-col items-center text-center gap-4 bg-white rounded-2xl px-6 sm:px-8 py-6 border border-[#275C53]/5 sm:flex-row sm:text-left sm:justify-between">
             <div>
               <h4 className="text-[#275C53] font-semibold text-base">Not sure which strain is right for you?</h4>
               <p className="text-[#192026]/70 text-sm mt-1">Our team can help you pick the perfect seeds for your climate, experience level, and goals.</p>
             </div>
-            <div className="flex gap-3 shrink-0">
+            <div className="flex gap-3 shrink-0 justify-center">
               <Link href="/strain-finder" className="px-5 py-2.5 bg-[#D7B65D] text-[#1a3d36] text-sm font-semibold rounded-full hover:bg-[#c9a84e] transition-colors">Take the Strain Quiz</Link>
               <Link href="/contact" className="px-5 py-2.5 border border-[#275C53]/20 text-[#275C53] text-sm font-medium rounded-full hover:bg-[#275C53]/5 transition-colors">Contact Support</Link>
             </div>

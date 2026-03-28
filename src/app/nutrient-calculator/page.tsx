@@ -188,8 +188,8 @@ export default function NutrientCalculatorPage() {
         </div>
       </div>
 
-      <div className="flex gap-8 items-start flex-col lg:flex-row">
-        <div className="flex-1 min-w-0">
+      <div className="flex gap-8 items-start flex-col lg:flex-row w-full">
+        <div className="flex-1 min-w-0 w-full">
 
           {/* Calculator Card */}
           <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 sm:p-8 mb-8">
@@ -223,7 +223,7 @@ export default function NutrientCalculatorPage() {
             </div>
 
             {/* Plant Type + Experience */}
-            <div className="grid grid-cols-2 gap-6 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
               <div>
                 <label className="text-[11px] uppercase tracking-[1px] text-[#192026]/40 font-semibold block mb-2">Seed Type</label>
                 <div className="grid grid-cols-2 gap-2">
