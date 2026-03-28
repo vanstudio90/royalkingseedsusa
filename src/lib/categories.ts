@@ -16,6 +16,8 @@ export const categories: Category[] = [
   { name: 'Fast Flowering Seeds', slug: 'fast-flowering-seeds' },
   { name: 'Best Seller Seeds', slug: 'best-seller', parent: 'shop-all-cannabis-seeds' },
   { name: 'Best Strains For Anxiety', slug: 'best-strains-for-anxiety', parent: 'shop-all-cannabis-seeds' },
+  { name: 'Best Strains For High Yield', slug: 'best-strains-for-high-yield', parent: 'shop-all-cannabis-seeds' },
+  { name: 'Best Strains For Indoor Growing', slug: 'best-strains-for-indoor-growing', parent: 'shop-all-cannabis-seeds' },
   { name: 'Best Strains For Outdoor Growing', slug: 'best-strains-for-outdoor-growing', parent: 'shop-all-cannabis-seeds' },
   { name: 'BOGO Seeds', slug: 'bogo-seeds', parent: 'shop-all-cannabis-seeds' },
   { name: 'Cannabis Seeds On Sale', slug: 'cannabis-seeds-on-sale', parent: 'shop-all-cannabis-seeds' },

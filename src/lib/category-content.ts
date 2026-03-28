@@ -130,6 +130,30 @@ export const categoryContent: Record<string, CategoryContent> = {
       { q: 'Which cannabis strains are best for anxiety?', a: 'CBD-dominant and balanced strains tend to be most effective for anxiety. Strains high in the terpenes linalool and myrcene, such as Granddaddy Purple and ACDC, are frequently recommended for their calming properties.' },
     ],
   },
+  'best-strains-for-high-yield': {
+    h1: 'High Yield Cannabis Seeds USA — Biggest Harvests Per Plant',
+    intro: 'High-yield cannabis seeds are bred specifically for maximum harvest weight. Whether you grow indoors under LED or HPS lights, or outdoors in open ground, these genetics consistently produce above-average yields when given proper care. Our high-yield collection includes both autoflowering and feminized photoperiod strains selected for heavy colas, dense bud structure, and vigorous growth — perfect for growers who want the most from every square foot.',
+    bottomSections: [
+      { title: 'What Makes a Cannabis Strain High-Yield?', content: 'High-yield genetics are characterized by vigorous branching, dense flower formation, and strong nutrient uptake. Strains like Big Bud, Critical Mass, and Northern Lights have been selectively bred over decades for maximum bud production. Indoor growers using training techniques like LST, ScrOG, or topping can push these strains even further — often achieving 20-40% more than untrained plants.' },
+      { title: 'Indoor vs Outdoor High-Yield Growing', content: 'Indoor high-yield strains typically produce 400-600g per square meter under optimized lighting (LED or HPS). Outdoor high-yield strains can produce 500-1000g+ per plant when given full sun, adequate space, and a long enough growing season. Autoflowering high-yield strains offer a middle ground — faster turnaround with 3-4 harvests per year indoors.' },
+    ],
+    faqs: [
+      { q: 'What is the highest yielding cannabis strain?', a: 'Big Bud, Critical Mass, and Super Skunk are among the highest yielding strains available. Indoor, these can produce 500-600g/m². Outdoor, individual plants can exceed 800g in optimal conditions. High-yield autoflowers like Northern Lights Auto and Gorilla Glue Auto are the best choices for fast, heavy harvests.' },
+      { q: 'How do I increase my cannabis yield?', a: 'The three biggest factors are: 1) Genetics — choose strains bred for yield, 2) Lighting — maximize light intensity and coverage, 3) Training — use LST, topping, or ScrOG to create an even canopy. Proper nutrition, VPD control, and adequate pot size also make a significant difference.' },
+      { q: 'Are autoflowers or feminized seeds better for yield?', a: 'Feminized photoperiod plants produce larger individual harvests (2-8 oz per plant), but autoflowers allow 3-4 cycles per year indoors — often matching or exceeding annual yields. For maximum single-harvest weight, choose feminized. For maximum annual production, choose autoflowers.' },
+    ],
+  },
+  'best-strains-for-indoor-growing': {
+    h1: 'Best Cannabis Seeds for Indoor Growing USA — Compact, High-Performing Strains',
+    intro: 'These cannabis strains are specifically selected for indoor growing success. Compact growth patterns, manageable heights, strong responses to training, and excellent yields under artificial lighting make these the top choices for tent and grow room cultivators across the United States.',
+    bottomSections: [
+      { title: 'What Makes a Good Indoor Cannabis Strain?', content: 'The best indoor strains stay compact (under 4 feet), respond well to topping and LST, and finish flowering in 8-10 weeks. Indica-dominant hybrids are generally the easiest to manage indoors, while sativa-dominant strains may need more height management. All strains in this collection have been vetted for indoor performance.' },
+    ],
+    faqs: [
+      { q: 'What is the best cannabis strain for indoor growing?', a: 'Northern Lights, White Widow, and Girl Scout Cookies are consistently ranked as top indoor strains. They stay compact, respond well to training, and produce excellent yields under LED or HPS lighting. For beginners, autoflowering versions of these strains offer the easiest indoor experience.' },
+      { q: 'How much light do indoor cannabis plants need?', a: 'During vegetative growth, cannabis needs 18 hours of light per day. During flowering, photoperiod plants need 12 hours of light and 12 hours of complete darkness. Autoflowers can flower under 18-20 hours of light. LED lights at 200-400 watts cover a 4x4 tent effectively.' },
+    ],
+  },
   'best-strains-for-outdoor-growing': {
     h1: 'Best Cannabis Seeds for Outdoor Growing USA — Weather-Resistant Strains',
     intro: 'These cannabis strains are specifically selected for outdoor growing success across the United States. Whether you\'re cultivating in the hot, dry Southwest, the humid Southeast, or the short-season Northeast, these weather-resistant genetics deliver reliable outdoor harvests.',
