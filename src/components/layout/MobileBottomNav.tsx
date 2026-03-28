@@ -18,7 +18,8 @@ export function MobileBottomNav() {
   const pathname = usePathname();
   const router = useRouter();
   const toggleCart = useCartStore((s) => s.toggleCart);
-  const totalItems = useCartStore((s) => s.totalItems());
+  const totalItemsFn = useCartStore((s) => s.totalItems);
+  const totalItems = totalItemsFn();
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
