@@ -372,21 +372,31 @@ export default function YieldCalculatorPage() {
           {/* Quick Answers (Featured Snippets) */}
           <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 mb-10">
             <h2 className="text-lg font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Quick Yield Answers</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
               <div>
-                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">How much weed from a 4x4 tent?</h3>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">4x4 tent yield?</h3>
                 <p className="text-[24px] font-bold text-[#D7B65D]">8–16 oz</p>
-                <p className="text-[11px] text-[#192026]/40">per harvest with LED lighting</p>
+                <p className="text-[11px] text-[#192026]/40">per harvest, LED lighting</p>
               </div>
               <div>
-                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">How many plants per square foot?</h3>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">Plants per sq ft?</h3>
                 <p className="text-[24px] font-bold text-[#D7B65D]">1–2</p>
-                <p className="text-[11px] text-[#192026]/40">depending on training method</p>
+                <p className="text-[11px] text-[#192026]/40">depending on training</p>
               </div>
               <div>
-                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">Yield per plant (indoor)?</h3>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">Yield per plant?</h3>
                 <p className="text-[24px] font-bold text-[#D7B65D]">1–5 oz</p>
-                <p className="text-[11px] text-[#192026]/40">based on genetics and light</p>
+                <p className="text-[11px] text-[#192026]/40">indoor, genetics dependent</p>
+              </div>
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">2x2 tent yield?</h3>
+                <p className="text-[24px] font-bold text-[#D7B65D]">2–4 oz</p>
+                <p className="text-[11px] text-[#192026]/40">per harvest, LED lighting</p>
+              </div>
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">Autoflower yield?</h3>
+                <p className="text-[24px] font-bold text-[#D7B65D]">1–4 oz</p>
+                <p className="text-[11px] text-[#192026]/40">per plant, 8–10 weeks</p>
               </div>
             </div>
           </div>
@@ -395,8 +405,8 @@ export default function YieldCalculatorPage() {
           <div className="space-y-10 max-w-3xl">
             <section>
               <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>How Much Cannabis Can You Yield?</h2>
-              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Cannabis yield depends on four main factors: grow space size, lighting, genetics, and grower experience. Indoor growers using LED lights typically harvest 0.5 to 1.0 ounces per square foot, while HPS setups can push 0.75 to 1.25 oz/sq ft. Outdoor plants have the highest potential — a single plant in open ground can produce 1 to 5+ ounces depending on climate and strain.</p>
-              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Our yield calculator uses these baseline ranges and adjusts for your experience level and seed type. Autoflowering seeds allow more harvest cycles per year (up to 4 indoors), while feminized photoperiod strains typically produce larger individual harvests.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Cannabis yield depends on four main factors: grow space size, lighting, genetics, and grower experience. Indoor growers using LED lights typically harvest 0.5 to 1.0 ounces per square foot, while HPS setups can push 0.75 to 1.25 oz/sq ft. <Link href="/product-category/best-strains-for-outdoor-growing" className="text-[#275C53] hover:text-[#D7B65D]">Outdoor plants</Link> have the highest potential — a single plant in open ground can produce 1 to 5+ ounces depending on climate and strain.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Our yield calculator uses these baseline ranges and adjusts for your experience level and seed type. <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">Autoflowering cannabis seeds</Link> allow more harvest cycles per year (up to 4 indoors), while <Link href="/product-category/feminized-seeds" className="text-[#275C53] hover:text-[#D7B65D]">feminized photoperiod strains</Link> typically produce larger individual harvests.</p>
             </section>
 
             <section>
@@ -482,7 +492,8 @@ export default function YieldCalculatorPage() {
               <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>How Accurate Is This Cannabis Yield Calculator?</h2>
               <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Our calculator provides realistic yield ranges based on established growing data — not inflated marketing numbers. The estimates account for grow space, lighting efficiency, seed genetics, and grower experience. However, actual harvests depend on many variables including <Link href="/blog/cannabis-nutrient-deficiencies" className="text-[#275C53] hover:text-[#D7B65D]">nutrient management</Link>, environmental control, <Link href="/blog/cannabis-plant-pruning-and-topping" className="text-[#275C53] hover:text-[#D7B65D]">training techniques</Link>, and strain-specific characteristics.</p>
               <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">We deliberately show conservative ranges. Beginners should expect results closer to the lower end, while experienced growers using <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">high-yield cannabis seeds</Link> with proper training can consistently hit or exceed the upper range. The &ldquo;optimized&rdquo; number represents what skilled growers achieve with premium genetics, <Link href="/blog/cannabis-growing-lights-and-phases" className="text-[#275C53] hover:text-[#D7B65D]">optimized lighting</Link>, and dialed-in environments.</p>
-              <p className="text-[14px] text-[#192026]/65 leading-relaxed">This tool is built on data from over 200,000 American growers using seeds from Royal King Seeds. Use it as a planning starting point — your actual results will improve with each grow cycle as you learn your specific environment.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">This calculator is based on real grow data and industry-standard yield ranges used by indoor and outdoor cultivators across the United States. The logic reflects what 200,000+ American growers have reported when using seeds from Royal King Seeds.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Use these estimates as a planning starting point. Your actual results will improve with each grow cycle as you learn your specific environment. For the most accurate projections, factor in your <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">strain&apos;s genetic potential</Link>, your <Link href="/blog/cannabis-growing-lights-and-phases" className="text-[#275C53] hover:text-[#D7B65D]">lighting setup</Link>, and whether you use <Link href="/blog/cannabis-plant-pruning-and-topping" className="text-[#275C53] hover:text-[#D7B65D]">plant training techniques</Link>.</p>
             </section>
 
             {/* FAQ Schema */}
@@ -557,9 +568,9 @@ export default function YieldCalculatorPage() {
           </div>
 
           <div className="bg-[#275C53] rounded-2xl p-5 text-center">
-            <p className="text-white/80 text-[13px] mb-3">Find the perfect seeds for your grow</p>
+            <p className="text-white/80 text-[13px] mb-3">Not sure which seeds to pick?</p>
             <Link href="/strain-finder" className="inline-block w-full py-3 bg-white text-[#275C53] rounded-xl text-[13px] font-bold hover:bg-[#D7B65D] hover:text-white transition-colors">
-              Take the Strain Finder Quiz
+              Find the Best Strains for Your Setup
             </Link>
           </div>
 
