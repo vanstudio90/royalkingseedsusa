@@ -25,7 +25,7 @@ export async function GET(req: NextRequest) {
   }
 
   if (search) {
-    const safeSearch = search.replace(/[%_\\'"()]/g, '').slice(0, 100);
+    const safeSearch = search.replace(/[%_\\()]/g, '').slice(0, 100);
     if (safeSearch) {
       query = query.ilike('name', `%${safeSearch}%`);
     }
