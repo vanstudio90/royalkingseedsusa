@@ -11,13 +11,17 @@ export async function adminFetch(url: string, options: RequestInit = {}): Promis
     // localStorage unavailable (private browsing, etc.)
   }
 
+  // Don't set Content-Type for FormData — browser sets it with boundary automatically
+  const isFormData = typeof FormData !== 'undefined' && options.body instanceof FormData;
+  const headers: Record<string, string> = {
+    ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers as Record<string, string> || {}),
+  };
+
   const res = await fetch(url, {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...options.headers,
-    },
+    headers,
   });
 
   // Auto-logout on expired/invalid token
