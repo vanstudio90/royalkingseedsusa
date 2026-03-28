@@ -14,6 +14,8 @@ interface Product {
   strain_type: string;
   categories: string[];
   in_stock: boolean;
+  autoflower: boolean;
+  feminized: boolean;
   created_at: string;
 }
 
@@ -224,6 +226,7 @@ export default function AdminProductsPage() {
                   />
                 </th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Product</th>
+                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Flowering</th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Type</th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Price</th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Status</th>
@@ -244,6 +247,13 @@ export default function AdminProductsPage() {
                   <td className="px-4 py-3">
                     <div className="text-sm font-medium text-[#192026]">{p.name}</div>
                     <div className="text-[11px] text-[#192026]/30">/{p.slug}</div>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className={`text-[10px] uppercase tracking-[1px] font-semibold px-2 py-1 rounded-full ${
+                      p.autoflower ? 'bg-sky-50 text-sky-600' : 'bg-pink-50 text-pink-600'
+                    }`}>
+                      {p.autoflower ? 'Auto' : 'Feminized'}
+                    </span>
                   </td>
                   <td className="px-4 py-3">
                     <span className={`text-[10px] uppercase tracking-[1px] font-semibold px-2 py-1 rounded-full ${
