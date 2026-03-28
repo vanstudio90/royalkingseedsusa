@@ -11,10 +11,11 @@ export async function adminFetch(url: string, options: RequestInit = {}): Promis
     // localStorage unavailable (private browsing, etc.)
   }
 
-  // Don't set Content-Type for FormData — browser sets it with boundary automatically
+  // Don't set Content-Type for FormData or requests without a body (DELETE, GET)
   const isFormData = typeof FormData !== 'undefined' && options.body instanceof FormData;
+  const hasBody = options.body != null && !isFormData;
   const headers: Record<string, string> = {
-    ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+    ...(hasBody ? { 'Content-Type': 'application/json' } : {}),
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(options.headers as Record<string, string> || {}),
   };

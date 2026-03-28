@@ -63,8 +63,17 @@ export default function AdminProductsPage() {
 
   const deleteProduct = async (id: number, name: string) => {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
-    await adminFetch(`/api/admin/products/${id}`, { method: 'DELETE' });
-    fetchProducts();
+    try {
+      const res = await adminFetch(`/api/admin/products/${id}`, { method: 'DELETE' });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        alert(err.error || 'Failed to delete product');
+        return;
+      }
+      fetchProducts();
+    } catch {
+      alert('Failed to delete product. Please try again.');
+    }
   };
 
   const totalPages = Math.ceil(total / 25);
