@@ -25,7 +25,7 @@ export function MobileBottomNav() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const isActive = (href: string) => pathname === href;
 
@@ -44,7 +44,7 @@ export function MobileBottomNav() {
 
   const handleSearch = (q: string) => {
     setQuery(q);
-    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (debounceRef.current !== null) clearTimeout(debounceRef.current);
     if (q.length < 2) { setResults([]); return; }
     setLoading(true);
     debounceRef.current = setTimeout(async () => {
