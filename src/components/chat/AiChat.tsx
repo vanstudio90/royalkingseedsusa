@@ -21,6 +21,7 @@ function cleanText(text: string): string {
     .replace(/<products>[\s\S]*?<\/products>/g, '')
     .replace(/<cart_action>[\s\S]*?<\/cart_action>/g, '')
     .replace(/<nav_action>[\s\S]*?<\/nav_action>/g, '')
+    .replace(/<order_lookup>[\s\S]*?<\/order_lookup>/g, '')
     .trim();
 }
 

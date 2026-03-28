@@ -119,8 +119,50 @@ export function useChat() {
           }
         } catch { /* ignore */ }
       }
+
+      // Handle order lookup actions
+      const orderMatch = text.match(/<order_lookup>([\s\S]*?)<\/order_lookup>/);
+      if (orderMatch) {
+        try {
+          const lookup = JSON.parse(orderMatch[1]);
+          if (lookup.order_number && lookup.email) {
+            const res = await fetch('/api/orders/lookup', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ order_number: lookup.order_number, email: lookup.email }),
+            });
+            const data = await res.json();
+            if (res.ok) {
+              const items = (data.items || []).map((i: any) => `${i.name} x${i.quantity}`).join(', ');
+              const tracking = data.tracking_number
+                ? `**Tracking:** ${data.tracking_number}`
+                : '**Tracking:** Not yet available';
+              const orderInfo = [
+                `Here's what I found for order **${data.order_number}**:`,
+                '',
+                `**Status:** ${data.status}`,
+                `**Payment:** ${data.payment_status}`,
+                tracking,
+                `**Items:** ${items || 'N/A'}`,
+                `**Total:** $${data.total}`,
+                `**Placed:** ${new Date(data.placed_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`,
+                '',
+                'Is there anything else I can help you with?',
+              ].join('\n');
+              // Append order info to the existing message
+              const currentContent = useAiChatStore.getState().messages.at(-1)?.content || '';
+              const cleaned = currentContent.replace(/<order_lookup>[\s\S]*?<\/order_lookup>/g, '').trim();
+              updateLastAssistantMessage(cleaned + '\n\n' + orderInfo);
+            } else {
+              const currentContent = useAiChatStore.getState().messages.at(-1)?.content || '';
+              const cleaned = currentContent.replace(/<order_lookup>[\s\S]*?<\/order_lookup>/g, '').trim();
+              updateLastAssistantMessage(cleaned + '\n\nI couldn\'t find that order. Please double-check your order number and the email address you used when placing the order.');
+            }
+          }
+        } catch { /* ignore */ }
+      }
     },
-    [addItem]
+    [addItem, updateLastAssistantMessage]
   );
 
   return { messages, isStreaming, isOpen, sendMessage, toggleChat, setChatOpen, clearMessages };
