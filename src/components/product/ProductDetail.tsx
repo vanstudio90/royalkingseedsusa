@@ -243,7 +243,7 @@ export function ProductDetail({
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
         {/* Image Gallery */}
         <div>
-          <div className="aspect-square bg-white rounded-2xl flex items-center justify-center border border-[#275C53]/10 overflow-hidden max-w-[500px] w-full mx-auto">
+          <div className="aspect-square bg-white rounded-2xl flex items-center justify-center border border-[#275C53]/10 overflow-hidden w-full mx-auto">
             {allImages.length > 0 ? (
               <img src={allImages[activeImage]} alt={product.name} loading="eager" decoding="async" className="w-full h-full object-contain p-2" />
             ) : (

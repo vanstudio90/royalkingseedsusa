@@ -180,9 +180,9 @@ export default async function ProductPage({ params }: Props) {
         </ol>
       </nav>
 
-      <div className="flex gap-8 items-start">
+      <div className="flex gap-0 lg:gap-8 items-start">
         <ProductDetailSidebar productName={product.name} />
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 w-full">
           <ProductDetail product={product} relatedProducts={related} galleryImages={[]} />
         </div>
       </div>
