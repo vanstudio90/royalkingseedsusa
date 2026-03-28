@@ -24,6 +24,7 @@ export default function AdminProductsPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [page, setPage] = useState(1);
+  const [deleting, setDeleting] = useState<number | null>(null);
 
   const fetchProducts = async () => {
     setLoading(true);
@@ -62,21 +63,27 @@ export default function AdminProductsPage() {
   };
 
   const deleteProduct = async (id: number, name: string) => {
-    if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    if (!window.confirm(`Delete "${name}"? This cannot be undone.`)) return;
+    setDeleting(id);
     try {
       const token = localStorage.getItem('admin_token');
       const res = await fetch(`/api/admin/products/${id}`, {
         method: 'DELETE',
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+        headers: {
+          ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+        },
       });
+      const body = await res.text();
       if (!res.ok) {
-        const err = await res.json().catch(() => ({}));
-        alert(err.error || `Failed to delete product (${res.status})`);
+        window.alert(`Delete failed (${res.status}): ${body}`);
+        setDeleting(null);
         return;
       }
+      setDeleting(null);
       fetchProducts();
-    } catch (e) {
-      alert(`Failed to delete product: ${e instanceof Error ? e.message : 'Unknown error'}`);
+    } catch (e: any) {
+      window.alert(`Delete error: ${e?.message || 'Network error'}`);
+      setDeleting(null);
     }
   };
 
@@ -191,9 +198,10 @@ export default function AdminProductsPage() {
                       </Link>
                       <button
                         onClick={() => deleteProduct(p.id, p.name)}
-                        className="px-3 py-1.5 bg-red-50 rounded-lg text-[11px] font-semibold text-red-400 hover:text-red-600 transition-colors cursor-pointer"
+                        disabled={deleting === p.id}
+                        className="px-3 py-1.5 bg-red-50 rounded-lg text-[11px] font-semibold text-red-400 hover:text-red-600 transition-colors cursor-pointer disabled:opacity-50"
                       >
-                        Delete
+                        {deleting === p.id ? 'Deleting...' : 'Delete'}
                       </button>
                     </div>
                   </td>
