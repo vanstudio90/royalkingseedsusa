@@ -231,15 +231,6 @@ export function ProductDetail({
 
   return (
     <section>
-      {/* Breadcrumbs */}
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs uppercase tracking-[1px] text-[#192026]/40 mb-8">
-        <Link href="/" className="hover:text-[#275C53] transition-colors">Home</Link>
-        <span>/</span>
-        <Link href="/product-category/shop-all-cannabis-seeds" className="hover:text-[#275C53] transition-colors">Seeds</Link>
-        <span>/</span>
-        <span className="text-[#275C53] truncate">{product.name}</span>
-      </nav>
-
       <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
         {/* Image Gallery */}
         <div>
