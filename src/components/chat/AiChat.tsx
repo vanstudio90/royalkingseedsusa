@@ -157,7 +157,7 @@ export function AiChat() {
       {/* Toggle button — bottom left */}
       <button
         onClick={toggleChat}
-        className={`fixed left-4 bottom-4 z-40 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer ${
+        className={`fixed left-4 bottom-20 lg:bottom-4 z-40 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 cursor-pointer ${
           isOpen
             ? 'bg-[#192026] hover:bg-[#192026]/90 scale-90 rotate-90'
             : 'bg-[#275C53] hover:bg-[#1e4a42] hover:scale-110 hover:shadow-[0_4px_20px_rgba(39,92,83,0.4)]'
@@ -178,7 +178,7 @@ export function AiChat() {
 
       {/* Chat panel with slide-up animation */}
       <div
-        className={`fixed left-4 bottom-20 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[min(70vh,560px)] bg-white border border-[#275C53]/15 rounded-2xl flex flex-col overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out origin-bottom-left ${
+        className={`fixed left-4 bottom-36 lg:bottom-20 z-50 w-[calc(100vw-2rem)] sm:w-[400px] h-[min(70vh,560px)] bg-white border border-[#275C53]/15 rounded-2xl flex flex-col overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] transition-all duration-300 ease-out origin-bottom-left ${
           isOpen
             ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 scale-95 translate-y-4 pointer-events-none'
