@@ -25,6 +25,10 @@ export default function AdminProductsPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
+  const [floweringFilter, setFloweringFilter] = useState('all');
+  const [typeFilter, setTypeFilter] = useState('all');
+  const [sortBy, setSortBy] = useState('created_at');
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(25);
   const [deleting, setDeleting] = useState<number | null>(null);
@@ -37,7 +41,11 @@ export default function AdminProductsPage() {
       page: String(page),
       limit: String(limit),
       status: statusFilter,
+      sort: sortBy,
+      dir: sortDir,
       ...(search && { search }),
+      ...(floweringFilter !== 'all' && { flowering: floweringFilter }),
+      ...(typeFilter !== 'all' && { strain_type: typeFilter }),
     });
 
     const res = await adminFetch(`/api/admin/products?${params}`);
@@ -50,7 +58,23 @@ export default function AdminProductsPage() {
 
   useEffect(() => {
     fetchProducts();
-  }, [page, statusFilter, limit]);
+  }, [page, statusFilter, floweringFilter, typeFilter, sortBy, sortDir, limit]);
+
+  const handleSort = (col: string) => {
+    if (sortBy === col) {
+      setSortDir(prev => prev === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(col);
+      setSortDir('asc');
+    }
+    setPage(1);
+  };
+
+  const SortIcon = ({ col }: { col: string }) => (
+    <span className="ml-1 inline-block text-[8px] text-[#192026]/20">
+      {sortBy === col ? (sortDir === 'asc' ? '▲' : '▼') : '⇅'}
+    </span>
+  );
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -148,41 +172,83 @@ export default function AdminProductsPage() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-2xl border border-[#192026]/5 p-4 mb-4 flex items-center gap-4 flex-wrap">
-        <form onSubmit={handleSearch} className="flex-1 min-w-[200px]">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search products..."
-            className="w-full px-4 py-2.5 bg-[#f5f0ea] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#275C53]/20"
-          />
-        </form>
-        <div className="flex gap-2">
-          {['all', 'published', 'draft'].map((s) => (
-            <button
-              key={s}
-              onClick={() => { setStatusFilter(s); setPage(1); }}
-              className={`px-3 py-2 rounded-lg text-[11px] uppercase tracking-[1px] font-semibold transition-colors cursor-pointer ${
-                statusFilter === s
-                  ? 'bg-[#275C53] text-white'
-                  : 'bg-[#f5f0ea] text-[#192026]/40 hover:text-[#192026]/70'
-              }`}
-            >
-              {s}
-            </button>
-          ))}
+      <div className="bg-white rounded-2xl border border-[#192026]/5 p-4 mb-4 space-y-3">
+        <div className="flex items-center gap-3 flex-wrap">
+          <form onSubmit={handleSearch} className="flex-1 min-w-[200px]">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="Search by name..."
+              className="w-full px-4 py-2.5 bg-[#f5f0ea] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#275C53]/20"
+            />
+          </form>
+          <select
+            value={limit}
+            onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }}
+            className="px-3 py-2.5 bg-[#f5f0ea] rounded-xl text-[11px] font-semibold text-[#192026]/60 cursor-pointer focus:outline-none"
+          >
+            <option value={25}>25 per page</option>
+            <option value={50}>50 per page</option>
+            <option value={100}>100 per page</option>
+            <option value={250}>250 per page</option>
+          </select>
         </div>
-        <select
-          value={limit}
-          onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }}
-          className="px-3 py-2 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/60 cursor-pointer focus:outline-none"
-        >
-          <option value={25}>25 per page</option>
-          <option value={50}>50 per page</option>
-          <option value={100}>100 per page</option>
-          <option value={250}>250 per page</option>
-        </select>
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="text-[10px] uppercase tracking-[1px] text-[#192026]/25 font-semibold mr-1">Filters:</span>
+          {/* Status */}
+          <div className="flex gap-1">
+            {['all', 'published', 'draft'].map((s) => (
+              <button
+                key={s}
+                onClick={() => { setStatusFilter(s); setPage(1); }}
+                className={`px-2.5 py-1.5 rounded-lg text-[10px] uppercase tracking-[1px] font-semibold transition-colors cursor-pointer ${
+                  statusFilter === s
+                    ? 'bg-[#275C53] text-white'
+                    : 'bg-[#f5f0ea] text-[#192026]/40 hover:text-[#192026]/70'
+                }`}
+              >
+                {s}
+              </button>
+            ))}
+          </div>
+          <div className="w-px h-5 bg-[#192026]/10" />
+          {/* Flowering */}
+          <select
+            value={floweringFilter}
+            onChange={(e) => { setFloweringFilter(e.target.value); setPage(1); }}
+            className={`px-2.5 py-1.5 rounded-lg text-[10px] uppercase tracking-[1px] font-semibold cursor-pointer focus:outline-none transition-colors ${
+              floweringFilter !== 'all' ? 'bg-sky-100 text-sky-700' : 'bg-[#f5f0ea] text-[#192026]/40'
+            }`}
+          >
+            <option value="all">All Flowering</option>
+            <option value="auto">Auto</option>
+            <option value="feminized">Feminized</option>
+          </select>
+          {/* Strain Type */}
+          <select
+            value={typeFilter}
+            onChange={(e) => { setTypeFilter(e.target.value); setPage(1); }}
+            className={`px-2.5 py-1.5 rounded-lg text-[10px] uppercase tracking-[1px] font-semibold cursor-pointer focus:outline-none transition-colors ${
+              typeFilter !== 'all' ? 'bg-emerald-100 text-emerald-700' : 'bg-[#f5f0ea] text-[#192026]/40'
+            }`}
+          >
+            <option value="all">All Types</option>
+            <option value="indica">Indica</option>
+            <option value="sativa">Sativa</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="cbd">CBD</option>
+          </select>
+          {/* Clear filters */}
+          {(statusFilter !== 'all' || floweringFilter !== 'all' || typeFilter !== 'all' || search) && (
+            <button
+              onClick={() => { setStatusFilter('all'); setFloweringFilter('all'); setTypeFilter('all'); setSearch(''); setPage(1); setTimeout(fetchProducts, 0); }}
+              className="px-2.5 py-1.5 rounded-lg text-[10px] font-semibold text-red-400 hover:text-red-600 bg-red-50 cursor-pointer transition-colors"
+            >
+              Clear All
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Bulk actions */}
@@ -225,11 +291,11 @@ export default function AdminProductsPage() {
                     className="w-4 h-4 rounded accent-[#275C53] cursor-pointer"
                   />
                 </th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Product</th>
+                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold cursor-pointer hover:text-[#275C53] select-none" onClick={() => handleSort('name')}>Product<SortIcon col="name" /></th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Flowering</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Type</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Price</th>
-                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Status</th>
+                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold cursor-pointer hover:text-[#275C53] select-none" onClick={() => handleSort('strain_type')}>Type<SortIcon col="strain_type" /></th>
+                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold cursor-pointer hover:text-[#275C53] select-none" onClick={() => handleSort('price')}>Price<SortIcon col="price" /></th>
+                <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold cursor-pointer hover:text-[#275C53] select-none" onClick={() => handleSort('status')}>Status<SortIcon col="status" /></th>
                 <th className="text-right px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Actions</th>
               </tr>
             </thead>
