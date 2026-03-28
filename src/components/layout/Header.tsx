@@ -123,6 +123,7 @@ const navItems: MenuItem[] = [
           { label: 'When to Harvest', href: '/blog/cannabis-trichomes-and-harvesting' },
           { label: 'Drying Cannabis', href: '/blog/drying-and-curing-your-cannabis-plants' },
           { label: 'Curing Cannabis', href: '/blog/cannabis-harvesting-and-curing' },
+          { label: 'Yield Calculator', href: '/yield-calculator' },
           { label: 'All Grow Guides', href: '/blog' },
         ],
       },
