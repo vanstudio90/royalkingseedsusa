@@ -24,13 +24,16 @@ export default function AdminProductsPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(25);
   const [deleting, setDeleting] = useState<number | null>(null);
+  const [selected, setSelected] = useState<Set<number>>(new Set());
+  const [bulkDeleting, setBulkDeleting] = useState(false);
 
   const fetchProducts = async () => {
     setLoading(true);
     const params = new URLSearchParams({
       page: String(page),
-      limit: '25',
+      limit: String(limit),
       status: statusFilter,
       ...(search && { search }),
     });
@@ -39,12 +42,13 @@ export default function AdminProductsPage() {
     const data = await res.json();
     setProducts(data.products || []);
     setTotal(data.total || 0);
+    setSelected(new Set());
     setLoading(false);
   };
 
   useEffect(() => {
     fetchProducts();
-  }, [page, statusFilter]);
+  }, [page, statusFilter, limit]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,8 +77,8 @@ export default function AdminProductsPage() {
           ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
         },
       });
-      const body = await res.text();
       if (!res.ok) {
+        const body = await res.text();
         window.alert(`Delete failed (${res.status}): ${body}`);
         setDeleting(null);
         return;
@@ -87,7 +91,44 @@ export default function AdminProductsPage() {
     }
   };
 
-  const totalPages = Math.ceil(total / 25);
+  const toggleSelect = (id: number) => {
+    setSelected(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  };
+
+  const toggleSelectAll = () => {
+    if (selected.size === products.length) {
+      setSelected(new Set());
+    } else {
+      setSelected(new Set(products.map(p => p.id)));
+    }
+  };
+
+  const bulkDelete = async () => {
+    if (selected.size === 0) return;
+    if (!window.confirm(`Delete ${selected.size} product${selected.size > 1 ? 's' : ''}? This cannot be undone.`)) return;
+    setBulkDeleting(true);
+    const token = localStorage.getItem('admin_token');
+    let failed = 0;
+    for (const id of selected) {
+      try {
+        const res = await fetch(`/api/admin/products/${id}`, {
+          method: 'DELETE',
+          headers: token ? { 'Authorization': `Bearer ${token}` } : {},
+        });
+        if (!res.ok) failed++;
+      } catch { failed++; }
+    }
+    setBulkDeleting(false);
+    if (failed > 0) window.alert(`${failed} product(s) failed to delete.`);
+    fetchProducts();
+  };
+
+  const totalPages = Math.ceil(total / limit);
 
   return (
     <div>
@@ -130,7 +171,39 @@ export default function AdminProductsPage() {
             </button>
           ))}
         </div>
+        <select
+          value={limit}
+          onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }}
+          className="px-3 py-2 bg-[#f5f0ea] rounded-lg text-[11px] font-semibold text-[#192026]/60 cursor-pointer focus:outline-none"
+        >
+          <option value={25}>25 per page</option>
+          <option value={50}>50 per page</option>
+          <option value={100}>100 per page</option>
+          <option value={250}>250 per page</option>
+        </select>
       </div>
+
+      {/* Bulk actions */}
+      {selected.size > 0 && (
+        <div className="bg-red-50 rounded-xl border border-red-200 p-3 mb-4 flex items-center justify-between">
+          <span className="text-sm text-red-600 font-medium">{selected.size} product{selected.size > 1 ? 's' : ''} selected</span>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setSelected(new Set())}
+              className="px-3 py-1.5 bg-white rounded-lg text-[11px] font-semibold text-[#192026]/50 hover:text-[#192026] transition-colors cursor-pointer"
+            >
+              Clear Selection
+            </button>
+            <button
+              onClick={bulkDelete}
+              disabled={bulkDeleting}
+              className="px-4 py-1.5 bg-red-500 text-white rounded-lg text-[11px] font-semibold hover:bg-red-600 transition-colors cursor-pointer disabled:opacity-50"
+            >
+              {bulkDeleting ? `Deleting ${selected.size}...` : `Delete ${selected.size} Selected`}
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Products Table */}
       <div className="bg-white rounded-2xl border border-[#192026]/5 overflow-hidden">
@@ -142,6 +215,14 @@ export default function AdminProductsPage() {
           <table className="w-full">
             <thead>
               <tr className="border-b border-[#192026]/5">
+                <th className="text-left px-4 py-3 w-10">
+                  <input
+                    type="checkbox"
+                    checked={products.length > 0 && selected.size === products.length}
+                    onChange={toggleSelectAll}
+                    className="w-4 h-4 rounded accent-[#275C53] cursor-pointer"
+                  />
+                </th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Product</th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Type</th>
                 <th className="text-left px-4 py-3 text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold">Price</th>
@@ -151,7 +232,15 @@ export default function AdminProductsPage() {
             </thead>
             <tbody>
               {products.map((p) => (
-                <tr key={p.id} className="border-b border-[#192026]/5 hover:bg-[#f5f0ea]/50 transition-colors">
+                <tr key={p.id} className={`border-b border-[#192026]/5 transition-colors ${selected.has(p.id) ? 'bg-red-50/50' : 'hover:bg-[#f5f0ea]/50'}`}>
+                  <td className="px-4 py-3">
+                    <input
+                      type="checkbox"
+                      checked={selected.has(p.id)}
+                      onChange={() => toggleSelect(p.id)}
+                      className="w-4 h-4 rounded accent-[#275C53] cursor-pointer"
+                    />
+                  </td>
                   <td className="px-4 py-3">
                     <div className="text-sm font-medium text-[#192026]">{p.name}</div>
                     <div className="text-[11px] text-[#192026]/30">/{p.slug}</div>
