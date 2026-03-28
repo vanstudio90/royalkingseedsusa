@@ -224,33 +224,53 @@ export default function YieldCalculatorPage() {
           {/* Results */}
           {showResults && results && (
             <div id="results" className="mb-10 scroll-mt-24">
+              {/* Personalized Results */}
               <div className="bg-[#275C53] rounded-2xl p-6 sm:p-8 text-white mb-6">
-                <h2 className="text-lg font-bold mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Your Estimated Yield</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="bg-white/10 rounded-xl p-4 text-center">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#D7B65D] block">{results.yieldLow}–{results.yieldHigh}</span>
-                    <span className="text-white/60 text-[11px] uppercase tracking-[1px]">oz per harvest</span>
+                <h2 className="text-xl font-bold mb-2" style={{ fontFamily: 'var(--font-patua)' }}>Here&apos;s What You Can Expect From Your Grow</h2>
+                <p className="text-white/50 text-[13px] mb-5">Based on your {sqft} sq ft {env} setup using {light.toUpperCase()} lighting as a {exp} grower.</p>
+
+                {/* Typical vs Optimized */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                  <div className="bg-white/10 rounded-xl p-5">
+                    <span className="text-[10px] uppercase tracking-[1px] text-white/40 font-semibold block mb-2">Typical Yield</span>
+                    <span className="text-3xl sm:text-4xl font-bold text-white block">{results.yieldLow}–{results.yieldHigh} <span className="text-lg text-white/50">oz</span></span>
+                    <span className="text-white/40 text-[11px]">per harvest</span>
                   </div>
-                  <div className="bg-white/10 rounded-xl p-4 text-center">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#D7B65D] block">{results.plantCount}</span>
-                    <span className="text-white/60 text-[11px] uppercase tracking-[1px]">plants</span>
-                  </div>
-                  <div className="bg-white/10 rounded-xl p-4 text-center">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#D7B65D] block">{results.yieldPerPlantLow}–{results.yieldPerPlantHigh}</span>
-                    <span className="text-white/60 text-[11px] uppercase tracking-[1px]">oz per plant</span>
-                  </div>
-                  <div className="bg-white/10 rounded-xl p-4 text-center">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#D7B65D] block">{results.annualLow}–{results.annualHigh}</span>
-                    <span className="text-white/60 text-[11px] uppercase tracking-[1px]">oz per year ({results.cyclesPerYear} cycle{results.cyclesPerYear > 1 ? 's' : ''})</span>
+                  <div className="bg-[#D7B65D]/20 rounded-xl p-5 border border-[#D7B65D]/30">
+                    <span className="text-[10px] uppercase tracking-[1px] text-[#D7B65D] font-semibold block mb-2">Optimized (with training + genetics)</span>
+                    <span className="text-3xl sm:text-4xl font-bold text-[#D7B65D] block">{(results.yieldHigh * 1.3).toFixed(0)}+ <span className="text-lg text-[#D7B65D]/50">oz</span></span>
+                    <span className="text-[#D7B65D]/60 text-[11px]">per harvest with high-yield strains</span>
                   </div>
                 </div>
-                <p className="text-white/40 text-[11px] mt-4">* Estimates based on {sqft} sq ft, {env}, {light.toUpperCase()} lighting, {exp} level. Actual results vary by genetics, environment, and technique.</p>
+
+                <div className="grid grid-cols-3 gap-3 mb-4">
+                  <div className="bg-white/10 rounded-xl p-3 text-center">
+                    <span className="text-xl font-bold text-[#D7B65D] block">{results.plantCount}</span>
+                    <span className="text-white/50 text-[10px]">Plants</span>
+                  </div>
+                  <div className="bg-white/10 rounded-xl p-3 text-center">
+                    <span className="text-xl font-bold text-[#D7B65D] block">{results.yieldPerPlantLow}–{results.yieldPerPlantHigh}</span>
+                    <span className="text-white/50 text-[10px]">Oz / Plant</span>
+                  </div>
+                  <div className="bg-white/10 rounded-xl p-3 text-center">
+                    <span className="text-xl font-bold text-[#D7B65D] block">{results.annualLow}–{results.annualHigh}</span>
+                    <span className="text-white/50 text-[10px]">Oz / Year ({results.cyclesPerYear}x)</span>
+                  </div>
+                </div>
+
+                <p className="text-white/30 text-[10px]">Actual yields vary based on genetics, environment, nutrients, and technique. These are realistic ranges for properly maintained grows.</p>
+              </div>
+
+              {/* Persuasion bridge */}
+              <div className="bg-[#D7B65D]/10 border border-[#D7B65D]/20 rounded-2xl p-5 mb-6 text-center">
+                <p className="text-[14px] text-[#275C53] font-semibold">Want to hit the high end of this range?</p>
+                <p className="text-[12px] text-[#192026]/50 mt-1">Choose high-yield genetics below — the #1 factor in harvest weight.</p>
               </div>
 
               {/* Strain Recommendations */}
               <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 sm:p-8 mb-6">
-                <h3 className="text-lg font-bold text-[#275C53] mb-1" style={{ fontFamily: 'var(--font-patua)' }}>Recommended Strains for Your Setup</h3>
-                <p className="text-[12px] text-[#192026]/40 mb-4">High-yield genetics matched to your grow environment and experience level.</p>
+                <h3 className="text-lg font-bold text-[#275C53] mb-1" style={{ fontFamily: 'var(--font-patua)' }}>Best Strains for Your {sqft} sq ft {env === 'indoor' ? 'Indoor' : 'Outdoor'} Setup</h3>
+                <p className="text-[12px] text-[#192026]/40 mb-4">High-yield genetics matched to your environment and experience level.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {(STRAIN_RECS[getStrainKey()] || STRAIN_RECS['indoor-high-yield']).map(s => (
                     <Link key={s.slug} href={`/${s.slug}`}
@@ -259,27 +279,78 @@ export default function YieldCalculatorPage() {
                         <span className="text-xl">🌱</span>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h4 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">{s.name}</h4>
-                        <div className="flex gap-3 text-[10px] text-[#192026]/40 mt-0.5">
-                          <span>{s.type}</span>
-                          <span>{s.yield}</span>
-                          <span>{s.difficulty}</span>
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <h4 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">{s.name}</h4>
+                        </div>
+                        <div className="flex flex-wrap gap-1.5 mt-1">
+                          <span className="text-[9px] bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded font-medium">High Yield</span>
+                          <span className="text-[9px] bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded font-medium">{s.type}</span>
+                          <span className="text-[9px] bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded font-medium">{s.difficulty}</span>
+                          <span className="text-[9px] bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded font-medium">{s.yield}</span>
                         </div>
                       </div>
                     </Link>
                   ))}
                 </div>
-                <div className="flex gap-3 mt-5">
+                <div className="flex flex-wrap gap-3 mt-5">
                   <Link href="/product-category/best-strains-for-high-yield" className="inline-block px-6 py-3 bg-[#275C53] text-white rounded-xl text-[13px] font-bold hover:bg-[#1e4a42] transition-colors">
-                    Shop High Yield Seeds
+                    Shop High-Yield Strains for This Setup
                   </Link>
                   <Link href="/product-category/autoflowering-seeds" className="inline-block px-6 py-3 bg-[#F5F0EA] text-[#275C53] rounded-xl text-[13px] font-bold hover:bg-[#275C53] hover:text-white transition-colors">
                     Shop Autoflower Seeds
                   </Link>
                 </div>
               </div>
+
+              {/* Maximize Your Yield */}
+              <div className="bg-[#F5F0EA] rounded-2xl p-6 mb-6">
+                <h3 className="text-lg font-bold text-[#275C53] mb-1" style={{ fontFamily: 'var(--font-patua)' }}>Maximize Your Yield</h3>
+                <p className="text-[12px] text-[#192026]/40 mb-4">Three ways to push your harvest to the high end of this range.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <Link href="/product-category/best-strains-for-high-yield" className="bg-white rounded-xl p-4 hover:shadow-sm transition-all group">
+                    <span className="text-lg block mb-1">🧬</span>
+                    <h4 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">Upgrade Genetics</h4>
+                    <p className="text-[11px] text-[#192026]/40 mt-0.5">High-yield strains add 20–40% more harvest weight</p>
+                    <span className="text-[10px] text-[#275C53] font-semibold mt-2 block">Shop seeds →</span>
+                  </Link>
+                  <Link href="/blog/cannabis-plant-pruning-and-topping" className="bg-white rounded-xl p-4 hover:shadow-sm transition-all group">
+                    <span className="text-lg block mb-1">✂️</span>
+                    <h4 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">Use Training Techniques</h4>
+                    <p className="text-[11px] text-[#192026]/40 mt-0.5">LST, topping, and ScrOG maximize light exposure</p>
+                    <span className="text-[10px] text-[#275C53] font-semibold mt-2 block">Read guide →</span>
+                  </Link>
+                  <Link href="/blog/cannabis-growing-lights-and-phases" className="bg-white rounded-xl p-4 hover:shadow-sm transition-all group">
+                    <span className="text-lg block mb-1">💡</span>
+                    <h4 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">Optimize Lighting</h4>
+                    <p className="text-[11px] text-[#192026]/40 mt-0.5">Right spectrum and intensity for each growth stage</p>
+                    <span className="text-[10px] text-[#275C53] font-semibold mt-2 block">Read guide →</span>
+                  </Link>
+                </div>
+              </div>
             </div>
           )}
+
+          {/* Quick Answers (Featured Snippets) */}
+          <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 mb-10">
+            <h2 className="text-lg font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Quick Yield Answers</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">How much weed from a 4x4 tent?</h3>
+                <p className="text-[24px] font-bold text-[#D7B65D]">8–16 oz</p>
+                <p className="text-[11px] text-[#192026]/40">per harvest with LED lighting</p>
+              </div>
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">How many plants per square foot?</h3>
+                <p className="text-[24px] font-bold text-[#D7B65D]">1–2</p>
+                <p className="text-[11px] text-[#192026]/40">depending on training method</p>
+              </div>
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">Yield per plant (indoor)?</h3>
+                <p className="text-[24px] font-bold text-[#D7B65D]">1–5 oz</p>
+                <p className="text-[11px] text-[#192026]/40">based on genetics and light</p>
+              </div>
+            </div>
+          </div>
 
           {/* SEO Content */}
           <div className="space-y-10 max-w-3xl">
@@ -407,14 +478,26 @@ export default function YieldCalculatorPage() {
           </div>
 
           <div className="bg-white rounded-2xl border border-[#275C53]/5 p-5">
-            <h3 className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold mb-3">Shop Seeds</h3>
+            <h3 className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold mb-3">Top Yielding Strains</h3>
             <div className="space-y-2">
               {[
                 { label: 'High Yield Seeds', href: '/product-category/best-strains-for-high-yield' },
                 { label: 'Autoflower Seeds', href: '/product-category/autoflowering-seeds' },
                 { label: 'Feminized Seeds', href: '/product-category/feminized-seeds' },
                 { label: 'Outdoor Strains', href: '/product-category/best-strains-for-outdoor-growing' },
-                { label: 'High THC Seeds', href: '/product-category/high-tch-seeds' },
+              ].map(l => (
+                <Link key={l.href} href={l.href} className="block text-[13px] text-[#275C53] hover:text-[#D7B65D] transition-colors py-0.5 font-medium">→ {l.label}</Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-[#275C53]/5 p-5">
+            <h3 className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold mb-3">Best for Beginners</h3>
+            <div className="space-y-2">
+              {[
+                { label: 'Autoflower Seeds', href: '/product-category/autoflowering-seeds' },
+                { label: 'Feminized Seeds', href: '/product-category/feminized-seeds' },
+                { label: 'Mix Packs', href: '/product-category/mix-packs' },
               ].map(l => (
                 <Link key={l.href} href={l.href} className="block text-[13px] text-[#275C53] hover:text-[#D7B65D] transition-colors py-0.5 font-medium">→ {l.label}</Link>
               ))}
