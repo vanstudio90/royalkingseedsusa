@@ -231,6 +231,27 @@ export default function CompareStrains() {
                 </div>
               </div>
 
+              {/* Recommended Choice */}
+              {strains.length >= 2 && (() => {
+                const best = getBestPick(strains, 'overall') || strains[0];
+                const easiest = getBestPick(strains, 'difficulty') || strains[0];
+                const yieldBest = getBestPick(strains, 'yield') || strains[0];
+                return (
+                  <div className="bg-[#D7B65D]/10 border border-[#D7B65D]/20 rounded-2xl p-6 mb-6">
+                    <h3 className="text-[14px] font-bold text-[#275C53] mb-2">Recommended Choice Based on Your Comparison</h3>
+                    <p className="text-[13px] text-[#192026]/60 leading-relaxed mb-4">
+                      Based on your comparison, <strong className="text-[#275C53]">{best.name}</strong> is the strongest overall choice for growers seeking a balance of yield, potency, and grow ease.
+                      {easiest.slug !== best.slug && <> <strong className="text-[#275C53]">{easiest.name}</strong> is better suited for beginners or growers who want the simplest possible experience.</>}
+                      {yieldBest.slug !== best.slug && yieldBest.slug !== easiest.slug && <> For maximum harvest weight, <strong className="text-[#275C53]">{yieldBest.name}</strong> is the top producer.</>}
+                    </p>
+                    <div className="flex flex-wrap gap-3">
+                      <Link href={`/${best.slug}`} className="px-5 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold hover:bg-[#1e4a42] transition-colors">Shop Best Overall: {best.name.split(' ').slice(0, 2).join(' ')}</Link>
+                      {easiest.slug !== best.slug && <Link href={`/${easiest.slug}`} className="px-5 py-2.5 bg-white text-[#275C53] rounded-xl text-[12px] font-bold border border-[#275C53]/10 hover:bg-[#275C53] hover:text-white transition-colors">Shop Easiest: {easiest.name.split(' ').slice(0, 2).join(' ')}</Link>}
+                    </div>
+                  </div>
+                );
+              })()}
+
               {/* Shop Compared Strains */}
               <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 mb-6">
                 <h3 className="text-lg font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Shop the Compared Strains</h3>
@@ -367,24 +388,76 @@ export default function CompareStrains() {
               <p className="text-[14px] text-[#192026]/65 leading-relaxed">New growers often compare <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">autoflower seeds</Link> with <Link href="/product-category/feminized-seeds" className="text-[#275C53] hover:text-[#D7B65D]">feminized seeds</Link> before choosing their first run. Autoflowers are simpler and faster but produce smaller individual harvests. Feminized photoperiod seeds offer more control and larger yields but require understanding light cycles. Many experienced growers run both types simultaneously.</p>
             </section>
 
+            {/* Strain Comparison Chart Explained */}
             <section>
-              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Example Strain Comparisons</h2>
-              <div className="space-y-4">
-                {[
-                  { title: 'Northern Lights vs Blue Dream', a: 'Northern Lights', b: 'Blue Dream', summary: 'Northern Lights is the easier grow — compact, fast flowering, and incredibly forgiving. Blue Dream offers higher yields and more balanced effects but needs slightly more attention. Choose Northern Lights for your first grow; choose Blue Dream for a bigger, more versatile harvest.' },
-                  { title: 'Big Bud vs Critical Mass', a: 'Big Bud', b: 'Critical Mass', summary: 'Both are yield monsters, but Big Bud has a slight edge in total weight. Critical Mass finishes faster and has denser buds that are more mold-resistant. Choose Big Bud for maximum weight; choose Critical Mass for faster turnaround with easier trimming.' },
-                  { title: 'Gorilla Glue vs Bruce Banner', a: 'Gorilla Glue', b: 'Bruce Banner', summary: 'Both exceed 25% THC. Gorilla Glue produces more resin and is slightly easier to grow. Bruce Banner offers more cerebral effects and potentially higher THC peaks. Choose Gorilla Glue for yield + potency; choose Bruce Banner for the strongest possible THC.' },
-                ].map(ex => (
-                  <div key={ex.title} className="bg-white rounded-xl border border-[#275C53]/5 p-5">
-                    <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">{ex.title}</h3>
-                    <p className="text-[12px] text-[#192026]/50 leading-relaxed">{ex.summary}</p>
-                    <div className="flex gap-2 mt-3">
-                      <Link href={`/${ex.a.toLowerCase().replace(/\s+/g, '-')}-feminized`} className="text-[11px] text-[#275C53] font-semibold hover:text-[#D7B65D]">Shop {ex.a} →</Link>
-                      <Link href={`/${ex.b.toLowerCase().replace(/\s+/g, '-')}-feminized`} className="text-[11px] text-[#275C53] font-semibold hover:text-[#D7B65D]">Shop {ex.b} →</Link>
-                    </div>
-                  </div>
-                ))}
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Strain Comparison Chart Explained</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">When comparing cannabis strains, each metric tells a different story about how the plant will perform in your garden. <strong>Yield</strong> (measured in grams per square meter indoors or per plant outdoors) indicates harvest potential — <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">high-yield cannabis seeds</Link> like Big Bud can exceed 600g/m². <strong>THC content</strong> determines potency — <Link href="/product-category/high-tch-seeds" className="text-[#275C53] hover:text-[#D7B65D]">high-THC strains</Link> above 25% deliver the strongest effects.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed"><strong>Flowering time</strong> affects your total grow timeline — <Link href="/product-category/fast-flowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">fast-flowering strains</Link> finish in 7-8 weeks while sativas may take 12+. <strong>Grow difficulty</strong> ranges from very easy (<Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">autoflower seeds</Link> like Northern Lights Auto) to advanced (pure sativas and exotic genetics). Understanding these metrics helps you choose genetics that match your space, experience, and goals. Use our <Link href="/yield-calculator" className="text-[#275C53] hover:text-[#D7B65D]">yield calculator</Link> for harvest estimates and our <Link href="/nutrient-calculator" className="text-[#275C53] hover:text-[#D7B65D]">nutrient calculator</Link> for feeding plans.</p>
+            </section>
+
+            {/* Which Strain Is Best for You */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Which Cannabis Strain Is Best for You?</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">The right strain depends entirely on your priorities. Here is a breakdown by grower type:</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-4"><h3 className="text-[13px] font-semibold text-[#275C53] mb-1">🌱 Beginners</h3><p className="text-[12px] text-[#192026]/50">Choose <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">autoflower seeds</Link> like Northern Lights Auto or White Widow Auto. They flower automatically, stay compact, and tolerate mistakes.</p></div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-4"><h3 className="text-[13px] font-semibold text-[#275C53] mb-1">📈 Yield Hunters</h3><p className="text-[12px] text-[#192026]/50">Compare <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">high-yield strains</Link> like Big Bud, Critical Mass, and White Widow. Train with ScrOG for maximum canopy coverage.</p></div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-4"><h3 className="text-[13px] font-semibold text-[#275C53] mb-1">🔥 Potency Seekers</h3><p className="text-[12px] text-[#192026]/50">Compare <Link href="/product-category/high-tch-seeds" className="text-[#275C53] hover:text-[#D7B65D]">high-THC strains</Link> like Gorilla Glue (28-32%), Bruce Banner (25-29%), and Girl Scout Cookies (25-28%).</p></div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-4"><h3 className="text-[13px] font-semibold text-[#275C53] mb-1">⚡ Speed Growers</h3><p className="text-[12px] text-[#192026]/50">Choose <Link href="/product-category/fast-flowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">fast-flowering strains</Link> or autoflowers that finish in 8-10 weeks from seed. Critical Auto and Northern Lights Auto are the fastest.</p></div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-4"><h3 className="text-[13px] font-semibold text-[#275C53] mb-1">🏠 Indoor Growers</h3><p className="text-[12px] text-[#192026]/50">Compare <Link href="/product-category/best-strains-for-indoor-growing" className="text-[#275C53] hover:text-[#D7B65D]">indoor strains</Link> that stay compact under 4 feet. Northern Lights, Girl Scout Cookies, and OG Kush are top indoor performers.</p></div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-4"><h3 className="text-[13px] font-semibold text-[#275C53] mb-1">☀️ Outdoor Growers</h3><p className="text-[12px] text-[#192026]/50">Compare <Link href="/product-category/best-strains-for-outdoor-growing" className="text-[#275C53] hover:text-[#D7B65D]">outdoor strains</Link> with mold resistance and fast finish times. Blue Dream and Sour Diesel thrive in warm US climates.</p></div>
               </div>
+            </section>
+
+            {/* Expanded Example Comparisons */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Popular Strain Comparisons</h2>
+
+              {[
+                { heading: 'Classic Strain Comparisons', items: [
+                  { title: 'Northern Lights vs Blue Dream', summary: 'Northern Lights is the easier grow — compact, fast, and incredibly forgiving. Blue Dream offers higher yields and more balanced effects. Choose Northern Lights for your first grow; Blue Dream for bigger, more versatile harvests.' },
+                  { title: 'OG Kush vs Girl Scout Cookies', summary: 'Both are West Coast legends. OG Kush has the signature fuel-lemon-pine terpene profile. GSC delivers sweeter flavors with slightly higher THC. OG Kush is the purist choice; GSC is the modern classic.' },
+                  { title: 'White Widow vs AK-47', summary: 'White Widow is the Dutch coffeeshop standard — easy to grow with balanced effects. AK-47 hits harder with more cerebral stimulation. Choose White Widow for reliability; AK-47 for a more intense experience.' },
+                  { title: 'Jack Herer vs Sour Diesel', summary: 'Both are elite sativas. Jack Herer offers clear-headed focus and creativity. Sour Diesel delivers more intense energy with its signature fuel aroma. Jack Herer for mental clarity; Sour Diesel for raw energy.' },
+                ]},
+                { heading: 'High Yield Strain Comparisons', items: [
+                  { title: 'Big Bud vs Critical Mass', summary: 'Both are yield monsters. Big Bud has a slight edge in total weight. Critical Mass finishes faster with denser buds. Choose Big Bud for maximum weight; Critical Mass for faster turnaround.' },
+                  { title: 'Blue Dream vs Super Silver Haze', summary: 'Blue Dream yields heavily with balanced effects and easy growing. Super Silver Haze produces similar yields but with more intense sativa effects and longer flowering. Blue Dream for balance; SSH for pure sativa energy.' },
+                  { title: 'Gorilla Glue vs White Widow', summary: 'Gorilla Glue produces extreme resin with higher THC (28%+). White Widow yields comparably but with lower potency (20-25%). Gorilla Glue for potency + yield; White Widow for easier growing.' },
+                ]},
+                { heading: 'High THC Strain Comparisons', items: [
+                  { title: 'Gorilla Glue vs Bruce Banner', summary: 'Both exceed 25% THC. Gorilla Glue produces more resin and is slightly easier to grow. Bruce Banner offers more cerebral effects and potentially higher THC peaks. Gorilla Glue for yield + potency; Bruce Banner for the strongest THC.' },
+                  { title: 'Girl Scout Cookies vs Gelato', summary: 'GSC is the iconic hybrid with 25-28% THC. Gelato offers more exotic dessert terpenes with similar potency. GSC for proven reliability; Gelato for the most complex flavor experience.' },
+                  { title: 'Wedding Cake vs Ice Cream Cake', summary: 'Both are dessert-terpene powerhouses above 25% THC. Wedding Cake leans slightly more euphoric; Ice Cream Cake is more sedating. Wedding Cake for balanced potency; Ice Cream Cake for deep evening relaxation.' },
+                ]},
+                { heading: 'Beginner Strain Comparisons', items: [
+                  { title: 'Northern Lights vs White Widow', summary: 'Both are top beginner choices. Northern Lights is slightly more compact and forgiving. White Widow yields a bit more and has more balanced effects. Northern Lights for absolute ease; White Widow for a step up in yield.' },
+                  { title: 'Blue Dream vs Green Crack', summary: 'Blue Dream is the most beginner-friendly sativa-hybrid with balanced effects. Green Crack delivers more intense energy. Blue Dream for versatility; Green Crack for daytime productivity.' },
+                  { title: 'Northern Lights Auto vs White Widow Auto', summary: 'The two easiest autoflowers. Northern Lights Auto is the most forgiving plant in existence. White Widow Auto yields slightly more. Both finish in 8-10 weeks and tolerate beginner mistakes beautifully.' },
+                ]},
+                { heading: 'Autoflower vs Feminized Comparisons', items: [
+                  { title: 'Northern Lights Auto vs Northern Lights Feminized', summary: 'The auto version finishes in 10 weeks from seed but yields less per plant. The feminized version needs 4-5 months but produces significantly more per plant. Auto for speed; feminized for maximum yield.' },
+                  { title: 'Gorilla Glue Auto vs Gorilla Glue Feminized', summary: 'Both carry the legendary potency. The auto version is faster and easier but produces smaller harvests. The feminized version needs more time and skill but rewards with massive, extremely potent buds.' },
+                  { title: 'Blue Dream Auto vs Blue Dream Feminized', summary: 'Auto Blue Dream finishes in 10 weeks with moderate yields. Feminized Blue Dream can grow huge outdoors with much larger harvests. Auto for beginners and speed; feminized for experienced growers chasing maximum production.' },
+                ]},
+              ].map(group => (
+                <div key={group.heading} className="mb-6">
+                  <h3 className="text-[14px] font-bold text-[#275C53] mb-3">{group.heading}</h3>
+                  <div className="space-y-3">
+                    {group.items.map(ex => (
+                      <div key={ex.title} className="bg-white rounded-xl border border-[#275C53]/5 p-4">
+                        <h4 className="text-[13px] font-semibold text-[#275C53] mb-1">{ex.title}</h4>
+                        <p className="text-[12px] text-[#192026]/50 leading-relaxed">{ex.summary}</p>
+                        <div className="flex gap-3 mt-2">
+                          {ex.title.split(' vs ').map(name => (
+                            <Link key={name} href={`/${name.trim().toLowerCase().replace(/\s+/g, '-').replace(/#/g, '')}-feminized`} className="text-[10px] text-[#275C53] font-semibold hover:text-[#D7B65D]">Shop {name.trim()} →</Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </section>
 
             {/* FAQ */}
