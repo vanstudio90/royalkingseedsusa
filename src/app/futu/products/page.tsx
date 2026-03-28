@@ -64,15 +64,19 @@ export default function AdminProductsPage() {
   const deleteProduct = async (id: number, name: string) => {
     if (!confirm(`Delete "${name}"? This cannot be undone.`)) return;
     try {
-      const res = await adminFetch(`/api/admin/products/${id}`, { method: 'DELETE' });
+      const token = localStorage.getItem('admin_token');
+      const res = await fetch(`/api/admin/products/${id}`, {
+        method: 'DELETE',
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
       if (!res.ok) {
         const err = await res.json().catch(() => ({}));
-        alert(err.error || 'Failed to delete product');
+        alert(err.error || `Failed to delete product (${res.status})`);
         return;
       }
       fetchProducts();
-    } catch {
-      alert('Failed to delete product. Please try again.');
+    } catch (e) {
+      alert(`Failed to delete product: ${e instanceof Error ? e.message : 'Unknown error'}`);
     }
   };
 
