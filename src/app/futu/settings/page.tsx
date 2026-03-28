@@ -38,6 +38,7 @@ export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
+  const [clearing, setClearing] = useState(false);
 
   useEffect(() => {
     adminFetch('/api/admin/settings')
@@ -123,6 +124,30 @@ export default function AdminSettingsPage() {
       )}
 
       <div className="space-y-6">
+        {/* Cache Management */}
+        <div className="bg-white rounded-2xl border border-[#192026]/5 p-6">
+          <h2 className="text-lg font-bold text-[#192026] mb-2" style={{ fontFamily: 'var(--font-patua)' }}>Cache Management</h2>
+          <p className="text-[#192026]/40 text-sm mb-4">Clear the server-side page cache so all pages load fresh data. Cart and favorites are stored in your browser and will not be affected.</p>
+          <button
+            onClick={async () => {
+              setClearing(true);
+              setMessage('');
+              try {
+                const res = await adminFetch('/api/admin/clear-cache', { method: 'POST' });
+                const data = await res.json();
+                setMessage(data.success ? 'Cache cleared successfully. All pages will reload with fresh data.' : (data.error || 'Failed to clear cache'));
+              } catch {
+                setMessage('Error clearing cache');
+              }
+              setClearing(false);
+            }}
+            disabled={clearing}
+            className="px-6 py-2.5 bg-[#D7B65D] text-[#1a3d36] rounded-xl text-sm font-semibold hover:bg-[#c9a84e] transition-colors disabled:opacity-50 cursor-pointer"
+          >
+            {clearing ? 'Clearing...' : 'Clear Site Cache'}
+          </button>
+        </div>
+
         {/* Store Info */}
         <div className="bg-white rounded-2xl border border-[#192026]/5 p-6">
           <h2 className="text-lg font-bold text-[#192026] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Store Info</h2>
