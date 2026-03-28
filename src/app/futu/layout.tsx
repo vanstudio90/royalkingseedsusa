@@ -14,6 +14,7 @@ const navItems = [
   { href: '/futu/analytics', label: 'Analytics', icon: '📈' },
   { href: '/futu/pages', label: 'Pages & Blog', icon: '📄' },
   { href: '/futu/categories', label: 'Categories', icon: '📁' },
+  { href: '/futu/blog-categories', label: 'Blog Categories', icon: '📝' },
   { href: '/futu/reviews', label: 'Reviews', icon: '⭐' },
   { href: '/futu/shipping', label: 'Shipping', icon: '🚚' },
   { href: '/futu/wishlists', label: 'Wishlists', icon: '❤️' },
