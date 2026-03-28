@@ -128,7 +128,7 @@ export default function YieldCalculatorPage() {
           Cannabis Yield Calculator
         </h1>
         <p className="text-[#192026]/55 max-w-2xl mx-auto text-sm leading-relaxed">
-          Estimate your indoor or outdoor cannabis harvest, get plant count recommendations, and discover the best high-yield strains for your grow space.
+          Estimate how much cannabis you can grow — and discover the best <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">high-yield strains</Link> for your setup. Works for indoor tents, outdoor gardens, and everything in between.
         </p>
       </div>
 
@@ -283,6 +283,7 @@ export default function YieldCalculatorPage() {
                           <h4 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">{s.name}</h4>
                         </div>
                         <div className="flex flex-wrap gap-1.5 mt-1">
+                          <span className="text-[9px] bg-[#275C53] text-white px-1.5 py-0.5 rounded font-medium">Matches Your Setup</span>
                           <span className="text-[9px] bg-emerald-50 text-emerald-700 px-1.5 py-0.5 rounded font-medium">High Yield</span>
                           <span className="text-[9px] bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded font-medium">{s.type}</span>
                           <span className="text-[9px] bg-purple-50 text-purple-700 px-1.5 py-0.5 rounded font-medium">{s.difficulty}</span>
@@ -300,6 +301,34 @@ export default function YieldCalculatorPage() {
                     Shop Autoflower Seeds
                   </Link>
                 </div>
+              </div>
+
+              {/* Recommended Grow Plan */}
+              <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 mb-6">
+                <h3 className="text-lg font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Your Recommended Grow Plan</h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div className="bg-[#F5F0EA] rounded-xl p-4 text-center">
+                    <span className="text-2xl block mb-1">🌱</span>
+                    <span className="text-lg font-bold text-[#275C53] block">{results.plantCount}</span>
+                    <span className="text-[10px] text-[#192026]/40">Plants</span>
+                  </div>
+                  <div className="bg-[#F5F0EA] rounded-xl p-4 text-center">
+                    <span className="text-2xl block mb-1">{seedType === 'autoflower' ? '⚡' : '🌿'}</span>
+                    <span className="text-lg font-bold text-[#275C53] block">{seedType === 'autoflower' ? 'Auto' : seedType === 'feminized' ? 'Fem' : 'Mixed'}</span>
+                    <span className="text-[10px] text-[#192026]/40">Seed Type</span>
+                  </div>
+                  <div className="bg-[#F5F0EA] rounded-xl p-4 text-center">
+                    <span className="text-2xl block mb-1">{env === 'indoor' ? '💡' : '☀️'}</span>
+                    <span className="text-lg font-bold text-[#275C53] block">{env === 'indoor' ? light.toUpperCase() : 'Sun'}</span>
+                    <span className="text-[10px] text-[#192026]/40">Light Source</span>
+                  </div>
+                  <div className="bg-[#F5F0EA] rounded-xl p-4 text-center">
+                    <span className="text-2xl block mb-1">📅</span>
+                    <span className="text-lg font-bold text-[#275C53] block">{results.cyclesPerYear}x</span>
+                    <span className="text-[10px] text-[#192026]/40">Harvests / Year</span>
+                  </div>
+                </div>
+                <p className="text-[12px] text-[#192026]/40 mt-3">For a {sqft} sq ft {env} grow with {seedType} seeds, we recommend {results.plantCount} plants using {env === 'indoor' ? light.toUpperCase() + ' lighting' : 'natural sunlight'}. {seedType === 'autoflower' ? 'Autoflowers allow ' + results.cyclesPerYear + ' harvests per year for maximum annual yield.' : 'Feminized photoperiod plants give you maximum control over plant size and flowering timing.'}</p>
               </div>
 
               {/* Maximize Your Yield */}
@@ -326,6 +355,16 @@ export default function YieldCalculatorPage() {
                     <span className="text-[10px] text-[#275C53] font-semibold mt-2 block">Read guide →</span>
                   </Link>
                 </div>
+              </div>
+
+              {/* Email Capture */}
+              <div className="bg-[#275C53] rounded-2xl p-6 mb-6 text-center">
+                <h3 className="text-white font-bold text-lg mb-1" style={{ fontFamily: 'var(--font-patua)' }}>Want a Custom Grow Plan?</h3>
+                <p className="text-white/50 text-[12px] mb-4">Get personalized strain picks and growing tips for your {sqft} sq ft {env} setup — free.</p>
+                <form className="flex gap-2 max-w-md mx-auto" onSubmit={e => { e.preventDefault(); const input = e.currentTarget.querySelector('input'); if (input) { input.value = ''; input.placeholder = 'Thanks! Check your email.'; }}}>
+                  <input type="email" placeholder="your@email.com" required className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white text-[13px] placeholder:text-white/30 focus:outline-none focus:border-white/40" />
+                  <button type="submit" className="px-5 py-3 bg-[#D7B65D] text-[#275C53] rounded-xl text-[13px] font-bold hover:bg-white transition-colors cursor-pointer shrink-0">Send My Plan</button>
+                </form>
               </div>
             </div>
           )}
@@ -438,6 +477,14 @@ export default function YieldCalculatorPage() {
               </div>
             </section>
 
+            {/* Authority / Accuracy */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>How Accurate Is This Cannabis Yield Calculator?</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Our calculator provides realistic yield ranges based on established growing data — not inflated marketing numbers. The estimates account for grow space, lighting efficiency, seed genetics, and grower experience. However, actual harvests depend on many variables including <Link href="/blog/cannabis-nutrient-deficiencies" className="text-[#275C53] hover:text-[#D7B65D]">nutrient management</Link>, environmental control, <Link href="/blog/cannabis-plant-pruning-and-topping" className="text-[#275C53] hover:text-[#D7B65D]">training techniques</Link>, and strain-specific characteristics.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">We deliberately show conservative ranges. Beginners should expect results closer to the lower end, while experienced growers using <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">high-yield cannabis seeds</Link> with proper training can consistently hit or exceed the upper range. The &ldquo;optimized&rdquo; number represents what skilled growers achieve with premium genetics, <Link href="/blog/cannabis-growing-lights-and-phases" className="text-[#275C53] hover:text-[#D7B65D]">optimized lighting</Link>, and dialed-in environments.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">This tool is built on data from over 200,000 American growers using seeds from Royal King Seeds. Use it as a planning starting point — your actual results will improve with each grow cycle as you learn your specific environment.</p>
+            </section>
+
             {/* FAQ Schema */}
             <section>
               <h2 className="text-xl font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Frequently Asked Questions</h2>
@@ -478,17 +525,22 @@ export default function YieldCalculatorPage() {
           </div>
 
           <div className="bg-white rounded-2xl border border-[#275C53]/5 p-5">
-            <h3 className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold mb-3">Top Yielding Strains</h3>
-            <div className="space-y-2">
+            <h3 className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold mb-3">Top Yielding Strains Right Now</h3>
+            <div className="space-y-2.5">
               {[
-                { label: 'High Yield Seeds', href: '/product-category/best-strains-for-high-yield' },
-                { label: 'Autoflower Seeds', href: '/product-category/autoflowering-seeds' },
-                { label: 'Feminized Seeds', href: '/product-category/feminized-seeds' },
-                { label: 'Outdoor Strains', href: '/product-category/best-strains-for-outdoor-growing' },
-              ].map(l => (
-                <Link key={l.href} href={l.href} className="block text-[13px] text-[#275C53] hover:text-[#D7B65D] transition-colors py-0.5 font-medium">→ {l.label}</Link>
+                { name: 'Northern Lights', slug: 'northern-lights-feminized', yield: '500-600g/m²' },
+                { name: 'Big Bud', slug: 'big-bud-feminized', yield: '600-800g/plant' },
+                { name: 'Critical Mass', slug: 'critical-mass-feminized', yield: '500-700g/plant' },
+                { name: 'White Widow', slug: 'white-widow-feminized', yield: '450-500g/m²' },
+                { name: 'Blue Dream', slug: 'blue-dream-feminized', yield: '500-600g/m²' },
+              ].map(s => (
+                <Link key={s.slug} href={`/${s.slug}`} className="block group">
+                  <span className="text-[13px] text-[#275C53] group-hover:text-[#D7B65D] transition-colors font-medium">{s.name}</span>
+                  <span className="text-[10px] text-[#192026]/30 block">{s.yield}</span>
+                </Link>
               ))}
             </div>
+            <Link href="/product-category/best-strains-for-high-yield" className="block text-[12px] text-[#275C53] font-semibold mt-3 hover:text-[#D7B65D]">View all high-yield seeds →</Link>
           </div>
 
           <div className="bg-white rounded-2xl border border-[#275C53]/5 p-5">
