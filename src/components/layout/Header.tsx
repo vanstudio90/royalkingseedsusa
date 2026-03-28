@@ -43,7 +43,7 @@ const navItems: MenuItem[] = [
           { label: 'Beginner-Friendly', href: '/product-category/autoflowering-seeds' },
           { label: 'High Yield Seeds', href: '/product-category/best-strains-for-high-yield' },
           { label: 'Fast Growing Seeds', href: '/product-category/fast-flowering-cannabis-seeds' },
-          { label: 'Easy to Grow', href: '/product-category/autoflowering-seeds' },
+          { label: 'Yield Calculator', href: '/yield-calculator' },
         ],
       },
       {
