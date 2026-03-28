@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getProductBySlug, getProducts, getProductBySlugFromDb } from '@/lib/products/data';
+import { getDbImageUrl } from '@/lib/products/db-fallback';
 import { ProductDetail } from '@/components/product/ProductDetail';
 import { ProductDetailSidebar } from '@/components/product/ProductDetailSidebar';
 import { getCategoryBySlug } from '@/lib/categories';
@@ -80,6 +81,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug) || await getProductBySlugFromDb(slug);
+
+  // Check DB for updated image (admin panel uploads go to DB, not static JSON)
+  if (product) {
+    const dbImage = await getDbImageUrl(slug);
+    if (dbImage && dbImage !== product.imageUrl) {
+      product.imageUrl = dbImage;
+    }
+  }
 
   if (!product) {
     const page = await getStaticPage(slug);

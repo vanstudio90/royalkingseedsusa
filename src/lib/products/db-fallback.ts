@@ -45,3 +45,13 @@ export async function getProductBySlugFromDb(slug: string): Promise<Product | nu
   if (error || !data) return null;
   return toProduct(data);
 }
+
+export async function getDbImageUrl(slug: string): Promise<string | null> {
+  const { data } = await supabaseAdmin
+    .from('products')
+    .select('image_url')
+    .eq('slug', slug)
+    .single();
+
+  return data?.image_url || null;
+}
