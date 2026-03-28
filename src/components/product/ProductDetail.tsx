@@ -191,7 +191,7 @@ export function ProductDetail({
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('Product Info');
-  const hasMainImage = product.imageUrl && !product.imageUrl.startsWith('/images/seeds/');
+  const hasMainImage = product.imageUrl && !product.imageUrl.startsWith('/images/seeds/') && !product.imageUrl.match(/\.(jpg|jpeg)$/i);
   const allImages = [
     ...(hasMainImage ? [product.imageUrl] : []),
     ...galleryImages,
@@ -1186,7 +1186,7 @@ function CompareTab({ product, relatedProducts }: {
                     : 'bg-[#F5F0EA]'
               }`}>
                 <div className="w-full aspect-square rounded-xl overflow-hidden flex items-center justify-center bg-white mb-2">
-                  {p.imageUrl && !p.imageUrl.startsWith('/images/seeds/') ? (
+                  {p.imageUrl && !p.imageUrl.startsWith('/images/seeds/') && !p.imageUrl.match(/\.(jpg|jpeg)$/i) ? (
                     <img src={p.imageUrl} alt={p.name} className={`w-full h-full object-contain p-2 transition-transform duration-300 ${isHovered ? 'scale-110' : ''}`} />
                   ) : (
                     <span className={`text-3xl transition-opacity duration-300 ${isHovered ? 'opacity-50' : 'opacity-20'}`}>🌱</span>
