@@ -113,6 +113,18 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         <p className="text-sm text-[#192026]/40 mt-3">{filtered.length} strains available</p>
       </div>
 
+      {/* Quick Decision Strip */}
+      {content?.quickFacts && content.quickFacts.length > 0 && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+          {content.quickFacts.map((fact, i) => (
+            <div key={i} className="bg-white rounded-xl border border-[#275C53]/5 p-4 text-center">
+              <span className="text-[10px] uppercase tracking-[1px] text-[#192026]/30 font-semibold block mb-1">{fact.label}</span>
+              <span className="text-[14px] font-bold text-[#275C53]">{fact.value}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Product Grid */}
       <h2 className="sr-only">{category.name} — Browse All Strains</h2>
       <ProductGrid products={filtered.map(p => ({
@@ -153,20 +165,39 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         </div>
       )}
 
-      {/* Related Categories */}
-      {relatedCategories.length > 0 && (
-        <div className="mt-12 pt-8 border-t border-[#275C53]/10">
-          <h2 className="text-sm font-semibold text-[#275C53] mb-4">Related Seed Categories</h2>
-          <div className="flex flex-wrap gap-2">
-            {relatedCategories.map((cat) => (
-              <Link key={cat.slug} href={`/product-category/${cat.slug}`}
-                className="px-3 py-1.5 bg-white border border-[#275C53]/10 rounded-full text-[12px] text-[#275C53] hover:bg-[#275C53] hover:text-white transition-colors">
-                {cat.name}
-              </Link>
-            ))}
-          </div>
+      {/* Explore Related Categories */}
+      <div className="mt-12 pt-8 border-t border-[#275C53]/10">
+        <h2 className="text-lg text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Explore Related Cannabis Seed Categories</h2>
+        <div className="flex flex-wrap gap-2">
+          {(content?.relatedCategories || relatedCategories.map(c => ({ name: c.name, slug: c.slug }))).concat([
+            { name: 'Autoflower Seeds', slug: 'autoflowering-seeds' },
+            { name: 'Feminized Seeds', slug: 'feminized-seeds' },
+            { name: 'High THC Seeds', slug: 'high-tch-seeds' },
+            { name: 'High Yield Seeds', slug: 'best-strains-for-high-yield' },
+            { name: 'Indoor Seeds', slug: 'best-strains-for-indoor-growing' },
+            { name: 'Outdoor Seeds', slug: 'best-strains-for-outdoor-growing' },
+            { name: 'Fast Flowering', slug: 'fast-flowering-seeds' },
+            { name: 'CBD Seeds', slug: 'cbd-strains' },
+          ]).filter((c, i, arr) => c.slug !== slug && arr.findIndex(x => x.slug === c.slug) === i).slice(0, 8).map((cat) => (
+            <Link key={cat.slug} href={`/product-category/${cat.slug}`}
+              className="px-3 py-1.5 bg-white border border-[#275C53]/10 rounded-full text-[12px] text-[#275C53] hover:bg-[#275C53] hover:text-white transition-colors">
+              {cat.name}
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
+
+      {/* CTA / Trust Block */}
+      <div className="mt-10 bg-[#F5F0EA] rounded-2xl p-6 flex flex-col sm:flex-row items-center gap-4">
+        <div className="flex-1">
+          <h3 className="text-[#275C53] font-bold text-[15px]" style={{ fontFamily: 'var(--font-patua)' }}>Not sure which strain is right for you?</h3>
+          <p className="text-[12px] text-[#192026]/50 mt-1">Take our 60-second quiz or explore our grow guides for expert recommendations.</p>
+        </div>
+        <div className="flex gap-3 shrink-0">
+          <Link href="/strain-finder" className="px-5 py-2.5 bg-[#275C53] text-white rounded-xl text-[12px] font-bold hover:bg-[#1e4a42] transition-colors">Strain Finder Quiz</Link>
+          <Link href="/yield-calculator" className="px-5 py-2.5 bg-white text-[#275C53] rounded-xl text-[12px] font-bold border border-[#275C53]/10 hover:bg-[#275C53] hover:text-white transition-colors">Yield Calculator</Link>
+        </div>
+      </div>
 
       {/* Full A-Z Product Directory (server-rendered for crawlers) */}
       {slug === 'shop-all-cannabis-seeds' && filtered.length > 0 && (() => {
