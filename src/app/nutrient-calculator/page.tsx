@@ -168,6 +168,26 @@ export default function NutrientCalculatorPage() {
         </div>
       </div>
 
+      {/* Pre-Tool Quick Answers (SEO Entry Points) */}
+      <div className="bg-white rounded-2xl border border-[#275C53]/10 p-6 mb-8 max-w-3xl mx-auto">
+        <h2 className="text-[11px] font-bold text-[#275C53] uppercase tracking-[1.5px] mb-3">Quick Cannabis Feeding Answers</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
+          {[
+            { q: 'Ideal EC for cannabis in veg:', a: '0.6–1.4 depending on medium and stage' },
+            { q: 'Flowering PPM range:', a: '600–1000 depending on medium and week' },
+            { q: 'Soil feeding frequency:', a: 'Every 2–3 waterings (alternate with plain water)' },
+            { q: 'Coco feeding frequency:', a: 'Every watering — small daily feeds with runoff' },
+            { q: 'Autoflower nutrients:', a: '~20% less than photoperiod plants' },
+            { q: 'When to start feeding seedlings:', a: 'After 3-4 true leaf sets (2-3 weeks in soil)' },
+          ].map(item => (
+            <div key={item.q} className="flex gap-2 py-1.5">
+              <span className="text-[12px] text-[#275C53] font-semibold shrink-0">{item.q}</span>
+              <span className="text-[12px] text-[#192026]/50">{item.a}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="flex gap-8 items-start flex-col lg:flex-row">
         <div className="flex-1 min-w-0">
 
@@ -370,6 +390,12 @@ export default function NutrientCalculatorPage() {
             </section>
 
             <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Feeding Schedule Generator — Soil, Coco & Hydro</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Our calculator creates personalized feeding schedules based on your specific growing medium and plant stage. Unlike static feeding charts, the schedule generator accounts for whether you grow in soil (less frequent, buffered feeding), <Link href="/blog/cannabis-nutrient-deficiencies" className="text-[#275C53] hover:text-[#D7B65D]">coco coir</Link> (daily feeding with runoff monitoring), or hydroponic systems (continuous feed with tight EC management).</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">The generated schedule includes feed frequency, nutrient strength targets (EC and PPM), stage-specific nutrient emphasis (nitrogen for veg, phosphorus and potassium for flower), and flushing guidance. Growers using <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">autoflowering cannabis seeds</Link> receive automatically adjusted schedules with 20% lower nutrient concentrations to match their lighter feeding requirements. Scroll up to the calculator to generate your custom feeding schedule.</p>
+            </section>
+
+            <section>
               <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Feeding by Growth Stage</h2>
               <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">Cannabis nutrient requirements change dramatically as plants progress from seedling to harvest. Understanding what your plant needs at each stage is the foundation of successful feeding.</p>
               <div className="bg-white rounded-2xl border border-[#275C53]/5 overflow-hidden mb-4">
@@ -461,6 +487,122 @@ export default function NutrientCalculatorPage() {
               <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Not all cannabis strains handle nutrients the same way. Some are heavy feeders that reward aggressive nutrition programs with massive yields. Others are sensitive to overfeeding and prefer lighter, more conservative schedules. Matching your strain selection to your feeding style — or vice versa — is one of the most overlooked factors in growing success.</p>
               <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3"><Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">Autoflowering strains</Link> generally need lighter feeding due to their shorter lifecycle and smaller root systems. <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">High-yield strains</Link> like Big Bud and Critical Mass are heavy feeders during bloom and reward structured feeding programs. Beginner-friendly strains like Northern Lights and White Widow are forgiving of feeding mistakes — they tolerate both slight overfeeding and underfeeding without major stress.</p>
               <p className="text-[14px] text-[#192026]/65 leading-relaxed">If you are new to nutrients, start with forgiving genetics in soil. If you are chasing maximum yields in coco or hydro, choose strains bred for heavy production and feed them precisely through bloom. Use our <Link href="/strain-finder" className="text-[#275C53] hover:text-[#D7B65D]">strain finder quiz</Link> or <Link href="/yield-calculator" className="text-[#275C53] hover:text-[#D7B65D]">yield calculator</Link> to find genetics matched to your growing goals.</p>
+            </section>
+
+            {/* Week-by-Week Feeding Chart */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Feeding Chart by Week</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">This week-by-week feeding chart provides general EC and PPM targets for cannabis grown in soil. <Link href="/blog/cannabis-nutrient-deficiencies" className="text-[#275C53] hover:text-[#D7B65D]">Coco coir growers</Link> should increase EC by 0.2-0.4 and feed more frequently. Hydroponic growers can increase EC by 0.3-0.5 with continuous feeding.</p>
+              <div className="bg-white rounded-2xl border border-[#275C53]/5 overflow-hidden mb-4">
+                <table className="w-full text-sm">
+                  <thead><tr className="bg-[#F5F0EA]">
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Week</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Stage</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">EC (Soil)</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">PPM</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Focus</th>
+                  </tr></thead>
+                  <tbody>
+                    {[
+                      ['1-2', 'Seedling', '0.0-0.4', '0-200', 'Water only or very light feed'],
+                      ['3-4', 'Early Veg', '0.6-0.8', '300-400', 'Nitrogen for leaf growth'],
+                      ['5-6', 'Late Veg', '0.8-1.2', '400-600', 'N with increasing P, training'],
+                      ['7', 'Transition', '1.0-1.4', '500-700', 'Switch to bloom nutrients'],
+                      ['8-9', 'Early Flower', '1.2-1.6', '600-800', 'P & K increasing, bud sites'],
+                      ['10-11', 'Mid Flower', '1.2-1.6', '600-800', 'Peak P & K, bud fattening'],
+                      ['12', 'Late Flower', '0.6-1.0', '300-500', 'Reduce feed, begin flush'],
+                      ['13+', 'Flush', '0.0', '0', 'Plain water 5-10 days'],
+                    ].map(([week, stage, ec, ppm, focus]) => (
+                      <tr key={week} className="border-b border-[#192026]/5"><td className="px-4 py-2.5 text-[#192026]/70 font-medium">Wk {week}</td><td className="px-4 py-2.5 text-[#192026]/60">{stage}</td><td className="px-4 py-2.5 font-semibold text-[#275C53]">{ec}</td><td className="px-4 py-2.5 text-[#192026]/60">{ppm}</td><td className="px-4 py-2.5 text-[#192026]/50 text-[12px]">{focus}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed"><Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">Autoflowering strains</Link> follow a compressed version of this schedule, typically finishing by week 10. Reduce all EC values by 20% for autoflowers. <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">High-yield strains</Link> can handle the upper end of these ranges during peak flower.</p>
+            </section>
+
+            {/* Example Feeding Plans (indexable) */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Example Cannabis Feeding Plans</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">Here are sample feeding plans for the most common growing setups. Use our calculator above for a plan customized to your exact stage and medium.</p>
+              <div className="space-y-4">
+                {[
+                  { title: 'Soil — Late Veg Feeding Plan', ec: '0.8–1.2 EC', ppm: '400–600 PPM', freq: 'Feed every other watering', focus: 'Nitrogen dominant with increasing phosphorus. Focus on building strong canopy structure before flip.', medium: 'soil' },
+                  { title: 'Coco Coir — Mid Flower Feeding Plan', ec: '1.4–1.8 EC', ppm: '700–900 PPM', freq: 'Feed every watering with 10-20% runoff', focus: 'Heavy phosphorus and potassium for bud development. Maintain cal-mag. Monitor runoff EC weekly.', medium: 'coco' },
+                  { title: 'Hydroponic — Early Veg Feeding Plan', ec: '0.8–1.0 EC', ppm: '400–500 PPM', freq: 'Continuous recirculating feed', focus: 'Nitrogen dominant for rapid vegetative growth. Change reservoir every 7-10 days. Monitor pH daily.', medium: 'hydro' },
+                  { title: 'Autoflower — Full Cycle (Soil)', ec: '0.4–1.0 EC', ppm: '200–500 PPM', freq: 'Light feed every other watering', focus: 'Start very light, peak at week 5-6 of flower, then reduce. Autoflowers need 20% less than photoperiod.', medium: 'soil' },
+                ].map(plan => (
+                  <div key={plan.title} className="bg-white rounded-xl border border-[#275C53]/5 p-5">
+                    <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">{plan.title}</h3>
+                    <div className="grid grid-cols-3 gap-3 mb-2">
+                      <div><span className="text-[10px] text-[#192026]/30 block">EC</span><span className="text-[13px] font-bold text-[#275C53]">{plan.ec}</span></div>
+                      <div><span className="text-[10px] text-[#192026]/30 block">PPM</span><span className="text-[13px] font-bold text-[#275C53]">{plan.ppm}</span></div>
+                      <div><span className="text-[10px] text-[#192026]/30 block">Schedule</span><span className="text-[13px] font-bold text-[#275C53]">{plan.freq.split(',')[0]}</span></div>
+                    </div>
+                    <p className="text-[12px] text-[#192026]/50 leading-relaxed">{plan.focus}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Beginner vs Advanced */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Beginner vs Advanced Cannabis Feeding</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div className="bg-emerald-50/50 rounded-xl border border-emerald-100 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">🌱 Beginner Feeding Approach</h3>
+                  <ul className="text-[13px] text-[#192026]/60 space-y-1.5">
+                    <li>• Start at 25-50% of label dose</li>
+                    <li>• Use soil for natural buffering</li>
+                    <li>• Feed every other watering</li>
+                    <li>• Choose <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">forgiving autoflower strains</Link></li>
+                    <li>• Watch for leaf tip burn as first sign of excess</li>
+                    <li>• When in doubt, use less — not more</li>
+                  </ul>
+                </div>
+                <div className="bg-amber-50/50 rounded-xl border border-amber-100 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">🌳 Advanced Feeding Approach</h3>
+                  <ul className="text-[13px] text-[#192026]/60 space-y-1.5">
+                    <li>• Push EC to strain-specific limits</li>
+                    <li>• Use coco or hydro for precision control</li>
+                    <li>• Feed daily or continuous recirculating</li>
+                    <li>• Choose <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">heavy-feeding high-yield strains</Link></li>
+                    <li>• Monitor runoff EC and pH at every feed</li>
+                    <li>• Fine-tune ratios by growth stage</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Most growers should start with the beginner approach and progress to advanced techniques over multiple grows. The biggest mistake is jumping to aggressive feeding before understanding how your specific strain, environment, and water source interact. Our nutrient calculator adjusts recommendations for your experience level — beginners get conservative ranges that prioritize plant safety.</p>
+            </section>
+
+            {/* Increase Yields with Feeding */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>How to Increase Cannabis Yields with Proper Feeding</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Proper nutrition is one of the three pillars of yield optimization — alongside <Link href="/blog/cannabis-growing-lights-and-phases" className="text-[#275C53] hover:text-[#D7B65D]">lighting</Link> and <Link href="/blog/cannabis-plant-pruning-and-topping" className="text-[#275C53] hover:text-[#D7B65D]">plant training</Link>. Even the best genetics cannot reach their yield potential without adequate nutrition through the flowering stage.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">During mid-flower (weeks 4-6 of bloom), <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">high-yield cannabis strains</Link> demand peak phosphorus and potassium levels to support bud development. Growers who maintain consistent, adequate feeding through this critical window see 20-40% more yield than those who underfeed or feed inconsistently. The key is not maximum strength — it is consistent, stage-appropriate nutrition.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Use our <Link href="/yield-calculator" className="text-[#275C53] hover:text-[#D7B65D]">yield calculator</Link> to estimate your harvest potential, then match it with the feeding plan from this nutrient calculator. Together, these tools help you plan both your genetics and your nutrition for maximum results.</p>
+            </section>
+
+            {/* Nutrient Deficiencies Bridge */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Cannabis Nutrient Deficiencies and Feeding Issues</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">Even with a good feeding plan, deficiencies and toxicities can occur. Learning to identify and correct common issues is essential for every grower. Most problems are caused by pH imbalance or overfeeding — not actual nutrient shortage.</p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {[
+                  { issue: 'Nitrogen Deficiency', symptom: 'Lower leaves yellowing', link: '/blog/cannabis-nutrient-deficiencies' },
+                  { issue: 'Phosphorus Deficiency', symptom: 'Dark purple stems, slow flower', link: '/blog/cannabis-nutrient-deficiencies' },
+                  { issue: 'Nutrient Burn', symptom: 'Brown crispy leaf tips', link: '/blog/cannabis-nutrient-burn-and-light-stress' },
+                  { issue: 'Nutrient Lockout', symptom: 'Multiple deficiency signs at once', link: '/blog/cannabis-nutrient-deficiencies' },
+                  { issue: 'Calcium Deficiency', symptom: 'Brown spots on leaves (coco)', link: '/blog/cannabis-nutrient-deficiencies' },
+                  { issue: 'Overwatering', symptom: 'Droopy leaves, slow growth', link: '/blog/overwatering-vs-underwatering-cannabis-plants' },
+                ].map(d => (
+                  <Link key={d.issue} href={d.link} className="bg-white rounded-xl border border-[#275C53]/5 p-4 hover:shadow-sm transition-all group">
+                    <h3 className="text-[13px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">{d.issue}</h3>
+                    <p className="text-[11px] text-[#192026]/40 mt-0.5">{d.symptom}</p>
+                    <span className="text-[10px] text-[#275C53] font-medium mt-1 block">Read guide →</span>
+                  </Link>
+                ))}
+              </div>
             </section>
 
             {/* FAQ */}
