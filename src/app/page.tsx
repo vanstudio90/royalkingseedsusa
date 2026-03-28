@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getProducts, getFeaturedProducts, getBeginnerProducts, getHighThcProducts, getFastFloweringProducts } from '@/lib/products/data';
+import { overlayDbImages } from '@/lib/products/db-fallback';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
 
 export const metadata: Metadata = {
@@ -24,11 +25,13 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const products = getProducts().slice(0, 20);
-  const featured = getFeaturedProducts();
-  const beginnerSeeds = getBeginnerProducts();
-  const highThcSeeds = getHighThcProducts();
-  const fastFlowering = getFastFloweringProducts();
+  const [products, featured, beginnerSeeds, highThcSeeds, fastFlowering] = await Promise.all([
+    overlayDbImages(getProducts().slice(0, 20)),
+    overlayDbImages(getFeaturedProducts()),
+    overlayDbImages(getBeginnerProducts()),
+    overlayDbImages(getHighThcProducts()),
+    overlayDbImages(getFastFloweringProducts()),
+  ]);
   const totalProducts = getProducts().length;
 
   return (

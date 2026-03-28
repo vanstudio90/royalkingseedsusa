@@ -55,3 +55,23 @@ export async function getDbImageUrl(slug: string): Promise<string | null> {
 
   return data?.image_url || null;
 }
+
+// Batch: overlay DB images onto an array of products from static JSON
+export async function overlayDbImages(products: Product[]): Promise<Product[]> {
+  if (products.length === 0) return products;
+  const slugs = products.map(p => p.slug);
+  const { data } = await supabaseAdmin
+    .from('products')
+    .select('slug, image_url')
+    .in('slug', slugs);
+
+  if (!data || data.length === 0) return products;
+  const dbMap = new Map(data.map(r => [r.slug, r.image_url]));
+  return products.map(p => {
+    const dbImg = dbMap.get(p.slug);
+    if (dbImg && dbImg !== p.imageUrl) {
+      return { ...p, imageUrl: dbImg };
+    }
+    return p;
+  });
+}

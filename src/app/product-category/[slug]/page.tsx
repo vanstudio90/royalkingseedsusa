@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getProducts } from '@/lib/products/data';
+import { overlayDbImages } from '@/lib/products/db-fallback';
 import { getCategoryBySlug, categories } from '@/lib/categories';
 import { getCategoryContent } from '@/lib/category-content';
 import { ProductGrid } from '@/components/product/ProductGrid';
@@ -84,7 +85,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
   }
 
   const allProducts = getProducts();
-  const filtered = filterProductsByCategory(allProducts, slug);
+  const filtered = await overlayDbImages(filterProductsByCategory(allProducts, slug));
   const content = getCategoryContent(slug);
 
   const relatedCategories = categories

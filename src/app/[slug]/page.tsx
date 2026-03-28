@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { getProductBySlug, getProducts, getProductBySlugFromDb } from '@/lib/products/data';
-import { getDbImageUrl } from '@/lib/products/db-fallback';
+import { getDbImageUrl, overlayDbImages } from '@/lib/products/db-fallback';
 import { ProductDetail } from '@/components/product/ProductDetail';
 import { ProductDetailSidebar } from '@/components/product/ProductDetailSidebar';
 import { getCategoryBySlug } from '@/lib/categories';
@@ -115,9 +115,9 @@ export default async function ProductPage({ params }: Props) {
   }
 
   const allProducts = getProducts();
-  const related = allProducts
+  const related = await overlayDbImages(allProducts
     .filter(p => p.id !== product.id && (p.strainType === product.strainType || p.categories.some(c => product.categories.includes(c))))
-    .slice(0, 4);
+    .slice(0, 4));
 
   // Build breadcrumb
   const knownSlugs = ['feminized-seeds', 'autoflowering-seeds', 'indica-seeds', 'sativa-seeds', 'hybrid', 'cbd-strains', 'high-tch-seeds', 'mix-packs'];
