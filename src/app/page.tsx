@@ -409,6 +409,33 @@ export default async function HomePage() {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════
+          FREE GROWER TOOLS
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">
+        <h2 className="text-2xl sm:text-3xl text-[#275C53] text-center mb-3" style={{ fontFamily: 'var(--font-patua)' }}>
+          Free Cannabis Growing Tools
+        </h2>
+        <p className="text-center text-[#192026]/60 max-w-2xl mx-auto mb-8 text-sm">
+          Plan your grow, compare genetics, estimate your harvest, and dial in your feeding schedule — all free.
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {[
+            { name: 'Strain Finder Quiz', desc: 'Answer 6 questions, get personalized strain picks', href: '/strain-finder', icon: '🧬' },
+            { name: 'Yield Calculator', desc: 'Estimate your harvest by space, light & strain', href: '/yield-calculator', icon: '📊' },
+            { name: 'Nutrient Calculator', desc: 'EC & PPM targets for soil, coco & hydro', href: '/nutrient-calculator', icon: '🧪' },
+            { name: 'Compare Strains', desc: 'Side-by-side comparison of up to 4 strains', href: '/compare-strains', icon: '⚖️' },
+          ].map(tool => (
+            <Link key={tool.href} href={tool.href}
+              className="bg-white rounded-2xl border border-[#275C53]/5 p-5 text-center hover:shadow-lg hover:-translate-y-1 transition-all group">
+              <span className="text-3xl block mb-2">{tool.icon}</span>
+              <h3 className="text-[14px] font-semibold text-[#275C53] group-hover:text-[#D7B65D] transition-colors">{tool.name}</h3>
+              <p className="text-[11px] text-[#192026]/50 mt-1 leading-relaxed">{tool.desc}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════════════════
           7. WHY CHOOSE US — proof-based, specific numbers
       ═══════════════════════════════════════════════════════════════ */}
       <section className="max-w-[1280px] mx-auto px-4 sm:px-6 py-12">

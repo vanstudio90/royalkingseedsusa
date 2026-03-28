@@ -128,7 +128,6 @@ export function Footer() {
             <div>
               <h3 className={headingClass}>Help &amp; Policies</h3>
               <ul className="space-y-2.5">
-                <li><Link href="/strain-finder" className={linkClass}>Strain Finder Quiz</Link></li>
                 <li><Link href="/contact" className={linkClass}>Contact Us</Link></li>
                 <li><Link href="/faq" className={linkClass}>FAQ</Link></li>
                 <li><Link href="/shipping" className={linkClass}>Shipping &amp; Returns</Link></li>
@@ -139,15 +138,16 @@ export function Footer() {
               </ul>
             </div>
 
-            {/* Grow Guides */}
+            {/* Grower Tools */}
             <div>
-              <h3 className={headingClass}>Grow Guides</h3>
+              <h3 className={headingClass}>Grower Tools</h3>
               <ul className="space-y-2.5">
+                <li><Link href="/strain-finder" className={linkClass}>Strain Finder Quiz</Link></li>
+                <li><Link href="/yield-calculator" className={linkClass}>Yield Calculator</Link></li>
+                <li><Link href="/nutrient-calculator" className={linkClass}>Nutrient Calculator</Link></li>
+                <li><Link href="/compare-strains" className={linkClass}>Compare Strains</Link></li>
                 <li><Link href="/blog" className={linkClass}>All Grow Guides</Link></li>
-                <li><Link href="/product-category/autoflowering-seeds" className={linkClass}>Autoflower Growing</Link></li>
-                <li><Link href="/product-category/feminized-seeds" className={linkClass}>Feminized Growing</Link></li>
-                <li><Link href="/product-category/indica-seeds" className={linkClass}>Indica Strains Guide</Link></li>
-                <li><Link href="/product-category/sativa-seeds" className={linkClass}>Sativa Strains Guide</Link></li>
+                <li><Link href="/blog/all-guides" className={linkClass}>Article Archive</Link></li>
               </ul>
             </div>
 
