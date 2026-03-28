@@ -164,7 +164,7 @@ const navItems: MenuItem[] = [
         label: 'Featured',
         children: [
           { label: 'Best Sellers', href: '/product-category/best-seller' },
-          { label: 'Exotic Strains', href: '/product-category/exotic-cannabis-seeds' },
+          { label: 'Compare Strains', href: '/compare-strains' },
           { label: 'Strain Finder Quiz', href: '/strain-finder' },
         ],
       },
