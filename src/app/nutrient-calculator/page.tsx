@@ -453,7 +453,83 @@ export default function NutrientCalculatorPage() {
                   </ul>
                 </div>
               </div>
-              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Soil naturally buffers nutrients, making it the most forgiving medium for beginners. Coco coir is an inert medium that requires consistent feeding at every watering — it offers faster growth but less margin for error. Hydroponic systems deliver nutrients directly to roots with maximum efficiency, producing the fastest growth and highest yields, but requiring the most knowledge and monitoring. Your medium choice should match your experience level and how much time you can dedicate to plant care.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">Soil naturally buffers nutrients, making it the most forgiving medium for beginners. Coco coir is an inert medium that requires consistent feeding at every watering — it offers faster growth but less margin for error. Hydroponic systems deliver nutrients directly to roots with maximum efficiency, producing the fastest growth and highest yields, but requiring the most knowledge and monitoring.</p>
+              <div className="bg-white rounded-2xl border border-[#275C53]/5 overflow-hidden mb-4">
+                <table className="w-full text-sm">
+                  <thead><tr className="bg-[#F5F0EA]">
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Factor</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Soil</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Coco</th>
+                    <th className="text-left px-4 py-3 text-[11px] uppercase tracking-[1px] text-[#275C53] font-semibold">Hydro</th>
+                  </tr></thead>
+                  <tbody>
+                    {[
+                      ['Feed Frequency', 'Every 2-3 days', 'Daily', 'Continuous'],
+                      ['EC Range (Flower)', '1.0-1.6', '1.4-1.8', '1.6-2.0'],
+                      ['Nutrient Buffer', 'High (forgiving)', 'None', 'None'],
+                      ['Growth Speed', 'Moderate', 'Fast', 'Fastest'],
+                      ['Difficulty', 'Beginner', 'Intermediate', 'Advanced'],
+                      ['Cal-Mag Needed?', 'Rarely', 'Always', 'Often'],
+                      ['Best Strains', 'Forgiving autos', 'High-yield indoors', 'Performance strains'],
+                    ].map(([factor, soil, coco, hydro]) => (
+                      <tr key={factor} className="border-b border-[#192026]/5"><td className="px-4 py-2.5 text-[#192026]/70 font-medium text-[12px]">{factor}</td><td className="px-4 py-2.5 text-[#192026]/60 text-[12px]">{soil}</td><td className="px-4 py-2.5 text-[#192026]/60 text-[12px]">{coco}</td><td className="px-4 py-2.5 text-[#192026]/60 text-[12px]">{hydro}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Your medium choice should match your experience level and how much time you can dedicate to plant care. <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">Beginner-friendly autoflower strains</Link> in soil offer the most forgiving combination. <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">High-yield strains</Link> in coco or hydro deliver the biggest harvests for experienced growers willing to invest in precise nutrient management.</p>
+            </section>
+
+            {/* Best EC and PPM by Stage (search intent block) */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>What Is the Best EC and PPM for Cannabis?</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-4">The ideal EC and PPM depend on your plant&apos;s growth stage. Here are the target ranges most growers use across all mediums:</p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">🌱 Seedling EC &amp; PPM</h3>
+                  <p className="text-[20px] font-bold text-[#D7B65D] mb-1">0.2–0.5 EC / 100–250 PPM</p>
+                  <p className="text-[12px] text-[#192026]/50 leading-relaxed">Seedlings need almost no nutrients. Most quality soils provide enough for the first 2-3 weeks. In coco or hydro, start with a very dilute solution. Overfeeding seedlings is the most common beginner mistake.</p>
+                </div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">🌿 Vegetative EC &amp; PPM</h3>
+                  <p className="text-[20px] font-bold text-[#D7B65D] mb-1">0.6–1.4 EC / 300–700 PPM</p>
+                  <p className="text-[12px] text-[#192026]/50 leading-relaxed">Veg plants need increasing nitrogen for leaf and stem growth. Start at the low end of the range during early veg and increase through late veg as the plant builds its canopy. <Link href="/product-category/best-strains-for-high-yield" className="text-[#275C53] hover:text-[#D7B65D]">High-yield strains</Link> can handle the upper range.</p>
+                </div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">🌸 Flowering EC &amp; PPM</h3>
+                  <p className="text-[20px] font-bold text-[#D7B65D] mb-1">1.0–2.0 EC / 500–1000 PPM</p>
+                  <p className="text-[12px] text-[#192026]/50 leading-relaxed">Flowering demands peak nutrition, especially phosphorus and potassium. EC peaks during mid-flower (weeks 4-6 of bloom) then drops as you approach harvest and begin flushing. Hydroponic growers can push toward the higher end; soil growers should stay moderate.</p>
+                </div>
+              </div>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed"><Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">Autoflowering cannabis strains</Link> need approximately 20% less than these ranges at every stage. Always start at the lower end with a new strain and increase based on plant response — it is much easier to add more nutrients than to recover from overfeeding.</p>
+            </section>
+
+            {/* EC vs PPM Comparison */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>EC vs PPM for Cannabis — Which Should You Use?</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">📊 EC (Electrical Conductivity)</h3>
+                  <ul className="text-[13px] text-[#192026]/60 space-y-1">
+                    <li>• Universal standard worldwide</li>
+                    <li>• No scale confusion</li>
+                    <li>• Preferred by professional growers</li>
+                    <li>• Measured in mS/cm</li>
+                    <li>• More precise for nutrient control</li>
+                  </ul>
+                </div>
+                <div className="bg-white rounded-xl border border-[#275C53]/5 p-5">
+                  <h3 className="text-[14px] font-semibold text-[#275C53] mb-2">📏 PPM (Parts Per Million)</h3>
+                  <ul className="text-[13px] text-[#192026]/60 space-y-1">
+                    <li>• Popular in the United States</li>
+                    <li>• Two scales exist (500 and 700)</li>
+                    <li>• Easier to understand conceptually</li>
+                    <li>• Convert: EC × 500 = PPM (500 scale)</li>
+                    <li>• Always confirm which scale your meter uses</li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed"><strong>Our recommendation:</strong> Use EC if your meter supports it — it eliminates the confusion between PPM scales and is the standard used by commercial cultivators worldwide. If you prefer PPM, the 500 scale is most common in the US. Our calculator provides both values for convenience. The key takeaway: whether you use EC or PPM, consistency and monitoring plant response matter more than hitting an exact number.</p>
             </section>
 
             <section>
@@ -605,15 +681,43 @@ export default function NutrientCalculatorPage() {
               </div>
             </section>
 
+            {/* Problem-Based Block */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Why Your Cannabis Plants Are Not Responding to Nutrients</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">If your plants look unhealthy despite regular feeding, the problem is rarely a nutrient shortage. The most common causes are pH imbalance, overfeeding, wrong medium strategy, or environmental stress. Before adding more nutrients to fix a problem, work through this checklist:</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                {[
+                  { title: 'pH Is Wrong', desc: 'Cannabis absorbs nutrients within a narrow pH range (6.0-6.5 in soil, 5.5-6.0 in coco/hydro). Even with perfect EC, wrong pH causes lockout where the plant cannot access available nutrients. Always check and adjust pH before suspecting a deficiency.', icon: '⚠️' },
+                  { title: 'You Are Overfeeding', desc: 'More nutrients does not mean more growth. Excess salts damage root tips, reduce water uptake, and cause burn. Signs include dark green leaves, leaf tip burn, and crispy edges. Flush with plain water and reduce feed strength by 25-50%.', icon: '🔥' },
+                  { title: 'Wrong Medium Strategy', desc: 'Feeding soil like coco (daily) causes waterlogging and root rot. Feeding coco like soil (every few days) causes dry spots and salt accumulation. Each medium requires its own frequency and strength approach.', icon: '🌍' },
+                  { title: 'Root Zone Problems', desc: 'Compacted soil, root-bound pots, poor drainage, or cold root zones all prevent nutrient absorption regardless of what you feed. Healthy roots = healthy uptake. Check your container size, drainage, and root zone temperature (65-75°F ideal).', icon: '🌱' },
+                ].map(item => (
+                  <div key={item.title} className="bg-white rounded-xl border border-[#275C53]/5 p-4">
+                    <h3 className="text-[13px] font-semibold text-[#275C53] mb-1">{item.icon} {item.title}</h3>
+                    <p className="text-[12px] text-[#192026]/50 leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">If you have ruled out pH, overfeeding, and root zone issues, the problem may be genetic. Some strains are simply more sensitive to certain nutrients. <Link href="/product-category/autoflowering-seeds" className="text-[#275C53] hover:text-[#D7B65D]">Forgiving autoflower strains</Link> like Northern Lights Auto and White Widow Auto tolerate a wider range of feeding mistakes, making them ideal for growers still learning nutrient management.</p>
+            </section>
+
+            {/* Trust Block */}
+            <section>
+              <h2 className="text-xl font-bold text-[#275C53] mb-3" style={{ fontFamily: 'var(--font-patua)' }}>Why Trust Our Cannabis Feeding Recommendations</h2>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">Our nutrient calculator is built on real growing data from 200,000+ American growers who have used seeds from Royal King Seeds across soil, coco coir, and hydroponic systems. The EC and PPM ranges reflect what actually works in practice — not theoretical maximums from nutrient company marketing.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed mb-3">We deliberately use conservative ranges because real-world growing conditions vary enormously. Your water source, room temperature, humidity, pot size, and specific strain genetics all influence nutrient uptake. A recommendation that is too aggressive causes more damage than one that is slightly low — plants recover quickly from mild underfeeding but slowly from overfeeding and salt buildup.</p>
+              <p className="text-[14px] text-[#192026]/65 leading-relaxed">Our feeding data is updated regularly based on customer feedback, new strain releases, and evolving best practices in cannabis cultivation. Every recommendation is designed to be practical, safe, and effective for home growers across the United States. For personalized growing support, our team is available through our <Link href="/contact" className="text-[#275C53] hover:text-[#D7B65D]">contact page</Link>.</p>
+            </section>
+
             {/* FAQ */}
             <section>
               <h2 className="text-xl font-bold text-[#275C53] mb-4" style={{ fontFamily: 'var(--font-patua)' }}>Frequently Asked Questions</h2>
               <div className="space-y-3">
                 {[
-                  { q: 'How often should I feed cannabis plants in soil?', a: 'In soil, feed every other watering — alternating between nutrient solution and plain pH-adjusted water. This prevents salt buildup while keeping plants nourished. During peak flowering, you may increase to feeding 2 out of every 3 waterings if plants are hungry. Always check runoff and monitor plant response.' },
-                  { q: 'What EC should cannabis seedlings have?', a: 'Seedlings should receive very light nutrition: 0.2-0.5 EC (100-250 PPM). Most quality soils provide enough nutrients for the first 2-3 weeks, so you may not need to add anything until you see 3-4 true leaf sets. When you start feeding, begin at 25% of the label dose.' },
-                  { q: 'What PPM is best for cannabis in flower?', a: 'Flowering cannabis typically needs 600-1000 PPM depending on stage and medium. Early flower runs 500-700 PPM, mid flower peaks at 700-1000 PPM, and late flower drops back to 300-600 PPM as you approach harvest and begin flushing. Hydro and coco can handle the higher end; soil works best at the lower end.' },
-                  { q: 'Is coco coir fed differently than soil?', a: 'Yes, significantly. Coco is an inert medium with no nutrient content — you must feed at every watering. Coco also requires cal-mag supplementation because it naturally binds calcium. Feed frequency in coco is daily or even multiple times daily in larger plants, compared to every 2-3 days in soil.' },
+                  { q: 'How often should I feed cannabis plants in soil, coco, or hydro?', a: 'In soil, feed every other watering — alternating between nutrient solution and plain pH-adjusted water. In coco coir, feed at every watering (daily or more) because coco has no nutrient buffer. In hydroponic systems, nutrients are delivered continuously through the reservoir. Each medium requires a fundamentally different feeding approach.' },
+                  { q: 'What EC should cannabis seedlings have in soil and coco?', a: 'Seedlings need 0.2-0.5 EC (100-250 PPM) regardless of medium. In soil, most quality potting mixes provide enough for the first 2-3 weeks — no feeding needed. In coco, start with a very dilute solution from day one since coco contains no nutrients. Always begin at 25% of the label dose.' },
+                  { q: 'What PPM is best for cannabis in flower across different mediums?', a: 'Flowering cannabis needs 600-1000 PPM depending on stage, medium, and strain. Soil works best at 600-800 PPM, coco at 700-900 PPM, and hydro at 800-1000 PPM during peak flower. Reduce by 20% for autoflowers. Late flower drops to 300-500 PPM as you begin flushing before harvest.' },
+                  { q: 'Is coco coir fed differently than soil for cannabis?', a: 'Yes, significantly. Coco is inert with no nutrients — you must feed at every watering. Coco requires cal-mag supplementation because it naturally binds calcium. Feeding in coco is daily with 10-20% runoff, compared to every 2-3 days in soil. EC control is more critical in coco because there is less buffering.' },
                   { q: 'Do autoflowers need fewer nutrients?', a: 'Yes. Autoflowering plants generally need about 20% less nutrients than photoperiod plants. Their shorter lifecycle, smaller root systems, and faster growth stages make them more sensitive to overfeeding. Start at the lower end of any feeding recommendation when growing autoflowers.' },
                   { q: 'Can I use the same feeding schedule for every strain?', a: 'No. Different strains have different nutrient demands. Heavy-feeding strains like Big Bud and Gorilla Glue thrive on stronger nutrients during bloom. Sensitive strains and autoflowers prefer lighter feeding. Always start conservative and adjust based on how each specific plant responds.' },
                   { q: 'What happens if cannabis plants are overfed?', a: 'Overfeeding causes nutrient burn — leaf tips turn brown and crispy, then progresses inward. Severe overfeeding can cause nutrient lockout, where excess salts prevent the plant from absorbing any nutrients at all. If you see burn, flush with plain pH-adjusted water and reduce feed strength by 25-50%.' },
